@@ -1,6 +1,6 @@
 <?php
-class UserModel extends CI_Model
-{
+class UserModel extends CI_Model {
+
     private $tbl_users = 'user';
     
     public function __construct()

@@ -50,8 +50,10 @@ class Welcome extends CI_Controller {
 	}
 	public function gallery(){
 	
+		$this->load->model('GalleryModel');
 		$data['page_name'] = "gallery";
 		$data['menu'] = "gallery";
+		$data['results'] = $this->GalleryModel->read_all_gallery();
 		$this->load->view('layout', $data);
 	}	
 }

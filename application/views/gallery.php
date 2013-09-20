@@ -25,30 +25,16 @@
             
             <div id="gallery">
                 <ul>
+				<?php foreach($results as $key=>$value) { ?>
                     <li>
-                        <a href="#" title="Project 1"><img src="<?php echo base_url();?>images/gallery/thumbnail/image_01.jpg" alt="01" /></a>
-                        <h5>Project 1</h5>
-                        <p>Duis convallis mauris a sapien tempor blandit diam consequat.</p>
+                        <a href="#" title="<?php echo $value->project_name;?>">
+							<img src="<?php echo base_url();?>images/gallery/thumbnail/<?php echo $value->project_image;?>" alt="01" />
+						</a>
+                        <h5><?php echo $value->project_name;?></h5>
+                        <p><?php echo $value->project_description;?></p>
                         <div class="button"><a href="#">Visit Site</a></div>
                     </li>
-                    <li>
-                        <a href="#" title="Project 2"><img src="<?php echo base_url();?>images/gallery/thumbnail/image_02.jpg" alt="02" /></a>
-                        <h5>Project 2</h5>
-                        <p>Vestibulum aliquam ornare lorem, sed tempor ipsum malesuada.</p>
-                        <div class="button"><a href="#">Visit Site</a></div>
-                    </li>
-                    <li>
-                        <a href="#" title="Project 3"><img src="<?php echo base_url();?>images/gallery/thumbnail/image_03.jpg" alt="03" /></a>
-                        <h5>Project 3</h5>
-                        <p>Aliquam erat volutpat. Donec ac aliquam neque.</p>
-                        <div class="button"><a href="#">Visit Site</a></div>
-                    </li>
-                    <li>
-                        <a href="#" title="Project 4"><img src="<?php echo base_url();?>images/gallery/thumbnail/image_04.jpg" alt="04" /></a>
-                        <h5>Project 4</h5>
-                        <p>Mauris in risus in diam consequat suscipit non ac enim.</p>
-                        <div class="button"><a href="#">Visit Site</a></div>
-                    </li>
+				<?php  }  ?>
                 </ul>
 
         	</div>
