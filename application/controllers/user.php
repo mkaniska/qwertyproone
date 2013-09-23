@@ -32,7 +32,7 @@ class User extends CI_Controller {
     }	 
 	public function signup(){
 	
-		$data['page_name'] = "signup";
+		$data['page_name'] = "user/signup";
 		$data['menu'] = "signup";
 		$this->load->view('layout', $data);
 	}

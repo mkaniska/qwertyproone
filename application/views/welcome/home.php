@@ -1,5 +1,5 @@
 
-<?php $this->load->view('banner'); ?>
+<?php $this->load->view('welcome/banner'); ?>
 
 </div> <!-- end of header_wrapper -->
 

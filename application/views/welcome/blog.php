@@ -1,7 +1,7 @@
 
         <div id="templatemo_banner">
         
-   			<h3>Ut interdum mi sit amet magna feugiat auctor</h3>
+   			<h3>HAI</h3>
             
             <p>In ac libero urna. Suspendisse sed odio ut mi auctor blandit. Duis luctus nulla metus, a vulputate mauris. Integer sed nisi sapien, ut gravida mauris. Nam et tellus libero. Cras purus libero, dapibus nec rutrum in, dapibus nec risus.</p>
             

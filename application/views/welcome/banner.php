@@ -71,7 +71,6 @@
 			});
 			});
 		</script>
-		<script src="<?php echo base_url();?>js/jquery.chili-2.2.js" type="text/javascript"></script>
-		<script src="<?php echo base_url();?>js/chili/recipes.js" type="text/javascript"></script>
+
 		<div class="cleaner"></div>   
 </div>

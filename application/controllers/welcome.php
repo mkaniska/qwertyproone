@@ -19,6 +19,7 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+		$data['dir'] = "welcome"; 
 		$data['page_name'] = "home"; 
 		$data['menu'] = "home"; 
 		$this->load->view('layout', $data);	
@@ -26,24 +27,28 @@ class Welcome extends CI_Controller {
 	}
 	public function home(){
 	
-		$data['page_name'] = "home"; 
+		$data['dir'] = "welcome";
+		$data['page_name'] = "home";
 		$data['menu'] = "home"; 
 		$this->load->view('layout', $data);
 	}
 	public function contactus(){
 	
+		$data['dir'] = "welcome";
 		$data['page_name'] = "contactus"; 
 		$data['menu'] = "contactus";
 		$this->load->view('layout', $data);
 	}
 	public function blog(){
 	
+		$data['dir'] = "welcome";
 		$data['page_name'] = "blog"; 
 		$data['menu'] = "blog";
 		$this->load->view('layout', $data);
 	}
 	public function products(){
 	
+		$data['dir'] = "welcome";
 		$data['page_name'] = "products";
 		$data['menu'] = "products";
 		$this->load->view('layout', $data);
@@ -51,6 +56,7 @@ class Welcome extends CI_Controller {
 	public function gallery(){
 	
 		$this->load->model('GalleryModel');
+		$data['dir'] = "welcome";
 		$data['page_name'] = "gallery";
 		$data['menu'] = "gallery";
 		$data['results'] = $this->GalleryModel->read_all_gallery();
@@ -58,7 +64,8 @@ class Welcome extends CI_Controller {
 	}
 	public function dynamic(){
 	
-		$data['page_name'] = "Dynamic";
+		$data['dir'] = "user";
+		$data['page_name'] = "dynamic";
 		$data['menu'] = "dynamic";
 		$this->load->view('layout_max', $data);
 	}	

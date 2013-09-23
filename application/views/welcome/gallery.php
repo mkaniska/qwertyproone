@@ -32,7 +32,7 @@
 						</a>
                         <h5><?php echo $value->project_name;?></h5>
                         <p><?php echo $value->project_description;?></p>
-                        <div class="button"><a href="#">Visit Site</a></div>
+                        <div class="button"><a href="#">View More</a></div>
                     </li>
 				<?php  }  ?>
                 </ul>

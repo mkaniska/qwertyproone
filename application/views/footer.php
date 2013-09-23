@@ -16,6 +16,5 @@
 </div> <!-- end of footer -->
 
 </div> <!-- end of footer_wrapper -->
-<script type='text/javascript' src='<?php echo base_url();?>js/logging.js'></script>
 </body>
 </html>
