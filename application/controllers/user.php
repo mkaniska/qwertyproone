@@ -30,9 +30,11 @@ class User extends CI_Controller {
         /* Load helpers */
         $this->load->model('UserModel'); 
     }	 
-	public function index()
-	{
-		$this->load->view('user/user');
+	public function signup(){
+	
+		$data['page_name'] = "signup";
+		$data['menu'] = "signup";
+		$this->load->view('layout', $data);
 	}
 }
 

@@ -55,6 +55,12 @@ class Welcome extends CI_Controller {
 		$data['menu'] = "gallery";
 		$data['results'] = $this->GalleryModel->read_all_gallery();
 		$this->load->view('layout', $data);
+	}
+	public function dynamic(){
+	
+		$data['page_name'] = "Dynamic";
+		$data['menu'] = "dynamic";
+		$this->load->view('layout_max', $data);
 	}	
 }
 
