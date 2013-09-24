@@ -18,7 +18,7 @@
 $config['base_url']	= 'http://localhost/qwertyproone';
 
 // Ony for the Below pages we require the Fancy Form JS/Initiation to be loaded.
-$config['form_pages'] = array('signup','contactus');
+$config['form_pages'] = array('user/signup','welcome/contactus');
 
 /*
 |--------------------------------------------------------------------------

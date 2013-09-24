@@ -18,54 +18,47 @@ class Welcome extends CI_Controller {
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index()
-	{
-		$data['dir'] = "welcome"; 
-		$data['page_name'] = "home"; 
+	{		 
+		$data['page_name'] = "welcome/home"; 
 		$data['menu'] = "home"; 
 		$this->load->view('layout', $data);	
 		//$this->load->view('welcome_message');
 	}
-	public function home(){
-	
-		$data['dir'] = "welcome";
-		$data['page_name'] = "home";
+	public function home(){	
+
+		$data['page_name'] = "welcome/home";
 		$data['menu'] = "home"; 
 		$this->load->view('layout', $data);
 	}
 	public function contactus(){
 	
-		$data['dir'] = "welcome";
-		$data['page_name'] = "contactus"; 
+		$data['page_name'] = "welcome/contactus"; 
 		$data['menu'] = "contactus";
 		$this->load->view('layout', $data);
 	}
 	public function blog(){
 	
-		$data['dir'] = "welcome";
-		$data['page_name'] = "blog"; 
+		$data['page_name'] = "welcome/blog"; 
 		$data['menu'] = "blog";
 		$this->load->view('layout', $data);
 	}
 	public function products(){
 	
-		$data['dir'] = "welcome";
-		$data['page_name'] = "products";
+		$data['page_name'] = "welcome/products";
 		$data['menu'] = "products";
 		$this->load->view('layout', $data);
 	}
 	public function gallery(){
 	
 		$this->load->model('GalleryModel');
-		$data['dir'] = "welcome";
-		$data['page_name'] = "gallery";
+		$data['page_name'] = "welcome/gallery";
 		$data['menu'] = "gallery";
 		$data['results'] = $this->GalleryModel->read_all_gallery();
 		$this->load->view('layout', $data);
 	}
 	public function dynamic(){
 	
-		$data['dir'] = "user";
-		$data['page_name'] = "dynamic";
+		$data['page_name'] = "user/dynamic";
 		$data['menu'] = "dynamic";
 		$this->load->view('layout_max', $data);
 	}	

@@ -135,8 +135,12 @@ cite span { color: #000; }
 	width: 200px;
 	height: 30px;
 	margin-top: 30px;
+	margin-right:-20px;
+	color:#ffffff;
 	background: url(../images/templatemo_search.png) no-repeat;
 }
+
+#search_box a {color:#fff;}
 
 #search_box form {
 	width: 280px;
@@ -255,7 +259,7 @@ cite span { color: #000; }
 }
 
 #templatemo_content {
-	width: 620px;
+	width: 480px;
 	float: left;
 }
 
@@ -582,3 +586,5 @@ cite span { color: #000; }
 }
 
 /* end of footer */
+
+

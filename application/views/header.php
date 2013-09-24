@@ -7,14 +7,33 @@
 <meta name="description" content="Multi Layer - free website template provided by templatemo.com" />
 <link href="<?php echo base_url();?>css/style.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url();?>css/jquery.ennui.contentslider.css" rel="stylesheet" type="text/css" media="screen,projection" />
+<script type="text/javascript" src="<?php echo base_url();?>js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>js/login.js" ></script>
+<link rel="stylesheet" href="<?php echo base_url();?>css/login.css" type="text/css" media="all" />
 <?php if(in_array($page_name,$this->config->item('form_pages'))) { ?>
 <link rel="stylesheet" href="<?php echo base_url();?>css/jqtransform.css" type="text/css" media="all" />
-<script type="text/javascript" src="<?php echo base_url();?>js/jquery.js" ></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/jquery.jqtransform.js" ></script>
 <script language="javascript">	
 	$(function(){
 		$("form.jqtransform").jqTransform();
 	});
+	
+	function refill_cities(stateName){
+		 $.ajax({
+			  type: 'POST',
+			  url: '<?php echo base_url();?>user/get_cities',
+			  beforeSend: function(){  },
+			  data: 'state_name='+stateName,
+			  dataType: "text",
+			  success: function(resultData) {
+				  var json_obj = $.parseJSON(resultData);
+				  var options =  document.getElementById('city');
+				  for (var i=0; i<json_obj.length; i++) {			  
+						options[1] = new Option(i, i, true, true);
+				  }
+			  }
+		});		
+	}
 </script>
 <?php } ?>
 <!-- My Changes to Git -->
@@ -36,8 +55,29 @@
         <a class="header_corel" href="http://cn.onlyimage.com" title="test"  target="_blank"></a>
         
         <div id="search_box">
-			Signup |  Login 
+			<a href="#" id="loginButton"><span>Login</span></a>  
+			<a href="<?php echo base_url();?>user/signup" id="signupButton"><span>Signup</span></a>
         </div>
-        
+            <!-- Login Starts Here -->             
+                
+			<div style="clear:both"></div>
+			<div id="loginBox">                
+				<form id="loginForm">
+					<fieldset id="body">					
+						<div style="float:left;margin-left:10px;margin-bottom:5px;">
+							<label for="email">User Name</label> &nbsp; 
+							<input type="text" name="user_name" id="user_name" size="32" />
+						</div><div style="clear:both"></div>
+						<div style="float:left;margin-left:10px;margin-top:5px;">
+							<label for="password">Password &nbsp;</label> &nbsp;
+							<input type="password" name="password" id="password" size="20" /> &nbsp;
+							<input type="button" value="Login" />
+						</div></br>
+						<span style="font-size:11px;color:#ff0000;" id="login_result">Invalid Details Entered!</span>
+					</fieldset>
+				</form>
+			</div>
+			
+            <!-- Login Ends Here -->        
         <div class="cleaner"></div>
 	</div><!-- end of header -->

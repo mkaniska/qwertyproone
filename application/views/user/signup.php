@@ -55,27 +55,29 @@
 				<tr>
 					<td width="50%"> State : </td>
 					<td width="50%">						
-						<select name="state" style="width:20px;">
-							<option value="0" selected="selected">Select</option>
-							<option value="India">TamilNadu</option>
-							<option value="USA">Karnataka</option>
-							<option value="UK">Andhra</option>
-							<option value="UK">Kerala</option>
+						<select name="state">						
+						<?php foreach($states_list as $key=>$value) { ?>
+							<option value="<?php echo $value->city_state;?>"><?php echo $value->city_state;?></option>
+						<?php } ?>
 						</select>
 					</td>
 				</tr>				
 				<tr>
 					<td width="50%"> City : </td>
-					<td width="50%"><input type="text" id="city" name="city" class="required input_field" /></td>
+					<td width="50%" id="cityPlace">					
+						<select name="city" id="city">
+							<option value="0" selected="selected">Select</option>
+							<?php foreach($cities_list as $key=>$value) { ?>
+								<option value="<?php echo $value;?>"><?php echo $value;?></option>
+							<?php } ?>							
+						</select>					
+					</td>
 				</tr>
 				<tr>
 					<td width="50%"> Country : </td>
 					<td width="50%">						
-						<select name="country" style="width:20px;">
-							<option value="0" selected="selected">Select</option>
-							<option value="India">India</option>
-							<option value="USA">USA</option>
-							<option value="UK">UK</option>
+						<select name="country">							
+							<option value="India" selected="selected">India</option>
 						</select>
 					</td>
 				</tr>

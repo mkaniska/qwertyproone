@@ -15,6 +15,14 @@ class UserModel extends CI_Model {
         $query = $this->db->get($this->tbl_users);
         return $query->row();
     }
+    function is_valid_login($user,$pass){
+	
+        $this->db->select('city');
+        $this->db->where('random_string', $random_string);
+        $query = $this->db->get($this->table_name);
+        
+        return $query->row();  
+    }	
 }
 
 ?>

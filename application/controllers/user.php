@@ -31,11 +31,25 @@ class User extends CI_Controller {
         $this->load->model('UserModel'); 
     }	 
 	public function signup(){
-	
-		$data['page_name'] = "user/signup";
+		$this->load->model('CommonModel');
+		$data['page_name'] = "user/signup";		
+		$data['states_list'] = $this->CommonModel->states_list();			
+		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
 		$data['menu'] = "signup";
 		$this->load->view('layout', $data);
 	}
+	public function get_cities(){
+		$this->load->model('CommonModel');
+		$cities_list = $this->CommonModel->state_wise_cities($this->input->post('state_name'));
+		$resulted_array['values'] = $cities_list;
+		echo json_encode($cities_list);
+		exit;
+	}	
+	
+	public function processlogin() {
+		//$this->UserModel->
+	}
+	
 }
 
 /* End of file user.php */

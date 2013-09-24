@@ -302,9 +302,12 @@
 			;
 
 			// Set the new width
-			var iSelectWidth = $select.outerWidth();
+			var overRiddingOutter = 150;
+			var overRiddingInner = 75;
+			// Cofiguration Overriding by Developer
+			var iSelectWidth = overRiddingOutter; //$select.outerWidth();
 			var oSpan = $('span:first',$wrapper);
-			var newWidth = (iSelectWidth > oSpan.innerWidth())?iSelectWidth+oLinkOpen.outerWidth():$wrapper.width();
+			var newWidth = (iSelectWidth > overRiddingInner)?(iSelectWidth+overRiddingInner):$wrapper.width();
 			$wrapper.css('width',newWidth);
 			$ul.css('width',newWidth-2);
 			oSpan.css({width:iSelectWidth});

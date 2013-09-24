@@ -61,7 +61,7 @@
 				<tr>
 					<td width="50%"> Country : </td>
 					<td width="50%">						
-						<select name="country" style="width:20px;">
+						<select name="country">
 							<option value="0" selected="selected">Select</option>
 							<option value="India">India</option>
 							<option value="USA">USA</option>
