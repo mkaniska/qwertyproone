@@ -17,7 +17,7 @@
 
 	<div id="templatemo_content">
         
-		<h2>Website Templates Gallery</h2>
+		<h2>Google Map</h2>
         
             <p>In ac libero urna. Suspendisse sed odio ut mi auctor blandit. Duis luctus nulla metus, a vulputate mauris. Integer sed nisi sapien, ut gravida mauris. Nam et tellus libero.</p>  
             

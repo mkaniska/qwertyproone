@@ -29,7 +29,8 @@ class User extends CI_Controller {
         
         /* Load helpers */
         $this->load->model('UserModel'); 
-    }	 
+    }
+	
 	public function signup(){
 		$this->load->model('CommonModel');
 		$data['page_name'] = "user/signup";		
@@ -38,13 +39,14 @@ class User extends CI_Controller {
 		$data['menu'] = "signup";
 		$this->load->view('layout', $data);
 	}
+	
 	public function get_cities(){
 		$this->load->model('CommonModel');
 		$cities_list = $this->CommonModel->state_wise_cities($this->input->post('state_name'));
 		$resulted_array['values'] = $cities_list;
 		echo json_encode($cities_list);
 		exit;
-	}	
+	}
 	
 	public function processlogin() {
 		//$this->UserModel->
