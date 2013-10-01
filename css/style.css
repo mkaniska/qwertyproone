@@ -263,6 +263,11 @@ cite span { color: #000; }
 	float: left;
 }
 
+#templatemo_content_full {
+	width: 880px;
+	float: left;
+}
+
 .service_box {
 	width: 280px;
 }

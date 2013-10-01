@@ -3,9 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Demo - jquery-simple-datetimepicker</title>	
-	<!--Requirement jQuery-->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<!--Load Script and Stylesheet -->
 	<script type="text/javascript" src="jquery.simple-dtpicker.js"></script>
 	<link type="text/css" href="jquery.simple-dtpicker.css" rel="stylesheet" />
 

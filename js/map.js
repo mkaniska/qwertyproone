@@ -1,34 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Places Autocomplete</title>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-
-    <style>
-      input {
-        border: 1px solid  rgba(0, 0, 0, 0.5);
-      }
-      input.notfound {
-        border: 2px solid  rgba(255, 0, 0, 0.4);
-      }
-		#map-canvas, #map_canvas {
-		  height: 100%;
-		}
-		#panel {
-		  position: absolute;
-		  top: 5px;
-		  left: 50%;
-		  margin-left: -180px;
-		  z-index: 5;
-		  background-color: #fff;
-		  padding: 5px;
-		  border: 1px solid #999;
-		}	  
-    </style>
-
-    <script>
-	
 function initialize() {
 
   var mapOptions = {center: new google.maps.LatLng(12.9667, 77.5667),zoom: 13,mapTypeId: google.maps.MapTypeId.ROADMAP};
@@ -64,7 +33,7 @@ function initialize() {
     // If the place has a geometry, then present it on a map.
     if (place.geometry.viewport) {map.fitBounds(place.geometry.viewport);} else {map.setCenter(place.geometry.location);map.setZoom(17);}
     marker.setIcon(/** @type {google.maps.Icon} */({
-      url: 'marker3.png',
+      url: 'http://ptgmedia.pearsoncmg.com/images/chap5_9780321929549/elementLinks/b_icon.jpg',
       size: new google.maps.Size(24, 24),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(17, 34),
@@ -92,7 +61,7 @@ function initialize() {
     // If the place has a geometry, then present it on a map.
     if (place2.geometry.viewport) {map2.fitBounds(place2.geometry.viewport);} else {map2.setCenter(place2.geometry.location);map2.setZoom(17);}
     marker2.setIcon(/** @type {google.maps.Icon} */({
-      url: 'marker2.png',
+      url: 'http://ptgmedia.pearsoncmg.com/images/chap5_9780321929549/elementLinks/b_icon.jpg',
       size: new google.maps.Size(24, 24),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(17, 34),
@@ -124,21 +93,3 @@ function initialize() {
   //setupClickListener('changetype-geocode', ['geocode']);
 }
 google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-  </head>
-  <body>
-  <div style="float:left;width:400px;">
-    <div id="panel" style="margin-left: -260px;">
-      <input id="searchTextField" type="text" size="50">
-    </div>
-    <div id="map-canvas" style="width: 350px;height:300px;"></div>
-  </div>
-  
-  <div style="float:right;width:400px;">
-    <div id="panel2" style="margin-left: 60px;">
-      <input id="searchTextField2" type="text" size="50">
-    </div>
-    <div id="map-canvas2" style="width: 350px;height:300px;"></div>
-  </div>  
-  </body>
-</html>

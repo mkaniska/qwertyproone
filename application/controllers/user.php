@@ -39,6 +39,15 @@ class User extends CI_Controller {
 		$data['menu'] = "signup";
 		$this->load->view('layout', $data);
 	}
+
+	public function newride(){
+		$this->load->model('CommonModel');
+		$data['page_name'] = "user/newride";		
+		//$data['states_list'] = $this->CommonModel->states_list();			
+		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
+		$data['menu'] = "newride";
+		$this->load->view('layout', $data);
+	}
 	
 	public function get_cities(){
 		$this->load->model('CommonModel');
