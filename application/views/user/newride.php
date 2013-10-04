@@ -17,8 +17,8 @@
     <div id="templatemo_content_full">
         
         <h4>Announce Your Availability</h4>
-
-<div style="border:1px solid gray; width:900px; margin-bottom: 1em; padding: 10px;" id="tabs">
+<form method="post" name="contact" action="#" class="jqtransform">
+<div style="border:1px solid #90B8FD; width:900px; margin-bottom: 1em; padding: 10px;" id="tabs">
 
 <ul>
 <li><a href="#tabs-1">Post Location - Step 1</a></li>
@@ -32,12 +32,12 @@
 		<table width="100%" cellpadding="4" cellspacing="3">		
 			<tr>
 				<td width="75%" colspan="2"> <label>City:&nbsp;</label>
-					<select name="city" id="city">
+					<p style="margin-left:60px;"><select name="city" id="city">
 						<option value="0" selected="selected">Select</option>
 						<?php foreach($cities_list as $key=>$value) { ?>
 							<option value="<?php echo $value;?>"><?php echo $value;?></option>
 						<?php } ?>							
-					</select>				
+					</select></p>
 				</td>
 			</tr>
 			<tr><td width="50%">   </td><td width="50%"></td></tr>
@@ -53,17 +53,17 @@
 			<tr><td width="50%">   </td><td width="50%"></td></tr>
 			<tr>
 				<td width="100%" colspan="2" align="center">
-					<input style="font-weight: bold;" type="submit" name="reset" id="reset" value="Submit" />	
+					<input style="font-weight: bold;" type="button" name="next1" id="next1" value="Continue" />	
 				</td>
 			</tr>
 		</table>
 		
-		</form>		
+			
   
 </div>
 <div id="tabs-2">
 
-	<form method="post" name="contact" action="#" class="jqtransform">
+	
 		
 		<table width="100%" cellpadding="4" cellspacing="3">
 			<tr>
@@ -139,15 +139,15 @@
 			</tr>
 			<tr>
 				<td width="100%" colspan="2" align="center">
-					<input style="font-weight: bold;" type="submit" name="reset" id="reset" value="Submit " />	
+					<input style="font-weight: bold;" type="button" name="next2" id="next2" value="Continue" />	
 				</td>
 			</tr>
 		</table>
 		
-		</form>
+		
 </div>
 <div id="tabs-3">
-<form method="post" name="contact" action="#" class="jqtransform">
+
 		
 		<table width="100%" cellpadding="4" cellspacing="3">
 			<tr>
@@ -223,15 +223,16 @@
 			</tr>
 			<tr>
 				<td width="100%" colspan="2" align="center">
-					<input style="font-weight: bold;" type="submit" name="reset" id="reset" value="Submit " />	
+					<input style="font-weight: bold;" type="button" name="gonext" id="gonext" value="Continue" />	
 				</td>
 			</tr>
 		</table>
 		
-		</form>
+		
 </div>
 
-</div>        
+</div>
+</form>
     </div> <!-- end of templatemo_content -->
         
     <?php //$this->load->view('sidebar'); ?>

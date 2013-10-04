@@ -34,11 +34,19 @@
 <!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
 <script src="<?php echo base_url();?>js/jquery-ui.js"></script>
 <link rel="stylesheet" href="<?php echo base_url();?>css/tab_jquery-ui.css" />
-<script language="javascript">	
+<script language="javascript">
 	$(function(){
 		$("form.jqtransform").jqTransform();
 		$( "#tabs" ).tabs();
+		//$( "#tabs" ).tabs({ show: { effect: "blind", duration: 1000 } });
+		$( "#next1" ).click(function() {
+			$("#tabs").tabs("option", "active", 1);
+		});
+		$( "#next2" ).click(function() {
+			$("#tabs").tabs("option", "active", 2);
+		});
 	});	
+
 	function refill_cities(stateName){
 		 $.ajax({
 			  type: 'POST',
