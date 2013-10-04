@@ -20,6 +20,8 @@ $config['base_url']	= 'http://localhost/qwertyproone';
 // Ony for the Below pages we require the Fancy Form JS/Initiation to be loaded.
 $config['form_pages'] = array('user/signup','welcome/contactus','user/newride');
 
+$config['is_map_page'] = array('user/newride');
+
 /*
 |--------------------------------------------------------------------------
 | Index File

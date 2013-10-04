@@ -46,6 +46,25 @@
     display:block
 }
 
+#rideButton { 
+    /*display:inline-block;
+    float:right;*/
+    border-radius:3px;
+    -moz-border-radius:3px;
+    position:relative;
+    z-index:30;
+    cursor:pointer;
+	color:#000;
+}
+
+#rideButton span {
+    color:#FFFFFF; 
+    font-size:14px; 
+    font-weight:bold;
+    padding:7px 29px 9px 10px;
+    display:block
+}
+
 /* Login Button Text */
 #loginButton span {
     color:#FFFFFF; 

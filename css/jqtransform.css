@@ -15,7 +15,7 @@ button.jqTransformButton {
 	margin: 0px;
 	padding: 0px;
 	border: none;
-	background-color: transparent;
+	background-color: #90B8FD;
 	cursor: pointer;
 	overflow: visible;
 	font-family: Arial;
@@ -24,7 +24,7 @@ button.jqTransformButton {
 *:first-child+html button.jqTransformButton[type]{width: 1;} /* IE7 */
 
 button.jqTransformButton span {
-	background: transparent url(../images/btn_right.gif) no-repeat right top;
+	background: #90B8FD url(../images/btn_right.gif) no-repeat right top;
 	display: block;
 	float: left;
 	padding: 0px 4px 0px 0px; /* sliding doors padding */
@@ -33,7 +33,7 @@ button.jqTransformButton span {
 }
 
 button.jqTransformButton span span {
-	background: transparent url(../images/btn_left.gif) no-repeat top left;
+	background: #90B8FD url(../images/btn_left.gif) no-repeat top left;
 	color: #333;
 	padding: 8px 4px 0px 8px;
 	font-weight: normal;

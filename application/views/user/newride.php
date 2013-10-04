@@ -42,6 +42,29 @@
 			</tr>
 			<tr><td width="50%">   </td><td width="50%"></td></tr>
 			<tr>
+				<td width="50%"><label>Start Time:&nbsp;</label>
+					<select name="start_time" id="start_time">
+					<option value="0" selected="selected">Select Start Time</option>					
+					<?php $inc=12;for($i=0;$i<24;$i++) { $ampm=($i<12?' AM':' PM');?>
+						<?php for($j=0;$j<=55;$j=$j+5) { ?>
+							<option value="<?php echo $inc.':'.(($j<10)?'0'.$j:$j).$ampm;?>"><?php echo $inc.':'.(($j<10)?'0'.$j:$j).$ampm;?></option>
+						<?php } $inc=($i<12?($i+1):($i-11));?>
+					<?php } ?>
+					</select>
+				</td>
+				<td width="50%"><label>Return Time:&nbsp;</label>
+					<select name="return_time" id="return_time">
+					<option value="0" selected="selected">Select Return Time</option>					
+					<?php $inc=12;for($i=0;$i<24;$i++) { $ampm=($i<12?' AM':' PM');?>
+						<?php for($j=0;$j<=55;$j=$j+5) { ?>
+							<option value="<?php echo $default=$inc.':'.(($j<10)?'0'.$j:$j).$ampm;?>" <?php if($default=='5:00 PM'){ ?> selected="selected" <?php } ?>><?php echo $inc.':'.(($j<10)?'0'.$j:$j).$ampm;?></option>
+						<?php } $inc=($i<12?($i+1):($i-11));?>
+					<?php } ?>
+					</select>
+				</td>
+			</tr>
+			<tr><td width="50%">   </td><td width="50%"></td></tr>			
+			<tr>
 				<td width="50%"><label>Origin:&nbsp;</label><input type="text" name="origin_from" id="searchTextField" class="required input_field" style="width:250px;" /></td>
 				<td width="50%"><label>Destination:&nbsp;</label><input type="text" name="destination_to" id="searchTextField2" class="required input_field" style="width:250px;" /></td>
 			</tr>
@@ -65,85 +88,43 @@
 
 	
 		
-		<table width="100%" cellpadding="4" cellspacing="3">
+		<table width="70%" cellpadding="4" cellspacing="3">
 			<tr>
-				<td width="50%"> Full Name : </td>
-				<td width="50%"><input type="text" id="full_name" name="full_name" class="required input_field" /></td>
-			</tr>
-			<tr>
-				<td width="50%"> Gender : </td>
-				<td width="50%">
-					<input type="radio" id="gender" name="gender" value="male" /> <label>Male</label> &nbsp; 
-					<input type="radio" id="gender" name="gender" value="female" /> <label>Female</label>
+				<td width="60%"> I am a : </td>
+				<td width="40%">
+					<input type="radio" id="travel_type" name="travel_type" value="passenger" checked="checked" /> <label>Passenger</label> &nbsp; 
+					<input type="radio" id="travel_type" name="travel_type" value="driver" /> <label>Driver</label>
 				</td>
 			</tr>
 			<tr>
-				<td width="50%"> Email : </td>
-				<td width="50%"><input type="text" id="email_address" name="email_address" class="required input_field" /></td>
-			</tr>
+				<td width="30%">  </td>
+				<td width="70%"><input type="checkbox" id="need_alert" class="input_field" name="need_alert" value="Newsletter" /> <label>&nbsp;Alert me when someone Joins on my Route</label>  </td>
+			</tr>			
 			<tr>
-				<td width="50%"> Password : </td>
-				<td width="50%"><input type="password" id="password" name="password" class="required input_field" /></td>
-			</tr>
-			<tr>
-				<td width="50%"> Re-Type Password : </td>
-				<td width="50%"><input type="password" id="re_password" name="re_password" class="required input_field" /></td>
-			</tr>				
-			<tr>
-				<td width="50%"> Phone : </td>
-				<td width="50%"><input type="text" id="phone_number" name="phone_number" class="required input_field" /></td>
-			</tr>
-			<tr>
-				<td width="50%"> Address : </td>
-				<td width="50%"><input type="text" id="address" name="address" class="required input_field" size="25" /></td>
-			</tr>
-			<tr>
-				<td width="50%"> State : </td>
-				<td width="50%">						
-					<select name="state">						
-					<?php foreach($states_list as $key=>$value) { ?>
-						<option value="<?php echo $value->city_state;?>"><?php echo $value->city_state;?></option>
-					<?php } ?>
-					</select>
-				</td>
-			</tr>				
-			<tr>
-				<td width="50%"> City : </td>
-				<td width="50%" id="cityPlace">					
-					<select name="city" id="city">
-						<option value="0" selected="selected">Select</option>
-						<?php foreach($cities_list as $key=>$value) { ?>
-							<option value="<?php echo $value;?>"><?php echo $value;?></option>
-						<?php } ?>							
-					</select>					
+				<td width="60%"> Vehicle Type : </td>
+				<td width="40%">
+					<input type="radio" id="vehicle_type" name="vehicle_type" value="Car" checked="checked" /> <label>Car</label> &nbsp; 
+					<input type="radio" id="vehicle_type" name="vehicle_type" value="Bike" /> <label>Bike</label>
 				</td>
 			</tr>
 			<tr>
-				<td width="50%"> Country : </td>
-				<td width="50%">						
-					<select name="country">							
-						<option value="India" selected="selected">India</option>
-					</select>
-				</td>
+				<td width="60%"> Model Type : </td>
+				<td width="40%"><input type="text" id="model_type" name="model_type" class="required input_field" style="width:250px;" /></td>
 			</tr>
 			<tr>
-				<td width="50%"> Interested To Receive : </td>
-				<td width="50%">
-					<input type="checkbox" id="interest" class="input_field" name="interest" value="Newsletter" /> <label>&nbsp;Newsletter</label> &nbsp; 
-					<input type="checkbox" id="interest" class="input_field" name="interest" value="Updates" /> <label>&nbsp;Updates</label>
+				<td width="60%"> Fuel Type : </td>
+				<td width="40%">
+					<input type="radio" id="fuel_type" name="fuel_type" value="Diesel" checked="checked" /> <label>Diesel</label> &nbsp; 
+					<input type="radio" id="fuel_type" name="fuel_type" value="Petrol" /> <label>Petrol</label>  &nbsp;
+					<input type="radio" id="fuel_type" name="fuel_type" value="LPG" /> <label>LPG</label>  &nbsp;
 				</td>
-			</tr>
-			<tr>
-				<td width="50%"> About You : </td>
-				<td width="50%"><textarea id="text" name="about_you" rows="5" cols="75" class="required"></textarea></td>
 			</tr>
 			<tr>
 				<td width="100%" colspan="2" align="center">
 					<input style="font-weight: bold;" type="button" name="next2" id="next2" value="Continue" />	
 				</td>
 			</tr>
-		</table>
-		
+		</table>		
 		
 </div>
 <div id="tabs-3">
@@ -152,7 +133,7 @@
 		<table width="100%" cellpadding="4" cellspacing="3">
 			<tr>
 				<td width="50%"> Full Name : </td>
-				<td width="50%"><input type="text" id="full_name" name="full_name" class="required input_field" /></td>
+				<td width="50%"><input type="text" id="full_name" name="full_name" class="required input_field" style="width:250px;" /></td>
 			</tr>
 			<tr>
 				<td width="50%"> Gender : </td>
@@ -163,59 +144,23 @@
 			</tr>
 			<tr>
 				<td width="50%"> Email : </td>
-				<td width="50%"><input type="text" id="email_address" name="email_address" class="required input_field" /></td>
+				<td width="50%"><input type="text" id="email_address" name="email_address" class="required input_field" style="width:250px;" /></td>
 			</tr>
 			<tr>
 				<td width="50%"> Password : </td>
-				<td width="50%"><input type="password" id="password" name="password" class="required input_field" /></td>
+				<td width="50%"><input type="password" id="password" name="password" class="required input_field" style="width:250px;" /></td>
 			</tr>
 			<tr>
 				<td width="50%"> Re-Type Password : </td>
-				<td width="50%"><input type="password" id="re_password" name="re_password" class="required input_field" /></td>
+				<td width="50%"><input type="password" id="re_password" name="re_password" class="required input_field" style="width:250px;" /></td>
 			</tr>				
 			<tr>
 				<td width="50%"> Phone : </td>
-				<td width="50%"><input type="text" id="phone_number" name="phone_number" class="required input_field" /></td>
+				<td width="50%"><input type="text" id="phone_number" name="phone_number" class="required input_field" style="width:250px;" /></td>
 			</tr>
 			<tr>
 				<td width="50%"> Address : </td>
-				<td width="50%"><input type="text" id="address" name="address" class="required input_field" size="25" /></td>
-			</tr>
-			<tr>
-				<td width="50%"> State : </td>
-				<td width="50%">						
-					<select name="state">						
-					<?php foreach($states_list as $key=>$value) { ?>
-						<option value="<?php echo $value->city_state;?>"><?php echo $value->city_state;?></option>
-					<?php } ?>
-					</select>
-				</td>
-			</tr>				
-			<tr>
-				<td width="50%"> City : </td>
-				<td width="50%" id="cityPlace">					
-					<select name="city" id="city">
-						<option value="0" selected="selected">Select</option>
-						<?php foreach($cities_list as $key=>$value) { ?>
-							<option value="<?php echo $value;?>"><?php echo $value;?></option>
-						<?php } ?>							
-					</select>					
-				</td>
-			</tr>
-			<tr>
-				<td width="50%"> Country : </td>
-				<td width="50%">						
-					<select name="country">							
-						<option value="India" selected="selected">India</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td width="50%"> Interested To Receive : </td>
-				<td width="50%">
-					<input type="checkbox" id="interest" class="input_field" name="interest" value="Newsletter" /> <label>&nbsp;Newsletter</label> &nbsp; 
-					<input type="checkbox" id="interest" class="input_field" name="interest" value="Updates" /> <label>&nbsp;Updates</label>
-				</td>
+				<td width="50%"><input type="text" id="address" name="address" class="required input_field" style="width:250px;" /></td>
 			</tr>
 			<tr>
 				<td width="50%"> About You : </td>

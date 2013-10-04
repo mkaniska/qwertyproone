@@ -4,7 +4,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>CodeIgniter Sample Application</title>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+<?php if(in_array($page_name,$this->config->item('is_map_page'))) { ?>
 <script type="text/javascript" src="<?php echo base_url();?>js/map.js" ></script>
+<?php } ?>
 <link href="<?php echo base_url();?>css/style.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url();?>css/jquery.ennui.contentslider.css" rel="stylesheet" type="text/css" media="screen,projection" />
 <script type="text/javascript" src="<?php echo base_url();?>js/jquery-1.7.2.min.js"></script>
@@ -40,7 +42,12 @@
 		$( "#tabs" ).tabs();
 		//$( "#tabs" ).tabs({ show: { effect: "blind", duration: 1000 } });
 		$( "#next1" ).click(function() {
-			$("#tabs").tabs("option", "active", 1);
+			if($("#city").val()==0){alert("Please select the city");$("#city").focus();}
+			else if($("#start_time").val()==0){alert("Please select the Start Time");$("#start_time").focus();}
+			else if($("#return_time").val()==0){alert("Please select the Return Time");$("#return_time").focus();}
+			else if($("#searchTextField").val()==''){alert("Please enter the Origin Location");$("#searchTextField").focus();}
+			else if($("#searchTextField2").val()==''){alert("Please enter the Destination Location");$("#searchTextField2").focus();}
+			else{$("#tabs").tabs("option", "active", 1);}
 		});
 		$( "#next2" ).click(function() {
 			$("#tabs").tabs("option", "active", 2);
@@ -84,7 +91,7 @@
         <a class="header_corel" href="http://cn.onlyimage.com" title="test"  target="_blank"></a>
         
         <div id="search_box">
-			<a href="#" id="loginButton"><span>Login</span></a>  
+			<a href="#" id="loginButton"><span>Login</span></a>
 			<a href="<?php echo base_url();?>user/signup" id="signupButton"><span>Signup</span></a>
         </div>
             <!-- Login Starts Here -->             
