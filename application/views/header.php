@@ -24,13 +24,20 @@
 		  padding: 5px;
 		  border: 1px solid #999;
 		}
+				#map-canvas, #map_canvas {
+		  height: 100%;
+		}
+		  #map-canvas, #map_canvas {
+			height: 650px;
+		  }		
 </style>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/tabcontent.css" />
-<script type="text/javascript" src="<?php echo base_url();?>js/tabcontent.js"></script>
-	
+<!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+<script src="<?php echo base_url();?>js/jquery-ui.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>css/tab_jquery-ui.css" />
 <script language="javascript">	
 	$(function(){
 		$("form.jqtransform").jqTransform();
+		$( "#tabs" ).tabs();
 	});	
 	function refill_cities(stateName){
 		 $.ajax({

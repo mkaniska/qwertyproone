@@ -17,16 +17,17 @@
     <div id="templatemo_content_full">
         
         <h4>Announce Your Availability</h4>
-
-<div style="border:1px solid gray; width:900px; margin-bottom: 1em; padding: 10px;" id="tabs">
-
-<ul>
-<li><a href="#tabs-1">Post Location - Step 1</a></li>
-<li><a href="#tabs-2">Ride Details - Step 2</a></li>
-<li><a href="#tabs-3">Personal Details - Step 3</a></li>
+		
+<ul id="steps_tabs" class="shadetabs">
+	<li><a href="#" rel="step1" class="selected">Post Location - Step 1</a></li>
+	<li><a href="#" rel="step2">Ride Details - Step 2</a></li>
+	<li><a href="#" rel="step3">Personal Details - Step 3</a></li>
 </ul>
-<div id="tabs-1">
-  
+
+<div style="border:1px solid gray; width:900px; margin-bottom: 1em; padding: 10px">
+
+	<div id="step1" class="tabcontent">
+	
 		<form method="post" name="contact" action="#" class="jqtransform">
 		
 		<table width="100%" cellpadding="4" cellspacing="3">		
@@ -42,8 +43,8 @@
 			</tr>
 			<tr><td width="50%">   </td><td width="50%"></td></tr>
 			<tr>
-				<td width="50%"><label>Origin:&nbsp;</label><input type="text" name="origin_from" id="searchTextField" class="required input_field" style="width:250px;" /></td>
-				<td width="50%"><label>Destination:&nbsp;</label><input type="text" name="destination_to" id="searchTextField2" class="required input_field" style="width:250px;" /></td>
+				<td width="50%"><label>Origin:&nbsp;</label><input type="text" id="origin_from" name="searchTextField" class="required input_field" style="width:250px;" /></td>
+				<td width="50%"><label>Destination:&nbsp;</label><input type="text" id="destination_to" name="searchTextField2" class="required input_field" style="width:250px;" /></td>
 			</tr>
 			<tr><td width="50%">   </td><td width="50%"></td></tr>
 			<tr>
@@ -53,17 +54,18 @@
 			<tr><td width="50%">   </td><td width="50%"></td></tr>
 			<tr>
 				<td width="100%" colspan="2" align="center">
-					<input style="font-weight: bold;" type="submit" name="reset" id="reset" value="Submit" />	
+					<input style="font-weight: bold;" type="submit" name="reset" id="reset" value="Submit " />	
 				</td>
 			</tr>
 		</table>
 		
-		</form>		
-  
-</div>
-<div id="tabs-2">
+		</form>
+		
+	</div>
 
-	<form method="post" name="contact" action="#" class="jqtransform">
+	<div id="step2" class="tabcontent">
+
+		<form method="post" name="contact" action="#" class="jqtransform">
 		
 		<table width="100%" cellpadding="4" cellspacing="3">
 			<tr>
@@ -145,9 +147,11 @@
 		</table>
 		
 		</form>
-</div>
-<div id="tabs-3">
-<form method="post" name="contact" action="#" class="jqtransform">
+	</div>
+
+	<div id="step3" class="tabcontent">	
+      
+		<form method="post" name="contact" action="#" class="jqtransform">
 		
 		<table width="100%" cellpadding="4" cellspacing="3">
 			<tr>
@@ -229,9 +233,20 @@
 		</table>
 		
 		</form>
+    
+	</div>
+
 </div>
 
-</div>        
+<script type="text/javascript">
+
+var countries=new ddtabcontent("steps_tabs");
+countries.setpersist(true);
+countries.setselectedClassTarget("link"); //"link" or "linkparent"
+countries.init();
+
+</script>
+        
     </div> <!-- end of templatemo_content -->
         
     <?php //$this->load->view('sidebar'); ?>
