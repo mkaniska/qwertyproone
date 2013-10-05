@@ -40,6 +40,15 @@ class User extends CI_Controller {
 		$this->load->view('layout', $data);
 	}
 
+	public function process_signup(){
+		$this->load->model('CommonModel');
+		$posted_data = $this->input->post(NULL, TRUE);
+		
+		$data['page_name'] = "user/signup";
+		$data['menu'] = "signup";
+		$this->load->view('layout', $data);
+	}
+	
 	public function newride(){
 		$this->load->model('CommonModel');
 		$data['page_name'] = "user/newride";		

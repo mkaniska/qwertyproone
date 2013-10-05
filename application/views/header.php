@@ -39,21 +39,61 @@
 <script language="javascript">
 	$(function(){
 		$("form.jqtransform").jqTransform();
-		$( "#tabs" ).tabs();
+		$( "#tabs" ).tabs({
+			  beforeActivate: function(event, ui){
+				 if(ui.newTab.find("a").attr("href")=='#tabs-2'){/*checkStepOneValidation();*/}
+				 else if(ui.newTab.find("a").attr("href")=='#tabs-3'){/*checkStepTwoValidation();*/}
+			  }
+			 });
 		//$( "#tabs" ).tabs({ show: { effect: "blind", duration: 1000 } });
+		//$( "#tabs" ).on( "tabsbeforeactivate", function( event, ui ) {alert(ui.newTab.attr('id'));} )
+		///$( "#tabs" ).on( "tabsactivate", function( event, ui ) {alert(event);} );
 		$( "#next1" ).click(function() {
-			if($("#city").val()==0){alert("Please select the city");$("#city").focus();}
-			else if($("#start_time").val()==0){alert("Please select the Start Time");$("#start_time").focus();}
-			else if($("#return_time").val()==0){alert("Please select the Return Time");$("#return_time").focus();}
-			else if($("#searchTextField").val()==''){alert("Please enter the Origin Location");$("#searchTextField").focus();}
-			else if($("#searchTextField2").val()==''){alert("Please enter the Destination Location");$("#searchTextField2").focus();}
-			else{$("#tabs").tabs("option", "active", 1);}
+			checkStepOneValidation();
 		});
 		$( "#next2" ).click(function() {
-			$("#tabs").tabs("option", "active", 2);
+			checkStepTwoValidation();
 		});
+		$( "#submitride" ).click(function() {
+			checkStepThreeValidation();
+		});
+		$( "#travel_type1" ).click(function() {
+			$( "#vehicle" ).hide();$( "#model" ).hide();$( "#fuel" ).hide();
+		});
+		$( "#travel_type2" ).click(function() {
+			$( "#vehicle" ).show();$( "#model" ).show();$( "#fuel" ).show();
+		});		
 	});	
-
+	function checkStepOneValidation() {
+		$("#errorDisplay").html('');
+		var ok = true;
+		if($("#city").val()==0){$("#errorDisplay").html("Please select the city");$("#city").focus();ok = false;}
+		else if($("#start_time").val()==0){$("#errorDisplay").html("Please select the Start Time");$("#start_time").focus();ok = false;}
+		else if($("#return_time").val()==0){$("#errorDisplay").html("Please select the Return Time");$("#return_time").focus();ok = false;}
+		else if($("#searchTextField").val()==''){$("#errorDisplay").html("Please enter the Origin Location");$("#searchTextField").focus();ok = false;}
+		else if($("#searchTextField2").val()==''){$("#errorDisplay").html("Please enter the Destination Location");$("#searchTextField2").focus();ok = false;}
+		if(ok==true){$("#tabs").tabs("option", "active", 1);}
+	}
+	function checkStepTwoValidation() {
+		$("#errorDisplay1").html('');
+		var ok = true;
+		if($('#travel_type2').attr('checked')?true:false) {
+			if($("#model_type").val()==''){$("#errorDisplay1").html("Please enter the model type");$("#model_type").focus();ok = false;}
+		}
+		if(ok){$("#tabs").tabs("option", "active", 2);}
+	}
+	function checkStepThreeValidation() {
+		$("#errorDisplay2").html('');
+		var ok = true;
+		if($("#full_name").val()==''){$("#errorDisplay2").html("Please enter the full name");$("#full_name").focus();ok = false;}
+		else if($("#email_address").val()==''){$("#errorDisplay2").html("Please enter the email address");$("#email_address").focus();ok = false;}
+		else if($("#password").val()==''){$("#errorDisplay2").html("Please enter the password");$("#password").focus();ok = false;}
+		else if($("#re_password").val()==''){$("#errorDisplay2").html("Please re-enter the password");$("#re_password").focus();ok = false;}
+		else if($("#password").val()!=$("#re_password").val()){$("#errorDisplay2").html("Passwords are not matching");$("#re_password").focus();ok = false;}
+		else if($("#phone_number").val()==''){$("#errorDisplay2").html("Please enter the phone number");$("#phone_number").focus();ok = false;}
+		else if($("#address").val()==''){$("#errorDisplay2").html("Please enter the address");$("#address").focus();ok = false;}
+		if(ok==true){$("#postride" ).submit();}
+	}	
 	function refill_cities(stateName){
 		 $.ajax({
 			  type: 'POST',
@@ -69,6 +109,19 @@
 				  }
 			  }
 		});		
+	}
+	//onKeyPress="return disableEnterKey(event)"
+	function disableEnterKey(e)
+	{
+		 var key;
+		 if(window.event)
+			  key = window.event.keyCode;     //IE
+		 else
+			  key = e.which;     //firefox
+		 if(key == 13)
+			  return false;
+		 else
+			  return true;
 	}
 </script>
 <?php } ?>

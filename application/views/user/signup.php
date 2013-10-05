@@ -1,11 +1,8 @@
-        <div id="templatemo_banner">
-        
-   			<h3>Contact Information</h3>
-            
-            <p>Suspendisse sed odio ut mi auctor blandit. Duis luctus nulla metus, a vulputate mauris. Integer sed nisi sapien, ut gravida mauris. Nam et tellus libero. Cras purus libero, dapibus nec rutrum in, dapibus nec risus. Ut interdum mi sit amet magna feugiat auctor.</p>
-            
-            <p>Vivamus laoreet pharetra eros. In quam nibh, placerat ac, porta ac, molestie non, purus. Curabitur sem ante, condimentum non, cursus quis, eleifend non, libero. Nunc a nulla. Suspendisse vitae orci a ligula egestas bibendum. Vestibulum ultrices. Pellentesque tempus sapien nec sem commodo ullamcorper.</p>
-            
+        <div id="templatemo_banner">        
+   			<h3>Registration</h3>            
+            <p>Register with "Save my Expense" is Free. Save My Expense is a place where people who would like to reduce their transportation cost. 
+			You can share your Travel Expense with your Colleque or friends or any other new person who also like to save the cost. 
+			To achieve this, only thing you need to do is, Post your Ride information & start saving your cost.</p>
         </div>
 
 </div> <!-- end of header_wrapper -->
@@ -19,7 +16,7 @@
         <h4>Registration</h4>
         <div id="contact_form">
         
-            <form method="post" name="contact" action="#" class="jqtransform">
+            <form method="post" name="contact" action="<?php echo base_url();?>user/process_signup" class="jqtransform">
 			<table width="100%" cellpadding="4" cellspacing="3">
 				<tr>
 					<td width="50%"> Full Name : </td>
@@ -50,7 +47,7 @@
 				</tr>
 				<tr>
 					<td width="50%"> Address : </td>
-					<td width="50%"><input type="text" id="address" name="address" class="required input_field" size="25" /></td>
+					<td width="50%"><input type="text" id="address" name="address" class="required input_field" size="30" /></td>
 				</tr>
 				<tr>
 					<td width="50%"> State : </td>
@@ -81,20 +78,11 @@
 						</select>
 					</td>
 				</tr>
-				<tr>
-					<td width="50%"> Interested To Receive : </td>
-					<td width="50%">
-						<input type="checkbox" id="interest" class="input_field" name="interest" value="Newsletter" /> <label>&nbsp;Newsletter</label> &nbsp; 
-						<input type="checkbox" id="interest" class="input_field" name="interest" value="Updates" /> <label>&nbsp;Updates</label>
-					</td>
-				</tr>
-				<tr>
-					<td width="50%"> About You : </td>
-					<td width="50%"><textarea id="text" name="about_you" rows="5" cols="75" class="required"></textarea></td>
-				</tr>
+				<tr><td width="50%">   </td><td width="50%"> </td></tr>				
 				<tr>
 					<td width="100%" colspan="2" align="center">
-						<input style="font-weight: bold;" type="submit" name="reset" id="reset" value="Submit " />	
+						<input style="font-weight: bold;" type="submit" name="doSignup" id="doSignup" value="Submit " /> &nbsp; &nbsp; 	
+						<input style="font-weight: bold;" type="button" name="doCancel" id="doCancel" value="Cancel " />  	
 					</td>
 				</tr>
 			</table>

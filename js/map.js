@@ -15,12 +15,14 @@ function initialize() {
 
   var infowindow = new google.maps.InfoWindow();
   var marker = new google.maps.Marker({
-    map: map
+    map: map,
+	draggable: true
   });
 
   var infowindow2 = new google.maps.InfoWindow();
   var marker2 = new google.maps.Marker({
-    map: map2
+    map: map2,
+	draggable: true
   });  
   
   google.maps.event.addListener(autocomplete, 'place_changed', function() {
