@@ -14,10 +14,12 @@
     <div id="templatemo_content">
         
         <h4>Registration</h4>
+		
         <div id="contact_form">
         
-            <form method="post" name="contact" action="<?php echo base_url();?>user/process_signup" class="jqtransform">
+            <form method="post" id="signupForm" action="<?php echo base_url();?>user/process_signup" class="jqtransform">
 			<table width="100%" cellpadding="4" cellspacing="3">
+				<tr><td width="100%" colspan="2" align="left"><div id="errorDisplay" style="color:#ff0000;margin-left:100px;float:left;"></div></td></tr>
 				<tr>
 					<td width="50%"> Full Name : </td>
 					<td width="50%"><input type="text" id="full_name" name="full_name" class="required input_field" /></td>
@@ -25,7 +27,7 @@
 				<tr>
 					<td width="50%"> Gender : </td>
 					<td width="50%">
-						<input type="radio" id="gender" name="gender" value="male" /> <label>Male</label> &nbsp; 
+						<input type="radio" id="gender" name="gender" value="male" checked="checked" /> <label>Male</label> &nbsp; 
 						<input type="radio" id="gender" name="gender" value="female" /> <label>Female</label>
 					</td>
 				</tr>
@@ -70,18 +72,11 @@
 						</select>					
 					</td>
 				</tr>
-				<tr>
-					<td width="50%"> Country : </td>
-					<td width="50%">						
-						<select name="country">							
-							<option value="India" selected="selected">India</option>
-						</select>
-					</td>
-				</tr>
+
 				<tr><td width="50%">   </td><td width="50%"> </td></tr>				
 				<tr>
 					<td width="100%" colspan="2" align="center">
-						<input style="font-weight: bold;" type="submit" name="doSignup" id="doSignup" value="Submit " /> &nbsp; &nbsp; 	
+						<input style="font-weight: bold;" type="button" name="doSignup" id="doSignup" value="Submit " /> &nbsp; &nbsp; 	
 						<input style="font-weight: bold;" type="button" name="doCancel" id="doCancel" value="Cancel " />  	
 					</td>
 				</tr>

@@ -54,6 +54,9 @@
 		$( "#next2" ).click(function() {
 			checkStepTwoValidation();
 		});
+		$( "#doSignup" ).click(function() {
+			isValidSignup();
+		});
 		$( "#submitride" ).click(function() {
 			checkStepThreeValidation();
 		});
@@ -93,7 +96,19 @@
 		else if($("#phone_number").val()==''){$("#errorDisplay2").html("Please enter the phone number");$("#phone_number").focus();ok = false;}
 		else if($("#address").val()==''){$("#errorDisplay2").html("Please enter the address");$("#address").focus();ok = false;}
 		if(ok==true){$("#postride" ).submit();}
-	}	
+	}
+	function isValidSignup() {
+		$("#errorDisplay").html('');
+		var ok = true;
+		if($("#full_name").val()==''){$("#errorDisplay").html("Please enter the full name");$("#full_name").focus();ok = false;}
+		else if($("#email_address").val()==''){$("#errorDisplay").html("Please enter the email address");$("#email_address").focus();ok = false;}
+		else if($("#password").val()==''){$("#errorDisplay").html("Please enter the password");$("#password").focus();ok = false;}
+		else if($("#re_password").val()==''){$("#errorDisplay").html("Please re-enter the password");$("#re_password").focus();ok = false;}
+		else if($("#password").val()!=$("#re_password").val()){$("#errorDisplay").html("Passwords are not matching");$("#re_password").focus();ok = false;}
+		else if($("#phone_number").val()==''){$("#errorDisplay").html("Please enter the phone number");$("#phone_number").focus();ok = false;}
+		else if($("#address").val()==''){$("#errorDisplay").html("Please enter the address");$("#address").focus();ok = false;}
+		if(ok==true){$("#signupForm" ).submit();}
+	}
 	function refill_cities(stateName){
 		 $.ajax({
 			  type: 'POST',
