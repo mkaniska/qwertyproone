@@ -81,32 +81,32 @@
 		$("#errorDisplay1").html('');
 		var ok = true;
 		if($('#travel_type2').attr('checked')?true:false) {
-			if($("#model_type").val()==''){$("#errorDisplay1").html("Please enter the model type");$("#model_type").focus();ok = false;}
+			if($.trim($("#model_type").val())==''){$("#errorDisplay1").html("Please enter the model type");$("#model_type").focus();ok = false;}
 		}
 		if(ok){$("#tabs").tabs("option", "active", 2);}
 	}
 	function checkStepThreeValidation() {
 		$("#errorDisplay2").html('');
 		var ok = true;
-		if($("#full_name").val()==''){$("#errorDisplay2").html("Please enter the full name");$("#full_name").focus();ok = false;}
-		else if($("#email_address").val()==''){$("#errorDisplay2").html("Please enter the email address");$("#email_address").focus();ok = false;}
+		if($.trim($("#full_name").val())==''){$("#errorDisplay2").html("Please enter a valid full name");$("#full_name").focus();ok = false;}
+		else if($.trim($("#email_address").val())==''){$("#errorDisplay2").html("Please enter a valid email address");$("#email_address").focus();ok = false;}
 		else if($("#password").val()==''){$("#errorDisplay2").html("Please enter the password");$("#password").focus();ok = false;}
 		else if($("#re_password").val()==''){$("#errorDisplay2").html("Please re-enter the password");$("#re_password").focus();ok = false;}
 		else if($("#password").val()!=$("#re_password").val()){$("#errorDisplay2").html("Passwords are not matching");$("#re_password").focus();ok = false;}
-		else if($("#phone_number").val()==''){$("#errorDisplay2").html("Please enter the phone number");$("#phone_number").focus();ok = false;}
-		else if($("#address").val()==''){$("#errorDisplay2").html("Please enter the address");$("#address").focus();ok = false;}
+		else if($.trim($("#phone_number").val())==''){$("#errorDisplay2").html("Please enter a valid phone number");$("#phone_number").focus();ok = false;}
+		else if($.trim($("#address").val())==''){$("#errorDisplay2").html("Please enter a valid address");$("#address").focus();ok = false;}
 		if(ok==true){$("#postride" ).submit();}
 	}
 	function isValidSignup() {
 		$("#errorDisplay").html('');
 		var ok = true;
-		if($("#full_name").val()==''){$("#errorDisplay").html("Please enter the full name");$("#full_name").focus();ok = false;}
-		else if($("#email_address").val()==''){$("#errorDisplay").html("Please enter the email address");$("#email_address").focus();ok = false;}
-		else if($("#password").val()==''){$("#errorDisplay").html("Please enter the password");$("#password").focus();ok = false;}
-		else if($("#re_password").val()==''){$("#errorDisplay").html("Please re-enter the password");$("#re_password").focus();ok = false;}
-		else if($("#password").val()!=$("#re_password").val()){$("#errorDisplay").html("Passwords are not matching");$("#re_password").focus();ok = false;}
-		else if($("#phone_number").val()==''){$("#errorDisplay").html("Please enter the phone number");$("#phone_number").focus();ok = false;}
-		else if($("#address").val()==''){$("#errorDisplay").html("Please enter the address");$("#address").focus();ok = false;}
+		if($.trim($("#full_name").val())==''){$("#errorDisplay").html("Please enter a valid full name");$("#full_name").focus();ok = false;}
+		else if($.trim($("#email_address").val())==''){$("#errorDisplay").html("Please enter a valid email address");$("#email_address").focus();ok = false;}
+		else if($("#password_text").val()==''){$("#errorDisplay").html("Please enter the password");$("#password_text").focus();ok = false;}
+		else if($("#re_password_text").val()==''){$("#errorDisplay").html("Please re-enter the password");$("#re_password_text").focus();ok = false;}
+		else if($("#password_text").val()!=$("#re_password_text").val()){$("#errorDisplay").html("Passwords are not matching");$("#re_password_text").focus();ok = false;}
+		else if($.trim($("#phone_number").val())==''){$("#errorDisplay").html("Please enter a valid phone number");$("#phone_number").focus();ok = false;}
+		else if($.trim($("#address").val())==''){$("#errorDisplay").html("Please enter a valid address");$("#address").focus();ok = false;}
 		if(ok==true){$("#signupForm" ).submit();}
 	}
 	function refill_cities(stateName){

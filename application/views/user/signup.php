@@ -19,7 +19,7 @@
         
             <form method="post" id="signupForm" action="<?php echo base_url();?>user/process_signup" class="jqtransform">
 			<table width="100%" cellpadding="4" cellspacing="3">
-				<tr><td width="100%" colspan="2" align="left"><div id="errorDisplay" style="color:#ff0000;margin-left:100px;float:left;"></div></td></tr>
+				<tr><td width="100%" colspan="2" align="left"><div id="errorDisplay" style="color:#ff0000;margin-left:130px;float:left;"></div></td></tr>
 				<tr>
 					<td width="50%"> Full Name : </td>
 					<td width="50%"><input type="text" id="full_name" name="full_name" class="required input_field" /></td>
@@ -37,11 +37,11 @@
 				</tr>
 				<tr>
 					<td width="50%"> Password : </td>
-					<td width="50%"><input type="password" id="password" name="password" class="required input_field" /></td>
+					<td width="50%"><input type="password" id="password_text" name="password" class="required input_field" /></td>
 				</tr>
 				<tr>
 					<td width="50%"> Re-Type Password : </td>
-					<td width="50%"><input type="password" id="re_password" name="re_password" class="required input_field" /></td>
+					<td width="50%"><input type="password" id="re_password_text" name="re_password" class="required input_field" /></td>
 				</tr>				
 				<tr>
 					<td width="50%"> Phone : </td>
