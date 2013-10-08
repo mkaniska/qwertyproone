@@ -15,6 +15,7 @@
 <?php if(in_array($page_name,$this->config->item('form_pages'))) { ?>
 <link rel="stylesheet" href="<?php echo base_url();?>css/jqtransform.css" type="text/css" media="all" />
 <script type="text/javascript" src="<?php echo base_url();?>js/jquery.jqtransform.js" ></script>
+<script type="text/javascript" src="<?php echo base_url();?>js/jquery.validate.js" ></script>
 <style>
 		#panel {
 		  position: absolute;
@@ -54,9 +55,64 @@
 		$( "#next2" ).click(function() {
 			checkStepTwoValidation();
 		});
+		
 		$( "#doSignup" ).click(function() {
 			isValidSignup();
 		});
+		
+		/*
+		//
+		$("#signupForm").validate({
+				rules: {
+					full_name: {
+						required: true,
+						minlength: 3,
+						maxlength:25
+					},
+					email_address: {
+						required: true,
+						email: true
+					},
+					password_text: {
+						required: true,
+						minlength: 5
+					},					
+					re_password_text: {
+						required: true,
+						minlength: 5,
+						equalTo: "#password_text"
+					},
+					phone_number: {
+						required: true,
+						minlength: 5
+					}					
+				},
+				messages: {
+				
+					full_name: {
+						required: "Please enter a valid Full Name",
+						minlength: "Your Full Name should be at least 5 characters long"
+					},
+					email_address: {
+						required: "Please enter a valid Email Address"
+					},
+					password_text: {
+						required: "Please enter a valid password",
+						minlength: "Your password must be at least 5 characters long"
+					},					
+					re_password_text: {
+						required: "Please re-enter a valid password",
+						minlength: "Re-typing password must be minimum 5 characters long",
+						equalTo: "Please enter the same password as above"
+					},
+					phone_number: {
+						required: "Please enter a valid phone number",
+						minlength: "Your Phone number must be at least 5 characters long"
+					}
+				}
+			});		
+		// Ends
+		*/
 		$( "#submitride" ).click(function() {
 			checkStepThreeValidation();
 		});
@@ -97,6 +153,7 @@
 		else if($.trim($("#address").val())==''){$("#errorDisplay2").html("Please enter a valid address");$("#address").focus();ok = false;}
 		if(ok==true){$("#postride" ).submit();}
 	}
+	
 	function isValidSignup() {
 		$("#errorDisplay").html('');
 		var ok = true;
@@ -109,7 +166,8 @@
 		else if($.trim($("#address").val())==''){$("#errorDisplay").html("Please enter a valid address");$("#address").focus();ok = false;}
 		if(ok==true){$("#signupForm" ).submit();}
 	}
-	function refill_cities(stateName){
+	/**/
+	function refill_cities(stateName) {
 		 $.ajax({
 			  type: 'POST',
 			  url: '<?php echo base_url();?>user/get_cities',
@@ -140,6 +198,9 @@
 	}
 </script>
 <?php } ?>
+<style type="text/css">
+.error{color:#ff0000; display: inline; margin-left: 10px; width: auto;}
+</style>
 <!-- My Changes to Git -->
 </head>
 <body>

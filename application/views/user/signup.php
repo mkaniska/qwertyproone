@@ -19,9 +19,14 @@
         
             <form method="post" id="signupForm" action="<?php echo base_url();?>user/process_signup" class="jqtransform">
 			<table width="100%" cellpadding="4" cellspacing="3">
-				<tr><td width="100%" colspan="2" align="left"><div id="errorDisplay" style="color:#ff0000;margin-left:130px;float:left;"></div></td></tr>
+				<tr><td width="100%" colspan="2" align="left">
+				<div id="errorDisplay" style="color:#ff0000;margin-left:130px;float:left;">
+				<?php if($this->session->flashdata('flash_message') !='') { ?>
+					<?php echo $this->session->flashdata('flash_message'); ?>
+				<?php } ?>
+				</div></td></tr>
 				<tr>
-					<td width="50%"> Full Name : </td>
+					<td width="50%">Full Name : </td>
 					<td width="50%"><input type="text" id="full_name" name="full_name" class="required input_field" /></td>
 				</tr>
 				<tr>
@@ -80,6 +85,7 @@
 						<input style="font-weight: bold;" type="button" name="doCancel" id="doCancel" value="Cancel " />  	
 					</td>
 				</tr>
+				
 			</table>
             
             </form>

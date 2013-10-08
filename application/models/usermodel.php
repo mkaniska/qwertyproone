@@ -20,9 +20,13 @@ class UserModel extends CI_Model {
         $this->db->select('city');
         $this->db->where('random_string', $random_string);
         $query = $this->db->get($this->table_name);
-        
         return $query->row();  
     }	
+	function insertSingup($data) {
+        $this->db->insert($this->table_name, $data);
+        $inserted_id = $this->db->insert_id();
+        return $inserted_id;
+	}
 }
 
 ?>

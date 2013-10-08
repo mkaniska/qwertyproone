@@ -31,22 +31,32 @@ class User extends CI_Controller {
         $this->load->model('UserModel'); 
     }
 	
-	public function signup(){
+	public function signup($param=NULL) {
 		$this->load->model('CommonModel');
 		$data['page_name'] = "user/signup";		
 		$data['states_list'] = $this->CommonModel->states_list();			
 		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
 		$data['menu'] = "signup";
+		$data['param'] = $param==NULL ?'':$param;
 		$this->load->view('layout', $data);
 	}
 
 	public function process_signup(){
-		$this->load->model('CommonModel');
+		//$this->load->model('UserModel');
 		$posted_data = $this->input->post(NULL, TRUE);
-		
-		$data['page_name'] = "user/signup";
-		$data['menu'] = "signup";
-		$this->load->view('layout', $data);
+		//$isValidID = $this->UserModel->insertSingup($posted_data);
+		//if($isValidID>0){
+		if(1){
+		//redirect('user/thanks');
+		$this->session->set_flashdata('flash_message', 'Please enter all the details');
+		redirect('user/signup/error/1');		
+		} else {
+		$this->session->set_flashdata('flash_message', 'Please enter all the details');
+		redirect('user/signup/error/1');
+		}
+		//$data['page_name'] = "user/thanks";
+		//$data['menu'] = "signup";
+		//$this->load->view('layout', $data);
 	}
 	
 	public function newride(){
