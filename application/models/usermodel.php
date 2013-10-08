@@ -1,13 +1,13 @@
 <?php
 class UserModel extends CI_Model {
 
-    private $tbl_users = 'user';
+    private $tbl_users = 'pro_users';
     
     public function __construct()
     {
         parent::__construct();
-        $this->table_name = 'user';
-        $this->primary_key = 'id';
+        $this->table_name = 'pro_users';
+        $this->primary_key = 'pro_user_id';
     }
     
     function read_user_with_name($name){

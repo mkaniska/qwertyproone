@@ -42,10 +42,10 @@ class Welcome extends CI_Controller {
 		$data['menu'] = "blog";
 		$this->load->view('layout', $data);
 	}
-	public function products(){
+	public function faq(){
 	
-		$data['page_name'] = "welcome/products";
-		$data['menu'] = "products";
+		$data['page_name'] = "welcome/faq";
+		$data['menu'] = "faq";
 		$this->load->view('layout', $data);
 	}
 	public function gallery(){
@@ -61,6 +61,33 @@ class Welcome extends CI_Controller {
 		$data['page_name'] = "user/dynamic";
 		$data['menu'] = "dynamic";
 		$this->load->view('layout_max', $data);
+	}
+	public function process_contact(){
+		
+		if($this->input->post('doContact')=='Submit') {
+		
+		$posted_data['full_name'] 		= $this->input->post('full_name');
+		$posted_data['gender'] 			= $this->input->post('gender');
+		$posted_data['email_address'] 	= $this->input->post('email_address');
+		$posted_data['message_text'] 	= $this->input->post('message_text');
+		$posted_data['phone_number']	= $this->input->post('phone_number');
+
+			$this->load->library('email');
+
+			$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
+			$this->email->to('murugdev.eee@gmail.com');
+
+			$this->email->subject('Commute Easy: User Enquiry');
+			$this->email->message($posted_data['message_text']);
+
+			$this->email->send();
+			$this->session->set_flashdata('flash_message', 'Successfully Registered !');
+			redirect('welcome/thanks');
+		} else {
+			$this->session->set_flashdata('data_back', $posted_data);
+			$this->session->set_flashdata('flash_message', 'Please enter all the details');
+			redirect('welcome/contactus/error/1');
+		}
 	}	
 }
 

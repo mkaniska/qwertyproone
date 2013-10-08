@@ -314,6 +314,11 @@ cite span { color: #000; }
 	width: 470px;
 }
 
+.services_section .left_full {
+	float: left; 
+	
+}
+
 .services_section .left p {
 	text-align: justify;
 }

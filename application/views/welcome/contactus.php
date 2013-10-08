@@ -26,56 +26,42 @@
         <h4>Send us a message now!</h4>
         <div id="contact_form">
         
-            <form method="post" name="contact" action="#" class="jqtransform">
+            <form method="post" name="contactForm" action="<?php echo base_url();?>welcome/process_contact" class="jqtransform">
 			<table width="100%" cellpadding="4" cellspacing="3">
+				<tr><td width="100%" colspan="2" align="left">
+				<div id="errorDisplay" style="color:#ff0000;margin-left:130px;float:left;">
+				<?php if($this->session->flashdata('flash_message') !='') { ?>
+					<?php echo $this->session->flashdata('flash_message'); ?>
+				<?php } ?>
+				</div></td></tr>
 				<tr>
 					<td width="50%"> Name : </td>
-					<td width="50%"><input type="text" id="name" name="name" class="required input_field" /></td>
+					<td width="50%"><input type="text" id="full_name" name="full_name" class="required input_field" /></td>
 				</tr>
 				<tr>
 					<td width="50%"> Gender : </td>
 					<td width="50%">
-						<input type="radio" id="gender" name="gender" value="male" /> <label>Male</label> &nbsp; 
+						<input type="radio" id="gender" name="gender" value="male" checked="checked" /> <label>Male</label> &nbsp; 
 						<input type="radio" id="gender" name="gender" value="female" /> <label>Female</label>
 					</td>
 				</tr>
-				<tr>
-					<td width="50%"> Interest : </td>
-					<td width="50%">
-						<input type="checkbox" id="interest" class="input_field" name="interest" value="Sports" /> <label>&nbsp;Sports</label> &nbsp; 
-						<input type="checkbox" id="interest" class="input_field" name="gender" value="Art &amp; Science" /> <label>&nbsp;Art & Science</label>
-					</td>
-				</tr>				
+			
 				<tr>
 					<td width="50%"> Email : </td>
-					<td width="50%"><input type="text" id="email" name="email" class="required input_field" /></td>
+					<td width="50%"><input type="text" id="email_address" name="email_address" class="required input_field" /></td>
 				</tr>
 				<tr>
 					<td width="50%"> Phone : </td>
-					<td width="50%"><input type="text" id="phone" name="phone" class="required input_field" /></td>
-				</tr>
-				<tr>
-					<td width="50%"> City : </td>
-					<td width="50%"><input type="text" id="city" name="city" class="required input_field" /></td>
-				</tr>
-				<tr>
-					<td width="50%"> Country : </td>
-					<td width="50%">						
-						<select name="country">
-							<option value="0" selected="selected">Select</option>
-							<option value="India">India</option>
-							<option value="USA">USA</option>
-							<option value="UK">UK</option>
-						</select>
-					</td>
+					<td width="50%"><input type="text" id="phone_number" name="phone_number" class="required input_field" /></td>
 				</tr>
 				<tr>
 					<td width="50%"> Message : </td>
-					<td width="50%"><textarea id="text" name="text" rows="5" cols="75" class="required"></textarea></td>
+					<td width="50%"><textarea id="message_text" name="message_text" rows="8" cols="75" class="required"></textarea></td>
 				</tr>
 				<tr>
 					<td width="100%" colspan="2" align="center">
-						<input style="font-weight: bold;" type="submit" name="reset" id="reset" value="Submit " />	
+						<input style="font-weight: bold;" type="button" name="doContact" id="doContact" value="Submit " /> &nbsp; &nbsp; 	
+						<input style="font-weight: bold;" type="button" name="doCancel" id="doCancel" value="Cancel " />	
 					</td>
 				</tr>
 			</table>

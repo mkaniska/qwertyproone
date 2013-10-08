@@ -59,6 +59,12 @@
 		$( "#doSignup" ).click(function() {
 			isValidSignup();
 		});
+		$( "#doContact" ).click(function() {
+			isValidContact();
+		});
+		$( "#processLogin" ).click(function() {
+			dologin();
+		});		
 		
 		/*
 		//
@@ -164,8 +170,18 @@
 		else if($("#password_text").val()!=$("#re_password_text").val()){$("#errorDisplay").html("Passwords are not matching");$("#re_password_text").focus();ok = false;}
 		else if($.trim($("#phone_number").val())==''){$("#errorDisplay").html("Please enter a valid phone number");$("#phone_number").focus();ok = false;}
 		else if($.trim($("#address").val())==''){$("#errorDisplay").html("Please enter a valid address");$("#address").focus();ok = false;}
+		else if($.trim($("#zipcode").val())==''){$("#errorDisplay").html("Please enter a valid zip code");$("#zipcode").focus();ok = false;}
 		if(ok==true){$("#signupForm" ).submit();}
 	}
+	function isValidContact() {
+		$("#errorDisplay").html('');
+		var ok = true;
+		if($.trim($("#full_name").val())==''){$("#errorDisplay").html("Please enter a valid full name");$("#full_name").focus();ok = false;}
+		else if($.trim($("#email_address").val())==''){$("#errorDisplay").html("Please enter a valid email address");$("#email_address").focus();ok = false;}
+		else if($.trim($("#phone_number").val())==''){$("#errorDisplay").html("Please enter a valid phone number");$("#phone_number").focus();ok = false;}
+		else if($.trim($("#message_text").val())==''){$("#errorDisplay").html("Please enter a valid message");$("#message_text").focus();ok = false;}
+		if(ok==true){$("#contactForm" ).submit();}
+	}	
 	/**/
 	function refill_cities(stateName) {
 		 $.ajax({
@@ -183,6 +199,25 @@
 			  }
 		});		
 	}
+	function dologin() {
+		$("#login_result").html('');
+		if($.trim($("#user_name").val())!='' || $.trim($("#password_text").val())!='') {
+			 $.ajax({
+				  type: 'POST',
+				  url: '<?php echo base_url();?>user/processlogin',
+				  beforeSend: function(){  },
+				  data: 'username='+$("#user_name").val()+'&password='+$("#password_text").val(),
+				  dataType: "text",
+				  success: function(resultData) {
+					  if(resultData=='Success'){
+						window.location.href="<?php echo base_url();?>user/welcome";
+					  }else{
+						$("#login_result").html('Invalid Login Details!');
+					  }
+				  }
+			});
+		} else{$("#login_result").html('<br />Enter Your Login Details!');}
+	}	
 	//onKeyPress="return disableEnterKey(event)"
 	function disableEnterKey(e)
 	{
@@ -235,10 +270,10 @@
 						</div><div style="clear:both"></div>
 						<div style="float:left;margin-left:10px;margin-top:5px;">
 							<label for="password">Password &nbsp;</label> &nbsp;
-							<input type="password" name="password" id="password" size="20" /> &nbsp;
-							<input type="button" value="Login" />
+							<input type="password" name="password_text" id="password_text" size="20" /> &nbsp;
+							<input type="button" id="processLogin" value="Login" />
 						</div></br>
-						<span style="font-size:11px;color:#ff0000;" id="login_result">Invalid Details Entered!</span>
+						<span style="font-size:11px;color:#ff0000;" id="login_result"></span>
 					</fieldset>
 				</form>
 			</div>

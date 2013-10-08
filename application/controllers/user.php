@@ -42,21 +42,48 @@ class User extends CI_Controller {
 	}
 
 	public function process_signup(){
-		//$this->load->model('UserModel');
-		$posted_data = $this->input->post(NULL, TRUE);
-		//$isValidID = $this->UserModel->insertSingup($posted_data);
-		//if($isValidID>0){
-		if(1){
-		//redirect('user/thanks');
-		$this->session->set_flashdata('flash_message', 'Please enter all the details');
-		redirect('user/signup/error/1');		
+		
+		$posted_data['pro_user_type'] 		= 2;// Commuters
+		$posted_data['pro_user_full_name'] 	= $this->input->post('full_name');
+		$posted_data['pro_user_gender'] 	= $this->input->post('gender');
+		$posted_data['pro_user_email'] 		= $this->input->post('email_address');
+		$posted_data['pro_user_password'] 	= $this->input->post('password_text');
+		$posted_data['pro_user_phone']	 	= $this->input->post('phone_number');
+		$posted_data['pro_user_address'] 	= $this->input->post('address');
+		$posted_data['pro_user_state'] 		= $this->input->post('state');
+		$posted_data['pro_user_city'] 		= $this->input->post('city');
+		$posted_data['pro_user_zipcode'] 	= $this->input->post('zipcode');
+		$posted_data['pro_user_ip'] 		= $_SERVER['REMOTE_ADDR'];
+		$posted_data['pro_user_latitude'] 	= '';
+		$posted_data['pro_user_longitude'] 	= time();
+		$posted_data['pro_user_joined'] 	= time();
+		$posted_data['pro_user_updated'] 	= time();
+		$posted_data['pro_user_status'] 	= '0';
+		$isValidID = $this->UserModel->insertSingup($posted_data);
+		if($isValidID>0) {
+			// Sending Email Activation Link
+			$this->load->library('email');
+
+			$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
+			$this->email->to('murugdev.eee@gmail.com');
+
+			$this->email->subject('Commute Easy: Registration Email Activation');
+			$this->email->message('Testing the email class.');
+
+			$this->email->send();
+			$this->session->set_flashdata('flash_message', 'Successfully Registered !');
+			redirect('user/thanks');
 		} else {
-		$this->session->set_flashdata('flash_message', 'Please enter all the details');
-		redirect('user/signup/error/1');
+			$this->session->set_flashdata('data_back', $posted_data);
+			$this->session->set_flashdata('flash_message', 'Please enter all the details');
+			redirect('user/signup/error/1');
 		}
-		//$data['page_name'] = "user/thanks";
-		//$data['menu'] = "signup";
-		//$this->load->view('layout', $data);
+	}
+
+	public function thanks() {
+		$data['page_name'] = "user/thanks";
+		$data['menu'] = "thanks";		
+		$this->load->view('layout', $data);
 	}
 	
 	public function newride(){
