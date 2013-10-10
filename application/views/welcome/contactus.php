@@ -26,7 +26,7 @@
         <h4>Send us a message now!</h4>
         <div id="contact_form">
         
-            <form method="post" name="contactForm" action="<?php echo base_url();?>welcome/process_contact" class="jqtransform">
+            <form method="post" id="contactForm" name="contactForm" action="<?php echo base_url();?>welcome/process_contact" class="jqtransform">
 			<table width="100%" cellpadding="4" cellspacing="3">
 				<tr><td width="100%" colspan="2" align="left">
 				<div id="errorDisplay" style="color:#ff0000;margin-left:130px;float:left;">
@@ -56,7 +56,7 @@
 				</tr>
 				<tr>
 					<td width="50%"> Message : </td>
-					<td width="50%"><textarea id="message_text" name="message_text" rows="8" cols="75" class="required"></textarea></td>
+					<td width="50%"><textarea id="message_text" name="message_text" rows="8" cols="75" class="required" style="width:230px;"></textarea></td>
 				</tr>
 				<tr>
 					<td width="100%" colspan="2" align="center">
