@@ -70,7 +70,7 @@
 				</tr>
 				<tr>
 					<td width="50%"> Zip Code : </td>
-					<td width="50%"><input type="text" id="zipcode" name="zipcode" value="<?php if(isset($data_back))echo $data_back['pro_user_zipcode'];?>" class="required input_field" /></td>
+					<td width="50%"><input type="text" id="zipcode" name="zipcode" value="<?php if(isset($data_back))echo $data_back['pro_user_zipcode'];?>" class="required input_field" size="10" /></td>
 				</tr>
 				<tr>
 					<td width="50%"> State : </td>

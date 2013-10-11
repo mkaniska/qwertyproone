@@ -15,12 +15,17 @@ class UserModel extends CI_Model {
         $query = $this->db->get($this->tbl_users);
         return $query->row();
     }
-    function is_valid_login($user,$pass){
+    function is_valid_login($user, $pass){
 	
-        $this->db->select('city');
-        $this->db->where('random_string', $random_string);
+        $this->db->select('pro_user_id,pro_user_full_name'); //'pro_users');
+        $this->db->where('pro_user_email', $user);
+        $this->db->where('pro_user_password', $pass);
         $query = $this->db->get($this->table_name);
-        return $query->row();  
+		if($query->num_rows() > 0) {
+			return $query->row();  
+		}else {
+			return '';
+		}
     }	
 	function insertSingup($data) {
         $this->db->insert($this->table_name, $data);

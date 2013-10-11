@@ -12,7 +12,10 @@
 <script type="text/javascript" src="<?php echo base_url();?>js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/login.js" ></script>
 <link rel="stylesheet" href="<?php echo base_url();?>css/login.css" type="text/css" media="all" />
+<script src="<?php echo base_url();?>js/jquery-ui.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>css/tab_jquery-ui.css" />
 <?php if(in_array($page_name,$this->config->item('form_pages'))) { ?>
+<?php //if(1) { ?>
 <link rel="stylesheet" href="<?php echo base_url();?>css/jqtransform.css" type="text/css" media="all" />
 <script type="text/javascript" src="<?php echo base_url();?>js/jquery.jqtransform.js" ></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/jquery.validate.js" ></script>
@@ -35,17 +38,32 @@
 		  }		
 </style>
 <!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
-<script src="<?php echo base_url();?>js/jquery-ui.js"></script>
-<link rel="stylesheet" href="<?php echo base_url();?>css/tab_jquery-ui.css" />
+
 <script language="javascript">
 	$(function(){
-		$("form.jqtransform").jqTransform();
+		//if($("#signupForm") || $("#contactForm") || $("#postRide")) {
+			//if($('form#signupForm').length > 0){ 
+				$("#signupForm").jqTransform();
+			//}
+			//if($('form#contactForm').length > 0){ 
+				$("#contactForm").jqTransform();
+			//}
+
+			//if($('form#loginForm').length > 0){ 
+				$("#loginForm").jqTransform();
+			//}
+			//if($('form#postRide').length > 0){
+				$("#postRide").jqTransform();
+			//}			
+		//}
+		//if($('form#postRide').length > 0) {
 		$( "#tabs" ).tabs({
 			  beforeActivate: function(event, ui){
 				 if(ui.newTab.find("a").attr("href")=='#tabs-2'){/*checkStepOneValidation();*/}
 				 else if(ui.newTab.find("a").attr("href")=='#tabs-3'){/*checkStepTwoValidation();*/}
 			  }
 			 });
+		//}	 
 		//$( "#tabs" ).tabs({ show: { effect: "blind", duration: 1000 } });
 		//$( "#tabs" ).on( "tabsbeforeactivate", function( event, ui ) {alert(ui.newTab.attr('id'));} )
 		///$( "#tabs" ).on( "tabsactivate", function( event, ui ) {alert(event);} );
@@ -64,9 +82,7 @@
 		});
 		$( "#processLogin" ).click(function() {
 			dologin();
-		});		
-		
-		
+		});
 		$( "#submitride" ).click(function() {
 			checkStepThreeValidation();
 		});
@@ -207,17 +223,16 @@
         <div id="search_box">
 		<?php if($this->session->userdata('_user_id')=='') { ?>
 			<a href="#" id="loginButton"><span>Login</span></a>
-			<a href="<?php echo base_url();?>user/signup" id="signupButton"><span>Signup</span></a>
-		<?php }else {  ?>
-			<span>Welcome <?php echo $this->session->userdata('_user_name');?></span> !&nbsp; &nbsp; &nbsp;
-			<a href="<?php echo base_url();?>user/logout" style="font-weight:bold;"><span>Logout</span></a>
+		<?php }else { echo $this->session->userdata('_user_name'); ?>
+			<a href="<?php echo base_url();?>user/logout"  ><span>Logout</span></a>
 		<?php } ?>
+			<a href="<?php echo base_url();?>user/signup" id="signupButton"><span>Signup</span></a>
         </div>
             <!-- Login Starts Here -->             
                 
 			<div style="clear:both"></div>
 			<div id="loginBox">                
-				<form id="loginForm">
+				<form id="loginForm" method="post">
 					<fieldset id="body">					
 						<div style="float:left;margin-left:10px;margin-bottom:5px;">
 							<label for="email">User Name</label> &nbsp; 

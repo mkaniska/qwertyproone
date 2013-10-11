@@ -4,6 +4,8 @@
    			<h3>Thank You !</h3>
             
             <p>In ac libero urna. Suspendisse sed odio ut mi auctor blandit. Duis luctus nulla metus, a vulputate mauris. Integer sed nisi sapien, ut gravida mauris. Nam et tellus libero. Cras purus libero, dapibus nec rutrum in, dapibus nec risus.</p>
+            
+            <p>Vivamus laoreet pharetra eros. In quam nibh, placerat ac, porta ac, molestie non, purus. Curabitur sem ante, condimentum non, cursus quis, eleifend non, libero. Nunc a nulla. Suspendisse vitae orci a ligula egestas bibendum. Vestibulum ultrices. Pellentesque tempus sapien nec sem commodo ullamcorper.</p>
 
         </div>
 
@@ -17,15 +19,13 @@
     
     	<div class="post_section">
 		
-           <h2>Thanks for Contacting Us !</h2>
+           <h2>Welcome to CodeIgniter !</h2>
             
             <div class="post_content">
-				<?php if($this->session->flashdata('flash_message')!='') { ?>
-					<?php echo $this->session->flashdata('flash_message'); ?>
-				<?php }else { ?>
-					<script> window.location.href='<?php echo base_url();?>welcome/home'; </script>
-				<?php } ?>
-				Our Administrator will contact you via Email or Phone with more details. !..
+
+				Vivamus laoreet pharetra eros. In quam nibh, placerat ac, porta ac, molestie non, purus. Curabitur sem ante,
+				condimentum non, cursus quis, eleifend non, libero. Nunc a nulla. Suspendisse vitae orci a ligula egestas bibendum.
+				Vestibulum ultrices. Pellentesque tempus sapien nec sem commodo ullamcorper.
             </div>
             
         </div>

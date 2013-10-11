@@ -85,6 +85,12 @@ class User extends CI_Controller {
 		$data['menu'] = "thanks";		
 		$this->load->view('layout', $data);
 	}
+
+	public function welcome() {
+		$data['page_name'] = "user/welcome";
+		$data['menu'] = "welcome";		
+		$this->load->view('layout', $data);
+	}
 	
 	public function newride(){
 		$this->load->model('CommonModel');
@@ -104,9 +110,33 @@ class User extends CI_Controller {
 	}
 	
 	public function processlogin() {
-		//$this->UserModel->
+		$username 	= $this->input->post('username');
+		$password 	= $this->input->post('password');
+		$output     = $this->UserModel->is_valid_login($username,$password);
+		//print_r($output);exit;
+		if($output!=''){
+			if($output->pro_user_id>0){
+				$newsessdata = array(
+								   '_user_id'  	=> $output->pro_user_id,
+								   '_user_name' => $output->pro_user_full_name
+							   );
+				$this->session->set_userdata($newsessdata);
+				echo 'success';
+			}else{
+				echo 'failed';
+			}
+		}else{echo 'failed';}
+		exit;
 	}
 	
+	public function logout() {
+		$newsessdata = array(
+						   '_user_id'  	=> '',
+						   '_user_name' => ''
+					   );
+		$this->session->unset_userdata($newsessdata); // Clearing the session values
+		redirect('welcome/home');
+	}
 }
 
 /* End of file user.php */

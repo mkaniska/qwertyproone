@@ -66,19 +66,31 @@ class Welcome extends CI_Controller {
 		
 		if($this->input->post('doContact')=='Submit') {
 		
-		$posted_data['full_name'] 		= $this->input->post('full_name');
-		$posted_data['gender'] 			= $this->input->post('gender');
-		$posted_data['email_address'] 	= $this->input->post('email_address');
-		$posted_data['message_text'] 	= $this->input->post('message_text');
-		$posted_data['phone_number']	= $this->input->post('phone_number');
+		$full_name 		= $this->input->post('full_name');
+		$gender 		= $this->input->post('gender');
+		$email_address 	= $this->input->post('email_address');
+		$message_text 	= $this->input->post('message_text');
+		$phone_number	= $this->input->post('phone_number');
 
 			$this->load->library('email');
 
 			$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
 			$this->email->to('murugdev.eee@gmail.com');
 
-			$this->email->subject('Commute Easy: User Enquiry');
-			$this->email->message($posted_data['message_text']);
+			$this->email->subject('User Enquiry');
+			
+			$textMessage = "Hello Admin, <br />";
+			$textMessage.=$full_name." is trying to contact you for the following reason. <br />";
+			$textMessage.=$message_text."<br /><br />";
+			$textMessage.="Below are the details he has provided. <br />";
+			$textMessage.="Full Name : ".$full_name." <br />";
+			$textMessage.="Gender : ".$gender." <br />";
+			$textMessage.="Email Address : ".$email_address." <br />";
+			$textMessage.="Phone Number : ".$phone_number." <br /><br />";
+			$textMessage.="Thanks, <br />";
+			$textMessage.="Administrator";
+			
+			$this->email->message($textMessage);
 
 			$this->email->send();
 			$this->session->set_flashdata('flash_message', 'Successfully Registered !');

@@ -17,7 +17,7 @@
     <div id="templatemo_content_full">
         
         <h4>Announce Your Availability</h4>
-<form method="post" name="contact" action="#" class="jqtransform">
+<form method="post" name="rideForm" id="postRide" action="<?php echo base_url();?>user/process_signup" id="postride" class="jqtransform">
 <div style="border:1px solid #90B8FD; width:900px; margin-bottom: 1em; padding: 10px;" id="tabs">
 
 <ul>
@@ -27,8 +27,6 @@
 </ul>
 <div id="tabs-1">
   
-		<form method="post" name="contact" action="<?php echo base_url();?>user/process_signup" id="postride" class="jqtransform">
-		
 		<table width="100%" cellpadding="4" cellspacing="3">
 			<tr><td width="100%" colspan="2"><div id="errorDisplay" style="color:#ff0000;margin-left:300px;float:left;"></div></td></tr>
 			<tr>
@@ -187,4 +185,4 @@
 </div>
 <div class="cleaner"></div>
 </div>
-</div>   
+</div>
