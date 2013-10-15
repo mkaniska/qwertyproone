@@ -3,10 +3,11 @@
 	<div id="content" class="left">
        <div id="contact_form">
 		
-           <form method="post" name="contact" action="#">
-			<table width="100%" cellpadding="4" cellspacing="3">
+           <form method="post" name="registration_form" action="<?php echo base_url();?>user/process_signup" onsubmit="return isValidSignup();">
+		   
+			<table width="100%" cellpadding="4" cellspacing="3" align="center">
 				<tr><td width="100%" colspan="2" align="left">
-				<div id="errorDisplay" style="color:#ff0000;margin-left:130px;float:left;">
+				<div id="errorDisplay" style="color:#ff0000;margin-left:130px;float:left;font-weight:bold;">
 				<?php if($this->session->flashdata('flash_message') !='') { ?>
 					<?php echo $this->session->flashdata('flash_message'); ?>
 				<?php } ?>
@@ -68,10 +69,11 @@
 					</td>
 				</tr>
 				<tr><td width="20%">   </td><td width="80%"> </td></tr>				
+				<tr><td width="20%">   </td><td width="80%"> </td></tr>				
 				<tr>
 					<td width="100%" colspan="2" align="center">
-						<input class="submit_btn float_l" type="button" name="doSignup" id="doSignup" value="Submit " /> &nbsp; &nbsp;  &nbsp;	
-						<input class="submit_btn float_l" type="button" name="doCancel" id="doCancel" value="Cancel " />  	
+						<input class="submit_btn float_l" type="submit" name="doSignup" id="doSignupButton" value="Submit" /> &nbsp; &nbsp;  &nbsp;	
+						<input class="submit_btn float_l" type="button" name="doCancel" id="doCancel" value="Cancel" />  	
 					</td>
 				</tr>				
 			</table>

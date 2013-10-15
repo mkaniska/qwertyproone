@@ -11,16 +11,17 @@ class Ride extends CI_Controller {
 	
 	public function thanks() {
 		$data['page_name'] = "ride/thanks";
-		$data['menu'] = "thanks";		
+		$data['menu'] = "thanks";
+		$data['title'] = SITE_TITLE." :: Thank you !";
 		$this->load->view('layout', $data);
 	}
-
 	
 	public function add(){
 		$data['page_name'] = "ride/add";		
 		$data['states_list'] = $this->CommonModel->states_list();			
 		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
 		$data['menu'] = "add";
+		$data['title'] = SITE_TITLE." :: Post a New Ride";
 		$this->load->view('layout', $data);
 	}
 	

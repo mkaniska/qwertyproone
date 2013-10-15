@@ -6,32 +6,37 @@
 		</div>
         <div class="clear"></div>          
         <div id="contact_form">
-           <form method="post" name="contact" action="#">
-           
+           <form method="post" name="contact_us_form" id="contact_us_form" action="<?php echo base_url();?>welcome/process_contact">
+				
+				<div id="errorDisplay" style="color:#ff0000;float:left;margin-left:300px;font-weight:bold;">
+				<?php if($this->session->flashdata('flash_message') !='') { ?>
+					<?php echo $this->session->flashdata('flash_message'); ?>
+				<?php } ?>
+				</div><div class="cleaner h20"></div>
            		<div class="col one_third">
-                    <label for="author">Subject:</label> <input type="text" id="author" name="author" class="required input_field" />
+                    <label for="subject">* Subject :-</label> <input type="text" id="subject" name="subject" class="required input_field" />
                     <div class="cleaner h10"></div>
                     
-                    <label for="email">Name:</label> <input type="text" id="email" name="email" class="validate-email required input_field" />
+                    <label for="full_name">* Name :-</label> <input type="text" id="full_name" name="full_name" class="validate-email required input_field" />
                     <div class="cleaner h10"></div>
                         
-					<label for="subject">Email:</label> <input type="text" name="subject" id="subject" class="input_field" />
+					<label for="email_address">* Email :-</label> <input type="text" name="email_address" id="email_address" class="input_field" />
                     <div class="cleaner h10"></div>
 					
-					<label for="subject">Phone:</label> <input type="text" name="subject" id="subject" class="input_field" />
+					<label for="phone_number">* Phone :-</label> <input type="text" name="phone_number" id="phone_number" class="input_field" />
                     <div class="cleaner h10"></div>					
 				</div>
                 
                 <div class="col two-third no_margin_right">
-                    <label for="text">Message:</label> <textarea id="text" name="text" rows="0" cols="0" class="required" style="height:220px;"></textarea>
+                    <label for="message_text">* Message :-</label> <textarea id="message_text" name="message_text" rows="0" cols="0" class="required" style="height:220px;"></textarea>
                     <div class="cleaner h10"></div>
 				</div>
                 
                 <div class="cleaner h20"></div>  
-                          
-                <input type="submit" value="Send" id="submit" name="submit" class="submit_btn float_l" /> &nbsp; &nbsp; &nbsp; &nbsp;
-                <input type="button" value="Cancel" id="submit" name="submit" class="submit_btn float_l" />  
-
+                <p style="margin-left:50px;">
+                <input type="submit" value="Submit" id="doContact" name="doContact" class="submit_btn float_l" /> &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="button" value="Cancel" id="doCancel" name="doCancel" class="submit_btn float_l" />  
+				</p>	
             </form>
         </div>
         <div class="clear"></div>

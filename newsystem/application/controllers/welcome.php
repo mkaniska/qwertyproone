@@ -5,19 +5,21 @@ class Welcome extends CI_Controller {
 	public function index()
 	{		 
 		$data['page_name'] = "welcome/home"; 
-		$data['menu'] = "home"; 
-		$this->load->view('layout', $data);	
-		//$this->load->view('welcome_message');
+		$data['menu'] = "home";
+		$data['title'] = "Welcome to CodeIgniter Sample";		
+		$this->load->view('layout', $data);
 	}
 	public function home(){	
 
 		$data['page_name'] = "welcome/home";
 		$data['menu'] = "home"; 
+		$data['title'] = "Welcome to CodeIgniter Sample";
 		$this->load->view('layout', $data);
 	}
 	public function contactus(){
 	
 		$data['page_name'] = "welcome/contactus"; 
+		$data['title'] = SITE_TITLE." :: Contact Us";
 		$data['menu'] = "contactus";
 		$this->load->view('layout', $data);
 	}
@@ -25,20 +27,23 @@ class Welcome extends CI_Controller {
 	
 		$data['page_name'] = "welcome/faq";
 		$data['menu'] = "faq";
+		$data['title'] = SITE_TITLE." :: FAQ";
 		$this->load->view('layout', $data);
 	}
+	/*
 	public function aboutus(){
 	
 		$data['page_name'] = "welcome/aboutus";
 		$data['menu'] = "aboutus";
 		$this->load->view('layout', $data);
 	}
-	public function process_contact(){
-		
+	*/
+	public function process_contact() {
+	
 		if($this->input->post('doContact')=='Submit') {
 		
+		$subject 		= $this->input->post('subject');
 		$full_name 		= $this->input->post('full_name');
-		$gender 		= $this->input->post('gender');
 		$email_address 	= $this->input->post('email_address');
 		$message_text 	= $this->input->post('message_text');
 		$phone_number	= $this->input->post('phone_number');
@@ -55,11 +60,10 @@ class Welcome extends CI_Controller {
 			$textMessage.=$message_text."<br /><br />";
 			$textMessage.="Below are the details he has provided. <br />";
 			$textMessage.="Full Name : ".$full_name." <br />";
-			$textMessage.="Gender : ".$gender." <br />";
 			$textMessage.="Email Address : ".$email_address." <br />";
 			$textMessage.="Phone Number : ".$phone_number." <br /><br />";
 			$textMessage.="Thanks, <br />";
-			$textMessage.="Administrator";
+			$textMessage.="Auto Responder";
 			
 			$this->email->message($textMessage);
 
@@ -67,7 +71,7 @@ class Welcome extends CI_Controller {
 			$this->session->set_flashdata('flash_message', 'Successfully Registered !');
 			redirect('welcome/thanks');
 		} else {
-			$this->session->set_flashdata('data_back', $posted_data);
+			//$this->session->set_flashdata('data_back', $posted_data);
 			$this->session->set_flashdata('flash_message', 'Please enter all the details');
 			redirect('welcome/contactus/error/1');
 		}
