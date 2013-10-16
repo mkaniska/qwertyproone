@@ -92,9 +92,9 @@ class User extends CI_Controller {
 		exit;
 	}
 	
-	public function processlogin() {
-		$username 	= $this->input->post('username');
-		$password 	= $this->input->post('password');
+	public function process_login() {
+		$username 	= $this->input->post('user_name');
+		$password 	= $this->input->post('pass_word');
 		$output     = $this->UserModel->is_valid_login($username,$password);
 		//print_r($output);exit;
 		if($output!=''){
@@ -115,7 +115,8 @@ class User extends CI_Controller {
 	public function logout() {
 		$newsessdata = array('_user_id'  	=> '', '_user_name' => '');
 		$this->session->unset_userdata($newsessdata); // Clearing the session values
-		redirect('welcome/home');
+		$this->session->set_flashdata('flash_message', 'Successfully Logged out !..');
+		redirect('user/login');
 	}
 	
 	public function thanks() {

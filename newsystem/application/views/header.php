@@ -35,7 +35,8 @@ $(function(){
 					});
 	$( "#tabs" ).tabs( "option", "disabled", [ 1,2 ] );
 });
-		</script>
+
+</script>
 <?php } ?>
 <!-- Initialize the Drop Down Menu --> 
 <script type="text/javascript">

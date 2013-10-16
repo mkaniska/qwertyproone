@@ -111,3 +111,22 @@ function isValidContact() {
 	else if($.trim($("#message_text").val())==''){$("#errorDisplay").html("Please enter a valid message");$("#message_text").focus();ok = false;}
 	return ok;
 }
+
+function doLogin() {
+	 $.ajax({
+		  type: 'POST',
+		  url: 'process_login',
+		  beforeSend: function(){  },
+		  data: 'user_name='+$("#user_name").val()+'&pass_word='+$("#password_value").val(),
+		  dataType: "text",
+		  success: function(resultData) {
+			  if(resultData=='success'){
+				window.location.href='http://localhost/qwerty/welcome/home';
+			  }else{
+				$("#errorDisplay").html('Invalid Login Details Provided!');
+				$("#user_name").val('');
+				$("#password_value").val('');
+			  }
+		  }
+	});		
+}
