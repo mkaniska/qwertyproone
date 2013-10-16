@@ -19,7 +19,7 @@
     
     	<div class="post_section">
 		
-           <h2>Thanks for Signing up !</h2>
+           <h2>Thanks for Signing up & Posting your Ride Details !</h2>
             
             <div class="post_content">
 				<?php if($this->session->flashdata('flash_message')!='') { ?>
@@ -27,9 +27,8 @@
 				<?php }else { ?>
 					<script> window.location.href='<?php echo base_url();?>welcome/home'; </script>
 				<?php } ?>
-				Vivamus laoreet pharetra eros. In quam nibh, placerat ac, porta ac, molestie non, purus. Curabitur sem ante,
-				condimentum non, cursus quis, eleifend non, libero. Nunc a nulla. Suspendisse vitae orci a ligula egestas bibendum.
-				Vestibulum ultrices. Pellentesque tempus sapien nec sem commodo ullamcorper.
+				You would receive the Account Activation link on your email to verify your Email Account. After you activated your account, 
+				you would be able to login into the application !...
             </div>
             
         </div>

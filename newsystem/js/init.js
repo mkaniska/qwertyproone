@@ -17,11 +17,11 @@ $(function(){
 		/*$( "#doSignupButton").click(function() {
 			isValidSignup();
 		});
-		*/
+		
 		$( "#contact_us_form").submit(function() {
 			isValidContact();
 		});
-
+*/
 		$( "#doCancel" ).click(function() {
 			window.location.href='http://localhost/qwerty/welcome/home';
 		});

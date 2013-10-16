@@ -33,7 +33,7 @@ $(function(){
 							else if(ui.newTab.find("a").attr("href")=='#tabs-3'){ /*checkStepTwoValidation(); */}
 						}
 					});
-	//$( "#tabs" ).tabs( "option", "disabled", [ 1,2 ] );
+	$( "#tabs" ).tabs( "option", "disabled", [ 1,2 ] );
 });
 		</script>
 <?php } ?>

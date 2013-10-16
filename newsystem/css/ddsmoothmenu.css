@@ -37,8 +37,9 @@
 }
 
 .ddsmoothmenu ul li a.selected, .ddsmoothmenu ul li a:hover { /*CSS class that's dynamically added to the currently active menu items' LI A element*/
-	color: #E1673C;
-	/*background: url(../images/website_menu_item_hover.jpg)*/
+	/*color: #E1673C;*/
+	color:#FFFFFF;
+	background: url(../images/website_menu_item_hover.jpg)
 }
 
 /*1st sub level menu*/

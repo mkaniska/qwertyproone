@@ -44,7 +44,10 @@ function checkStepThreeValidation() {
 	else if($.trim($("#phone_number").val())==''){$("#errorDisplay2").html("Please enter a valid phone number");$("#phone_number").focus();ok = false;}
 	else if($.trim($("#address").val())==''){$("#errorDisplay2").html("Please enter a valid address");$("#address").focus();ok = false;}
 	else if($.trim($("#zipcode").val())==''){$("#errorDisplay2").html("Please enter a valid zip code");$("#zipcode").focus();ok = false;}
-	finalValidationOnRide();
+	if(ok==true)
+		return finalValidationOnRide();
+	else
+		return false;
 }
 
 function finalValidationOnRide() {
@@ -54,15 +57,15 @@ function finalValidationOnRide() {
 	var ok3 = true;
 
 	/* Activate 1st Tab */
-	if($("#city").val()==0){$("#errorDisplay").html("Please select the city");$("#city").focus();ok1 = false;ok2 = false;ok3 = false;}
-	else if($("#start_time").val()==0){$("#errorDisplay").html("Please select the Start Time");$("#start_time").focus();ok1 =  false;ok2 = false;ok3 = false;}
-	else if($("#return_time").val()==0){$("#errorDisplay").html("Please select the Return Time");$("#return_time").focus();ok1 = false;ok2 = false;ok3 = false;}
-	else if($("#searchTextField").val()==''){$("#errorDisplay").html("Please enter the Origin Location");$("#searchTextField").focus();ok1 = false;ok2 = false;ok3 = false;}
-	else if($("#searchTextField2").val()==''){$("#errorDisplay").html("Please enter the Destination Location");$("#searchTextField2").focus();ok1 = false;ok2 = false;ok3 = false;}
+	if($("#city").val()==0){$("#errorDisplay").html("Please select the city");$("#city").focus();ok1 = false;}
+	else if($("#start_time").val()==0){$("#errorDisplay").html("Please select the Start Time");$("#start_time").focus();ok1 =  false;}
+	else if($("#return_time").val()==0){$("#errorDisplay").html("Please select the Return Time");$("#return_time").focus();ok1 = false;}
+	else if($("#searchTextField").val()==''){$("#errorDisplay").html("Please enter the Origin Location");$("#searchTextField").focus();ok1 = false;}
+	else if($("#searchTextField2").val()==''){$("#errorDisplay").html("Please enter the Destination Location");$("#searchTextField2").focus();ok1 = false;}
 
 	/* Activate 2nd Tab */
 	else if($('#travel_type2').attr('checked')?true:false) {
-		if($.trim($("#model_type").val())==''){$("#errorDisplay1").html("Please enter the model type");$("#model_type").focus();ok2 = false; ok3 = false;}
+		if($.trim($("#model_type").val())==''){$("#errorDisplay1").html("Please enter the model type");$("#model_type").focus();ok2 = false; }
 	}
 	
 	/* Activate 3rd Tab */
@@ -75,11 +78,12 @@ function finalValidationOnRide() {
 	else if($.trim($("#address").val())==''){$("#errorDisplay2").html("Please enter a valid address");$("#address").focus();ok3 = false;}
 	else if($.trim($("#zipcode").val())==''){$("#errorDisplay2").html("Please enter a valid zip code");$("#zipcode").focus();ok3 = false;}
 
-
-	if(ok1==false){$("#tabs").tabs("option", "active", 0);}
-	else if(ok2==false){$("#tabs").tabs("option", "active", 1);}
-	else if(ok3==false){$("#tabs").tabs("option", "active", 2);}
-	if(ok1==true && ok2==true && ok3==true){return true;}else{return false;}
+	//alert(ok1+' '+ok2+' '+ok3);
+	var allrite = true;
+	if(ok1==false){$("#tabs").tabs("option", "active", 0); allrite = false; }
+	else if(ok2==false){$("#tabs").tabs("option", "active", 1); allrite = false; }
+	else if(ok3==false){$("#tabs").tabs("option", "active", 2); allrite = false; }
+	if(allrite == false){return false;}else{return true;}
 }
 
 function isValidSignup() {

@@ -44,6 +44,12 @@ img { margin: 0; padding: 0}
 .img_frame_23 span { background: url(../images/website_image_frame_23.png); width: 630px; height: 230px }
 .img_frame_12 { width: 451px; height: 245px }
 .img_frame_12 span { background: url(../images/website_image_frame_12.png); width: 465px; height: 260px }
+
+
+.img_frame_23_new { width: 616px; height: 216px }
+.img_frame_23_new span { background: url(../images/website_image_frame_23.png); width: 630px; height: 230px }
+
+
 .img_nom { display: block; margin-bottom: 15px }
 .img_fl { float: left; margin: 3px 15px 5px 0 }
 .img_fr { float: left; margin: 3px 0 5px 15px }
@@ -122,6 +128,7 @@ a.header { display: block; font-weight: 700 }
 .one_third { width: 300px }
 .one_third_1{ width: 850px }
 #content, .two-third { width: 630px }
+#content_login { width: 630px;height:380px; }
 #content_full { width: 930px }
 #sidebar { width: 300px }
 .one_fourth { width: 216px }
@@ -198,6 +205,23 @@ a.header { display: block; font-weight: 700 }
 #contact_form form label { display: block; width: 300px; margin-right: 12px; font-size: 11px;font-weight:bold; }
 #contact_form form select {   padding: 7px 3px 7px 7px; color: #2c2c2c;  background: #fff; border: 1px solid #ccc; line-height:10px; }
 #contact_form form textarea { 
+	width: 550px; 
+	height: 155px; 
+	padding: 5px; 
+	color: #2c2c2c; 
+	background: #fff; 
+	border: 1px solid #ccc; 
+	font-family: Arial, Helvetica, sans-serif;
+	resize:none;
+	font-size:12px;
+}
+
+
+form { padding: 0; margin-bottom: 40px }
+form .input_field { width: 290px; padding: 7px; color: #2c2c2c;  background: #fff; border: 1px solid #ccc; }
+form label { display: block; width: 300px; margin-right: 12px; font-size: 11px;font-weight:bold; }
+form select {   padding: 7px 3px 7px 7px; color: #2c2c2c;  background: #fff; border: 1px solid #ccc; line-height:10px; }
+form textarea { 
 	width: 550px; 
 	height: 155px; 
 	padding: 5px; 

@@ -6,7 +6,7 @@
 		</div>
         <div class="clear"></div>          
         <div id="contact_form">
-           <form method="post" name="contact_us_form" id="contact_us_form" action="<?php echo base_url();?>welcome/process_contact">
+           <form method="post" name="contact_us_form" id="contact_us_form" action="<?php echo base_url();?>welcome/process_contact" onsubmit="return isValidContact();">
 				
 				<div id="errorDisplay" style="color:#ff0000;float:left;margin-left:300px;font-weight:bold;">
 				<?php if($this->session->flashdata('flash_message') !='') { ?>

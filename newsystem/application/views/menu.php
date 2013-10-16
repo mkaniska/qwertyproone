@@ -14,7 +14,7 @@
 			<li><a href="<?php echo base_url();?>ride/add" <?php if($menu=='addride')echo 'class="selected"';?>>Post Ride</a></li>
 			<li><a href="<?php echo base_url();?>welcome/contactus" <?php if($menu=='contactus')echo 'class="selected"';?>>Contact Us</a></li>
 			<li><a href="<?php echo base_url();?>user/register" <?php if($menu=='register')echo 'class="selected"';?>>Sign Up</a></li>
-			<li><a href="#">Login</a></li>
+			<li><a href="<?php echo base_url();?>user/login">Login</a></li>
 		</ul>
 		<br style="clear: left" />
 	</div>

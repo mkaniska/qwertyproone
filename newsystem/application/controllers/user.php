@@ -18,11 +18,16 @@ class User extends CI_Controller {
 
 	public function index()
 	{		 
-		$data['page_name'] = "user/login"; 
+		redirect('welcome/home');
+	}	
+	
+	public function login() {
+		$this->load->model('CommonModel');
+		$data['page_name'] = "user/login";
 		$data['menu'] = "login";
 		$data['title'] = SITE_TITLE." :: Login";
-		$this->load->view('layout', $data);
-	}	
+		$this->load->view('simple_layout', $data);
+	}
 	
 	public function register($param=NULL) {
 		$this->load->model('CommonModel');
