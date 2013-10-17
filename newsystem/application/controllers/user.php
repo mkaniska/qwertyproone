@@ -29,6 +29,14 @@ class User extends CI_Controller {
 		$this->load->view('simple_layout', $data);
 	}
 	
+	public function getpassword() {
+		$this->load->model('CommonModel');
+		$data['page_name'] = "user/getpassword";
+		$data['menu'] = "getpassword";
+		$data['title'] = SITE_TITLE." :: Retrive Password";
+		$this->load->view('simple_layout', $data);
+	}	
+	
 	public function register($param=NULL) {
 		$this->load->model('CommonModel');
 		$data['page_name'] = "user/register";		
@@ -111,6 +119,25 @@ class User extends CI_Controller {
 		}else{echo 'failed';}
 		exit;
 	}
+	
+	public function retrivepassword() {
+		$username 	= $this->input->post('user_name');
+		$output     = $this->UserModel->is_valid_user($username);
+		//print_r($output);exit;
+		if($output!=''){
+			if($output->pro_user_id>0){
+				$newsessdata = array(
+								   '_user_id'  	=> $output->pro_user_id,
+								   '_user_name' => $output->pro_user_full_name
+							   );
+				$this->session->set_userdata($newsessdata);
+				echo 'success';
+			}else{
+				echo 'failed';
+			}
+		}else{echo 'failed';}
+		exit;
+	}	
 	
 	public function logout() {
 		$newsessdata = array('_user_id'  	=> '', '_user_name' => '');

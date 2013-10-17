@@ -9,12 +9,7 @@ class UserModel extends CI_Model {
         $this->table_name = 'pro_users';
         $this->primary_key = 'pro_user_id';
     }
-    
-    function read_user_with_name($name){
-        $this->db->where('name', $name);
-        $query = $this->db->get($this->tbl_users);
-        return $query->row();
-    }
+	
     function is_valid_login($user, $pass){
 	
         $this->db->select('pro_user_id,pro_user_full_name'); //'pro_users');
@@ -26,7 +21,39 @@ class UserModel extends CI_Model {
 		}else {
 			return '';
 		}
-    }	
+    }
+	
+    function is_valid_user($user){
+	
+        $this->db->select('pro_user_id,pro_user_full_name,pro_user_email,pro_user_password'); //'pro_users');
+        $this->db->where('pro_user_email', $user);
+        $query = $this->db->get($this->table_name);
+		if($query->num_rows() > 0) {
+
+			$this->load->library('email');
+
+			$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
+			$this->email->to('murugdev.eee@gmail.com');
+			$this->email->subject('Commute Easy: Your Password');
+			
+			// Constructing Ride Details Email Notification
+			$emailMessage = "Hello ".$query->row()->pro_user_full_name.", <br /><br />";
+			$emailMessage.= "Please check your password below. <br /><br />";
+			$emailMessage.= "Password : ".$query->row()->pro_user_password.", <br />";
+
+			$emailMessage.= " <br />";
+			$emailMessage.= " Thanks, <br />";
+			$emailMessage.= " Administrator";
+
+			$this->email->message($emailMessage);
+			$this->email->send();
+			
+			return 'success';exit;
+		}else {
+			return 'failure';exit;
+		}
+    }
+	
 	function insertSingup($data) {
         $this->db->insert($this->table_name, $data);
         $inserted_id = $this->db->insert_id();

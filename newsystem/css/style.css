@@ -244,3 +244,5 @@ form textarea {
 
 .no_margin_right { margin-right: 0 }
 .last_box { margin-bottom: 0; background: none }
+
+form select option{margin:4px;}

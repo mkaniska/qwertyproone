@@ -20,6 +20,7 @@ class CommonModel extends CI_Model {
 		}
         return $result_back;
     }
+	
     function cities_list($state){
         
         $this->db->where('city_state', $state);
@@ -31,7 +32,8 @@ class CommonModel extends CI_Model {
 			$result_back[] = $row->city_name;
 		}
         return $result_back;  
-    }	
+    }
+	
 }
 
 ?>

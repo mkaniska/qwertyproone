@@ -32,10 +32,16 @@ $(function(){
 		$( "#submitride" ).click(function() {
 			checkStepThreeValidation();
 		});
+		/*
 		$( "#travel_type1" ).click(function() {
-			$( "#vehicle" ).hide();$( "#model" ).hide();$( "#fuel" ).hide();
+			$( "#vehicle" ).hide();
+			$( "#model" ).hide();
+			$( "#fuel" ).hide();
 		});
 		$( "#travel_type2" ).click(function() {
-			$( "#vehicle" ).show();$( "#model" ).show();$( "#fuel" ).show();
+			$( "#vehicle" ).show();
+			$( "#model" ).show();
+			$( "#fuel" ).show();
 		});	
+		*/
 });

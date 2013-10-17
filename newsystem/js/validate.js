@@ -1,3 +1,17 @@
+
+function enableFields(selectedValue){
+
+	if(selectedValue=='passenger'){
+		$( "#vehicle").hide();
+		$( "#model").hide();
+		$( "#fuel").hide();
+	}else{
+		$( "#vehicle").show();
+		$( "#model").show();
+		$( "#fuel").show();
+	}
+}
+
 function disableEnterKey(e)
 {
 	 var key;
@@ -101,6 +115,7 @@ function isValidSignup() {
 	return ok;
 	
 }
+
 function isValidContact() {
 	$("#errorDisplay").html('');
 	var ok = true;
@@ -113,6 +128,7 @@ function isValidContact() {
 }
 
 function doLogin() {
+
 	 $.ajax({
 		  type: 'POST',
 		  url: 'process_login',
@@ -129,4 +145,38 @@ function doLogin() {
 			  }
 		  }
 	});		
+}
+
+function validateInfo() {
+	if($.trim($("#user_name").val())!=''){
+		 $.ajax({
+			  type: 'POST',
+			  url: 'retrivepassword',
+			  beforeSend: function(){  },
+			  data: 'user_name='+$("#user_name").val(),
+			  dataType: "text",
+			  success: function(resultData) {
+				  if(resultData=='success'){
+					$("#errorDisplay").html('Your Password has been sent to your Email!');
+				  }else{
+					$("#user_name").val('');
+					$("#errorDisplay").html('Invalid Details Given!');
+				  }
+			  }
+		});
+	}else{$("#errorDisplay").html('Please Enter Valid Detail !');}
+}
+
+function isValidRide(){
+
+	var ok = true;
+	if($("#city").val()==0){$("#errorDisplay").html("Please select the city");$("#city").focus();ok = false;}
+	else if($("#start_time").val()==0){$("#errorDisplay").html("Please select the Start Time");$("#start_time").focus();ok =  false;}
+	else if($("#return_time").val()==0){$("#errorDisplay").html("Please select the Return Time");$("#return_time").focus();ok = false;}
+	else if($("#searchTextField").val()==''){$("#errorDisplay").html("Please enter the Origin Location");$("#searchTextField").focus();ok = false;}
+	else if($("#searchTextField2").val()==''){$("#errorDisplay").html("Please enter the Destination Location");$("#searchTextField2").focus();ok = false;}
+	else if($('#travel_type').val()=='driver') {
+		if($.trim($("#model_type").val())==''){$("#errorDisplay").html("Please enter the model type");$("#model_type").focus();ok = false; }
+	}
+	if(ok==true){return true;}else{return false;}
 }

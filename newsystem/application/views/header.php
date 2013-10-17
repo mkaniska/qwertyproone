@@ -17,7 +17,7 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 
 <!-- Google Map related JS & CSS Files -->
-<?php if($page_name=='ride/add') { ?>
+<?php if($page_name=='ride/add' || $page_name=='ride/postride') { ?>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/map.js"></script>
 <?php } ?>
@@ -56,7 +56,7 @@ ddsmoothmenu.init({
 <body>
 <div id="website_header_wrapper">
 	<div id="website_header" class="wrapper">
-    	<div id="site_title"><a href="#">CodeIgniter Sample Application</a></div>
+    	<div id="site_title"><a href="<?php echo base_url();?>welcome/home">CodeIgniter Sample Application</a></div>
 		<!-- start of website_menu -->
 			<?php $this->load->view('menu'); ?>
         <!-- end of website_menu -->
