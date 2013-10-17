@@ -8,6 +8,15 @@
             <div style="border:1px solid #CCCCCC;line-height:25px;"> <!-- 918F8D-->
 		    <form style="margin:25px;" method="post" name="contact_us_form" id="contact_us_form" action="<?php echo base_url();?>welcome/process_contact" onsubmit="return isValidContact();">
 			<table width="100%" cellpadding="3" cellspacing="0" align="center" border="1">
+				<tr>
+					<td width="100%" colspan="8">
+						<div id="errorDisplay" style="color:#ff0000;margin-left:300px;float:left;font-weight:bold;">
+							<?php if($this->session->flashdata('flash_message') !='') { ?>
+								<?php echo $this->session->flashdata('flash_message'); ?>
+							<?php } ?>
+						</div>
+					</td>
+				</tr>
 				<tr style="font-weight:bold;font-size:11px;text-align:center;background-color:#ccc;">
 					<td>City</td>
 					<td>Vehicle</td>

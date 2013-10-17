@@ -35,7 +35,13 @@ $(function(){
 					});
 	$( "#tabs" ).tabs( "option", "disabled", [ 1,2 ] );
 });
-
+</script>
+<?php } ?>
+<?php if($page_name=='ride/add') { ?>
+<script>
+$(function(){
+	$( "#tabs" ).tabs();
+});
 </script>
 <?php } ?>
 <!-- Initialize the Drop Down Menu --> 

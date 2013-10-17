@@ -9,7 +9,7 @@ class Ride extends CI_Controller {
         $this->load->model('CommonModel');
     }
 	
-	public function index(){
+	public function index() {
 		redirect('welcome/home');
 	}
 
@@ -28,7 +28,7 @@ class Ride extends CI_Controller {
 		$this->load->view('layout', $data);
 	}
 	
-	public function add(){
+	public function add() {
 		$data['page_name'] = "ride/add";		
 		$data['states_list'] = $this->CommonModel->states_list();			
 		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
@@ -36,7 +36,23 @@ class Ride extends CI_Controller {
 		$data['title'] = SITE_TITLE." :: Post a New Ride";
 		$this->load->view('layout', $data);
 	}
-	public function postride(){
+
+	public function edit($id) {
+		$data['page_name'] = "ride/edit";
+		$data['ride_value'] = $this->RideModel->get_ride_value($id);
+		if($data['ride_value']!='') {
+			$data['states_list'] = $this->CommonModel->states_list();			
+			$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
+			$data['menu'] = "editride";
+			$data['title'] = SITE_TITLE." :: Edit the Ride";
+			$this->load->view('layout', $data);
+		}else{
+			$this->session->set_flashdata('flash_message', 'Invalid Request!');
+			redirect('ride/ridelist');
+		}
+	}
+	
+	public function postride() {
 		$data['page_name'] = "ride/postride";		
 		$data['states_list'] = $this->CommonModel->states_list();			
 		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
@@ -209,8 +225,7 @@ class Ride extends CI_Controller {
 			$this->session->set_flashdata('flash_message', 'Please enter all the details');
 			redirect('ride/postride/error/1');
 		}
-	} 
-	
+	}
 }
 
 /* End of file ride.php */

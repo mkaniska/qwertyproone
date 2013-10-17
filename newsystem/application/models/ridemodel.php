@@ -24,7 +24,19 @@ class RideModel extends CI_Model {
 		{
 			$result_back[] = $row;
 		}
-        return $result_back;  
+        return $result_back;
+    }
+    function get_ride_value($RideID){
+        $UserID = $this->session->userdata('_user_id');
+        $this->db->where('user_id', $UserID);
+        $this->db->where('ride_id', $RideID);
+		$this->db->select();
+        $query = $this->db->get($this->table_name);
+		if($query->num_rows() > 0){
+			return $query->row();
+		}else{
+			return '';
+		}
     }	
 }
 
