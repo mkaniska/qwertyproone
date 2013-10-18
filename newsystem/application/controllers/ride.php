@@ -14,11 +14,47 @@ class Ride extends CI_Controller {
 	}
 
 	public function ridelist() {
+		if($this->session->userdata('_user_id')==''){redirect('user/login');}
+		$this->load->library('pagination');		
+		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
+		$config['uri_segment'] 		= 3;
+		$config['num_links']		= 3;
+		$config['per_page'] 		= 3;
+		$config['base_url'] 		= base_url().'ride/ridelist/';
+		$config['use_page_numbers'] = TRUE;
+        $config['cur_tag_open'] 	= "<li><span><b>";
+        $config['cur_tag_close'] 	= "</b></span></li>";
+		$config['full_tag_open'] 	= '<ul>';
+		$config['full_tag_close'] 	= '</ul>';
+		$config['num_tag_open'] 	= '<li>';
+		$config['num_tag_close'] 	= '</li>';
+		$config['first_link'] 		= 'First';
+		$config['last_link'] 		= 'Last';
+		$config['prev_link'] 		= 'Prev';
+		$config['next_link'] 		= 'Next';
+		$config['first_tag_open'] 	= $config['last_tag_open'] = $config['next_tag_open'] = $config['prev_tag_open'] = '<li>';
+        $config['first_tag_close'] 	= $config['last_tag_close'] = $config['next_tag_close'] = $config['prev_tag_close'] = '</li>';
+
+		$config['total_rows'] 			= $this->RideModel->get_total_rides();
+		
 		$data['page_name'] = "ride/ridelist";
-		$data['menu'] = "ridelist";
-		$data['ride_list'] = $this->RideModel->get_rides_posted();
+		$data['menu'] = "ridelist";		
+		$data['ride_list'] = $this->RideModel->get_rides_posted($config["per_page"], $page);
 		$data['title'] = SITE_TITLE." :: Ride List Posted";
+		
+		//$config['page_query_string'] = TRUE;
+		
+		$this->pagination->initialize($config); 
+		$data['pagelink'] = $this->pagination->create_links();
+		
 		$this->load->view('layout', $data);
+	}
+	public function search() {
+		$data['page_name'] = "ride/search";
+		$data['menu'] = "search";
+		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
+		$data['title'] = SITE_TITLE." :: Search for a Ride";
+		$this->load->view('simple_layout', $data);
 	}
 	
 	public function thanks() {
@@ -38,6 +74,7 @@ class Ride extends CI_Controller {
 	}
 
 	public function edit($id) {
+		if($this->session->userdata('_user_id')==''){redirect('user/login');}
 		$data['page_name'] = "ride/edit";
 		$data['ride_value'] = $this->RideModel->get_ride_value($id);
 		if($data['ride_value']!='') {
@@ -53,6 +90,7 @@ class Ride extends CI_Controller {
 	}
 	
 	public function postride() {
+		if($this->session->userdata('_user_id')==''){redirect('user/login');}
 		$data['page_name'] = "ride/postride";		
 		$data['states_list'] = $this->CommonModel->states_list();			
 		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
@@ -62,7 +100,7 @@ class Ride extends CI_Controller {
 	}	
 
 	public function process_ride() {
-	
+		if($this->session->userdata('_user_id')==''){redirect('user/login');}
 		if($this->input->post('submitride')=='Submit') {
 			
 			// For Signup Process
@@ -109,6 +147,7 @@ class Ride extends CI_Controller {
 			// Send an activation email & notifications
 			
 				// Sending Email Activation Link
+				/*
 				$this->load->library('email');
 
 				$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
@@ -142,7 +181,7 @@ class Ride extends CI_Controller {
 
 				$this->email->message($rideMessage);
 				$this->email->send();				
-				
+				*/
 				$this->session->set_flashdata('flash_message', 'Successfully Added your Ride Details & Registered !');
 				redirect('ride/thanks');
 			} else {
@@ -157,7 +196,7 @@ class Ride extends CI_Controller {
 	} 
 
 	public function process_newride() {
-	
+		if($this->session->userdata('_user_id')==''){redirect('user/login');}
 		if($this->input->post('post_ride')=='Submit') {
 			
 			$UserID = $this->session->userdata('_user_id');

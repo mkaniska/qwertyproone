@@ -246,3 +246,52 @@ form textarea {
 .last_box { margin-bottom: 0; background: none }
 
 form select option{margin:4px;}
+
+
+/* CSS Applied for Customized Pagination Link */
+
+
+.mypagination ul > li > a, .mypagination ul > li > span {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #FFFFFF;
+    border-color: #DDDDDD;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px 1px 1px 0;
+    float: left;
+    line-height: 20px;
+    padding: 4px 12px;
+    text-decoration: none;
+}
+
+.mypagination ul > li:first-child > a, .mypagination ul > li:first-child > span {
+    border-bottom-left-radius: 4px;
+    border-left-width: 1px;
+    border-top-left-radius: 4px;
+}
+
+.mypagination {
+
+	margin: 10px 0;
+}
+
+.mypagination ul {
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    display: inline-block;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+.mypagination ul > li{
+
+	display: inline;
+}
+
+li{ 
+{
+	line-height: 20px;
+}

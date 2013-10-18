@@ -331,7 +331,7 @@ class CI_Pagination {
 		// Add the wrapper HTML if exists
 		$output = $this->full_tag_open.$output.$this->full_tag_close;
 
-		return $output;
+		return '<div class="clear mypagination">'.$output."</div>";
 	}
 }
 // END Pagination Class

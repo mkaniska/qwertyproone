@@ -10,6 +10,7 @@
 				</ul>
 			</li>-->
 			<li><a href="<?php echo base_url();?>welcome/faq" <?php if($menu=='faq')echo 'class="selected"';?>>FAQ</a></li>
+			<li><a href="<?php echo base_url();?>ride/search" <?php if($menu=='search')echo 'class="selected"';?>>Search</a></li>
 			<?php if($this->session->userdata('_user_id')=='') { ?>
 			<li><a href="<?php echo base_url();?>ride/add" <?php if($menu=='addride')echo 'class="selected"';?>>Post Ride</a></li>
 			<li><a href="<?php echo base_url();?>welcome/contactus" <?php if($menu=='contactus')echo 'class="selected"';?>>Contact Us</a></li>

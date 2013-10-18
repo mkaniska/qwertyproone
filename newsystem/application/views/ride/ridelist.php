@@ -46,6 +46,8 @@
 					</td>
 				</tr>	
 				<?php } ?>
+				<tr style="font-size:11px;">
+					<td colspan="8" align="center"><?php echo $pagelink;?></td>
 				</tr>
 			</table>
             </form>

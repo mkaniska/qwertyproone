@@ -30,14 +30,7 @@ class Welcome extends CI_Controller {
 		$data['title'] = SITE_TITLE." :: FAQ";
 		$this->load->view('layout', $data);
 	}
-	/*
-	public function aboutus(){
-	
-		$data['page_name'] = "welcome/aboutus";
-		$data['menu'] = "aboutus";
-		$this->load->view('layout', $data);
-	}
-	*/
+ 
 	public function process_contact() {
 	
 		if($this->input->post('doContact')=='Submit') {

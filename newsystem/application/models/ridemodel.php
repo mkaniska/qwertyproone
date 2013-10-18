@@ -13,19 +13,39 @@ class RideModel extends CI_Model {
         $inserted_id = $this->db->insert_id();
         return $inserted_id;
 	}
+
+    function get_total_rides() {
+
+        $UserID = $this->session->userdata('_user_id');
+        $this->db->where('user_id', $UserID);
+		$this->db->order_by("added_on","DESC");
+		$this->db->select('ride_id');
+		$query = $this->db->get($this->table_name);
+		return $query->num_rows();
+	}
 	
-    function get_rides_posted(){
+    function get_rides_posted($cp,$pp) {
+
         $UserID = $this->session->userdata('_user_id');
         $this->db->where('user_id', $UserID);
 		$this->db->order_by("added_on","DESC");
 		$this->db->select('ride_id,passenger_city,vehicle_type,start_time,return_time,origin_location,destination_location,added_on,active_status');
-        $query = $this->db->get($this->table_name);
-		foreach ($query->result() as $row)
-		{
-			$result_back[] = $row;
+        $this->db->limit($cp, $pp);
+		$query = $this->db->get($this->table_name);
+		//echo $this->db->last_query();exit; // To Print the SQL Query
+		if($query->num_rows() > 0){
+			foreach ($query->result() as $row)
+			{
+				$result_back[] = $row;
+			}
+			//return array('resultList'=>$result_back,'resultCount'=>$query->num_rows());
+			return $result_back;
+		}else{ 
+			//return array('resultList'=>array(),'resultCount'=>0);
+			return array();
 		}
-        return $result_back;
     }
+	
     function get_ride_value($RideID){
         $UserID = $this->session->userdata('_user_id');
         $this->db->where('user_id', $UserID);
