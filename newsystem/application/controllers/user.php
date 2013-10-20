@@ -76,10 +76,12 @@ class User extends CI_Controller {
 				$this->email->to('murugdev.eee@gmail.com');
 
 				$this->email->subject('Commute Easy: Registration Email Activation');
+				/*
 				$this->email->message('Testing the email class.');
-
 				$this->email->send();
+				*/
 				$this->session->set_flashdata('flash_message', 'Successfully Registered !');
+				$this->session->set_flashdata('flash_url', base_url().'user/login');
 				redirect('user/thanks');
 			} else {
 				$this->session->set_flashdata('data_back', $posted_data);
@@ -148,8 +150,11 @@ class User extends CI_Controller {
 	
 	public function thanks() {
 		$data['page_name'] = "user/thanks";
-		$data['menu'] = "thanks";		
-		$this->load->view('layout', $data);
+		$data['menu'] = "thanks";
+		$data['title'] = SITE_TITLE." :: Thanks";
+		//$this->session->set_flashdata('flash_message', '<p style="text-align:center;">Successfully Registered ! </p> You will receive the email for verification & please confirm that to activate your account!.');
+		//$this->session->set_flashdata('flash_url', base_url().'user/login');
+		$this->load->view('simple_layout', $data);
 	}	
 }
 

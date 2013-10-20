@@ -16,6 +16,15 @@ class Welcome extends CI_Controller {
 		$data['title'] = "Welcome to CodeIgniter Sample";
 		$this->load->view('layout', $data);
 	}
+	public function thanks(){	
+
+		$data['page_name'] = "welcome/thanks";
+		$data['menu'] = "thanks"; 
+		$data['title'] = "Thank you !";
+		$data['title'] = SITE_TITLE." :: Thanks";
+		$this->session->set_flashdata('flash_message', 'Successfully Registered ! <br /> You will receive the email for verification & please confirm that to activate your account!.');
+		$this->load->view('layout', $data);
+	}	
 	public function contactus(){
 	
 		$data['page_name'] = "welcome/contactus"; 

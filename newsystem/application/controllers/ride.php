@@ -49,6 +49,7 @@ class Ride extends CI_Controller {
 		
 		$this->load->view('layout', $data);
 	}
+	
 	public function search() {
 		$data['page_name'] = "ride/search";
 		$data['menu'] = "search";
@@ -100,7 +101,7 @@ class Ride extends CI_Controller {
 	}	
 
 	public function process_ride() {
-		if($this->session->userdata('_user_id')==''){redirect('user/login');}
+		//if($this->session->userdata('_user_id')==''){redirect('user/login');}
 		if($this->input->post('submitride')=='Submit') {
 			
 			// For Signup Process
@@ -147,7 +148,7 @@ class Ride extends CI_Controller {
 			// Send an activation email & notifications
 			
 				// Sending Email Activation Link
-				/*
+				
 				$this->load->library('email');
 
 				$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
@@ -178,13 +179,15 @@ class Ride extends CI_Controller {
 				$rideMessage.= " <br />";
 				$rideMessage.= " Thanks, <br />";
 				$rideMessage.= " Administrator";
-
-				$this->email->message($rideMessage);
-				$this->email->send();				
+				/*
+					$this->email->message($rideMessage);
+					$this->email->send();				
 				*/
 				$this->session->set_flashdata('flash_message', 'Successfully Added your Ride Details & Registered !');
+				$this->session->set_flashdata('flash_url', base_url().'user/login');
 				redirect('ride/thanks');
 			} else {
+				$posted_data = array_merge($ride_data, $user_data); 
 				$this->session->set_flashdata('data_back', $posted_data);
 				$this->session->set_flashdata('flash_message', 'Please enter all the details');
 				redirect('ride/add/error/1');
@@ -249,14 +252,15 @@ class Ride extends CI_Controller {
 				$rideMessage.= " <br />";
 				$rideMessage.= " Thanks, <br />";
 				$rideMessage.= " Administrator";
-
-				$this->email->message($rideMessage);
-				$this->email->send();				
-				
+				/*
+					$this->email->message($rideMessage);
+					$this->email->send();				
+				*/
 				$this->session->set_flashdata('flash_message', 'Successfully Added your Ride Details !');
+				$this->session->set_flashdata('flash_url', base_url().'user/login');
 				redirect('ride/thanks');
 			} else {
-				$this->session->set_flashdata('data_back', $posted_data);
+				$this->session->set_flashdata('data_back', $ride_data);
 				$this->session->set_flashdata('flash_message', 'Please enter all the details');
 				redirect('ride/postride/error/1');
 			}

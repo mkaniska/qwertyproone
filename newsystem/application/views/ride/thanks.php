@@ -1,43 +1,26 @@
-
-        <div id="templatemo_banner">
-        
-   			<h3>Thank You !</h3>
-            
-            <p>In ac libero urna. Suspendisse sed odio ut mi auctor blandit. Duis luctus nulla metus, a vulputate mauris. Integer sed nisi sapien, ut gravida mauris. Nam et tellus libero. Cras purus libero, dapibus nec rutrum in, dapibus nec risus.</p>
-            
-            <p>Vivamus laoreet pharetra eros. In quam nibh, placerat ac, porta ac, molestie non, purus. Curabitur sem ante, condimentum non, cursus quis, eleifend non, libero. Nunc a nulla. Suspendisse vitae orci a ligula egestas bibendum. Vestibulum ultrices. Pellentesque tempus sapien nec sem commodo ullamcorper.</p>
-
-        </div>
-
-</div> <!-- end of header_wrapper -->
-
-<div id="templatemo_content_wrapper_outer">
-<div id="templatemo_content_wrapper_inner">
-<div id="templatemo_content_wrapper">
-
-    <div id="templatemo_content">
-    
-    	<div class="post_section">
-		
-           <h2>Thanks for Signing up & Posting your Ride Details !</h2>
-            
-            <div class="post_content">
-				<?php if($this->session->flashdata('flash_message')!='') { ?>
+<div id="website_main" class="wrapper">
+	<div id="content_login" class="left">
+        <div class="post">
+            <h2 style="text-align:center;margin-left:200px;">Thank you !</h2>
+            <div class="img_frame img_frame_23_new">
+			<span style="margin-top:15px;margin-left:140px;">
+				<div id="errorDisplay" style="color:#3FBA32;margin-left:50px;margin-top:50px;float:left;font-weight:bold;">
+				<?php if($this->session->flashdata('flash_message') !='') { ?>
 					<?php echo $this->session->flashdata('flash_message'); ?>
-				<?php }else { ?>
-					<script> window.location.href='<?php echo base_url();?>welcome/home'; </script>
+				<?php } ?> <br />
+				<?php if($this->session->flashdata('flash_url') !='') { ?>
+					<p style="text-align:center;margin-left:-50px;">
+						<input class="submit_btn float_l" type="button" value="Click Here" onclick="javascript:sendHere('<?php echo $this->session->flashdata('flash_url'); ?>');" />
+					</p>
 				<?php } ?>
-				You would receive the Account Activation link on your email to verify your Email Account. After you activated your account, 
-				you would be able to login into the application !...
-            </div>
-            
+				</div>
+			</span>
+			</div>
         </div>
-    
-    </div> <!-- end of templatemo_content -->
-        
-    <?php $this->load->view('sidebar'); ?>		
-
-	<div class="cleaner"></div>
-</div>
-</div>
+    </div> <!-- END of content half -->
+    <!-- START of sidebar -->
+	<?php //$this->load->view('sidebar_login'); ?>
+    <!-- END of sidebar -->
+    <div class="clear"></div>
+	<script></script>
 </div>

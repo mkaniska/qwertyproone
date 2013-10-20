@@ -1,4 +1,7 @@
 
+function sendHere(toUrl) {
+	window.location.href=toUrl;
+}
 function enableFields(selectedValue){
 
 	if(selectedValue=='passenger'){

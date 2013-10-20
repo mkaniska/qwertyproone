@@ -137,7 +137,7 @@
 						</td></tr>
 						<tr>
 							<td width="20%">* Full Name : </td>
-							<td width="80%"><input type="text" id="full_name" name="full_name" class="required input_field" value="" /></td>
+							<td width="80%"><input type="text" maxlength="25" id="full_name" name="full_name" class="required input_field" value="" /></td>
 						</tr>
 						<tr>
 							<td width="20%"> &nbsp; &nbsp;Gender : </td>
@@ -148,19 +148,19 @@
 						</tr>
 						<tr>
 							<td width="20%">*  Email : </td>
-							<td width="80%"><input type="text" id="email_address" name="email_address" value="" class="required input_field" /></td>
+							<td width="80%"><input type="text" maxlength="30" id="email_address" name="email_address" value="" class="required input_field" /></td>
 						</tr>
 						<tr>
 							<td width="20%">*  Password : </td>
-							<td width="80%"><input type="password" id="password_text" name="password_text" class="required input_field" /></td>
+							<td width="80%"><input type="password" maxlength="15" id="password_text" name="password_text" class="required input_field" /></td>
 						</tr>
 						<tr>
 							<td width="25%">*  Re-Type Password : </td>
-							<td width="75%"><input type="password" id="re_password_text" name="re_password" class="required input_field" /></td>
+							<td width="75%"><input type="password" maxlength="15" id="re_password_text" name="re_password" class="required input_field" /></td>
 						</tr>				
 						<tr>
 							<td width="20%">*  Phone : </td>
-							<td width="80%"><input type="text" id="phone_number" name="phone_number" value="" class="required input_field" /></td>
+							<td width="80%"><input type="text" id="phone_number" maxlength="14" name="phone_number" value="" class="required input_field" /></td>
 						</tr>
 						<tr>
 							<td width="20%">*  Address : </td>
@@ -179,7 +179,7 @@
 						</tr>
 						<tr>
 							<td width="20%">*  Zip Code : </td>
-							<td width="80%"><input type="text" id="zipcode" name="zipcode" value="" class="required input_field" style="width:150px;" /></td>
+							<td width="80%"><input type="text" id="zipcode" maxlength="6" name="zipcode" value="" class="required input_field" style="width:150px;" /></td>
 						</tr>
 						<tr>
 							<td width="20%">*  State : </td>
