@@ -68,6 +68,9 @@
 			</table>
             </form>
 			</div>
+			<div id="searchedResult" style="border:1px solid #CCCCCC;margin-left:30px;margin-top:20px;width:950px;height:200px;">
+				Please enter your city & time values to do a search on this sytem and to find the matching results.
+			</div>
         </div>
         <div class="clear"></div>
 </div>
