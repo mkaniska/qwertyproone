@@ -44,4 +44,6 @@ $(function(){
 			$( "#fuel" ).show();
 		});	
 		*/
+
+		$("#search_address").autocomplete({source: new Array()});
 });

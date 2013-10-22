@@ -183,3 +183,50 @@ function isValidRide(){
 	}
 	if(ok==true){return true;}else{return false;}
 }
+
+function getMatchingLocation(strVal) {
+
+	if($.trim(strVal)!='' && strVal.length>=3) {
+		var addressArray = [];
+		 $.ajax({
+			  type: 'POST',
+			  url: 'matching_places',
+			  beforeSend: function(){  },
+			  data: 'address_string='+strVal,
+			  dataType: "text",
+			  success: function(resultData) {
+				  var json_obj = $.parseJSON(resultData);
+				  if(json_obj.length>0) {
+					  for (var i=0; i<json_obj.length; i++) {			  
+							addressArray[i]= json_obj[i];
+					  }
+					  $("#search_address" ).autocomplete( "enable" );
+					  $("#search_address").autocomplete({source: addressArray});
+				  }else{
+					  $("#search_address" ).autocomplete( "enable" );
+					  $("#search_address").autocomplete({source: new Array()});
+				  }
+			  }
+		});
+	}
+}
+
+function findMatchingRides() {
+	var city	   = $.trim($("#city").val());
+	var address    = $.trim($("#search_address").val());
+	var startTime  = $.trim($("#start_time").val());
+	var returnTime = $.trim($("#return_time").val());
+	var search_for = $.trim($("#travel_type").val());
+	if(1) {
+		 $.ajax({
+			  type: 'POST',
+			  url: 'matching_rides',
+			  beforeSend: function(){  },
+			  data: 'city='+city+'&address='+address+'&startTime='+startTime+'&returnTime='+returnTime+"&search_for="+search_for,
+			  dataType: "text",
+			  success: function(resultData) {
+					$("#searchedResult").html(resultData);
+			  }
+		});
+	}
+}

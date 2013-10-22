@@ -1,0 +1,272 @@
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '03:00:00', '03:00 AM'), (NULL, '03:05:00', '03:05 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '03:10:00', '03:10 AM'), (NULL, '03:15:00', '03:15 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '03:20:00', '03:20 AM'), (NULL, '03:25:00', '03:25 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '03:30:00', '03:30 AM'), (NULL, '03:35:00', '03:35 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '03:40:00', '03:40 AM'), (NULL, '03:45:00', '03:45 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '03:50:00', '03:50 AM'), (NULL, '03:55:00', '03:55 AM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '04:00:00', '04:00 AM'), (NULL, '04:05:00', '04:05 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '04:10:00', '04:10 AM'), (NULL, '04:15:00', '04:15 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '04:20:00', '04:20 AM'), (NULL, '04:25:00', '04:25 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '04:30:00', '04:30 AM'), (NULL, '04:35:00', '04:35 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '04:40:00', '04:40 AM'), (NULL, '04:45:00', '04:45 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '04:50:00', '04:50 AM'), (NULL, '04:55:00', '04:55 AM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '05:00:00', '05:00 AM'), (NULL, '05:05:00', '05:05 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '05:10:00', '05:10 AM'), (NULL, '05:15:00', '05:15 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '05:20:00', '05:20 AM'), (NULL, '05:25:00', '05:25 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '05:30:00', '05:30 AM'), (NULL, '05:35:00', '05:35 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '05:40:00', '05:40 AM'), (NULL, '05:45:00', '05:45 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '05:50:00', '05:50 AM'), (NULL, '05:55:00', '05:55 AM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '06:00:00', '06:00 AM'), (NULL, '06:05:00', '06:05 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '06:10:00', '06:10 AM'), (NULL, '06:15:00', '06:15 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '06:20:00', '06:20 AM'), (NULL, '06:25:00', '06:25 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '06:30:00', '06:30 AM'), (NULL, '06:35:00', '06:35 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '06:40:00', '06:40 AM'), (NULL, '06:45:00', '06:45 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '06:50:00', '06:50 AM'), (NULL, '06:55:00', '06:55 AM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '07:00:00', '07:00 AM'), (NULL, '07:05:00', '07:05 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '07:10:00', '07:10 AM'), (NULL, '07:15:00', '07:15 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '07:20:00', '07:20 AM'), (NULL, '07:25:00', '07:25 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '07:30:00', '07:30 AM'), (NULL, '07:35:00', '07:35 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '07:40:00', '07:40 AM'), (NULL, '07:45:00', '07:45 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '07:50:00', '07:50 AM'), (NULL, '07:55:00', '07:55 AM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '08:00:00', '08:00 AM'), (NULL, '08:05:00', '08:05 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '08:10:00', '08:10 AM'), (NULL, '08:15:00', '08:15 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '08:20:00', '08:20 AM'), (NULL, '08:25:00', '08:25 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '08:30:00', '08:30 AM'), (NULL, '08:35:00', '08:35 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '08:40:00', '08:40 AM'), (NULL, '08:45:00', '08:45 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '08:50:00', '08:50 AM'), (NULL, '08:55:00', '08:55 AM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '09:00:00', '09:00 AM'), (NULL, '09:05:00', '09:05 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '09:10:00', '09:10 AM'), (NULL, '09:15:00', '09:15 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '09:20:00', '09:20 AM'), (NULL, '09:25:00', '09:25 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '09:30:00', '09:30 AM'), (NULL, '09:35:00', '09:35 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '09:40:00', '09:40 AM'), (NULL, '09:45:00', '09:45 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '09:50:00', '09:50 AM'), (NULL, '09:55:00', '09:55 AM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '10:00:00', '10:00 AM'), (NULL, '10:05:00', '10:05 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '10:10:00', '10:10 AM'), (NULL, '10:15:00', '10:15 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '10:20:00', '10:20 AM'), (NULL, '10:25:00', '10:25 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '10:30:00', '10:30 AM'), (NULL, '10:35:00', '10:35 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '10:40:00', '10:40 AM'), (NULL, '10:45:00', '10:45 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '10:50:00', '10:50 AM'), (NULL, '10:55:00', '10:55 AM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '11:00:00', '11:00 AM'), (NULL, '11:05:00', '11:05 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '11:10:00', '11:10 AM'), (NULL, '11:15:00', '11:15 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '11:20:00', '11:20 AM'), (NULL, '11:25:00', '11:25 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '11:30:00', '11:30 AM'), (NULL, '11:35:00', '11:35 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '11:40:00', '11:40 AM'), (NULL, '11:45:00', '11:45 AM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '11:50:00', '11:50 AM'), (NULL, '11:55:00', '11:55 AM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '12:00:00', '12:00 PM'), (NULL, '12:05:00', '12:05 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '12:10:00', '12:10 PM'), (NULL, '12:15:00', '12:15 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '12:20:00', '12:20 PM'), (NULL, '12:25:00', '12:25 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '12:30:00', '12:30 PM'), (NULL, '12:35:00', '12:35 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '12:40:00', '12:40 PM'), (NULL, '12:45:00', '12:45 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '12:50:00', '12:50 PM'), (NULL, '12:55:00', '12:55 PM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '13:00:00', '01:00 PM'), (NULL, '13:05:00', '01:05 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '13:10:00', '01:10 PM'), (NULL, '13:15:00', '01:15 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '13:20:00', '01:20 PM'), (NULL, '13:25:00', '01:25 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '13:30:00', '01:30 PM'), (NULL, '13:35:00', '01:35 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '13:40:00', '01:40 PM'), (NULL, '13:45:00', '01:45 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '13:50:00', '01:50 PM'), (NULL, '13:55:00', '01:55 PM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '14:00:00', '02:00 PM'), (NULL, '14:05:00', '02:05 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '14:10:00', '02:10 PM'), (NULL, '14:15:00', '02:15 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '14:20:00', '02:20 PM'), (NULL, '14:25:00', '02:25 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '14:30:00', '02:30 PM'), (NULL, '14:35:00', '02:35 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '14:40:00', '02:40 PM'), (NULL, '14:45:00', '02:45 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '14:50:00', '02:50 PM'), (NULL, '14:55:00', '02:55 PM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '15:00:00', '03:00 PM'), (NULL, '15:05:00', '03:05 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '15:10:00', '03:10 PM'), (NULL, '15:15:00', '03:15 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '15:20:00', '03:20 PM'), (NULL, '15:25:00', '03:25 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '15:30:00', '03:30 PM'), (NULL, '15:35:00', '03:35 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '15:40:00', '03:40 PM'), (NULL, '15:45:00', '03:45 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '15:50:00', '03:50 PM'), (NULL, '15:55:00', '03:55 PM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '16:00:00', '04:00 PM'), (NULL, '16:05:00', '04:05 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '16:10:00', '04:10 PM'), (NULL, '16:15:00', '04:15 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '16:20:00', '04:20 PM'), (NULL, '16:25:00', '04:25 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '16:30:00', '04:30 PM'), (NULL, '16:35:00', '04:35 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '16:40:00', '04:40 PM'), (NULL, '16:45:00', '04:45 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '16:50:00', '04:50 PM'), (NULL, '16:55:00', '04:55 PM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '17:00:00', '05:00 PM'), (NULL, '17:05:00', '05:05 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '17:10:00', '05:10 PM'), (NULL, '17:15:00', '05:15 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '17:20:00', '05:20 PM'), (NULL, '17:25:00', '05:25 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '17:30:00', '05:30 PM'), (NULL, '17:35:00', '05:35 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '17:40:00', '05:40 PM'), (NULL, '17:45:00', '05:45 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '17:50:00', '05:50 PM'), (NULL, '17:55:00', '05:55 PM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '18:00:00', '06:00 PM'), (NULL, '18:05:00', '06:05 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '18:10:00', '06:10 PM'), (NULL, '18:15:00', '06:15 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '18:20:00', '06:20 PM'), (NULL, '18:25:00', '06:25 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '18:30:00', '06:30 PM'), (NULL, '18:35:00', '06:35 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '18:40:00', '06:40 PM'), (NULL, '18:45:00', '06:45 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '18:50:00', '06:50 PM'), (NULL, '18:55:00', '06:55 PM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '19:00:00', '07:00 PM'), (NULL, '19:05:00', '07:05 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '19:10:00', '07:10 PM'), (NULL, '19:15:00', '07:15 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '19:20:00', '07:20 PM'), (NULL, '19:25:00', '07:25 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '19:30:00', '07:30 PM'), (NULL, '19:35:00', '07:35 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '19:40:00', '07:40 PM'), (NULL, '19:45:00', '07:45 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '19:50:00', '07:50 PM'), (NULL, '19:55:00', '07:55 PM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '20:00:00', '08:00 PM'), (NULL, '20:05:00', '08:05 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '20:10:00', '08:10 PM'), (NULL, '20:15:00', '08:15 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '20:20:00', '08:20 PM'), (NULL, '20:25:00', '08:25 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '20:30:00', '08:30 PM'), (NULL, '20:35:00', '08:35 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '20:40:00', '08:40 PM'), (NULL, '20:45:00', '08:45 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '20:50:00', '08:50 PM'), (NULL, '20:55:00', '08:55 PM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '21:00:00', '09:00 PM'), (NULL, '21:05:00', '09:05 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '21:10:00', '09:10 PM'), (NULL, '21:15:00', '09:15 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '21:20:00', '09:20 PM'), (NULL, '21:25:00', '09:25 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '21:30:00', '09:30 PM'), (NULL, '21:35:00', '09:35 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '21:40:00', '09:40 PM'), (NULL, '21:45:00', '09:45 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '21:50:00', '09:50 PM'), (NULL, '21:55:00', '09:55 PM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '22:00:00', '10:00 PM'), (NULL, '22:05:00', '10:05 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '22:10:00', '10:10 PM'), (NULL, '22:15:00', '10:15 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '22:20:00', '10:20 PM'), (NULL, '22:25:00', '10:25 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '22:30:00', '10:30 PM'), (NULL, '22:35:00', '10:35 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '22:40:00', '10:40 PM'), (NULL, '22:45:00', '10:45 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '22:50:00', '10:50 PM'), (NULL, '22:55:00', '10:55 PM');
+
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '23:00:00', '11:00 PM'), (NULL, '23:05:00', '11:05 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '23:10:00', '11:10 PM'), (NULL, '23:15:00', '11:15 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '23:20:00', '11:20 PM'), (NULL, '23:25:00', '11:25 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '23:30:00', '11:30 PM'), (NULL, '23:35:00', '11:35 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '23:40:00', '11:40 PM'), (NULL, '23:45:00', '11:45 PM');
+
+INSERT INTO `project`.`pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES (NULL, '23:50:00', '11:50 PM'), (NULL, '23:55:00', '11:55 PM');
+

@@ -22,9 +22,9 @@
 <script type="text/javascript" src="<?php echo base_url();?>js/map.js"></script>
 <?php } ?>
 <!-- Tab based form related JS & CSS Files --> 
-<?php if($page_name=='ride/add') { ?>
 <script src="<?php echo base_url();?>js/jquery-ui.js"></script>
 <link rel="stylesheet" href="<?php echo base_url();?>css/tab_jquery-ui.css" />
+<?php if($page_name=='ride/add') { ?>
 <script>
 $(function(){
 	$( "#tabs" ).tabs({

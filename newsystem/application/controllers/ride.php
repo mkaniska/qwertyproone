@@ -50,10 +50,34 @@ class Ride extends CI_Controller {
 		$this->load->view('layout', $data);
 	}
 	
+	public function matching_places() {
+		$place = $this->input->post('address_string');
+		$matching_list = $this->CommonModel->find_matching_places($place);
+		echo json_encode($matching_list);
+		exit;
+	}
+	
+	public function matching_rides() {
+		$input['city'] 		= $this->input->post('city');
+		$input['address'] 	= $this->input->post('address');
+		$input['startTime'] 	= $this->input->post('startTime');
+		$input['returnTime'] = $this->input->post('returnTime');
+		$input['search_for'] = $this->input->post('search_for');
+		
+		$matching_list = $this->RideModel->find_matching_rides($input);
+		
+		$data['matching_list'] = $matching_list;
+		$data['page_name'] = "ride/results";
+		
+		$this->load->view('ajax_layout', $data);		
+		exit;
+	}
+	
 	public function search() {
 		$data['page_name'] = "ride/search";
 		$data['menu'] = "search";
 		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
+		$data['time_slots'] = $this->CommonModel->get_time_slot();
 		$data['title'] = SITE_TITLE." :: Search for a Ride";
 		$this->load->view('simple_layout', $data);
 	}

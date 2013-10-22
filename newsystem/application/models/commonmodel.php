@@ -33,6 +33,38 @@ class CommonModel extends CI_Model {
 		}
         return $result_back;  
     }
+
+    function get_time_slot() {
+        
+		$this->db->order_by("slot_id","ASC");
+		$this->db->select();
+        $query = $this->db->get('pro_time_slot');
+		foreach ($query->result() as $row)
+		{
+			$result_back[] = $row;
+		}
+        return $result_back;  
+    }
+	
+    function find_matching_places($place){
+        
+        $this->db->like('origin_location', $place); 
+		//$this->db->where('origin_location', $place);
+        //$this->db->where('destination_location', $place);
+		$this->db->order_by("origin_location","ASC");
+		$this->db->group_by("origin_location");
+		$this->db->select('origin_location');
+        $query = $this->db->get('pro_ride_details');
+		if($query->num_rows()>0) {
+			foreach ($query->result() as $row)
+			{
+				$result_back[] = $row->origin_location;
+			}
+		}else{
+			$result_back = array();
+		}
+        return $result_back;
+    }	
 	
 }
 

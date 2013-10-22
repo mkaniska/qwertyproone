@@ -198,6 +198,7 @@ a.header { display: block; font-weight: 700 }
 .sidebar_box { margin-bottom: 40px }
 .sidebar_box_content {padding-left: 10px }
 
+#contact_form form .input_field1 { width: 225px; padding: 7px; color: #2c2c2c;  background: #fff; border: 1px solid #ccc; }
 
 #contact_form { padding: 0; margin-bottom: 40px }
 #contact_form form { margin: 0px; padding: 0px; }
