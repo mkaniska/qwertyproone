@@ -28,26 +28,30 @@ class RideModel extends CI_Model {
 	
 		$addressString = explode(" ",$data['address']);
 		$this->db->like('origin_location', $addressString[0]);
-		$this->db->or_like('origin_location', $addressString[0]);
+		$this->db->or_like('origin_location', $addressString[1]);
 		
-		$this->db->like('destination_location', $addressString[1]);
+		$this->db->or_like('destination_location', $addressString[0]);
 		$this->db->or_like('destination_location', $addressString[1]);
 		
 		$this->db->where('passenger_city', $data['city']);
 		
         $this->db->where('start_time_24 >=', $data['startTime']);
         $this->db->where('return_time_24 <=', $data['returnTime']);
+		
         $this->db->where('travel_as', $data['search_for']);
 		
 		$this->db->order_by("ride_id","DESC");
 		
-		$this->db->select('origin_location');
+		$this->db->join('pro_users', 'pro_users.pro_user_id = pro_ride_details.user_id');
+		
+		$this->db->select("pro_ride_details.*,pro_users.pro_user_full_name");
 		
         $query = $this->db->get('pro_ride_details');
 		
-		echo $this->db->last_query();exit;
+		//echo $this->db->last_query();exit;
 		
-		if($query->num_rows()>0) {		
+		if($query->num_rows()>0) {
+		
 			foreach ($query->result() as $row)
 			{
 				$result_back[] = $row;
@@ -55,7 +59,8 @@ class RideModel extends CI_Model {
 		}else{
 			$result_back = array();
 		}
-        return $result_back;
+        //print_r($result_back);exit;
+		return $result_back;
     }
 	
     function get_rides_posted($cp,$pp) {

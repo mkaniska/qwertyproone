@@ -8,9 +8,9 @@
 		<td>Start Time</td>
 		<td>Return Time</td>
 	</tr>
-	<?php if(count($matching_list)>0) { foreach($matching_list as $out) { ?>
-	<tr style="font-size:11px;"> 				
-		<td><?php echo $out->person_name;?></td>
+	<?php if(count($matching_list)>0) { foreach($matching_list as $key=>$out) { ?>
+	<tr style="font-size:11px;text-align:left;padding-left:3px;"> 				
+		<td><?php echo $out->pro_user_full_name;?></td>
 		<td><?php echo $out->passenger_city;?></td>
 		<td><?php echo $out->vehicle_type;?></td>
 		<td><?php echo $out->origin_location;?></td>

@@ -9,7 +9,7 @@
 				<table width="100%" cellpadding="4" cellspacing="3" align="center">
 					<tr>
 						<td width="100%" colspan="5">
-							<div id="errorDisplay" style="color:#ff0000;margin-left:200px;float:left;font-weight:bold;">
+							<div id="errorDisplay" style="color:#ff0000;margin-left:340px;float:left;font-weight:bold;">
 							<?php if($this->session->flashdata('flash_message') !='') { ?>
 								<?php echo $this->session->flashdata('flash_message'); ?>
 							<?php } ?>
@@ -58,7 +58,7 @@
 			</table>
             </form>
 			</div>
-			<div id="searchedResult" style="border:1px solid #CCCCCC;margin-left:30px;margin-top:20px;width:950px;height:200px;">
+			<div id="searchedResult" style="overflow:auto;border:1px solid #CCCCCC;margin-left:0px;margin-top:20px;width:1000px;height:150px;text-align:center;">
 				Please enter your city & time values to do a search on this sytem and to find the matching results.
 			</div>
         </div>

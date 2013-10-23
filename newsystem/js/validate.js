@@ -217,16 +217,19 @@ function findMatchingRides() {
 	var startTime  = $.trim($("#start_time").val());
 	var returnTime = $.trim($("#return_time").val());
 	var search_for = $.trim($("#travel_type").val());
-	if(1) {
+	if(address!='' && city!='0') {
 		 $.ajax({
 			  type: 'POST',
 			  url: 'matching_rides',
-			  beforeSend: function(){  },
+			  beforeSend: function(){$("#searchedResult").html('<img src="http://localhost/qwerty/images/ajax_loader.gif" border="0" />'); },
 			  data: 'city='+city+'&address='+address+'&startTime='+startTime+'&returnTime='+returnTime+"&search_for="+search_for,
 			  dataType: "text",
 			  success: function(resultData) {
+				    $("#errorDisplay").html("");
 					$("#searchedResult").html(resultData);
 			  }
 		});
+	}else {
+		$("#errorDisplay").html("Please enter all the details to search");
 	}
 }

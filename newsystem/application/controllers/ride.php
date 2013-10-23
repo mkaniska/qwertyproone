@@ -58,6 +58,7 @@ class Ride extends CI_Controller {
 	}
 	
 	public function matching_rides() {
+	
 		$input['city'] 		= $this->input->post('city');
 		$input['address'] 	= $this->input->post('address');
 		$input['startTime'] 	= $this->input->post('startTime');
@@ -67,9 +68,10 @@ class Ride extends CI_Controller {
 		$matching_list = $this->RideModel->find_matching_rides($input);
 		
 		$data['matching_list'] = $matching_list;
+		
 		$data['page_name'] = "ride/results";
 		
-		$this->load->view('ajax_layout', $data);		
+		echo $this->load->view('ajax_layout', $data, true);		
 		exit;
 	}
 	
