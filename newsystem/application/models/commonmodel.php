@@ -46,6 +46,14 @@ class CommonModel extends CI_Model {
         return $result_back;  
     }
 	
+	function get_time_label($time_value) {
+		
+		$this->db->where('slot_value', $time_value);
+		$this->db->select('slot_label');
+        $query = $this->db->get('pro_time_slot');
+		return $query->row();
+	}
+	
     function find_matching_places($place){
         
         $this->db->like('origin_location', $place); 

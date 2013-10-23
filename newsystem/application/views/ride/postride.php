@@ -38,22 +38,16 @@
 						<td width="50%">						
 						Start Time: <br />
 							<select name="start_time" id="start_time">
-							<option value="0" selected="selected">Select Start Time</option>					
-							<?php $inc=12;for($i=0;$i<24;$i++) { $ampm=($i<12?' AM':' PM');?>
-								<?php for($j=0;$j<=55;$j=$j+5) { ?>
-									<option value="<?php echo $inc.':'.(($j<10)?'0'.$j:$j).$ampm;?>"><?php echo $inc.':'.(($j<10)?'0'.$j:$j).$ampm;?></option>
-								<?php } $inc=($i<12?($i+1):($i-11));?>
+							<?php foreach($time_slots as $value) { ?>
+								<option value="<?php echo $value->slot_value;?>" <?php if($value->slot_value=='08:00:00'){ ?> selected="selected" <?php } ?>><?php echo $value->slot_label;?></option>
 							<?php } ?>
 							</select>
 						</td>						
 						<td width="50%">
 						Return Time : <br />
 							<select name="return_time" id="return_time">
-							<option value="0" selected="selected">Select Return Time</option>					
-							<?php $inc=12;for($i=0;$i<24;$i++) { $ampm=($i<12?' AM':' PM');?>
-								<?php for($j=0;$j<=55;$j=$j+5) { ?>
-									<option value="<?php echo $default=$inc.':'.(($j<10)?'0'.$j:$j).$ampm;?>"><?php echo $inc.':'.(($j<10)?'0'.$j:$j).$ampm;?></option>
-								<?php } $inc=($i<12?($i+1):($i-11));?>
+							<?php foreach($time_slots as $value) { ?>
+								<option value="<?php echo $value->slot_value;?>" <?php if($value->slot_value=='17:00:00'){ ?> selected="selected" <?php } ?>><?php echo $value->slot_label;?></option>
 							<?php } ?>
 							</select>
 						</td>

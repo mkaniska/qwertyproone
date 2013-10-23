@@ -95,6 +95,7 @@ class Ride extends CI_Controller {
 		$data['page_name'] = "ride/add";		
 		$data['states_list'] = $this->CommonModel->states_list();			
 		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
+		$data['time_slots']  = $this->CommonModel->get_time_slot();
 		$data['menu'] = "addride";
 		$data['title'] = SITE_TITLE." :: Post a New Ride";
 		$this->load->view('layout', $data);
@@ -107,6 +108,7 @@ class Ride extends CI_Controller {
 		if($data['ride_value']!='') {
 			$data['states_list'] = $this->CommonModel->states_list();			
 			$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
+			$data['time_slots']  = $this->CommonModel->get_time_slot();
 			$data['menu'] = "editride";
 			$data['title'] = SITE_TITLE." :: Edit the Ride";
 			$this->load->view('layout', $data);
@@ -121,6 +123,7 @@ class Ride extends CI_Controller {
 		$data['page_name'] = "ride/postride";		
 		$data['states_list'] = $this->CommonModel->states_list();			
 		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
+		$data['time_slots']  = $this->CommonModel->get_time_slot();
 		$data['menu'] = "addride";
 		$data['title'] = SITE_TITLE." :: Post a New Ride";
 		$this->load->view('layout', $data);
