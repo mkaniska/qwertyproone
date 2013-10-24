@@ -35,7 +35,7 @@ class Ride extends CI_Controller {
 		$config['first_tag_open'] 	= $config['last_tag_open'] = $config['next_tag_open'] = $config['prev_tag_open'] = '<li>';
         $config['first_tag_close'] 	= $config['last_tag_close'] = $config['next_tag_close'] = $config['prev_tag_close'] = '</li>';
 
-		$config['total_rows'] 			= $this->RideModel->get_total_rides();
+		$config['total_rows'] 		= $this->RideModel->get_total_rides();
 		
 		$data['page_name'] = "ride/ridelist";
 		$data['menu'] = "ridelist";		
@@ -92,8 +92,9 @@ class Ride extends CI_Controller {
 	}
 	
 	public function add() {
-		$data['page_name'] = "ride/add";		
-		$data['states_list'] = $this->CommonModel->states_list();			
+		if($this->session->userdata('_user_id')!=''){redirect('ride/postride');}
+		$data['page_name'] = "ride/add";
+		$data['states_list'] = $this->CommonModel->states_list();
 		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
 		$data['time_slots']  = $this->CommonModel->get_time_slot();
 		$data['menu'] = "addride";
@@ -232,6 +233,54 @@ class Ride extends CI_Controller {
 		}
 	} 
 
+	public function sendrequest(){
+		
+		$request_ride_id 		= $this->input->post('request_ride_id');
+		$requesting_user_id 	= $this->session->userdata('_user_id');
+		
+		if($request_ride_id>0) {
+		
+			$ride_details 			 = $this->RideModel->get_ride_value($request_ride_id,false);
+			$requesting_user_details = $this->UserModel->get_user_details($requesting_user_id);
+			$join_request_id 		 = $this->RideModel->insertJoinRequest($ride_details);
+			print($join_request_id);exit;
+			if($join_request_id>0) {
+
+				$this->load->library('email');
+				$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
+				$this->email->to('murugdev.eee@gmail.com');
+				$this->email->subject('Commute Easy: Join Request Sent');
+				
+				// Constructing Ride Details Email Notification
+				$notificationMessage = "Hello ".$requesting_user_details->pro_user_full_name.", <br />";
+				
+				$notificationMessage.= "Your Join Request has been posted to the user & you will get a Notification once after he approved it !.. <br />";
+				
+				$notificationMessage.= "Following are the details for which you had Posted your Join Request.<br />";
+
+				$notificationMessage.= "City : ".$ride_details['passenger_city'].", <br />";
+				$notificationMessage.= "Start Time : ".$ride_details['start_time'].", <br />";
+				$notificationMessage.= "Return Time : ".$ride_details['return_time'].", <br />";
+				$notificationMessage.= "Origin Location : ".$ride_details['origin_location'].", <br />";
+				$notificationMessage.= "Destination Location : ".$ride_details['destination_location'].", <br />";
+				
+				$notificationMessage.= " <br />";
+				$notificationMessage.= " Thanks, <br />";
+				$notificationMessage.= " Administrator";
+				
+				/*
+					$this->email->message($rideMessage);
+					$this->email->send();				
+				*/
+				echo 'success';exit;
+			}else {
+				echo 'failed';exit;
+			}
+		}else {
+			echo 'failed';exit;
+		}
+	}
+	
 	public function process_newride() {
 	
 		if($this->session->userdata('_user_id')==''){redirect('user/login');}
@@ -301,7 +350,7 @@ class Ride extends CI_Controller {
 					$this->email->send();				
 				*/
 				$this->session->set_flashdata('flash_message', 'Successfully Added your Ride Details !');
-				$this->session->set_flashdata('flash_url', base_url().'user/login');
+				$this->session->set_flashdata('flash_url', base_url().'ride/ridelist');
 				redirect('ride/thanks');
 			} else {
 				$this->session->set_flashdata('data_back', $ride_data);
@@ -313,6 +362,88 @@ class Ride extends CI_Controller {
 			redirect('ride/postride/error/1');
 		}
 	}
+	
+	public function update_ride() {
+	
+		if($this->session->userdata('_user_id')==''){redirect('user/login');}
+
+		$UserID = $this->session->userdata('_user_id');
+		
+		$UserName = $this->session->userdata('_user_name');
+		
+		$EditRideID = $this->input->post('ride_id');
+		
+		$isValid = $this->RideModel->is_valid_ride_update($EditRideID, $UserID);
+			
+		if($this->input->post('update_ride')=='Update' &&  $isValid) {
+			
+			if($UserID>0) {
+
+			// Update the Ride Details & Vehicle Details;
+			
+			$ride_data['passenger_city'] 		= $this->input->post('city');
+			
+			$ride_data['start_time'] 			= $this->CommonModel->get_time_label($this->input->post('start_time'));
+			$ride_data['return_time'] 			= $this->CommonModel->get_time_label($this->input->post('return_time'));
+			
+			$ride_data['start_time_24'] 		= $this->input->post('start_time');
+			$ride_data['return_time_24'] 		= $this->input->post('return_time');
+			
+			$ride_data['origin_location']	 	= $this->input->post('origin_from');
+			$ride_data['destination_location']	= $this->input->post('destination_to');
+			$ride_data['travel_as'] 			= $this->input->post('travel_type');
+			$ride_data['join_alert_needed'] 	= $this->input->post('travel_alert');
+			$ride_data['vehicle_type'] 			= $this->input->post('vehicle_type');
+			$ride_data['model_type'] 			= $this->input->post('model_type');
+			$ride_data['fuel_type'] 			= $this->input->post('fuel_type');
+			$ride_data['modified_on'] 			= time();
+	
+			$this->RideModel->updateRide($ride_data, $EditRideID);
+		
+				// Sending Email Activation Link
+				$this->load->library('email');
+
+				$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
+				$this->email->to('murugdev.eee@gmail.com');
+				$this->email->subject('Commute Easy: Updated Ride Details');
+				
+				// Constructing Ride Details Email Notification
+				$rideMessage = "Hello ".$UserName.", <br />";
+				$rideMessage.= "You have updated the Ride Details successfully !.. <br />";
+				$rideMessage.= "Following are the details updated by you. You can review & change it anytime after you logged into the application. <br />";
+				$rideMessage.= "City : ".$ride_data['passenger_city'].", <br />";
+				$rideMessage.= "Start Time : ".$ride_data['start_time'].", <br />";
+				$rideMessage.= "Return Time : ".$ride_data['return_time'].", <br />";
+				$rideMessage.= "Origin Location : ".$ride_data['origin_location'].", <br />";
+				$rideMessage.= "Destination Location : ".$ride_data['destination_location'].", <br />";
+				$rideMessage.= "Travel As : ".$ride_data['travel_as'].", <br />";
+				
+				if($ride_data['travel_as']=='driver'){
+					$rideMessage.= "Vehicle Type : ".$ride_data['vehicle_type'].", <br />";	
+					$rideMessage.= "Model Type : ".$ride_data['model_type'].", <br />";	
+					$rideMessage.= "Fuel Type : ".$ride_data['fuel_type'].", <br />";
+				}
+				
+				$rideMessage.= " <br />";
+				$rideMessage.= " Thanks, <br />";
+				$rideMessage.= " Administrator";
+				/*
+					$this->email->message($rideMessage);
+					$this->email->send();				
+				*/
+				$this->session->set_flashdata('flash_message', 'Successfully Updated your Ride Details !');
+				$this->session->set_flashdata('flash_url', base_url().'ride/ridelist');
+				redirect('ride/thanks');
+			} else {
+				$this->session->set_flashdata('data_back', $ride_data);
+				$this->session->set_flashdata('flash_message', 'Please enter all the details');
+				redirect('ride/edit/1');
+			}
+		}else{
+			$this->session->set_flashdata('flash_message', 'Invalid Request');
+			redirect('ride/edit/1');
+		}
+	}	
 }
 
 /* End of file ride.php */

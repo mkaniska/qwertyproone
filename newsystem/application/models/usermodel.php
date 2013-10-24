@@ -22,6 +22,31 @@ class UserModel extends CI_Model {
 			return '';
 		}
     }
+
+    function get_user_details($UserID) {
+        $this->db->where('pro_user_id', $UserID);
+		$this->db->select();
+        $query = $this->db->get($this->table_name);
+		if($query->num_rows() > 0){
+			return $query->row();
+		}else{
+			return '';
+		}
+    }
+	
+	function get_recent_joinees() {
+	
+		$this->db->limit(5);
+		$this->db->order_by("pro_user_joined","DESC");
+		$this->db->select('pro_user_full_name,pro_user_city,pro_user_joined');
+		$query = $this->db->get($this->table_name);
+		if($query->num_rows() > 0) {
+			foreach ($query->result() as $row) {
+				$result_back[] = $row;
+			}
+		}
+		return $result_back;
+	}
 	
     function is_valid_user($user){
 	

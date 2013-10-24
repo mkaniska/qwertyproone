@@ -2,9 +2,18 @@
 
 class Welcome extends CI_Controller {
 
+    function __construct() {
+        parent::__construct();
+        $this->load->model('UserModel'); 
+        $this->load->model('RideModel'); 
+        $this->load->model('CommonModel');
+    }
+	
 	public function index()
 	{		 
 		$data['page_name'] = "welcome/home"; 
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();
 		$data['menu'] = "home";
 		$data['title'] = "Welcome to CodeIgniter Sample";		
 		$this->load->view('layout', $data);
@@ -12,6 +21,8 @@ class Welcome extends CI_Controller {
 	public function home(){	
 
 		$data['page_name'] = "welcome/home";
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();
 		$data['menu'] = "home"; 
 		$data['title'] = "Welcome to CodeIgniter Sample";
 		$this->load->view('layout', $data);

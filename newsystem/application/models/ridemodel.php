@@ -14,6 +14,30 @@ class RideModel extends CI_Model {
         return $inserted_id;
 	}
 
+	function insertJoinRequest($data) {
+		$requesting_user_id = $this->session->userdata('_user_id');
+		$dataForTable['ride_id'] 			= $data->ride_id;
+		$dataForTable['requesting_user_id'] = $requesting_user_id;
+		$dataForTable['owner_user_id'] 		= $data->user_id;
+		$dataForTable['requested_on'] 		= time();
+		$dataForTable['approved_on'] 		= '';
+		$dataForTable['request_status']		= '0';
+        $this->db->insert('pro_join_request', $dataForTable);
+        $inserted_id = $this->db->insert_id();
+        return $inserted_id;
+	}
+	
+	function updateRide($data, $RideId) {
+        
+		$this->db->where('ride_id', $RideId);
+		$this->db->update($this->table_name, $data);
+        if($this->db->affected_rows()>0) {
+			return true;
+		}else {
+			return false;
+		}
+	}	
+
     function get_total_rides() {
 
         $UserID = $this->session->userdata('_user_id');
@@ -24,6 +48,20 @@ class RideModel extends CI_Model {
 		return $query->num_rows();
 	}
 
+	function get_recent_rides() {
+	
+		$this->db->limit(5);
+		$this->db->order_by("added_on","DESC");
+		$this->db->select('origin_location,destination_location,start_time,return_time');
+		$query = $this->db->get($this->table_name);
+		if($query->num_rows() > 0) {
+			foreach ($query->result() as $row) {
+				$result_back[] = $row;
+			}
+		}
+		return $result_back;
+	}
+	
     function find_matching_rides($data){
 	
 		$addressString = explode(" ",$data['address']);
@@ -39,6 +77,8 @@ class RideModel extends CI_Model {
         $this->db->where('return_time_24 <=', $data['returnTime']);
 		
         $this->db->where('travel_as', $data['search_for']);
+		
+        $this->db->where('user_id !=', $this->session->userdata('_user_id'));// To ignore his own posts
 		
 		$this->db->order_by("ride_id","DESC");
 		
@@ -85,9 +125,13 @@ class RideModel extends CI_Model {
 		}
     }
 	
-    function get_ride_value($RideID){
+    function get_ride_value($RideID,$forOwner=true){
+	
         $UserID = $this->session->userdata('_user_id');
-        $this->db->where('user_id', $UserID);
+		
+		if($forOwner) {
+			$this->db->where('user_id', $UserID);
+		}
         $this->db->where('ride_id', $RideID);
 		$this->db->select();
         $query = $this->db->get($this->table_name);
@@ -96,7 +140,19 @@ class RideModel extends CI_Model {
 		}else{
 			return '';
 		}
-    }	
+    }
+
+    function is_valid_ride_update($RideID, $UserID) {
+        $this->db->where('user_id', $UserID);
+        $this->db->where('ride_id', $RideID);
+		$this->db->select('ride_id');
+        $query = $this->db->get($this->table_name);
+		if($query->num_rows() > 0){
+			return true;
+		}else{
+			return false;
+		}
+    }
 }
 
 ?>

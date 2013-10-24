@@ -4,7 +4,7 @@
 		</div>
         <div class="clear"></div>
         <div id="contact_form">
-            <div style="border:6px solid #CCCCCC;width:1000px;"> <!-- 918F8D-->
+            <div style="border:6px solid #CCCCCC;width:1000px;margin-top:-10px;"> <!-- 918F8D-->
 				<form style="margin:5px;" method="post" name="contact_us_form" id="contact_us_form" action="<?php echo base_url();?>welcome/process_contact">
 				<table width="100%" cellpadding="4" cellspacing="3" align="center">
 					<tr>

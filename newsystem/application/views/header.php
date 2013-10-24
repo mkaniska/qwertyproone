@@ -56,7 +56,7 @@ ddsmoothmenu.init({
 </script>
 <!-- Document On loading JS function initialization --> 
 <script src="<?php echo base_url();?>js/init.js"></script>
-<!-- All the JS form validations are available here --> 
+<!-- All the JS form validations are available here -->
 <script src="<?php echo base_url();?>js/validate.js"></script>
 </head>
 <body>

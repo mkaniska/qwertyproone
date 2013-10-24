@@ -3,7 +3,7 @@
         <div class="post">
             <h2>Edit Ride</h2>
 			<div style="border:1px solid #CCCCCC;line-height:25px;"><!-- 918F8D-->
-			<form action="<?php echo base_url();?>ride/process_newride" method="post" style="margin:20px;" onsubmit="return isValidRide();" style="color:#555555;">
+			<form action="<?php echo base_url();?>ride/update_ride" method="post" style="margin:20px;" onsubmit="return isValidRide();" style="color:#555555;">
 				<table width="100%" cellpadding="4" cellspacing="3" align="center">
 					<tr>
 						<td width="100%" colspan="2">
@@ -88,7 +88,7 @@
 					<tr><td width="100%" colspan="2">  </td></tr>
 					<tr>
 						<td width="100%" colspan="2" align="center">
-							<input class="submit_btn float_l" type="submit" name="post_ride" id="post_ride" value="Update" /> &nbsp; &nbsp;
+							<input class="submit_btn float_l" type="submit" name="update_ride" id="post_ride" value="Update" /> &nbsp; &nbsp;
 							<input class="submit_btn float_l" type="button" name="cancelBtn" id="cancelBtn" value="Cancel" onclick="javascript:window.location.href='<?php echo base_url();?>ride/ridelist'" />  	
 						</td>
 					</tr>

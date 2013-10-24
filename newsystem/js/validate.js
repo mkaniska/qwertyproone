@@ -226,10 +226,37 @@ function findMatchingRides() {
 			  dataType: "text",
 			  success: function(resultData) {
 				    $("#errorDisplay").html("");
-					$("#searchedResult").html(resultData);
+					$("#searchedResult").css({'height':'300px'});
+					$("#searchedResult").html(resultData);					
 			  }
 		});
 	}else {
 		$("#errorDisplay").html("Please enter all the details to search");
+	}
+}
+
+function sendJoinRequest(selectedID,responseTag) {
+	if(selectedID>0) {
+		 $.ajax({
+			  type: 'POST',
+			  url: 'sendrequest',
+			  beforeSend: function(){$(responseTag).html('<img src="http://localhost/qwerty/images/sending_request.gif" border="0" />'); },
+			  data: 'request_ride_id='+selectedID,
+			  dataType: "text",
+			  success: function(resultData) {
+				  //$("#additionalInfo").html(resultData);
+					if(resultData=='success') {
+						//alert(resultData);
+						$(responseTag).html('<img src="http://localhost/qwerty/images/sent.gif" border="0" title="Sent Successfully" alt="Sent Successfully" />');
+					}else{
+						//alert(resultData);
+						alert("Error Sending Request!");
+						$(responseTag).html('<img src="http://localhost/qwerty/images/request.gif" border="0" title="Send Request" alt="Send Request" />');
+					}
+			  }
+		});
+	}else {
+		alert("Invalid Request!");
+		//$("#errorDisplay").html("Please enter all the details to search");
 	}
 }

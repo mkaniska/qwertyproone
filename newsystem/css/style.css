@@ -77,7 +77,7 @@ p { margin: 0 0 15px 0 }
 .h40 { height: 40px }
 
 .no_bullet { margin: 0; padding: 0; list-style: none }
-.no_bullet li { margin: 0 0 20px 0; padding: 0 }
+.no_bullet li { margin: 0 0 15px 0; padding: 0 }
 a.header { display: block; font-weight: 700 }
 
 #website_header_wrapper {
@@ -137,7 +137,7 @@ a.header { display: block; font-weight: 700 }
 #site_title { float: left; margin-top: 20px }
 #site_title a { display: block; font-size: 12px; font-family: Georgia, "Times New Roman", Times, serif; width: 246px; height: 54px; color: #acacac; text-indent: -10000px; /*background: url(../images/website_logo.png) no-repeat top left*/ }
 
-#website_menu { float: right; margin-top: 45px; }
+#website_menu { float: right; margin-top: 45px; margin-right:-200px;}
 
 .post { clear: both; margin: 0 0 30px 0; padding: 0 0 10px 0; border-bottom: 1px solid #eee }
 .post h2 { margin-bottom: 10px }
@@ -197,6 +197,8 @@ a.header { display: block; font-weight: 700 }
 
 .sidebar_box { margin-bottom: 40px }
 .sidebar_box_content {padding-left: 10px }
+
+#list_form { padding: 0; margin-bottom: 40px; width:1000px; }
 
 #contact_form form .input_field1 { width: 225px; padding: 7px; color: #2c2c2c;  background: #fff; border: 1px solid #ccc; }
 
@@ -295,4 +297,13 @@ form select option{margin:4px;}
 li{ 
 {
 	line-height: 20px;
+}
+
+.welcome_text {
+	vertical-align:top;
+	margin-top:10px;
+	font-weight:bold;
+	font-style:italic;
+	color:#fff;
+	float:right;
 }

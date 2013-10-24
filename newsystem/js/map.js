@@ -48,10 +48,14 @@ function initialize() {
   });
   
   google.maps.event.addListener(autocomplete, 'place_changed', function() {
-    infowindow.close();marker.setVisible(false);input.className = '';var place = autocomplete.getPlace();
+    infowindow.close();marker.setVisible(false);
+	input.className = '';
+	$( "#searchTextField" ).addClass( "required input_field" );
+	var place = autocomplete.getPlace();
 	if (!place.geometry) {
       // Inform the user that the place was not found and return.
       input.className = 'notfound';
+	  $("#searchTextField").addClass("required input_field");
       return;
     }
     // If the place has a geometry, then present it on a map.
@@ -76,10 +80,14 @@ function initialize() {
     infowindow.open(map, marker);
   });  
   google.maps.event.addListener(autocomplete2, 'place_changed', function() {
-    infowindow2.close();marker2.setVisible(false);input2.className = '';var place2 = autocomplete2.getPlace();
+    infowindow2.close();marker2.setVisible(false);
+	input2.className = '';
+	$( "#searchTextField2" ).addClass("required input_field");
+	var place2 = autocomplete2.getPlace();
     if (!place2.geometry) {
       // Inform the user that the place was not found and return.
       input2.className = 'notfound';
+	  $( "#searchTextField2" ).addClass("required input_field");
       return;
     }
     // If the place has a geometry, then present it on a map.

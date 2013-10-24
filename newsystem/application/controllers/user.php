@@ -13,7 +13,9 @@ class User extends CI_Controller {
         //$this->load->helper('captcha');
         
         /* Load helpers */
+        $this->load->model('RideModel'); 
         $this->load->model('UserModel'); 
+        $this->load->model('CommonModel'); 
     }
 
 	public function index()
@@ -22,6 +24,7 @@ class User extends CI_Controller {
 	}	
 	
 	public function login() {
+		if($this->session->userdata('_user_id')!=''){redirect('welcome/home');}
 		$this->load->model('CommonModel');
 		$data['page_name'] = "user/login";
 		$data['menu'] = "login";
@@ -42,6 +45,8 @@ class User extends CI_Controller {
 		$data['page_name'] = "user/register";		
 		$data['states_list'] = $this->CommonModel->states_list();			
 		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();
 		$data['menu'] = "register";
 		$data['title'] = SITE_TITLE." :: Registration";
 		$data['param'] = $param==NULL ?'':$param;
