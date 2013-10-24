@@ -6,7 +6,7 @@
         <div class="clear"></div>          
         <div id="contact_form">
             <div style="border:1px solid #CCCCCC;line-height:25px;"> <!-- 918F8D-->
-		    <form style="margin:25px;" method="post" name="contact_us_form" id="contact_us_form" action="<?php echo base_url();?>welcome/process_contact" onsubmit="return isValidContact();">
+		    <form style="margin:10px;" method="post" name="contact_us_form" id="contact_us_form" action="<?php echo base_url();?>welcome/process_contact" onsubmit="return isValidContact();">
 			<table width="100%" cellpadding="3" cellspacing="0" align="center" border="1">
 				<tr>
 					<td width="100%" colspan="8">

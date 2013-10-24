@@ -17,7 +17,7 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 
 <!-- Google Map related JS & CSS Files -->
-<?php if($page_name=='ride/add' || $page_name=='ride/postride') { ?>
+<?php if($page_name=='ride/add' || $page_name=='ride/postride' || $page_name=='ride/edit') { ?>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/map.js"></script>
 <?php } ?>
@@ -37,7 +37,7 @@ $(function(){
 });
 </script>
 <?php } ?>
-<?php if($page_name=='ride/add') { ?>
+<?php if($page_name=='ride/add' || $page_name=='ride/edit') { ?>
 <script>
 $(function(){
 	$( "#tabs" ).tabs();

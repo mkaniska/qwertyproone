@@ -37,30 +37,26 @@
 						<td width="50%">						
 						Start Time: <br />
 							<select name="start_time" id="start_time">
-							<option value="0" selected="selected">Select Start Time</option>					
-							<?php $inc=12;for($i=0;$i<24;$i++) { $ampm=($i<12?' AM':' PM');?>
-								<?php for($j=0;$j<=55;$j=$j+5) { ?>
-									<option value="<?php echo $x=$inc.':'.(($j<10)?'0'.$j:$j).$ampm;?>"  <?php if($ride_value->start_time==$x){?> selected="selected" <?php } ?>><?php echo $inc.':'.(($j<10)?'0'.$j:$j).$ampm;?></option>
-								<?php } $inc=($i<12?($i+1):($i-11));?>
-							<?php } ?>
+							<?php foreach($time_slots as $value) { ?>
+								<option value="<?php echo $value->slot_value;?>" <?php if($ride_value->start_time_24==$value->slot_value){?> selected="selected" <?php } ?>><?php echo $value->slot_label;?></option>
+							<?php } ?>							
 							</select>
 						</td>						
 						<td width="50%">
 						Return Time : <br />
 							<select name="return_time" id="return_time">
-							<option value="0" selected="selected">Select Return Time</option>					
-							<?php $inc=12;for($i=0;$i<24;$i++) { $ampm=($i<12?' AM':' PM');?>
-								<?php for($j=0;$j<=55;$j=$j+5) { ?>
-									<option value="<?php echo $y=$default=$inc.':'.(($j<10)?'0'.$j:$j).$ampm;?>" <?php if($ride_value->start_time==$y){?> selected="selected" <?php } ?>><?php echo $inc.':'.(($j<10)?'0'.$j:$j).$ampm;?></option>
-								<?php } $inc=($i<12?($i+1):($i-11));?>
-							<?php } ?>
+							<?php foreach($time_slots as $value) { ?>
+								<option value="<?php echo $value->slot_value;?>" <?php if($ride_value->return_time_24==$value->slot_value){?> selected="selected" <?php } ?>><?php echo $value->slot_label;?></option>
+							<?php } ?>								
 							</select>
 						</td>
 					</tr>
 					<tr><td width="100%" colspan="2">  </td></tr>
 					<tr>
-						<td width="50%"> Origin :&nbsp; <input onKeyPress="return disableEnterKey(event)" type="text" name="origin_from" id="searchTextField" class="required input_field" style="width:250px;" value="<?php echo $ride_value->origin_location;?>" /></td>
-						<td width="50%"> Destination :&nbsp; <input onKeyPress="return disableEnterKey(event)" type="text" name="destination_to" id="searchTextField2" class="required input_field" style="width:250px;" value="<?php echo $ride_value->destination_location;?>" /></td>
+						<td width="50%"> Origin :&nbsp; 
+						<input onKeyPress="return disableEnterKey(event)" type="text" name="origin_from" id="searchTextField" class="required input_field" style="width:250px;" value="<?php echo $ride_value->origin_location;?>" /></td>
+						<td width="50%"> Destination :&nbsp; 
+						<input onKeyPress="return disableEnterKey(event)" type="text" name="destination_to" id="searchTextField2" class="required input_field" style="width:250px;" value="<?php echo $ride_value->destination_location;?>" /></td>
 					</tr>
 					<tr><td width="100%" colspan="2">  </td></tr>
 					<tr id="vehicle">

@@ -159,8 +159,13 @@ class Ride extends CI_Controller {
 
 			$ride_data['user_id'] 				= $isValidUserID;
 			$ride_data['passenger_city'] 		= $this->input->post('city');
-			$ride_data['start_time'] 			= $this->input->post('start_time');
-			$ride_data['return_time'] 			= $this->input->post('return_time');
+			
+			$ride_data['start_time'] 			= $this->CommonModel->get_time_label($this->input->post('start_time'));
+			$ride_data['return_time'] 			= $this->CommonModel->get_time_label($this->input->post('return_time'));
+			
+			$ride_data['start_time_24'] 		= $this->input->post('start_time');
+			$ride_data['return_time_24'] 		= $this->input->post('return_time');
+			
 			$ride_data['origin_location']	 	= $this->input->post('origin_from');
 			$ride_data['destination_location']	= $this->input->post('destination_to');
 			$ride_data['travel_as'] 			= $this->input->post('travel_type');
@@ -228,14 +233,18 @@ class Ride extends CI_Controller {
 	} 
 
 	public function process_newride() {
+	
 		if($this->session->userdata('_user_id')==''){redirect('user/login');}
+		
 		if($this->input->post('post_ride')=='Submit') {
+			
+			//print_r($this->input->post());exit;
 			
 			$UserID = $this->session->userdata('_user_id');
 			$UserName = $this->session->userdata('_user_name');
 			
 			if($UserID>0) {
-			
+
 			// Insert the Ride Details & Vehicle Details;
 
 			$ride_data['user_id'] 				= $UserID;
@@ -244,8 +253,8 @@ class Ride extends CI_Controller {
 			$ride_data['start_time'] 			= $this->CommonModel->get_time_label($this->input->post('start_time'));
 			$ride_data['return_time'] 			= $this->CommonModel->get_time_label($this->input->post('return_time'));
 			
-			$ride_data['start_time_24'] 		= $this->input->post('start_time')
-			$ride_data['return_time_24'] 		= $this->input->post('return_time')
+			$ride_data['start_time_24'] 		= $this->input->post('start_time');
+			$ride_data['return_time_24'] 		= $this->input->post('return_time');
 			
 			$ride_data['origin_location']	 	= $this->input->post('origin_from');
 			$ride_data['destination_location']	= $this->input->post('destination_to');
@@ -279,10 +288,11 @@ class Ride extends CI_Controller {
 				$rideMessage.= "Travel As : ".$ride_data['travel_as'].", <br />";
 				
 				if($ride_data['travel_as']=='driver'){
-					$rideMessage.= "Vehicle Type : ".$ride_data['pro_user_type'].", <br />";	
-					$rideMessage.= "Model Type : ".$ride_data['pro_user_type'].", <br />";	
-					$rideMessage.= "Fuel Type : ".$ride_data['pro_user_type'].", <br />";
+					$rideMessage.= "Vehicle Type : ".$ride_data['vehicle_type'].", <br />";	
+					$rideMessage.= "Model Type : ".$ride_data['model_type'].", <br />";	
+					$rideMessage.= "Fuel Type : ".$ride_data['fuel_type'].", <br />";
 				}
+				
 				$rideMessage.= " <br />";
 				$rideMessage.= " Thanks, <br />";
 				$rideMessage.= " Administrator";
