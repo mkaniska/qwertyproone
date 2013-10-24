@@ -49,6 +49,92 @@ class Ride extends CI_Controller {
 		
 		$this->load->view('layout', $data);
 	}
+
+	public function update_request() {
+	
+		$request_id     = $this->input->post('request_id');
+		//$ride_id    	= $this->input->post('ride_id');
+		$status 	    = $this->input->post('status');
+		$owner_user_id  = $this->session->userdata('_user_id');
+		
+		if($request_id>0) {
+			
+			$isUpdated    			= $this->RideModel->updateJoinRequest($request_id, $status);
+			$request_details 		= $this->RideModel->get_request_details($request_id);
+			$requested_user_details = $this->UserModel->get_user_details($request_details->requesting_user_id);
+			$owner_user_details 	= $this->UserModel->get_user_details($request_details->owner_user_id);
+			//insertJoinRequest
+			$finalStatus = ($status=='1')?'Approved':'Rejected';
+			if($isUpdated) {
+
+				$this->load->library('email');
+				$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
+				$this->email->to('murugdev.eee@gmail.com');
+				$this->email->subject('Commute Easy: Join Request '.$finalStatus.' !');
+				
+				// Constructing Ride Details Email Notification
+				$notificationMessage = "Hello ".$requested_user_details->pro_user_full_name.", <br />";
+				
+				$notificationMessage.= "Your Join Request has been $finalStatus by ".$owner_user_details->pro_user_full_name." !.. <br />";
+				
+				$notificationMessage.= "Please connect to Admin or ".$owner_user_details->pro_user_full_name." for any further Details <br />";
+				
+				$notificationMessage.= " <br />";
+				$notificationMessage.= " Thanks, <br />";
+				$notificationMessage.= " Administrator";
+				
+				/*
+					$this->email->message($notificationMessage);
+					$this->email->send();				
+				*/
+				echo 'success';exit;
+			}else {
+				echo 'failed';exit;
+			}
+		}else {
+			echo 'failed';exit;
+		}
+	}
+	
+	public function requestlist() {
+	
+		if($this->session->userdata('_user_id')==''){redirect('user/login');}
+		
+		$this->load->library('pagination');		
+		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
+		$config['uri_segment'] 		= 3;
+		$config['num_links']		= 3;
+		$config['per_page'] 		= 3;
+		$config['base_url'] 		= base_url().'ride/requestlist/';
+		$config['use_page_numbers'] = TRUE;
+        $config['cur_tag_open'] 	= "<li><span><b>";
+        $config['cur_tag_close'] 	= "</b></span></li>";
+		$config['full_tag_open'] 	= '<ul>';
+		$config['full_tag_close'] 	= '</ul>';
+		$config['num_tag_open'] 	= '<li>';
+		$config['num_tag_close'] 	= '</li>';
+		$config['first_link'] 		= 'First';
+		$config['last_link'] 		= 'Last';
+		$config['prev_link'] 		= 'Prev';
+		$config['next_link'] 		= 'Next';
+		$config['first_tag_open'] 	= $config['last_tag_open'] = $config['next_tag_open'] = $config['prev_tag_open'] = '<li>';
+        $config['first_tag_close'] 	= $config['last_tag_close'] = $config['next_tag_close'] = $config['prev_tag_close'] = '</li>';
+
+		$config['total_rows'] 		= $this->RideModel->get_total_requests();
+		
+		$data['page_name'] = "ride/requestlist";
+		$data['menu'] = "requestlist";		
+		$data['request_list'] = $this->RideModel->get_join_requests($config["per_page"], $page);
+		$data['title'] = SITE_TITLE." :: List of Join Requests";
+		
+		//$config['page_query_string'] = TRUE;
+		
+		$this->pagination->initialize($config); 
+		$data['pagelink'] = $this->pagination->create_links();
+		
+		$this->load->view('layout', $data);
+	}
+
 	
 	public function matching_places() {
 		$place = $this->input->post('address_string');
@@ -66,9 +152,11 @@ class Ride extends CI_Controller {
 		$input['search_for'] = $this->input->post('search_for');
 		
 		$matching_list = $this->RideModel->find_matching_rides($input);
+		$ignore_list   = $this->RideModel->request_already_sent_to();
 		
-		$data['matching_list'] = $matching_list;
-		
+		$data['matching_list']  = $matching_list;
+		$data['ignore_rides']   = $ignore_list;
+		//print_r($ignore_list);exit;
 		$data['page_name'] = "ride/results";
 		
 		echo $this->load->view('ajax_layout', $data, true);		
@@ -125,6 +213,8 @@ class Ride extends CI_Controller {
 		$data['states_list'] = $this->CommonModel->states_list();			
 		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
 		$data['time_slots']  = $this->CommonModel->get_time_slot();
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
 		$data['menu'] = "addride";
 		$data['title'] = SITE_TITLE." :: Post a New Ride";
 		$this->load->view('layout', $data);
@@ -243,7 +333,7 @@ class Ride extends CI_Controller {
 			$ride_details 			 = $this->RideModel->get_ride_value($request_ride_id,false);
 			$requesting_user_details = $this->UserModel->get_user_details($requesting_user_id);
 			$join_request_id 		 = $this->RideModel->insertJoinRequest($ride_details);
-			print($join_request_id);exit;
+			
 			if($join_request_id>0) {
 
 				$this->load->library('email');
@@ -269,7 +359,7 @@ class Ride extends CI_Controller {
 				$notificationMessage.= " Administrator";
 				
 				/*
-					$this->email->message($rideMessage);
+					$this->email->message($notificationMessage);
 					$this->email->send();				
 				*/
 				echo 'success';exit;

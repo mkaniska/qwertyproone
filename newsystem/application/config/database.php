@@ -48,10 +48,24 @@
 $active_group = 'default';
 $active_record = TRUE;
 
+//Added user murugesh_project with password Project!23 murugesh_project
+
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'project';
+
+switch(1) {
+
+	case '1':
+			$db['default']['username'] = 'root';
+			$db['default']['password'] = '';
+			$db['default']['database'] = 'project';	
+			break;
+	case '2':
+			$db['default']['username'] = 'murugesh_project';
+			$db['default']['password'] = 'Project!23';
+			$db['default']['database'] = 'murugesh_project';	
+			break;			
+}
+
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

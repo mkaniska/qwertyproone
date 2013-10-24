@@ -251,12 +251,35 @@ function sendJoinRequest(selectedID,responseTag) {
 					}else{
 						//alert(resultData);
 						alert("Error Sending Request!");
-						$(responseTag).html('<img src="http://localhost/qwerty/images/request.gif" border="0" title="Send Request" alt="Send Request" />');
+						$(responseTag).html('<img src="http://localhost/qwerty/images/request.png" border="0" title="Send Request" alt="Send Request" />');
 					}
 			  }
 		});
 	}else {
 		alert("Invalid Request!");
 		//$("#errorDisplay").html("Please enter all the details to search");
+	}
+}
+
+function confirmRequest(responseID, reqID, stsVAL) {
+	if(reqID>0) {
+		 $.ajax({
+			  type: 'POST',
+			  url: 'update_request',
+			  beforeSend: function(){$(responseTag).html('<img src="http://localhost/qwerty/images/sending_request.gif" border="0" />'); },
+			  data: 'request_id='+reqID+'&status='+stsVAL,
+			  dataType: "text",
+			  success: function(resultData) {
+					if(resultData=='success') {
+						$(responseID).html('Updated Successfully');
+					}else{
+						//alert(resultData);
+						//alert("Error Request!");
+						$(responseID).html('Error Request!');
+					}
+			  }
+		});
+	}else {
+		alert("Invalid Request!");
 	}
 }

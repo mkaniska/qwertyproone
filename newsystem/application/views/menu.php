@@ -29,7 +29,8 @@
 			<li><a href="<?php echo base_url();?>user/register" <?php if($menu=='register')echo 'class="selected"';?>>Sign Up</a></li>
 			<li><a href="<?php echo base_url();?>user/login" <?php if($menu=='login')echo 'class="selected"';?>>Login</a></li>
 			<?php }else if($this->session->userdata('_user_id')!=''){ ?>
-			<li><a href="<?php echo base_url();?>ride/ridelist" <?php if($menu=='ridelist')echo 'class="selected"';?>>List</a></li>
+			<li><a href="<?php echo base_url();?>ride/ridelist" <?php if($menu=='ridelist')echo 'class="selected"';?>>Ride List</a></li>
+			<li><a href="<?php echo base_url();?>ride/requestlist" <?php if($menu=='requestlist')echo 'class="selected"';?>>Requests</a></li>
 			<?php } ?>
 		</ul>
 		<br style="clear: left" />

@@ -19,14 +19,17 @@
 		<td align="center">
 			<?php $responseID = 'request_row_'.$out->ride_id;
 				  if($this->session->userdata('_user_name')!='') {
-						//$val=base_url().'ride/sendrequest/'.$out->ride_id;
 						$href="javascript:sendJoinRequest('".$out->ride_id."','#".$responseID."')";
 					}
 				  else{$href="javascript:alert('Please Register & Login into application to post your request!')";}?>
 			<span id="<?php echo $responseID;?>">
+			<?php if(!in_array($out->ride_id,$ignore_rides)) { ?>
 			<a href="<?php echo $href;?>" alt="Send Request" title="Send Request">
 				<img src="<?php echo base_url().'images/request.png';?>" align="absmiddle" />
 			</a>
+			<?php }else{ ?>
+				<img src="<?php echo base_url().'images/alreadysent.png';?>" alt="Already Sent" title="Already Sent" align="absmiddle" />
+			<?php } ?>
 			</span>
 		</td>
 	</tr>	
