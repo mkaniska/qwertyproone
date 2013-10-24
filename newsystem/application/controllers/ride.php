@@ -240,8 +240,13 @@ class Ride extends CI_Controller {
 
 			$ride_data['user_id'] 				= $UserID;
 			$ride_data['passenger_city'] 		= $this->input->post('city');
-			$ride_data['start_time'] 			= $this->input->post('start_time');
-			$ride_data['return_time'] 			= $this->input->post('return_time');
+			
+			$ride_data['start_time'] 			= $this->CommonModel->get_time_label($this->input->post('start_time'));
+			$ride_data['return_time'] 			= $this->CommonModel->get_time_label($this->input->post('return_time'));
+			
+			$ride_data['start_time_24'] 		= $this->input->post('start_time')
+			$ride_data['return_time_24'] 		= $this->input->post('return_time')
+			
 			$ride_data['origin_location']	 	= $this->input->post('origin_from');
 			$ride_data['destination_location']	= $this->input->post('destination_to');
 			$ride_data['travel_as'] 			= $this->input->post('travel_type');
