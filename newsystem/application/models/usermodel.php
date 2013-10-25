@@ -10,11 +10,13 @@ class UserModel extends CI_Model {
         $this->primary_key = 'pro_user_id';
     }
 	
-    function is_valid_login($user, $pass){
+    function is_valid_login($user, $pass, $userType=2) {
 	
         $this->db->select('pro_user_id,pro_user_full_name'); //'pro_users');
         $this->db->where('pro_user_email', $user);
         $this->db->where('pro_user_password', $pass);
+		$this->db->where('pro_user_type', $userType); // $userType =1 is for Admin / 2 is for User / 3 is for HR 
+		 
         $query = $this->db->get($this->table_name);
 		if($query->num_rows() > 0) {
 			return $query->row();  
@@ -23,6 +25,31 @@ class UserModel extends CI_Model {
 		}
     }
 
+    function get_total_users() {
+
+		$this->db->order_by("pro_user_joined","DESC");
+		$this->db->select('pro_user_id');
+		$query = $this->db->get($this->table_name);
+		return $query->num_rows();
+	}	
+
+    function get_users_registered($cp,$pp) {
+
+		$this->db->order_by("pro_user_joined","DESC");
+		$this->db->select();
+        $this->db->limit($cp, $pp);
+		$query = $this->db->get($this->table_name);
+		if($query->num_rows() > 0){
+			foreach ($query->result() as $row)
+			{
+				$result_back[] = $row;
+			}
+			return $result_back;
+		}else{ 
+			return array();
+		}
+    }
+	
     function get_user_details($UserID) {
         $this->db->where('pro_user_id', $UserID);
 		$this->db->select();

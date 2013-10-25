@@ -54,8 +54,8 @@
 					</tr>
 					<tr><td width="100%" colspan="2">  </td></tr>
 					<tr>
-						<td width="50%"> Origin :&nbsp; <input onKeyPress="return disableEnterKey(event)" type="text" name="origin_from" id="searchTextField" class="required input_field" style="width:250px;" /></td>
-						<td width="50%"> Destination :&nbsp; <input onKeyPress="return disableEnterKey(event)" type="text" name="destination_to" id="searchTextField2" class="required input_field" style="width:250px;" /></td>
+						<td width="50%"> Origin :&nbsp; <br /> <input onKeyPress="return disableEnterKey(event)" type="text" name="origin_from" id="searchTextField" class="required input_field" style="width:250px;" /></td>
+						<td width="50%"> Destination :&nbsp;<br /> <input onKeyPress="return disableEnterKey(event)" type="text" name="destination_to" id="searchTextField2" class="required input_field" style="width:250px;" /></td>
 					</tr>
 					<tr><td width="100%" colspan="2">  </td></tr>
 					<tr id="vehicle">

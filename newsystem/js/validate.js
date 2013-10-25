@@ -266,7 +266,7 @@ function confirmRequest(responseID, reqID, stsVAL) {
 		 $.ajax({
 			  type: 'POST',
 			  url: 'update_request',
-			  beforeSend: function(){$(responseTag).html('<img src="http://localhost/qwerty/images/sending_request.gif" border="0" />'); },
+			  beforeSend: function(){$(responseID).html('<img src="http://localhost/qwerty/images/sending_request.gif" border="0" />'); },
 			  data: 'request_id='+reqID+'&status='+stsVAL,
 			  dataType: "text",
 			  success: function(resultData) {
@@ -281,5 +281,17 @@ function confirmRequest(responseID, reqID, stsVAL) {
 		});
 	}else {
 		alert("Invalid Request!");
+	}
+}
+
+function doAdminLogin() {
+	if($.trim($("#user_name").val())=='') {
+		$("#errorDisplay").html("Please enter the username/email !");
+		return false;
+	}else if($.trim($("#password_value").val())==""){
+		$("#errorDisplay").html("Please enter the password !");
+		return false;
+	}else {
+		return true;
 	}
 }
