@@ -173,14 +173,19 @@ class RideModel extends CI_Model {
 		return $result_back;
     }
 	
-    function get_rides_posted($cp,$pp,$user=true) {
+    function get_rides_posted($cp,$pp,$user=true,$userinfo=false) {
 
         $UserID = $this->session->userdata('_user_id');
 		if($user) {
 			$this->db->where('user_id', $UserID);
 		}
+		$join = '';
+		if($userinfo) {
+			$this->db->join("pro_users","pro_users.pro_user_id=pro_ride_details.user_id");
+			$join = ', pro_users.*';
+		}
 		$this->db->order_by("added_on","DESC");
-		$this->db->select('ride_id,passenger_city,vehicle_type,start_time,return_time,origin_location,destination_location,added_on,active_status');
+		$this->db->select('pro_ride_details.*'.$join);
         $this->db->limit($cp, $pp);
 		$query = $this->db->get($this->table_name);
 		if($query->num_rows() > 0){

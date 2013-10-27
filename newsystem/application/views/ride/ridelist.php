@@ -1,7 +1,7 @@
 <div id="website_main" class="wrapper">
         <div class="col one_third_1">
             <h5 style="padding-bottom:5px;">List of Rides Posted &nbsp; 
-			<a href="<?php echo base_url();?>ride/postride"><img src="<?php echo base_url();?>images/Add2.png" border="0" alt="Add New Ride" title="Add New Ride" /></a></h5>
+			<a href="<?php echo base_url();?>ride/postride"><img align="absmiddle" src="<?php echo base_url();?>images/Add2.png" border="0" alt="Add New Ride" title="Add New Ride" /></a></h5>
             <div class="cleaner"></div>
 		</div>
         <div class="clear"></div>          

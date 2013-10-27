@@ -1,6 +1,6 @@
 <div id="website_main" class="wrapper">
         <div class="col one_third_1">
-            <h5 style="padding-bottom:5px;">List of Users</h5>
+            <h5 style="padding-bottom:5px;">List of Users <font style="color:#E16715;">[ Total <?php echo $total;?> users joined ]</font></h5>
             <div class="cleaner"></div>
 		</div>
         <div class="clear"></div>          
@@ -18,31 +18,23 @@
 				<?php } ?>
 				<tr style="font-weight:bold;font-size:11px;text-align:center;background-color:#ccc;">
 					<!-- <td>City</td> -->
-					<td width="5%">Name</td>
-					<td width="30%">Gender</td>
-					<td width="30%">Destination Location</td>
-					<td width="8%">Start Time</td>
-					<td width="10%">Return Time</td>
-					<td width="10%">Posted On</td>
-					<td width="7%">Action</td>
+					<td width="20%">Name</td>
+					<td width="5%">Gender</td>
+					<td width="25%">Email</td>
+					<td width="30%">Address</td>
+					<td width="8%">Phone</td>
+					<td width="10%">Joined On</td>
+					<td width="5%">Status</td>
 				</tr>
 				<?php if(count($user_list)>0){foreach($user_list as $out) { ?>
 				<tr style="font-size:11px;"> 				
 					<td><?php echo $out->pro_user_full_name;?></td>
 					<td><?php echo $out->pro_user_gender;?></td>
-					<td><?php echo $out->origin_location;?></td>
-					<td><?php echo $out->destination_location;?></td>
-					<td><?php echo $out->start_time;?></td>
-					<td><?php echo $out->return_time;?></td>
-					<td><?php echo date("d M Y",$out->added_on);?></td>
-					<td align="center">
-						<a href="<?php echo base_url();?>ride/edit/<?php echo $out->ride_id;?>" alt="Edit" title="Edit">
-							<img src="<?php echo base_url();?>images/edit.png" border="0" />
-						</a> | 
-						<a href="<?php echo base_url();?>ride/delete/<?php echo $out->ride_id;?>" alt="Delete" title="Delete" onclick="return confirm('Are you sure to delete this entry ?');">
-							<img src="<?php echo base_url();?>images/delete.png" border="0" />
-						</a>
-					</td>
+					<td><?php echo $out->pro_user_email;?></td>
+					<td><?php echo $out->pro_user_address.', '.$out->pro_user_city.', '.$out->pro_user_state;?></td>
+					<td><?php echo $out->pro_user_phone;?></td>
+					<td><?php echo date("d M 'y",$out->pro_user_joined);?></td>
+					<td><?php echo $out->pro_user_status=='1'?'Active':'Inactive';?></td>
 				</tr>
 				<?php } ?>
 				<tr style="font-size:11px;">
@@ -50,7 +42,7 @@
 				</tr>
 				<?php }else{?>
 				<tr style="font-size:11px;">
-					<td colspan="7" align="center"> No Rides Added</td>
+					<td colspan="7" align="center"> No Users Joined</td>
 				</tr>
 				<?php } ?>
 			</table>

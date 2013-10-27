@@ -24,6 +24,7 @@
 							<td width="75%"><input type="password" id="password_value" name="password_value" class="required input_field" /></td>
 						</tr>
 						<tr><td width="100%" colspan="2">   </td></tr>
+						<tr><td width="100%" colspan="2">   </td></tr>
 						<tr>
 							<td width="100%" colspan="2" align="left" style="padding-left:152px;">
 								<input class="submit_btn float_l" type="submit" name="submitlogin" id="submitlogin" value="Login" />
@@ -31,7 +32,7 @@
 								<a href="<?php echo base_url();?>admin/getpassword">Forgot Password ?</a>
 								</div>
 							</td>
-						</tr>				
+						</tr>
 					</table>				
 				</form>
 				</span>
