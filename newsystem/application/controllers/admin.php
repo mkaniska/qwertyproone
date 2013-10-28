@@ -16,7 +16,7 @@ class Admin extends CI_Controller {
 	}	
 
 	public function home() {
-		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
+		//if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
 		$data['page_name'] = "admin/home";
 		$data['menu'] = "home";
 		$data['title'] = SITE_TITLE." :: Dashboard";
@@ -102,7 +102,7 @@ class Admin extends CI_Controller {
 	}
 	
 	public function ride_list() {
-		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
+		//if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
 		$this->load->library('pagination');		
 		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
 		$config['uri_segment'] 		= 3;

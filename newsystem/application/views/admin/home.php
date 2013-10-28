@@ -1,48 +1,67 @@
-<div id="website_main" class="wrapper">
-	<div id="content_ful" class="left">
-        <div class="post">
-            <h2>Find a Ride</h2>
-            <p>Duis id lacus ac odio varius ultricies. Validate <a href="http://validator.w3.org/check?uri=referer" rel="nofollow">XHTML</a> &amp; <a href="http://jigsaw.w3.org/css-validator/check/referer" rel="nofollow">CSS</a>. Nam ut congue velit. Cras eget fermentum sem. Maecenas nec purus lorem, a sodales lectus. Etiam consequat nulla sit amet nisl volutpat ornare. Donec purus nulla, egestas ac porttitor et, pharetra nec felis. Donec lobortis fringilla blandit. Fusce a purus vel justo pulvinar tempor.</p>
-        </div>
-        <div class="post2">
-		<div class="col2 one_fifth">
-			<div id="rnd_container">
-				<b class="rnd_top"><b class="rnd_b1"></b><b class="rnd_b2"></b><b class="rnd_b3"></b><b class="rnd_b4"></b></b>
-				<div class="rnd_content">
-				Employees <br/>
-				Click Here <br/>
-				For your Approved <br/>
-				Offers
-				</div>
-				<b class="rnd_bottom"><b class="rnd_b4"></b><b class="rnd_b3"></b><b class="rnd_b2"></b><b class="rnd_b1"></b></b>
-			</div>
-			</div>
-			<div class="col2 one_fifth">
-			<div id="rnd_container" >
-				<b class="rnd_top"><b class="rnd_b1"></b><b class="rnd_b2"></b><b class="rnd_b3"></b><b class="rnd_b4"></b></b>
-				<div class="rnd_content">
-				Employees <br/>
-				Click Here <br/>
-				For your Approved <br/>
-				Offers
-				</div>
-				<b class="rnd_bottom"><b class="rnd_b4"></b><b class="rnd_b3"></b><b class="rnd_b2"></b><b class="rnd_b1"></b></b>
-			</div>
-			</div>
-			<div class="col2 one_fifth">
-			<div id="rnd_container" >
-				<b class="rnd_top"><b class="rnd_b1"></b><b class="rnd_b2"></b><b class="rnd_b3"></b><b class="rnd_b4"></b></b>
-				<div class="rnd_content">
-				Employees <br/>
-				Click Here <br/>
-				For your Approved <br/>
-				Offers
-				</div>
-				<b class="rnd_bottom"><b class="rnd_b4"></b><b class="rnd_b3"></b><b class="rnd_b2"></b><b class="rnd_b1"></b></b>
-			</div>
-			</div>			
-        </div>
-
-    </div> <!-- END of content half -->
-    <div class="clear"></div>
+<div class="grid_10">
+	<div class="box round first grid">
+		<h2>Tables & Grids</h2>
+		<div class="block">
+			<table class="data display datatable" id="example" style="border:1px solid #ccc;">
+			<thead>
+				<tr>
+					<th>Rendering engine</th>
+					<th>Browser</th>
+					<th>Platform(s)</th>
+					<th>Engine version</th>
+					<th>CSS grade</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="odd gradeX">
+					<td>Trident</td>
+					<td>Internet
+						 Explorer 4.0</td>
+					<td>Win 95+</td>
+					<td class="center"> 4</td>
+					<td class="center">X</td>
+				</tr>
+				<tr class="even gradeC">
+					<td>Trident</td>
+					<td>Internet
+						 Explorer 5.0</td>
+					<td>Win 95+</td>
+					<td class="center">5</td>
+					<td class="center">C</td>
+				</tr>
+				<tr class="odd gradeA">
+					<td>Trident</td>
+					<td>Internet
+						 Explorer 5.5</td>
+					<td>Win 95+</td>
+					<td class="center">5.5</td>
+					<td class="center">A</td>
+				</tr>
+				<tr class="even gradeA">
+					<td>Trident</td>
+					<td>Internet
+						 Explorer 6</td>
+					<td>Win 98+</td>
+					<td class="center">6</td>
+					<td class="center">A</td>
+				</tr>
+				<tr class="odd gradeA">
+					<td>Trident</td>
+					<td>Internet Explorer 7</td>
+					<td>Win XP SP2+</td>
+					<td class="center">7</td>
+					<td class="center">A</td>
+				</tr>
+				<tr class="even gradeA">
+					<td>Trident</td>
+					<td>AOL browser (AOL desktop)</td>
+					<td>Win XP</td>
+					<td class="center">6</td>
+					<td class="center">A</td>
+				</tr>				
+			</tbody>
+		</table>
+		</div>
+	</div>
 </div>
+<div class="clear"></div>
