@@ -1,8 +1,12 @@
-<div class="grid_10">
-	<div class="box round first grid">
-		<h2>List of Users <font style="color:#E16715;">[ Total <?php echo $total;?> users joined ]</font></h2>
-            <div style="line-height:25px;padding-top:10px;"> <!-- 918F8D-->
-			<table width="100%" cellpadding="3" cellspacing="3" align="center" border="1">
+<div id="website_main" class="wrapper">
+        <div class="col one_third_1">
+            <h5 style="padding-bottom:5px;">List of Users <font style="color:#E16715;">[ Total <?php echo $total;?> users joined ]</font></h5>
+            <div class="cleaner"></div>
+		</div>
+        <div class="clear"></div>          
+        <div id="list_form">
+            <div style="border:1px solid #CCCCCC;line-height:25px;"> <!-- 918F8D-->
+			<table width="100%" cellpadding="3" cellspacing="0" align="center" border="1">
 			<?php if($this->session->flashdata('flash_message') !='') { ?>
 				<tr>
 					<td width="100%" colspan="7">
@@ -37,11 +41,11 @@
 				</tr>
 				<?php }else{?>
 				<tr style="font-size:11px;">
-					<td colspan="7" align="center"> No Users Available</td>
+					<td colspan="7" align="center"> No Users Joined</td>
 				</tr>
 				<?php } ?>
 			</table>
 			</div>
-	</div>
+        </div>
+        <div class="clear"></div>
 </div>
-<div class="clear"></div>

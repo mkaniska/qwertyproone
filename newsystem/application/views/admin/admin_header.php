@@ -4,6 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Admin Panel Template</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>admin-css/reset.css" media="screen" />  
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/style.css" media="screen" />  
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>admin-css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>admin-css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>admin-css/layout.css" media="screen" />

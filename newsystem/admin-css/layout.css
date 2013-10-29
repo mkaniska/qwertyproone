@@ -275,10 +275,10 @@ ul.section ul.current li a {
 	border-bottom:1px solid #fff;
 }
 ul.section ul.current li a:hover {
-	background:#E6F0F3;
+	background:#CCC;
 }
 ul.section ul.current li a:active {
-	background:#E6F0F3;
+	background:#CCC;
 }
 ul.section li a.current {
 	color:#1B548D;

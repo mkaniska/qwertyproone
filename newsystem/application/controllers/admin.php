@@ -140,7 +140,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function company_list() {
-		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
+		//if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
 		$this->load->library('pagination');		
 		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
 		$config['uri_segment'] 		= 3;
@@ -178,7 +178,7 @@ class Admin extends CI_Controller {
 	}
 	
 	public function user_list() {
-		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
+		//if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
 		$this->load->library('pagination');		
 		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
 		$config['uri_segment'] 		= 3;
