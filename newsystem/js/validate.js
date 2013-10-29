@@ -273,25 +273,11 @@ function confirmRequest(responseID, reqID, stsVAL) {
 					if(resultData=='success') {
 						$(responseID).html('Updated Successfully');
 					}else{
-						//alert(resultData);
-						//alert("Error Request!");
 						$(responseID).html('Error Request!');
 					}
 			  }
 		});
 	}else {
 		alert("Invalid Request!");
-	}
-}
-
-function doAdminLogin() {
-	if($.trim($("#user_name").val())=='') {
-		$("#errorDisplay").html("Please enter the username/email !");
-		return false;
-	}else if($.trim($("#password_value").val())==""){
-		$("#errorDisplay").html("Please enter the password !");
-		return false;
-	}else {
-		return true;
 	}
 }

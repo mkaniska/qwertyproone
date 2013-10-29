@@ -65,22 +65,28 @@ class Welcome extends CI_Controller {
 
 			$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
 			$this->email->to('murugdev.eee@gmail.com');
+			$this->email->subject('User Inquiry');
 
-			$this->email->subject('User Enquiry');
+			$email_data['PAGE_TITLE'] 		= 'Email Notification';
+			$email_data['PAGE_HEADING'] 	= 'Contact Inquiry Details !';
+			$email_data['ADDRESS_TO'] 		= "Hello Admin,";
+			$email_data['ADDRESS_CONTENT'] 	= $full_name." is trying to contact you for the following reason. <br /><br />".$message_text."<br />";
+			$email_data['SUCCESS_HEADER'] 	= 'User Details';
 			
-			$textMessage = "Hello Admin, <br />";
-			$textMessage.=$full_name." is trying to contact you for the following reason. <br />";
-			$textMessage.=$message_text."<br /><br />";
-			$textMessage.="Below are the details he has provided. <br />";
-			$textMessage.="Full Name : ".$full_name." <br />";
-			$textMessage.="Email Address : ".$email_address." <br />";
-			$textMessage.="Phone Number : ".$phone_number." <br /><br />";
-			$textMessage.="Thanks, <br />";
-			$textMessage.="Auto Responder";
+			$temp_str ="Full Name : ".$full_name." <br />";
+			$temp_str.="Email Address : ".$email_address." <br />";
+			$temp_str.="Phone Number : ".$phone_number." <br /><br />";
 			
-			$this->email->message($textMessage);
+			$email_data['SUCCESS_TEXT'] 	= $temp_str;
 
-			$this->email->send();
+			
+			$email_template = $this->load->view('contact_us_email', $email_data, true);				
+			
+			if($this->config->item('is_email_enabled')) {
+				$this->email->message($email_template);
+				$this->email->send();				
+			}			
+
 			$this->session->set_flashdata('flash_message', 'Successfully Registered !');
 			redirect('welcome/thanks');
 		} else {

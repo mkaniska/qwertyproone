@@ -73,6 +73,7 @@ class User extends CI_Controller {
 			$posted_data['pro_user_updated'] 	= time();
 			$posted_data['pro_user_status'] 	= '0';
 			$isValidID = $this->UserModel->insertSingup($posted_data);
+			
 			if($isValidID>0) {
 				// Sending Email Activation Link
 				$this->load->library('email');
@@ -81,10 +82,25 @@ class User extends CI_Controller {
 				$this->email->to('murugdev.eee@gmail.com');
 
 				$this->email->subject('Commute Easy: Registration Email Activation');
-				/*
-				$this->email->message('Testing the email class.');
-				$this->email->send();
-				*/
+
+				$email_data['PAGE_TITLE'] 		= 'Email Notification';
+				$email_data['PAGE_HEADING'] 	= 'Registration Confirmation & Email Account Activation !';
+				$email_data['ADDRESS_TO'] 		= "Hello ".$user_data['pro_user_full_name'];
+				$email_data['ADDRESS_CONTENT'] 	= 'Thanks for joining us !..';
+				$email_data['SUCCESS_HEADER'] 	= 'Activate Email';
+				$email_data['SUCCESS_TEXT'] 	= 'Please contact admin if in case you have any other queries/clarifications.!';
+				$email_data['LINK_LABEL'] 		= 'Our Website Link';
+				$email_data['LINK_URL'] 		= 'http://mail.yahoo.com';
+				$email_data['USER_NAME'] 		= $this->input->post('email_address');
+				$email_data['PASS_WORD'] 		= $this->input->post('password_text');
+				
+				$email_template = $this->load->view('signup_email_template', $email_data, true);				
+				
+				if($this->config->item('is_email_enabled')) {
+					$this->email->message($email_template);
+					$this->email->send();				
+				}				
+				
 				$this->session->set_flashdata('flash_message', 'Successfully Registered !');
 				$this->session->set_flashdata('flash_url', base_url().'user/login');
 				redirect('user/thanks');
@@ -157,8 +173,6 @@ class User extends CI_Controller {
 		$data['page_name'] = "user/thanks";
 		$data['menu'] = "thanks";
 		$data['title'] = SITE_TITLE." :: Thanks";
-		//$this->session->set_flashdata('flash_message', '<p style="text-align:center;">Successfully Registered ! </p> You will receive the email for verification & please confirm that to activate your account!.');
-		//$this->session->set_flashdata('flash_url', base_url().'user/login');
 		$this->load->view('simple_layout', $data);
 	}	
 }

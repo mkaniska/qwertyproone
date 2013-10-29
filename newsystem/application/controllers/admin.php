@@ -16,7 +16,7 @@ class Admin extends CI_Controller {
 	}	
 
 	public function home() {
-		//if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
+		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
 		$data['page_name'] = "admin/home";
 		$data['menu'] = "home";
 		$data['title'] = SITE_TITLE." :: Dashboard";
@@ -29,7 +29,7 @@ class Admin extends CI_Controller {
 		$data['page_name'] = "admin/login";
 		$data['menu'] = "login";
 		$data['title'] = SITE_TITLE." :: Login";
-		$this->load->view('admin_layout', $data);
+		$this->load->view('admin_login_layout', $data);
 	}
 
 	public function addcompany() {
@@ -70,7 +70,7 @@ class Admin extends CI_Controller {
 				$this->session->set_flashdata('flash_message', 'Invalid Login Details Entered!');
 				redirect('admin/login');
 			}
-		}else{
+		}else {
 				$this->session->set_flashdata('flash_message', 'Invalid Request!');
 				redirect('admin/login');
 		}
@@ -102,7 +102,7 @@ class Admin extends CI_Controller {
 	}
 	
 	public function ride_list() {
-		//if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
+		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
 		$this->load->library('pagination');		
 		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
 		$config['uri_segment'] 		= 3;
@@ -140,7 +140,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function company_list() {
-		//if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
+		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
 		$this->load->library('pagination');		
 		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
 		$config['uri_segment'] 		= 3;
@@ -178,7 +178,7 @@ class Admin extends CI_Controller {
 	}
 	
 	public function user_list() {
-		//if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
+		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
 		$this->load->library('pagination');		
 		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
 		$config['uri_segment'] 		= 3;
@@ -206,8 +206,6 @@ class Admin extends CI_Controller {
 		$data['menu'] = "user_list";		
 		$data['user_list'] = $this->UserModel->get_users_registered($config["per_page"], $page);
 		$data['title'] = SITE_TITLE." :: List of Users";
-		
-		//$config['page_query_string'] = TRUE;
 		
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();

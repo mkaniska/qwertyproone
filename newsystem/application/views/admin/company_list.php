@@ -1,14 +1,8 @@
-<div id="website_main" class="wrapper">
-        <div class="col one_third_1">
-            <h5 style="padding-bottom:5px;">List of Companies <font style="color:#E16715;">[ Total <?php echo $total;?> companies ]</font> &nbsp; 
-			<a href="<?php echo base_url();?>admin/addcompany"><img align="absmiddle" src="<?php echo base_url();?>images/Add2.png" border="0" alt="Add New Company" title="Add New Company" /></a>
-			</h5>
-            <div class="cleaner"></div>
-		</div>
-        <div class="clear"></div>          
-        <div id="list_form">
-            <div style="border:1px solid #CCCCCC;line-height:25px;"> <!-- 918F8D-->
-			<table width="100%" cellpadding="3" cellspacing="0" align="center" border="1">
+<div class="grid_10">
+	<div class="box round first grid">
+		<h2>List of Companies <font style="color:#E16715;">[ Total <?php echo $total;?> companies ]</font></h2>
+            <div style="line-height:25px;padding-top:10px;"> <!-- 918F8D-->
+			<table width="100%" cellpadding="3" cellspacing="3" align="center" border="1">
 			<?php if($this->session->flashdata('flash_message') !='') { ?>
 				<tr>
 					<td width="100%" colspan="7">
@@ -28,7 +22,7 @@
 					<td width="5%">Status</td>
 				</tr>
 				<?php if(count($company_list)>0){foreach($company_list as $out) { ?>
-				<tr style="font-size:11px;"> 				
+				<tr style="font-size:11px;">
 					<td><?php echo $out->company_name;?></td>
 					<td><?php echo $out->company_primary_contact_person;?></td>
 					<td><?php echo $out->company_contact_email;?></td>
@@ -48,6 +42,6 @@
 				<?php } ?>
 			</table>
 			</div>
-        </div>
-        <div class="clear"></div>
+	</div>
 </div>
+<div class="clear"></div>

@@ -1,14 +1,9 @@
-<div class="floatright">
-	<div class="floatleft">
-		<img src="<?php echo base_url();?>admin-images/img-profile.jpg" alt="Profile Pic" /></div>
-	<div class="floatleft marginleft10">
-		<ul class="inline-ul floatleft">
-			<li>Hello Admin</li>
-			<li><a href="#">Config</a></li>
-			<li><a href="#">Logout</a></li>
+<div style="float:right">
+	<div style="margin-right:50px;float:left;">
+		<span style="font-weight:bold;color:#fff;font-size:13px;">Welcome <?php echo $this->session->userdata('admin_user_name');?> | 
+		<a href="<?php echo base_url();?>admin/logout">Logout</a>
+		</span>
 		</ul>
-		<br />
-		<span class="small grey">Last Login: 3 hours ago</span>
 	</div>
 </div>
 <div class="clear"></div>

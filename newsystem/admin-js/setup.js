@@ -505,3 +505,4 @@ function setupLeftMenu() {
 		
 		$('#section-menu .submenu').css('height','auto');
 }
+
