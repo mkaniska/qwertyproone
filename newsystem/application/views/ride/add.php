@@ -1,5 +1,4 @@
 <div id="website_main" class="wrapper">
-
 		<h5 style="padding-bottom:15px;">Post a New Ride</h5> 
 		<p>
 		[ If you have an account already, please login <a href="<?php echo base_url();?>user/login" style="font-weight:bold;">here</a> ]

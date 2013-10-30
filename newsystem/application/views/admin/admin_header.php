@@ -13,7 +13,9 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Admin Panel Template</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>admin-css/reset.css" media="screen" />  
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/style.css" media="screen" />  
+    <?php if($page_name=='admin/login' || $page_name=='admin/ride_list' || $page_name=='admin/company_list' || $page_name=='admin/user_list') { ?>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/style.css" media="screen" />  
+	<?php } ?>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>admin-css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>admin-css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>admin-css/layout.css" media="screen" />
@@ -34,6 +36,9 @@
             //$('.datatable').dataTable();
 			setSidebarHeight();
 			$("#section-menu" ).accordion( "option", "active", <?php echo $tabActive;?>);
+			$('#submitbutton').css('cursor', 'pointer');
+			$('#cancelbutton').css('cursor', 'pointer');
+			$("#cancelbutton").click(function() {window.location.href='home';});
         });
     </script>
 </head>

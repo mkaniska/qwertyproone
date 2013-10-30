@@ -9,8 +9,8 @@ class CommonModel extends CI_Model {
     function states_list(){
 	
         $this->db->group_by("city_state");
-		$this->db->order_by("city_name","ASC");
-		$this->db->where('city_state', 'Tamil Nadu');
+		$this->db->order_by("city_state","ASC");
+		//$this->db->where('city_state', 'Tamil Nadu');
 		$this->db->select('city_state');
 		$query = $this->db->get('pro_cities');
 		$result_back = array();		

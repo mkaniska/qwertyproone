@@ -23,7 +23,6 @@
 									<option value="<?php echo $value;?>"><?php echo $value;?></option>
 								<?php } ?>
 							</select>
-							
 						</td>						
 						<td width="50%">
 						I am a : <br />

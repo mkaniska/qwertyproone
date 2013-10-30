@@ -13,11 +13,35 @@ class AdminModel extends CI_Model {
 		return $query->num_rows();
 	}
 
+	function insertCompany($data) {
+        $this->db->insert('pro_companies', $data);
+        $inserted_id = $this->db->insert_id();
+        return $inserted_id;
+	}
+
+	function insertOffer($data) {
+        $this->db->insert('pro_offers', $data);
+        $inserted_id = $this->db->insert_id();
+        return $inserted_id;
+	}
+	
     function get_company_types() {
         
 		$this->db->order_by("company_type","ASC");
 		$this->db->select();
         $query = $this->db->get('pro_company_types');
+		foreach ($query->result() as $row)
+		{
+			$result_back[] = $row;
+		}
+        return $result_back;  
+    }
+
+    function get_offer_types() {
+        
+		$this->db->order_by("offer_type","ASC");
+		$this->db->select();
+        $query = $this->db->get('offer_types');
 		foreach ($query->result() as $row)
 		{
 			$result_back[] = $row;

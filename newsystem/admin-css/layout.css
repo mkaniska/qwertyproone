@@ -1156,3 +1156,47 @@ td.details {
 	background-repeat: no-repeat;
 	background-position: 0 .5em;
 }
+
+#mytable tr, #mytable td{
+	border-width: 0px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #ccc;
+	background-color: #ffffff;
+}
+
+.input_fields {
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    color: #2C2C2C;
+    padding: 7px;
+    width: 230px;
+}
+
+.input_fields_small {
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    color: #2C2C2C;
+    padding: 7px;
+    width: 130px;
+}
+
+.form_label{
+	text-align:right;
+	padding-right:10px;
+}
+
+.buttons {
+	background-color: #A90329;
+    background-image: linear-gradient(to bottom, #A90329, #6D0019);
+    border: 1px solid #72021C;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    display: inline-block;
+    font-family: arial,helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px;
+    text-decoration: none;
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+	}

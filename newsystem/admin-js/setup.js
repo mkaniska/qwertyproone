@@ -506,3 +506,32 @@ function setupLeftMenu() {
 		$('#section-menu .submenu').css('height','auto');
 }
 
+function validCompany() {
+	$("#errorDisplay").html('');
+	var ok = true;
+	if($.trim($("#company_name").val())==''){$("#errorDisplay").html("Please enter the company name");$("#company_name").focus();ok = false;}
+	else if($("#company_type").val()==0){$("#errorDisplay").html("Please select the company type");$("#company_type").focus();ok = false;}
+	else if($.trim($("#contact_person").val())==''){$("#errorDisplay").html("Please enter the contact person Name");$("#contact_person").focus();ok = false;}
+	else if($.trim($("#contact_email").val())==''){$("#errorDisplay").html("Please enter the contact person email");$("#contact_email").focus();ok = false;}
+	else if($.trim($("#company_address").val())==''){$("#errorDisplay").html("Please enter the company address");$("#company_address").focus();ok = false;}
+	else if($("#city").val()==0){$("#errorDisplay").html("Please select the city");$("#city").focus();ok = false;}
+	else if($.trim($("#zipcode").val())==''){$("#errorDisplay").html("Please enter the zipcode");$("#zipcode").focus();ok = false;}
+	else if($.trim($("#state").val())==0){$("#errorDisplay").html("Please select the state");$("#state").focus();ok = false;}
+	else if($.trim($("#phone").val())==''){$("#errorDisplay").html("Please enter the phone number");$("#phone").focus();ok = false;}
+	if(ok==true){	
+		return true;
+	}else { return false; }
+}
+
+function validOffer() {
+	$("#errorDisplay").html('');
+	var ok = true;
+	if($.trim($("#offer_title").val())==''){$("#errorDisplay").html("Please enter the Offer Title");$("#offer_title").focus();ok = false;}
+	else if($("#offer_type").val()==0){$("#errorDisplay").html("Please select the offer type");$("#offer_type").focus();ok = false;}
+	else if($.trim($("#valid_from").val())==''){$("#errorDisplay").html("Please enter the valid from date");$("#valid_from").focus();ok = false;}
+	else if($.trim($("#valid_to").val())==''){$("#errorDisplay").html("Please enter the valid expiry date");$("#valid_to").focus();ok = false;}
+	else if($.trim($("#notes").val())==''){$("#errorDisplay").html("Please enter the notes");$("#notes").focus();ok = false;}
+	if(ok==true){	
+		return true;
+	}else { return false; }
+}
