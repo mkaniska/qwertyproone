@@ -535,3 +535,16 @@ function validOffer() {
 		return true;
 	}else { return false; }
 }
+
+function validSetting() {
+	$("#errorDisplay").html('');
+	var ok = true;
+	if($.trim($("#from_email").val())==''){$("#errorDisplay").html("Please enter the from email address");$("#from_email").focus();ok = false;}
+	else if($("#contact_phone").val()==''){$("#errorDisplay").html("Please enter the contact phone number");$("#contact_phone").focus();ok = false;}
+	else if($.trim($("#contact_person").val())==''){$("#errorDisplay").html("Please enter the contact person name");$("#contact_person").focus();ok = false;}
+	else if($.trim($("#contact_email").val())==''){$("#errorDisplay").html("Please enter the contact email address");$("#contact_email").focus();ok = false;}
+	else if($.trim($("#office_phone").val())==''){$("#errorDisplay").html("Please enter the office phone number");$("#office_phone").focus();ok = false;}
+	if(ok==true){	
+		return true;
+	}else { return false; }
+}

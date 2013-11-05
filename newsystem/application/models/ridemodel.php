@@ -162,14 +162,13 @@ class RideModel extends CI_Model {
 		
 		if($query->num_rows()>0) {
 		
-			foreach ($query->result() as $row)
-			{
+			foreach ($query->result() as $row) {
 				$result_back[] = $row;
 			}			
-		}else{
+		}else {
 			$result_back = array();
 		}
-        //print_r($result_back);exit;
+
 		return $result_back;
     }
 	

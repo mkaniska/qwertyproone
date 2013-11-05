@@ -24,8 +24,8 @@
 				<?php if(count($company_list)>0){foreach($company_list as $out) { ?>
 				<tr style="font-size:11px;">
 					<td><?php echo $out->company_name;?></td>
-					<td><?php echo $out->company_primary_contact_person;?></td>
-					<td><?php echo $out->company_contact_email;?></td>
+					<td><?php echo $out->contact_person;?></td>
+					<td><?php echo $out->contact_email;?></td>
 					<td><?php echo $out->company_address.', '.$out->company_city.', '.$out->company_state.', '.$out->company_zipcode;?></td>
 					<td><?php echo $out->company_phone;?></td>
 					<td><?php echo date("d M 'y",$out->company_added);?></td>
