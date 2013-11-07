@@ -54,6 +54,27 @@ class Admin extends CI_Controller {
 		$this->load->view('admin_layout', $data);
 	}
 
+	public function delete_offer() {
+		$offer_id = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
+		$isDeleted = $this->AdminModel->deleteOffer($offer_id);
+		if($isDeleted) {
+			$this->session->set_flashdata('flash_message', 'Offer Deleted Successfully!');
+		}else {
+			$this->session->set_flashdata('flash_message', 'Error on Deleting Offer!');
+		}
+		redirect('admin/offer_list');
+	}
+	
+	public function assign_company() {
+	
+		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
+		if($this->input->post('editOffer')=='Update') {
+			$inp_data['offer_title'] = $this->input->post('selectedCompanies');
+			$inp_data['offer_type'] = $this->input->post('selectedOffer');
+			$isUpdated = $this->AdminModel->assignCompanyOffer($inp_data, $offer_id);
+		}
+	}
+	
 	public function prcess_updateoffer() {
 	
 		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
@@ -279,7 +300,7 @@ class Admin extends CI_Controller {
 		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
 		$config['uri_segment'] 		= 3;
 		$config['num_links']		= 3;
-		$config['per_page'] 		= 3;
+		$config['per_page'] 		= 5;
 		$config['base_url'] 		= base_url().'admin/ride_list/';
 		$config['use_page_numbers'] = TRUE;
         $config['cur_tag_open'] 	= "<li><span><b>";
@@ -355,7 +376,7 @@ class Admin extends CI_Controller {
 		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
 		$config['uri_segment'] 		= 3;
 		$config['num_links']		= 3;
-		$config['per_page'] 		= 3;
+		$config['per_page'] 		= 5;
 		$config['base_url'] 		= base_url().'admin/offer_list/';
 		$config['use_page_numbers'] = TRUE;
         $config['cur_tag_open'] 	= "<li><span><b>";
@@ -379,6 +400,8 @@ class Admin extends CI_Controller {
 		$data['offer_list'] = $this->AdminModel->get_offers($config["per_page"], $page);
 		$data['title'] = SITE_TITLE." :: List of Offers";
 		
+		$data['company_list'] = $this->AdminModel->get_companies(1, 1, false);
+		
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();
 		
@@ -391,7 +414,7 @@ class Admin extends CI_Controller {
 		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
 		$config['uri_segment'] 		= 3;
 		$config['num_links']		= 3;
-		$config['per_page'] 		= 3;
+		$config['per_page'] 		= 5;
 		$config['base_url'] 		= base_url().'admin/company_list/';
 		$config['use_page_numbers'] = TRUE;
         $config['cur_tag_open'] 	= "<li><span><b>";
@@ -429,7 +452,7 @@ class Admin extends CI_Controller {
 		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
 		$config['uri_segment'] 		= 3;
 		$config['num_links']		= 3;
-		$config['per_page'] 		= 3;
+		$config['per_page'] 		= 5;
 		$config['base_url'] 		= base_url().'admin/user_list/';
 		$config['use_page_numbers'] = TRUE;
         $config['cur_tag_open'] 	= "<li><span><b>";

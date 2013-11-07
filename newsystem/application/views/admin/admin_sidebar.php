@@ -15,12 +15,14 @@
 						<li><a href="<?php echo base_url();?>admin/offer_list">List Offers</a></li>
 					</ul> 
 				</li>
+				<!--
 				<li><a class="menuitem">HR & Controls</a>
 					<ul class="submenu">
 						<li><a href="<?php echo base_url();?>admin/addhruser">Add HR User</a> </li>
 						<li><a href="<?php echo base_url();?>admin/hruser_list">List HR Users</a></li>
 					</ul>
 				</li>
+				-->
 				<li><a class="menuitem">Rides & Commuters</a>
 					<ul class="submenu">
 						<li><a href="<?php echo base_url();?>admin/ride_list">List Rides</a></li>

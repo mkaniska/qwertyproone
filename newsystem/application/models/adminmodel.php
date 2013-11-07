@@ -7,13 +7,13 @@ class AdminModel extends CI_Model {
     }
 
     function get_total_companies() {
-		
 		$this->db->select();
 		$query = $this->db->get('pro_companies');
 		return $query->num_rows();
 	}
 
     function get_total_offers() {
+		$this->db->where('is_deleted', '0');
 		$this->db->select();
 		$query = $this->db->get('pro_offers');
 		return $query->num_rows();
@@ -22,6 +22,7 @@ class AdminModel extends CI_Model {
     function get_offers($cp, $pp) {
         
 		$this->db->order_by("offer_created_on","ASC");
+		$this->db->where('is_deleted', '0');
 		$this->db->join("offer_types","offer_types.offer_type_id=pro_offers.offer_type");
 		$this->db->select('pro_offers.*,offer_types.*');
 		$this->db->limit($cp, $pp);
@@ -44,6 +45,16 @@ class AdminModel extends CI_Model {
 		}
 	}
 
+	function deleteOffer($offerid) {
+		$this->db->where('offer_id', $offerid);
+		$this->db->update('pro_offers', array('is_deleted'=>'1'));
+        if($this->db->affected_rows()>0) {
+			return true;
+		}else {
+			return false;
+		}
+	}	
+	
 	function updateoffer($data,$offerid) {
 		$this->db->where('offer_id', $offerid);
 		$this->db->update('pro_offers', $data);
@@ -146,12 +157,14 @@ class AdminModel extends CI_Model {
         return $result_back;  
     }
 	
-    function get_companies($cp,$pp) {
+    function get_companies($cp,$pp,$onlyLimitted=true) {
 
 		$this->db->order_by("company_added","DESC");
 		$this->db->join("pro_company_types","pro_companies.company_type=pro_company_types.company_type_id");
 		$this->db->select('pro_companies.*,pro_company_types.*');
-        $this->db->limit($cp, $pp);
+        if($onlyLimitted) {
+			$this->db->limit($cp, $pp);
+		}
 		$query = $this->db->get('pro_companies');
 		if($query->num_rows() > 0){
 			foreach ($query->result() as $row)

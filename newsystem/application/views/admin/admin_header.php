@@ -20,15 +20,20 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>admin-css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>admin-css/layout.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>admin-css/nav.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/jquery-ui.css" media="screen" />
     
 	
     <!-- BEGIN: load jquery -->
     
     
+    
     <script src="<?php echo base_url();?>admin-js/jquery-1.6.4.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url();?>admin-js/jquery.ui.core.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url();?>admin-js/jquery.ui.widget.min.js" type="text/javascript"></script>
-    <script src="<?php echo base_url();?>admin-js/jquery.ui.accordion.min.js" type="text/javascript"></script>    
+    <script src="<?php echo base_url();?>admin-js/jquery.ui.accordion.min.js" type="text/javascript"></script>
+	
+    <script src="<?php echo base_url();?>admin-js/jquery-1.9.1.js" type="text/javascript"></script>
+	<script src="<?php echo base_url();?>js/jquery-ui.js" type="text/javascript"></script>    
 	
 	 
 	<?php if($page_name=='admin/addoffer' || $page_name=='admin/edit_offer') { ?>
@@ -65,6 +70,9 @@
 				$('#valid_from').datePicker();
 				$('#valid_to').datePicker();
 			<?php } ?>
+			//$('#listcompany').on('click', function() {
+			//	$( "#dialog" ).dialog();
+			//});
         });
     </script>
 </head>

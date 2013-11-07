@@ -548,3 +548,21 @@ function validSetting() {
 		return true;
 	}else { return false; }
 }
+
+function pickSelectedCompany(offerID) {
+	$('#dialog').dialog();
+	$("#selectedOffer").val(offerID);
+}
+
+function doneSelectCompany(){
+	//get all the checked inputs with name skills
+	var checked = $('input[name="compList[]"]:checked');
+	//number of checked items
+	var checkedlength = checked.length;
+	//an array containing values of all checked inputs
+	var values = checked.map(function(){
+		return this.value
+	}).get();
+	$("#selectedCompanies").val(values);
+	$('.ui-dialog-titlebar-close:visible').click();
+}

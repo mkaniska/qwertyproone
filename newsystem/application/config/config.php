@@ -27,8 +27,7 @@ $config['is_map_page'] = array('user/newride');
 $config['is_email_enabled'] = false;
 
 $config['left_menu_navigation'] = array(array('admin/addcompany','admin/company_list','admin/type_list'),
-										array('admin/addoffer','admin/offer_list'),
-										array('admin/addhruser','admin/hruser_list'),
+										array('admin/addoffer','admin/offer_list','admin/edit_offer'),
 										array('admin/ride_list','admin/user_list'),
 										array('admin/settings')
 										);
