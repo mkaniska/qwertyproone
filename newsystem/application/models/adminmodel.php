@@ -43,6 +43,16 @@ class AdminModel extends CI_Model {
 			return false;
 		}
 	}
+
+	function updateoffer($data,$offerid) {
+		$this->db->where('offer_id', $offerid);
+		$this->db->update('pro_offers', $data);
+        if($this->db->affected_rows()>0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 	
 	function get_this_offer($offer_id) {
 		$this->db->where('offer_id', $offer_id);
@@ -167,12 +177,13 @@ class AdminModel extends CI_Model {
 		}
 		return $result_back;
 	}    
-	
+	/*
 	function insertSingup($data) {
         $this->db->insert($this->table_name, $data);
         $inserted_id = $this->db->insert_id();
         return $inserted_id;
 	}
+	*/
 }
 
 ?>

@@ -33,11 +33,11 @@
 								<tr>
 									<td width="15%" class="form_label"> Valid From</td> 
 									<td width="35%"> 
-									<input value="<?php if($offer->offer_valid_from!='') echo date("m/d/Y",$offer->offer_valid_from);?>" type="text" name="valid_from" id="valid_from" class="input_fields_very_small" /> &nbsp;
+									<input value="<?php if($offer->offer_valid_from!='') echo date("m/d/Y",$offer->offer_valid_from);?>" type="text" name="valid_from" id="valid_from" class="input_fields_very_small" readonly="readonly" /> &nbsp;
 									</td> 
 									<td width="15%" class="form_label"> Valid To</td> 
 									<td width="35%"> 
-									<input value="<?php if($offer->offer_valid_until!='') echo date("m/d/Y",$offer->offer_valid_until);?>" type="text" name="valid_to" id="valid_to" class="input_fields_very_small" /></td>
+									<input value="<?php if($offer->offer_valid_until!='') echo date("m/d/Y",$offer->offer_valid_until);?>" type="text" name="valid_to" id="valid_to" class="input_fields_very_small" readonly="readonly" /></td>
 								</tr>
 								<tr>
 									<td width="15%" class="form_label" valign="top"> Status</td> 
@@ -47,6 +47,7 @@
 									</td>
 									<td width="15%" class="form_label" valign="top"> Notes</td> 
 									<td width="35%"> 
+									<input type="hidden" name="offer_id" id="offer_id" value="<?php echo $offer->offer_id;?>" />
 									<textarea name="notes" id="notes" cols="40" rows="6"><?php if($offer->offer_notes!='') echo $offer->offer_notes;?></textarea>
 									</td> 
 								</tr>

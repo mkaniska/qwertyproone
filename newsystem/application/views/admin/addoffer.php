@@ -32,11 +32,11 @@
 								<tr>
 									<td width="15%" class="form_label"> Valid From</td> 
 									<td width="35%"> 
-									<input type="text" name="valid_from" id="valid_from" class="input_fields_very_small" /> &nbsp;
+									<input type="text" name="valid_from" id="valid_from" class="input_fields_very_small" readonly="readonly" /> &nbsp;
 									</td> 
 									<td width="15%" class="form_label"> Valid To</td> 
 									<td width="35%"> 
-									<input type="text" name="valid_to" id="valid_to" class="input_fields_very_small" /></td>
+									<input type="text" name="valid_to" id="valid_to" class="input_fields_very_small" readonly="readonly" /></td>
 								</tr>
 								<tr>
 									<td width="15%" class="form_label" valign="top"> Status</td> 

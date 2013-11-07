@@ -52,15 +52,19 @@
 			$("#section-menu" ).accordion( "option", "active", <?php echo $tabActive;?>);
 			$('#submitbutton').css('cursor', 'pointer');
 			$('#cancelbutton').css('cursor', 'pointer');
+			<?php if($page_name=='admin/edit_offer') { ?>
+			$("#cancelbutton").click(function() {window.location.href='../home';});
+			<?php }else { ?>
 			$("#cancelbutton").click(function() {window.location.href='home';});
+			<?php } ?>
 			<?php if($page_name=='admin/addoffer') { ?>
 				$('#valid_from').datePicker().val(new Date().asString()).trigger('change');
 				$('#valid_to').datePicker().val(new Date().asString()).trigger('change');
 			<?php } ?>
 			<?php if($page_name=='admin/edit_offer') { ?>
-				$('#valid_from').datePicker().val().trigger('change');
-				$('#valid_to').datePicker().val().trigger('change');
-			<?php } ?>			
+				$('#valid_from').datePicker();
+				$('#valid_to').datePicker();
+			<?php } ?>
         });
     </script>
 </head>

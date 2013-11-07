@@ -53,6 +53,39 @@ class Admin extends CI_Controller {
 		$data['title'] = SITE_TITLE." :: Edit Offer";
 		$this->load->view('admin_layout', $data);
 	}
+
+	public function prcess_updateoffer() {
+	
+		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
+		$offer_id = $this->input->post('offer_id');
+		if($this->input->post('editOffer')=='Update') {
+			
+			$inp_data['offer_title'] 		= $this->input->post('offer_title');
+			$inp_data['offer_type'] 		= $this->input->post('offer_type');
+			$fDates							= explode("/",$this->input->post('valid_from'));
+			$tDates							= explode("/",$this->input->post('valid_to'));
+			$inp_data['offer_valid_from'] 	= strtotime($fDates[2].'-'.$fDates[1].'-'.$fDates[0]);
+			$inp_data['offer_valid_until']	= strtotime($tDates[2].'-'.$tDates[1].'-'.$tDates[0]);
+			$inp_data['offer_notes']		= $this->input->post('notes');
+			$inp_data['offer_created_by'] 	= $this->session->userdata('admin_user_id');
+			$inp_data['offer_status'] 		= $this->input->post('status');
+			$inp_data['offer_modified_on'] 	= time();
+			
+			$isUpdated = $this->AdminModel->updateOffer($inp_data, $offer_id);
+			
+			if($isUpdated) {
+				$this->session->set_flashdata('flash_message', 'Offer Updated Successfully!');
+				redirect('admin/offer_list');
+			}else {
+				$this->session->set_flashdata('flash_message', 'Invalid Details Entered!');
+				//$this->session->set_flashdata('flash_data', $inp_data);
+				redirect('admin/edit_offer/'.$offer_id);
+			}
+		}else {
+			$this->session->set_flashdata('flash_message', 'Invalid Request!');
+			redirect('admin/edit_offer/'.$offer_id);
+		}
+	}
 	
 	public function update_setting() {
 	
@@ -103,8 +136,8 @@ class Admin extends CI_Controller {
 			$inp_data['offer_type'] 		= $this->input->post('offer_type');
 			$fDates							= explode("/",$this->input->post('valid_from'));
 			$tDates							= explode("/",$this->input->post('valid_to'));
-			$inp_data['offer_valid_from'] 	= strtotime($fDates[2].'-'.$fDates[0].'-'.$fDates[1]);
-			$inp_data['offer_valid_until']	= strtotime($tDates[2].'-'.$tDates[0].'-'.$tDates[1]);
+			$inp_data['offer_valid_from'] 	= strtotime($fDates[2].'-'.$fDates[1].'-'.$fDates[0]);
+			$inp_data['offer_valid_until']	= strtotime($tDates[2].'-'.$tDates[1].'-'.$tDates[0]);
 			$inp_data['offer_notes']		= $this->input->post('notes');
 			$inp_data['offer_created_by'] 	= $this->session->userdata('admin_user_id');
 			$inp_data['offer_status'] 		= $this->input->post('status');
