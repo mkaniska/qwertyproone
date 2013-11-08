@@ -19,6 +19,8 @@ $config['base_url']	 = 'http://localhost/qwerty';
 
 define('SITE_TITLE', 'CodeIgniter Sample');
 
+define('SITE_ADMIN_TITLE', 'Administrator');
+
 // Ony for the Below pages we require the Fancy Form JS/Initiation to be loaded.
 $config['form_pages'] = array('user/signup','welcome/contactus','user/newride','welcome/home');
 

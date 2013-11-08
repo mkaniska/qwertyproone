@@ -19,7 +19,7 @@ class Admin extends CI_Controller {
 		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
 		$data['page_name'] = "admin/home";
 		$data['menu'] = "home";
-		$data['title'] = SITE_TITLE." :: Dashboard";
+		$data['title'] = SITE_ADMIN_TITLE." :: Dashboard";
 		$this->load->view('admin_layout', $data);
 	}
 
@@ -28,7 +28,7 @@ class Admin extends CI_Controller {
 		$this->load->model('CommonModel');
 		$data['page_name'] = "admin/login";
 		$data['menu'] = "login";
-		$data['title'] = SITE_TITLE." :: Login";
+		$data['title'] = SITE_ADMIN_TITLE." :: Login";
 		$this->load->view('admin_login_layout', $data);
 	}
 	
@@ -38,7 +38,7 @@ class Admin extends CI_Controller {
 		$rows = $this->AdminModel->get_setting();
 		$data['setting'] = $rows[0];
 		$data['menu'] = "settings";
-		$data['title'] = SITE_TITLE." :: Global Settings";
+		$data['title'] = SITE_ADMIN_TITLE." :: Global Settings";
 		$this->load->view('admin_layout', $data);
 	}
 
@@ -50,7 +50,7 @@ class Admin extends CI_Controller {
 		$data['offer_types'] = $this->AdminModel->get_offer_types();
 		$data['offer'] = $rows[0];
 		$data['menu'] = "edit_offer";
-		$data['title'] = SITE_TITLE." :: Edit Offer";
+		$data['title'] = SITE_ADMIN_TITLE." :: Edit Offer";
 		$this->load->view('admin_layout', $data);
 	}
 
@@ -68,11 +68,35 @@ class Admin extends CI_Controller {
 	public function assign_company() {
 	
 		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
-		if($this->input->post('editOffer')=='Update') {
-			$inp_data['offer_title'] = $this->input->post('selectedCompanies');
-			$inp_data['offer_type'] = $this->input->post('selectedOffer');
-			$isUpdated = $this->AdminModel->assignCompanyOffer($inp_data, $offer_id);
+		if(1) {
+			$inp_data['company_ids'] = $this->input->post('selectedCompanies');
+			$offer_id = $inp_data['offer_id'] = $this->input->post('selectedOffer');
+			$isDone = $this->AdminModel->assignCompanyOffer($inp_data, $offer_id);
+			if($isDone){
+				$this->session->set_flashdata('flash_message', 'Offer Assigned Successfully!');
+				redirect('admin/offer_list');
+			}else {
+				$this->session->set_flashdata('flash_message', 'Error On Offer Assignment!');
+				redirect('admin/offer_list');
+			}
+		}else{
+			$this->session->set_flashdata('flash_message', 'Invalid Request!');
+			redirect('admin/offer_list');
 		}
+	}
+
+	public function select_company() {
+	
+		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
+		$offer_id = $this->input->post('offer_id');
+		$data['company_list']  = $this->AdminModel->get_companies(1, 1, false);
+		$assigned = $this->AdminModel->get_companies_assigned($offer_id);
+		$data['list_string'] = $assigned;
+		$data['assigned_list'] = explode(",", $assigned);
+		$data['offer_id'] = $offer_id;
+		$data['page_name'] = "admin/ajax_company_list";
+		echo $this->load->view('ajax_layout', $data, true);
+		exit;
 	}
 	
 	public function prcess_updateoffer() {
@@ -143,7 +167,7 @@ class Admin extends CI_Controller {
 		$data['page_name'] = "admin/addoffer";
 		$data['offer_types'] = $this->AdminModel->get_offer_types();
 		$data['menu'] = "addoffer";
-		$data['title'] = SITE_TITLE." :: Add Offer";
+		$data['title'] = SITE_ADMIN_TITLE." :: Add Offer";
 		$this->load->view('admin_layout', $data);
 	}
 
@@ -187,7 +211,7 @@ class Admin extends CI_Controller {
 		$data['state_list'] = $this->CommonModel->states_list();
 		$data['company_types'] = $this->AdminModel->get_company_types();
 		$data['menu'] = "addcompany";
-		$data['title'] = SITE_TITLE." :: Add Company";
+		$data['title'] = SITE_ADMIN_TITLE." :: Add Company";
 		$this->load->view('admin_layout', $data);
 	}
 
@@ -237,7 +261,7 @@ class Admin extends CI_Controller {
 		$this->load->model('CommonModel');
 		$data['page_name'] = "admin/getpassword";
 		$data['menu'] = "getpassword";
-		$data['title'] = SITE_TITLE." :: Retrive Password";
+		$data['title'] = SITE_ADMIN_TITLE." :: Retrive Password";
 		$this->load->view('admin_layout', $data);
 	}
 	
@@ -322,7 +346,7 @@ class Admin extends CI_Controller {
 		$data['page_name'] = "admin/ride_list";
 		$data['menu'] = "ride_list";		
 		$data['ride_list'] = $this->RideModel->get_rides_posted($config["per_page"], $page, false, true);
-		$data['title'] = SITE_TITLE." :: List of Rides";
+		$data['title'] = SITE_ADMIN_TITLE." :: List of Rides";
 		
 		//$config['page_query_string'] = TRUE;
 		
@@ -362,7 +386,7 @@ class Admin extends CI_Controller {
 		$data['page_name'] = "admin/type_list";
 		$data['menu'] = "type_list";		
 		$data['type_list'] = $this->AdminModel->list_company_types($config["per_page"], $page);
-		$data['title'] = SITE_TITLE." :: List of Industry Types";
+		$data['title'] = SITE_ADMIN_TITLE." :: List of Industry Types";
 		
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();
@@ -398,7 +422,7 @@ class Admin extends CI_Controller {
 		$data['page_name'] = "admin/offer_list";
 		$data['menu'] = "offer_list";		
 		$data['offer_list'] = $this->AdminModel->get_offers($config["per_page"], $page);
-		$data['title'] = SITE_TITLE." :: List of Offers";
+		$data['title'] = SITE_ADMIN_TITLE." :: List of Offers";
 		
 		$data['company_list'] = $this->AdminModel->get_companies(1, 1, false);
 		
@@ -436,7 +460,7 @@ class Admin extends CI_Controller {
 		$data['page_name'] = "admin/company_list";
 		$data['menu'] = "company_list";		
 		$data['company_list'] = $this->AdminModel->get_companies($config["per_page"], $page);
-		$data['title'] = SITE_TITLE." :: List of Companies";
+		$data['title'] = SITE_ADMIN_TITLE." :: List of Companies";
 		
 		//$config['page_query_string'] = TRUE;
 		
@@ -474,7 +498,7 @@ class Admin extends CI_Controller {
 		$data['page_name'] = "admin/user_list";
 		$data['menu'] = "user_list";		
 		$data['user_list'] = $this->UserModel->get_users_registered($config["per_page"], $page);
-		$data['title'] = SITE_TITLE." :: List of Users";
+		$data['title'] = SITE_ADMIN_TITLE." :: List of Users";
 		
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();

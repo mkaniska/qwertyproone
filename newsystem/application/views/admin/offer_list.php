@@ -31,7 +31,7 @@
 					<td><?php echo date("d M 'y",$out->offer_created_on);?></td>
 					<td> &nbsp; &nbsp;
 						<a href="javascript:pickSelectedCompany(<?php echo $out->offer_id;?>);" id="listcompany" title="Assign Company" alt="Assign Company">
-							<img src="<?php echo base_url();?>admin-images/pluse.png" />
+							<img src="<?php echo base_url();?>admin-images/add_org.png" />
 						</a> &nbsp; &nbsp; 
 						<a href="<?php echo base_url();?>admin/edit_offer/<?php echo $out->offer_id;?>" title="Edit" alt="Edit">
 							<img src="<?php echo base_url();?>images/edit.png" />
@@ -55,27 +55,5 @@
 	</div>
 </div>
 <div id="dialog" title="Select the Company" style="width:200px;height:400px;overflow:auto;display:none;">
-	<form method="post" name="selectCompany" action="<?php echo base_url();?>admin/assign_company">
-		<table width="90%" border="0">
-			<tr>
-				<td width="15%"> </td>
-				<td width="85%"> </td>
-			</tr>
-			<?php foreach($company_list as $out) { ?>
-			<tr style="font-size:11px;">
-				<td>
-					<input type="checkbox" name="compList[]" value="<?php echo $out->company_id;?>" /> 
-				</td>
-				<td><?php echo $out->company_name;?></td>
-			</tr>
-			<?php } ?>
-			<tr>
-				<td colspan="2" align="center"> <input type="button" class="buttons" value="Done" onclick="javascript:doneSelectCompany();" /> 
-				<input type="hidden" name="selectedCompanies" id="selectedCompanies" value=""  />
-				<input type="hidden" name="selectedOffer" id="selectedOffer" value=""  />
-				</td>
-			</tr>		
-		</table>
-	</form>
 </div>
 <div class="clear"></div>

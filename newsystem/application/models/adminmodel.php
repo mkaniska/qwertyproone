@@ -23,8 +23,8 @@ class AdminModel extends CI_Model {
         
 		$this->db->order_by("offer_created_on","ASC");
 		$this->db->where('is_deleted', '0');
-		$this->db->join("offer_types","offer_types.offer_type_id=pro_offers.offer_type");
-		$this->db->select('pro_offers.*,offer_types.*');
+		$this->db->join("pro_offer_types","pro_offer_types.offer_type_id=pro_offers.offer_type");
+		$this->db->select('pro_offers.*,pro_offer_types.*');
 		$this->db->limit($cp, $pp);
         $query = $this->db->get('pro_offers');
 		$result_back = array();
@@ -92,6 +92,30 @@ class AdminModel extends CI_Model {
         return $inserted_id;
 	}
 
+	function insertAssignment($data) {
+		$this->db->insert('pro_companies_offers', $data);
+		$inserted_id = $this->db->insert_id();
+		if($inserted_id>0){return true;}else{return false;}
+	}
+
+	function updateAssignment($data, $offer_id) {
+		$this->db->where('offer_id', $offer_id);
+		$this->db->update('pro_companies_offers', $data);
+		return true;
+	}
+	
+	function assignCompanyOffer($data, $offer_id) {
+	
+		$this->db->where('offer_id', $offer_id);
+		$this->db->select();
+		$query = $this->db->get('pro_companies_offers');
+		if($query->num_rows()>0) {
+			return $this->updateAssignment($data, $offer_id);
+		}else{
+			return $this->insertAssignment($data);
+		}
+	}
+
 	function insertOffer($data) {
         $this->db->insert('pro_offers', $data);
         $inserted_id = $this->db->insert_id();
@@ -138,7 +162,7 @@ class AdminModel extends CI_Model {
         
 		$this->db->order_by("offer_type","ASC");
 		$this->db->select();
-        $query = $this->db->get('offer_types');
+        $query = $this->db->get('pro_offer_types');
 		foreach ($query->result() as $row)
 		{
 			$result_back[] = $row;
@@ -176,6 +200,19 @@ class AdminModel extends CI_Model {
 			return array();
 		}
     }
+
+    function get_companies_assigned($offer_id) {
+	
+		$this->db->where('offer_id',$offer_id);
+		$this->db->select('company_ids');
+		$query = $this->db->get('pro_companies_offers');
+		if($query->num_rows() > 0) {
+			$row = $query->result();
+			return $row[0]->company_ids;
+		}else {
+			return '';
+		}
+    }
 	
 	function get_recent_joinees() {
 	
@@ -190,13 +227,6 @@ class AdminModel extends CI_Model {
 		}
 		return $result_back;
 	}    
-	/*
-	function insertSingup($data) {
-        $this->db->insert($this->table_name, $data);
-        $inserted_id = $this->db->insert_id();
-        return $inserted_id;
-	}
-	*/
 }
 
 ?>

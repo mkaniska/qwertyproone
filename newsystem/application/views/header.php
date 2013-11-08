@@ -29,8 +29,8 @@
 $(function(){
 	$( "#tabs" ).tabs({
 						beforeActivate: function(event, ui){
-							if(ui.newTab.find("a").attr("href")=='#tabs-2'){ /*checkStepOneValidation(); */}
-							else if(ui.newTab.find("a").attr("href")=='#tabs-3'){ /*checkStepTwoValidation(); */}
+							if(ui.newTab.find("a").attr("href")=='#tabs-2'){  }
+							else if(ui.newTab.find("a").attr("href")=='#tabs-3'){  }
 						}
 					});
 	$( "#tabs" ).tabs( "option", "disabled", [ 1,2 ] );
@@ -50,7 +50,7 @@ ddsmoothmenu.init({
 	mainmenuid: "website_menu", //menu DIV id
 	orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
 	classname: 'ddsmoothmenu', //class added to menu's outer DIV
-	//customtheme: ["#1c5a80", "#18374a"],
+	//customtheme: [ "#18374a","#1c5a80"],
 	contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
 });
 </script>

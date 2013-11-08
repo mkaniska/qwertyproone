@@ -469,26 +469,6 @@ function setupAccordion(containerElement) {
     $("#" + containerElement).accordion();
 }
 
-//setup radios and checkboxes
-//function setupGrumbleToolTip(elementid) {
-//    initializeGrumble(elementid);
-//    $('#' + elementid).focus(function () {
-//        initializeGrumble(elementid);
-//    });
-//}
-
-//function initializeGrumble(elementid) {
-//    $('#' + elementid).grumble(
-//	{
-//	    text: 'Whoaaa, this is a lot of text that i couldn\'t predict',
-//	    angle: 85,
-//	    distance: 50,
-//	    showAfter: 1000,
-//	    hideAfter: 2000
-//	}
-//);
-//}
-
 //setup left menu
 
 function setupLeftMenu() {
@@ -550,8 +530,23 @@ function validSetting() {
 }
 
 function pickSelectedCompany(offerID) {
-	$('#dialog').dialog();
+	
 	$("#selectedOffer").val(offerID);
+	if(offerID>0) {
+		 $.ajax({
+			  type: 'POST',
+			  url: 'select_company',
+			  beforeSend: function(){ },
+			  data: 'offer_id='+offerID,
+			  dataType: "text",
+			  success: function(resultData) {
+					$("#dialog").html(resultData);
+					$('#dialog').dialog();
+			  }
+		});
+	}else {
+		alert("Invalid Request!");
+	}
 }
 
 function doneSelectCompany(){
@@ -565,4 +560,5 @@ function doneSelectCompany(){
 	}).get();
 	$("#selectedCompanies").val(values);
 	$('.ui-dialog-titlebar-close:visible').click();
+	$('#selectCompany').submit();
 }
