@@ -15,6 +15,55 @@ class Admin extends CI_Controller {
 		redirect('admin/home');
 	}	
 
+	public function fileuploadtest(){
+		if($this->input->post('doupload')=='Upload'){
+			
+			/*
+			// File uploading here
+			$fconfig['upload_path'] = '../offer_pictures/';
+			$fconfig['allowed_types'] = 'gif|jpg|png|GIF|JPG|JPEG|PNG';
+			$fconfig['max_size']	= '1000';
+			$fconfig['max_width']  = '1024';
+			$fconfig['max_height']  = '1024';
+			$fconfig['remove_spaces']  = TRUE;
+            $fconfig['upload_url'] = base_url()."offer_pictures/";			
+			$ext = end(explode('.', $_FILES['userfile']['name']));
+			//$findExt = explode(basename($this->input->post('userfile')));
+			//$filename = 'mypic.gif';
+			//$ext = pathinfo($filename, PATHINFO_EXTENSION);
+			$fconfig['file_name']  = time().'.'.$ext;
+			$this->load->library('upload', $fconfig);
+			if ( ! $this->upload->do_upload()){
+				echo 'Error';
+			} else{
+				echo 'Success';
+			}			
+			*/
+			//$this->load->helper(array('form', 'url'));
+            $config = array();
+            $config['upload_path'] = dirname($_SERVER["SCRIPT_FILENAME"])."/uploads/";
+            $config['upload_path'] = base_url()."uploads/";
+            $config['allowed_types'] = 'gif|jpg|png|JPG|JPEG|PNG|GIF';
+            $config['max_size'] = '100';
+            $config['max_width'] = '1024';
+            $config['max_height'] = '768';
+            $config['max_filename'] = '1000';
+            //$config['file_name'] = 'x.png';
+
+            $this->load->library('upload',$config);
+			$this->upload->initialize($config);
+            if ($this->upload->do_upload()) {
+                echo $datas['message'] = $this->upload->data();                       
+            } else {
+                echo $datas['error'] = $this->upload->display_errors();                
+            }
+		}
+		$data['page_name'] = "admin/testupload";
+		$data['menu'] = "home";
+		$data['title'] = SITE_ADMIN_TITLE." :: Dashboard";		
+		$this->load->view('admin_layout', $data);
+	}
+	
 	public function home() {
 		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
 		$data['page_name'] = "admin/home";
@@ -69,10 +118,63 @@ class Admin extends CI_Controller {
 	
 		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
 		if(1) {
-			$inp_data['company_ids'] = $this->input->post('selectedCompanies');
+			$comp_ids = $inp_data['company_ids'] = $this->input->post('selectedCompanies');
 			$offer_id = $inp_data['offer_id'] = $this->input->post('selectedOffer');
-			$isDone = $this->AdminModel->assignCompanyOffer($inp_data, $offer_id);
-			if($isDone){
+			//$isDone = $this->AdminModel->assignCompanyOffer($inp_data, $offer_id);
+			$isThere = $this->AdminModel->isThisOfferAssigned($inp_data, $offer_id);
+			
+			if($isThere) {
+				$isDone = $this->AdminModel->updateAssignment($inp_data, $offer_id);
+			}else {
+			
+				$isDone = $this->AdminModel->insertAssignment($inp_data, $offer_id);
+				$company_info = $this->AdminModel->getTheseCompanyDetails($comp_ids);
+				$offers_info  = $this->AdminModel->get_this_offer($offer_id);
+
+				$mconfig['protocol'] = 'mail';
+				$mconfig['wordwrap'] = FALSE;
+				$mconfig['mailtype'] = 'html';
+				$mconfig['charset'] = 'utf-8';
+				$mconfig['crlf'] = "\r\n";
+				$mconfig['newline'] = "\r\n";
+				$this->load->library('email',$mconfig);
+
+				
+				foreach($company_info as $row) {
+					$this->email->from('admin@ideasdiary.com', 'Murugesan P');
+					$this->email->to($row['contact_email']);
+					$this->email->subject('Commute Easy: New Offer Posted!');
+					
+					$tmp_str ="Offer Title : ".$offers_info['offer_name']." <br />";
+					$tmp_str.= "Offer Type : ".$offers_info['OType']." <br />";
+					$tmp_str.= "Offer Provider : ".$offers_info['offer_provider']." <br />";
+					$tmp_str.= "Offer Provider Address : ".$offers_info['provider_address']." <br />";
+					$tmp_str.= "Contact Person : ".$offers_info['contact_person']." <br />";
+					$tmp_str.= "Contact Phone Type : ".$offers_info['contact_phone']." <br />";
+					$tmp_str.= "Contact Email : ".$offers_info['contact_email']." <br />";
+					$tmp_str.= "Minimum Purchase Price : ".$offers_info['minimum_purchase_amount']." <br />";
+					$tmp_str.= "Minimum Purchase Quantity : ".$offers_info['minimum_purchase_quantity']." <br />";
+					$tmp_str.= "Offer Percentage : ".$offers_info['offer_percentage']." <br />";
+					$tmp_str.= "Offer Amount : ".$offers_info['offer_amount']." <br />";
+					$tmp_str.= "Offer Type : ".$offers_info['conditions_apply']." <br />";
+					$tmp_str.= "Offer Notes : ".$offers_info['offer_notes']." <br />";
+					$tmp_str.= "Valid From : ".date("d M 'y",$offers_info['offer_valid_from'])." <br />";
+					$tmp_str.= "Valid Upto : ".date("d M 'y",$offers_info['offer_valid_until'])." <br />";
+					
+					$mail_data['ItemDetails'] = $tmp_str;
+					
+					$mail_data['HelloTo'] 		= $row['contact_person'];
+					
+					$mail_template = $this->load->view('new_offer_template', $mail_data, true);
+					
+					if($this->config->item('is_email_enabled')) {
+						$this->email->message($mail_template);
+						$this->email->send();				
+					}
+				}
+			}
+			
+			if($isDone) {
 				$this->session->set_flashdata('flash_message', 'Offer Assigned Successfully!');
 				redirect('admin/offer_list');
 			}else {
@@ -98,6 +200,18 @@ class Admin extends CI_Controller {
 		echo $this->load->view('ajax_layout', $data, true);
 		exit;
 	}
+
+	public function selected_companies() {
+	
+		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
+		$offer_id = $this->input->post('offer_id');
+		$data['company_list']  = $this->AdminModel->get_companies(1, 1, false);
+		$assigned = $this->AdminModel->get_companies_assigned($offer_id);
+		$data['company_list'] = $this->AdminModel->getTheseCompanyDetails($assigned);
+		$data['page_name'] = "admin/selected_company_list";
+		echo $this->load->view('ajax_layout', $data, true);
+		exit;
+	}
 	
 	public function prcess_updateoffer() {
 	
@@ -113,8 +227,20 @@ class Admin extends CI_Controller {
 			$inp_data['offer_valid_until']	= strtotime($tDates[2].'-'.$tDates[1].'-'.$tDates[0]);
 			$inp_data['offer_notes']		= $this->input->post('notes');
 			$inp_data['offer_created_by'] 	= $this->session->userdata('admin_user_id');
-			$inp_data['offer_status'] 		= $this->input->post('status');
+			$inp_data['offer_status'] 		= 1;//$this->input->post('status');
 			$inp_data['offer_modified_on'] 	= time();
+			
+			$inp_data['offer_provider'] 			= $this->input->post('offer_provider');
+			$inp_data['provider_address'] 			= $this->input->post('provider_address');
+			$inp_data['contact_person'] 			= $this->input->post('contact_person');
+			$inp_data['contact_phone'] 				= $this->input->post('contact_phone');
+			$inp_data['contact_email'] 				= $this->input->post('contact_email');
+			$inp_data['offer_picture'] 				= $this->input->post('offer_picture');
+			$inp_data['minimum_purchase_amount'] 	= $this->input->post('minimum_purchase_amount');
+			$inp_data['minimum_purchase_quantity'] 	= $this->input->post('minimum_purchase_quantity');
+			$inp_data['offer_percentage'] 			= $this->input->post('offer_percentage');
+			$inp_data['offer_amount'] 				= $this->input->post('offer_amount');
+			$inp_data['conditions_apply'] 			= $this->input->post('conditions_apply');
 			
 			$isUpdated = $this->AdminModel->updateOffer($inp_data, $offer_id);
 			
@@ -123,7 +249,6 @@ class Admin extends CI_Controller {
 				redirect('admin/offer_list');
 			}else {
 				$this->session->set_flashdata('flash_message', 'Invalid Details Entered!');
-				//$this->session->set_flashdata('flash_data', $inp_data);
 				redirect('admin/edit_offer/'.$offer_id);
 			}
 		}else {
@@ -185,8 +310,48 @@ class Admin extends CI_Controller {
 			$inp_data['offer_valid_until']	= strtotime($tDates[2].'-'.$tDates[1].'-'.$tDates[0]);
 			$inp_data['offer_notes']		= $this->input->post('notes');
 			$inp_data['offer_created_by'] 	= $this->session->userdata('admin_user_id');
-			$inp_data['offer_status'] 		= $this->input->post('status');
+			$inp_data['offer_status'] 		= 1;//$this->input->post('status');
 			$inp_data['offer_created_on'] 	= time();
+			
+			$inp_data['offer_provider'] 			= $this->input->post('offer_provider');
+			$inp_data['provider_address'] 			= $this->input->post('provider_address');
+			$inp_data['contact_person'] 			= $this->input->post('contact_person');
+			$inp_data['contact_phone'] 				= $this->input->post('contact_phone');
+			$inp_data['contact_email'] 				= $this->input->post('contact_email');
+			
+			$inp_data['minimum_purchase_amount'] 	= $this->input->post('minimum_purchase_amount');
+			$inp_data['minimum_purchase_quantity'] 	= $this->input->post('minimum_purchase_quantity');
+			$inp_data['offer_percentage'] 			= $this->input->post('offer_percentage');
+			$inp_data['offer_amount'] 				= $this->input->post('offer_amount');
+			$inp_data['conditions_apply'] 			= $this->input->post('conditions_apply');
+			
+			/*
+			// File uploading here
+			$fconfig['upload_path'] = '../offer_pictures/';
+			$fconfig['allowed_types'] = 'gif|jpg|png|GIF|JPG|JPEG|PNG';
+			$fconfig['max_size']	= '1000';
+			$fconfig['max_width']  = '1024';
+			$fconfig['max_height']  = '1024';
+			$fconfig['remove_spaces']  = TRUE;            
+			
+            $fconfig['upload_url'] = base_url()."offer_pictures/";			
+			$ext = end(explode('.', $_FILES['userfile']['name']));
+			//$findExt = explode(basename($this->input->post('userfile')));
+			//$filename = 'mypic.gif';
+			//$ext = pathinfo($filename, PATHINFO_EXTENSION);
+			$fconfig['file_name']  = time().'.'.$ext;
+			$this->load->library('upload', $fconfig);
+			if ( ! $this->upload->do_upload()){
+				$this->session->set_flashdata('flash_message', 'Invalid Picture Uploaded!');
+				$this->session->set_flashdata('flash_data', $inp_data);
+				redirect('admin/addoffer');
+			} else{
+				$inp_data['offer_picture'] = $fconfig['upload_path'].$fconfig['file_name'];
+			}
+			// File upload completed 
+			*/
+			
+			$inp_data['offer_picture'] = '';
 			
 			$isValidOfferID = $this->AdminModel->insertOffer($inp_data);
 			
@@ -356,6 +521,43 @@ class Admin extends CI_Controller {
 		$this->load->view('admin_layout', $data);
 	}
 
+	public function offertype_list() {
+	
+		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
+		$this->load->library('pagination');		
+		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
+		$config['uri_segment'] 		= 3;
+		$config['num_links']		= 3;
+		$config['per_page'] 		= 15;
+		$config['base_url'] 		= base_url().'admin/offertype_list/';
+		$config['use_page_numbers'] = TRUE;
+        $config['cur_tag_open'] 	= "<li><span><b>";
+        $config['cur_tag_close'] 	= "</b></span></li>";
+		$config['full_tag_open'] 	= '<ul>';
+		$config['full_tag_close'] 	= '</ul>';
+		$config['num_tag_open'] 	= '<li>';
+		$config['num_tag_close'] 	= '</li>';
+		$config['first_link'] 		= 'First';
+		$config['last_link'] 		= 'Last';
+		$config['prev_link'] 		= 'Prev';
+		$config['next_link'] 		= 'Next';
+		$config['first_tag_open'] 	= $config['last_tag_open'] = $config['next_tag_open'] = $config['prev_tag_open'] = '<li>';
+        $config['first_tag_close'] 	= $config['last_tag_close'] = $config['next_tag_close'] = $config['prev_tag_close'] = '</li>';
+
+		$config['total_rows'] 		= $this->AdminModel->get_total_offer_types();
+		
+		$data['total']     = $config['total_rows'];
+		$data['page_name'] = "admin/offertype_list";
+		$data['menu'] = "offertype_list";		
+		$data['offertype_list'] = $this->AdminModel->list_offer_types($config["per_page"], $page);
+		$data['title'] = SITE_ADMIN_TITLE." :: List of Offer Types";
+		
+		$this->pagination->initialize($config); 
+		$data['pagelink'] = $this->pagination->create_links();
+		
+		$this->load->view('admin_layout', $data);
+	}
+	
 	
 	public function type_list() {
 	
@@ -505,6 +707,50 @@ class Admin extends CI_Controller {
 		
 		$this->load->view('admin_layout', $data);
 	}
+	
+	public function company_details(){
+	
+		$company_id = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
+		if($company_id>0) {
+			$selection = array('selected_company' => $company_id);
+			$this->session->set_userdata($selection);
+		}else {
+			$company_id = $this->session->userdata('selected_company');
+		}
+		
+		$data['company_info'] = $this->AdminModel->getTheseCompanyDetails($company_id,false);
+		
+		$data['page_name'] = "admin/company_details";
+		$data['menu'] = "company_details";
+		
+		$this->load->library('pagination');		
+		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
+		$config['uri_segment'] 		= 3;
+		$config['num_links']		= 3;
+		$config['per_page'] 		= 5;
+		$config['base_url'] 		= base_url().'admin/company_details/';
+		$config['use_page_numbers'] = TRUE;
+        $config['cur_tag_open'] 	= "<li><span><b>";
+        $config['cur_tag_close'] 	= "</b></span></li>";
+		$config['full_tag_open'] 	= '<ul>';
+		$config['full_tag_close'] 	= '</ul>';
+		$config['num_tag_open'] 	= '<li>';
+		$config['num_tag_close'] 	= '</li>';
+		$config['first_link'] 		= 'First';
+		$config['last_link'] 		= 'Last';
+		$config['prev_link'] 		= 'Prev';
+		$config['next_link'] 		= 'Next';
+		$config['first_tag_open'] 	= $config['last_tag_open'] = $config['next_tag_open'] = $config['prev_tag_open'] = '<li>';
+        $config['first_tag_close'] 	= $config['last_tag_close'] = $config['next_tag_close'] = $config['prev_tag_close'] = '</li>';		
+		
+		$config['total_rows'] 		= $this->AdminModel->get_total_hrusers($company_id);		
+		
+		$data['total']     = $config['total_rows'];
+		$data['title'] = SITE_ADMIN_TITLE." :: Details of Company & List of HR";
+		$data['user_list'] = $this->AdminModel->getThisCompanyUsers($config["per_page"], $page, $company_id);
+		$this->load->view('admin_layout', $data);
+	}
+	
 }
 
 /* End of file admin.php */

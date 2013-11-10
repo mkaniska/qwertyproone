@@ -70,20 +70,25 @@ class Ride extends CI_Controller {
 			
 			if($isUpdated) {
 
-				$this->load->library('email');
-				$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
-				$this->email->to('murugdev.eee@gmail.com');
+				$mconfig['protocol'] = 'mail';
+				$mconfig['wordwrap'] = FALSE;
+				$mconfig['mailtype'] = 'html';
+				$mconfig['charset'] = 'utf-8';
+				$mconfig['crlf'] = "\r\n";
+				$mconfig['newline'] = "\r\n";
+				$this->load->library('email',$mconfig);
+				$this->email->from('admin@ideasdiary.com', 'Murugesan P');
+				//$this->email->to('murugdev.eee@gmail.com');
+				$this->email->to($requested_user_details->pro_user_email);
 				$this->email->subject('Commute Easy: Join Request '.$finalStatus.' !');
 				
 				// Constructing Ride Details Email Notification
+
+				$email_data['HelloTo'] 			= $requested_user_details->pro_user_full_name;
+				$email_data['byUser'] 			= $owner_user_details->pro_user_full_name;				
+				$email_data['Status'] 			= $finalStatus;
 				
-				$email_data['PAGE_TITLE'] 		= 'Email Notification';
-				$email_data['PAGE_HEADING'] 	= 'Update Notification on Join Request !';
-				$email_data['ADDRESS_TO'] 		= "Hello ".$requested_user_details->pro_user_full_name;
-				$email_data['ADDRESS_CONTENT'] 	= "Your Join Request has been $finalStatus by ".$owner_user_details->pro_user_full_name." !..";
-				$email_data['SUCCESS_HEADER'] 	= 'Message/Note :';
-				$email_data['SUCCESS_TEXT'] 	= 'Please contact admin or '.$owner_user_details->pro_user_full_name.' if in case you have any other queries/clarifications.!';
-				$email_template = $this->load->view('join_request_email', $email_data, true);				
+				$email_template = $this->load->view('join_request_reply_email', $email_data, true);				
 			
 				if($this->config->item('is_email_enabled')) {
 					$this->email->message($email_template);
@@ -277,22 +282,25 @@ class Ride extends CI_Controller {
 			
 				// Sending Email Activation Link
 				
-				$this->load->library('email');
+				$mconfig['protocol'] = 'mail';
+				$mconfig['wordwrap'] = FALSE;
+				$mconfig['mailtype'] = 'html';
+				$mconfig['charset'] = 'utf-8';
+				$mconfig['crlf'] = "\r\n";
+				$mconfig['newline'] = "\r\n";
+				$this->load->library('email',$mconfig);
 
-				$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
-				$this->email->to('murugdev.eee@gmail.com');
+
+				$this->email->from('admin@ideasdiary.com', 'Murugesan P');
+				//$this->email->to('murugdev.eee@gmail.com');
+				$this->email->to($user_data['pro_user_email']);
 				$this->email->subject('Commute Easy: Registration Email Activation');
 				
-				$email_data['PAGE_TITLE'] 		= 'Email Notification';
-				$email_data['PAGE_HEADING'] 	= 'Registration Confirmation & Email Account Activation !';
-				$email_data['ADDRESS_TO'] 		= "Hello ".$user_data['pro_user_full_name'];
-				$email_data['ADDRESS_CONTENT'] 	= 'Thanks for joining us !..';
-				$email_data['SUCCESS_HEADER'] 	= 'Activate Email';
-				$email_data['SUCCESS_TEXT'] 	= 'Please contact admin if in case you have any other queries/clarifications.!';
-				$email_data['LINK_LABEL'] 		= 'Our Website Link';
-				$email_data['LINK_URL'] 		= 'http://mail.yahoo.com';
-				$email_data['USER_NAME'] 		= 'murugesanme@gmail.com';
-				$email_data['PASS_WORD'] 		= 'Ade453H';
+				$email_data['HelloTo'] 			= "Hello ".$user_data['pro_user_full_name'];
+				$email_data['activateLink'] 	= 'http://mail.yahoo.com';
+				$email_data['userName'] 		= 'murugesanme@gmail.com';
+				$email_data['passWord'] 		= 'Ade453H';
+				$email_data['url'] 				= base_url();
 				
 				$email_template = $this->load->view('signup_email_template', $email_data, true);				
 				
@@ -301,32 +309,28 @@ class Ride extends CI_Controller {
 					$this->email->send();				
 				}
 
-				$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
-				$this->email->to('murugdev.eee@gmail.com');
+				$this->email->from('admin@ideasdiary.com', 'Murugesan P');
+				//$this->email->to('murugdev.eee@gmail.com');
+				$this->email->to($user_data['pro_user_email']);
 				$this->email->subject('Commute Easy: Posted Ride Details');
 
-				$mail_data['PAGE_TITLE'] 		= 'Email Notification';
-				$mail_data['PAGE_HEADING'] 		= 'Posted Ride Details !';
-				$mail_data['ADDRESS_TO'] 		= "Hello ".$user_data['pro_user_full_name'];
+				$mail_data['HelloTo'] 		= $user_data['pro_user_full_name'];
 				
-				$mail_data['ADDRESS_CONTENT'] 	= 'You have posted the Ride Details successfully ! Following are the details posted by you. You can review & change it anytime after you logged into the application.!';
-				
-				$mail_data['SUCCESS_HEADER'] 	= 'Ride Details';
-
-				$tmp_str = "City : ".$ride_data['passenger_city'].", <br />";
-				$tmp_str.= "Start Time : ".$ride_data['start_time'].", <br />";
-				$tmp_str.= "Return Time : ".$ride_data['return_time'].", <br />";
-				$tmp_str.= "Origin Location : ".$ride_data['origin_location'].", <br />";
-				$tmp_str.= "Destination Location : ".$ride_data['destination_location'].", <br />";
-				$tmp_str.= "Travel As : ".$ride_data['travel_as'].", <br />";
+				$tmp_str = "City : ".$ride_data['passenger_city']." <br />";
+				$tmp_str.= "Start Time : ".$ride_data['start_time']." <br />";
+				$tmp_str.= "Return Time : ".$ride_data['return_time']." <br />";
+				$tmp_str.= "Origin Location : ".$ride_data['origin_location']." <br />";
+				$tmp_str.= "Destination Location : ".$ride_data['destination_location']." <br />";
+				$tmp_str.= "Travel As : ".ucfirst($ride_data['travel_as'])." <br />";
 				
 				if($ride_data['travel_as']=='driver'){
-					$tmp_str.= "Vehicle Type : ".$ride_data['vehicle_type'].", <br />";	
-					$tmp_str.= "Model Type : ".$ride_data['model_type'].", <br />";	
-					$tmp_str.= "Fuel Type : ".$ride_data['fuel_type'].", <br />";
+					$tmp_str.= "Vehicle Type : ".$ride_data['vehicle_type']." <br />";	
+					$tmp_str.= "Model Type : ".$ride_data['model_type']." <br />";	
+					$tmp_str.= "Fuel Type : ".$ride_data['fuel_type']." <br />";
 				}
 				
-				$mail_data['SUCCESS_TEXT'] 		= $tmp_str;
+				$mail_data['ItemDetails'] 	= $tmp_str;
+				$mail_data['url'] 			= base_url();
 				
 				$mail_template = $this->load->view('posted_ride_email', $mail_data, true);
 
@@ -360,30 +364,33 @@ class Ride extends CI_Controller {
 			$ride_details 			 = $this->RideModel->get_ride_value($request_ride_id,false);
 			$requesting_user_details = $this->UserModel->get_user_details($requesting_user_id);
 			$join_request_id 		 = $this->RideModel->insertJoinRequest($ride_details);
-			
+			//print($join_request_id);exit;
 			if($join_request_id>0) {
 
-				$this->load->library('email');
-				$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
-				$this->email->to('murugdev.eee@gmail.com');
+				$mconfig['protocol'] = 'mail';
+				$mconfig['wordwrap'] = FALSE;
+				$mconfig['mailtype'] = 'html';
+				$mconfig['charset'] = 'utf-8';
+				$mconfig['crlf'] = "\r\n";
+				$mconfig['newline'] = "\r\n";
+				$this->load->library('email',$mconfig);
+
+				$this->email->from('admin@ideasdiary.com', 'Murugesan P');
+				//$this->email->to('murugdev.eee@gmail.com');
+				$this->email->to($requesting_user_details->pro_user_email);
 				$this->email->subject('Commute Easy: Join Request Sent');
 				
 				// Constructing Ride Details Email Notification
 				
-				$email_data['PAGE_TITLE'] 		= 'Email Notification';
-				$email_data['PAGE_HEADING'] 	= 'Update Notification on Join Request !';
-				$email_data['ADDRESS_TO'] 		= "Hello ".$requesting_user_details->pro_user_full_name;
-				$email_data['ADDRESS_CONTENT'] 	= "Your Join Request has been posted to the user & you will get a Notification once after he approved it !.. <br /> Following are the details for which you had Posted your Join Request.";
-				$mail_data['SUCCESS_HEADER'] 	= 'Ride Details';
+				$email_data['HelloTo'] = $requesting_user_details->pro_user_full_name;
 
-				$tmp_str = "City : ".$ride_details['passenger_city'].", <br />";
-				$tmp_str.= "Start Time : ".$ride_details['start_time'].", <br />";
-				$tmp_str.= "Return Time : ".$ride_details['return_time'].", <br />";
-				$tmp_str.= "Origin Location : ".$ride_details['origin_location'].", <br />";
-				$tmp_str.= "Destination Location : ".$ride_details['destination_location'].", <br />";
+				$tmp_str = "City : ".$ride_details->passenger_city." <br />";
+				$tmp_str.= "Start Time : ".$ride_details->start_time." <br />";
+				$tmp_str.= "Return Time : ".$ride_details->return_time." <br />";
+				$tmp_str.= "Origin Location : ".$ride_details->origin_location." <br />";
+				$tmp_str.= "Destination Location : ".$ride_details->destination_location." <br />";
 				
-				
-				$mail_data['SUCCESS_TEXT'] 		= $tmp_str;
+				$email_data['ItemDetails'] = $tmp_str;
 				
 				$email_template = $this->load->view('join_request_email', $email_data, true);
 				
@@ -439,34 +446,38 @@ class Ride extends CI_Controller {
 			$isValidRideID = $this->RideModel->insertRide($ride_data);
 		
 				// Sending Email Activation Link
-				$this->load->library('email');
+				$mconfig['protocol'] = 'mail';
+				$mconfig['wordwrap'] = FALSE;
+				$mconfig['mailtype'] = 'html';
+				$mconfig['charset'] = 'utf-8';
+				$mconfig['crlf'] = "\r\n";
+				$mconfig['newline'] = "\r\n";
+				$this->load->library('email',$mconfig);
 
-				$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
+
+				$this->email->from('admin@ideasdiary.com', 'Murugesan P');
 				$this->email->to('murugdev.eee@gmail.com');
 				$this->email->subject('Commute Easy: Posted Ride Details');			
 				
 				// Constructing Ride Details Email Notification
 
-				$mail_data['PAGE_TITLE'] 		= 'Email Notification';
-				$mail_data['PAGE_HEADING'] 		= 'Posted Ride Details !';
-				$mail_data['ADDRESS_TO'] 		= "Hello ".$UserName;				
-				$mail_data['ADDRESS_CONTENT'] 	= 'You have posted the Ride Details successfully ! Following are the details posted by you. You can review & change it anytime after you logged into the application.!';
-				$mail_data['SUCCESS_HEADER'] 	= 'Ride Details';
+				$mail_data['HelloTo'] 		= $UserName;				
 
-				$tmp_str = "City : ".$ride_data['passenger_city'].", <br />";
-				$tmp_str.= "Start Time : ".$ride_data['start_time'].", <br />";
-				$tmp_str.= "Return Time : ".$ride_data['return_time'].", <br />";
-				$tmp_str.= "Origin Location : ".$ride_data['origin_location'].", <br />";
+				$tmp_str = "City : ".$ride_data['passenger_city']." <br />";
+				$tmp_str.= "Start Time : ".$ride_data['start_time']." <br />";
+				$tmp_str.= "Return Time : ".$ride_data['return_time']." <br />";
+				$tmp_str.= "Origin Location : ".$ride_data['origin_location']." <br />";
 				$tmp_str.= "Destination Location : ".$ride_data['destination_location'].", <br />";
-				$tmp_str.= "Travel As : ".$ride_data['travel_as'].", <br />";
+				$tmp_str.= "Travel As : ".ucfirst($ride_data['travel_as'])." <br />";
 				
 				if($ride_data['travel_as']=='driver'){
-					$tmp_str.= "Vehicle Type : ".$ride_data['vehicle_type'].", <br />";	
-					$tmp_str.= "Model Type : ".$ride_data['model_type'].", <br />";	
-					$tmp_str.= "Fuel Type : ".$ride_data['fuel_type'].", <br />";
+					$tmp_str.= "Vehicle Type : ".$ride_data['vehicle_type']." <br />";	
+					$tmp_str.= "Model Type : ".$ride_data['model_type']." <br />";	
+					$tmp_str.= "Fuel Type : ".$ride_data['fuel_type']." <br />";
 				}
 				
-				$mail_data['SUCCESS_TEXT'] 		= $tmp_str;
+				$mail_data['ItemDetails'] 		= $tmp_str;
+				$mail_data['url'] 				= base_url();
 				
 				$mail_template = $this->load->view('posted_ride_email', $mail_data, true);
 
@@ -526,34 +537,38 @@ class Ride extends CI_Controller {
 	
 			$this->RideModel->updateRide($ride_data, $EditRideID);
 				
-				$this->load->library('email');
+				$mconfig['protocol'] = 'mail';
+				$mconfig['wordwrap'] = FALSE;
+				$mconfig['mailtype'] = 'html';
+				$mconfig['charset'] = 'utf-8';
+				$mconfig['crlf'] = "\r\n";
+				$mconfig['newline'] = "\r\n";
+				$this->load->library('email',$mconfig);
 
-				$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
+
+				$this->email->from('admin@ideasdiary.com', 'Murugesan P');
 				$this->email->to('murugdev.eee@gmail.com');
 				$this->email->subject('Commute Easy: Updated Ride Details');
 				
 				// Constructing Ride Details Email Notification
 				
-				$mail_data['PAGE_TITLE'] 		= 'Email Notification';
-				$mail_data['PAGE_HEADING'] 		= 'Posted Ride Details !';
-				$mail_data['ADDRESS_TO'] 		= "Hello ".$UserName;				
-				$mail_data['ADDRESS_CONTENT'] 	= 'You have updated the Ride Details successfully ! Following are the details posted by you. You can review & change it anytime after you logged into the application.!';
-				$mail_data['SUCCESS_HEADER'] 	= 'Ride Details';
+				$mail_data['HelloTo'] 		= $UserName;				
+				$mail_data['url'] 			= base_url();				
 
-				$tmp_str = "City : ".$ride_data['passenger_city'].", <br />";
-				$tmp_str.= "Start Time : ".$ride_data['start_time'].", <br />";
-				$tmp_str.= "Return Time : ".$ride_data['return_time'].", <br />";
-				$tmp_str.= "Origin Location : ".$ride_data['origin_location'].", <br />";
-				$tmp_str.= "Destination Location : ".$ride_data['destination_location'].", <br />";
-				$tmp_str.= "Travel As : ".$ride_data['travel_as'].", <br />";
+				$tmp_str = "City : ".$ride_data['passenger_city']." <br />";
+				$tmp_str.= "Start Time : ".$ride_data['start_time']." <br />";
+				$tmp_str.= "Return Time : ".$ride_data['return_time']." <br />";
+				$tmp_str.= "Origin Location : ".$ride_data['origin_location']." <br />";
+				$tmp_str.= "Destination Location : ".$ride_data['destination_location']." <br />";
+				$tmp_str.= "Travel As : ".ucfirst($ride_data['travel_as'])." <br />";
 				
 				if($ride_data['travel_as']=='driver'){
-					$tmp_str.= "Vehicle Type : ".$ride_data['vehicle_type'].", <br />";	
-					$tmp_str.= "Model Type : ".$ride_data['model_type'].", <br />";	
-					$tmp_str.= "Fuel Type : ".$ride_data['fuel_type'].", <br />";
+					$tmp_str.= "Vehicle Type : ".$ride_data['vehicle_type']." <br />";	
+					$tmp_str.= "Model Type : ".$ride_data['model_type']." <br />";	
+					$tmp_str.= "Fuel Type : ".$ride_data['fuel_type']." <br />";
 				}
 				
-				$mail_data['SUCCESS_TEXT'] 		= $tmp_str;
+				$mail_data['ItemDetails'] = $tmp_str;
 				
 				$mail_template = $this->load->view('posted_ride_email', $mail_data, true);
 

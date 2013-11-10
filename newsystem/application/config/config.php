@@ -15,9 +15,10 @@
 |
 */
 
-$config['base_url']	 = 'http://localhost/qwerty';
+//$config['base_url']	 = 'http://work.ideasdiary.com';
+$config['base_url']	 = 'http://'.$_SERVER['HTTP_HOST'].'/qwerty';
 
-define('SITE_TITLE', 'CodeIgniter Sample');
+define('SITE_TITLE', 'Application Front End');
 
 define('SITE_ADMIN_TITLE', 'Administrator');
 
@@ -26,10 +27,10 @@ $config['form_pages'] = array('user/signup','welcome/contactus','user/newride','
 
 $config['is_map_page'] = array('user/newride');
 
-$config['is_email_enabled'] = false;
+$config['is_email_enabled'] = true;
 
 $config['left_menu_navigation'] = array(array('admin/addcompany','admin/company_list','admin/type_list'),
-										array('admin/addoffer','admin/offer_list','admin/edit_offer'),
+										array('admin/addoffer','admin/offer_list','admin/edit_offer','admin/offertype_list'),
 										array('admin/ride_list','admin/user_list'),
 										array('admin/settings')
 										);

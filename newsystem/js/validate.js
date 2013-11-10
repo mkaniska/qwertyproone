@@ -1,4 +1,7 @@
 
+//var site_url = 'http://work.ideasdiary.com';
+var site_url = 'http://localhost/qwerty/';
+
 function sendHere(toUrl) {
 	window.location.href=toUrl;
 }
@@ -140,7 +143,7 @@ function doLogin() {
 		  dataType: "text",
 		  success: function(resultData) {
 			  if(resultData=='success'){
-				window.location.href='http://localhost/qwerty/welcome/home';
+				window.location.href=site_url+'welcome/home';
 			  }else{
 				$("#errorDisplay").html('Invalid Login Details Provided!');
 				$("#user_name").val('');
@@ -221,7 +224,7 @@ function findMatchingRides() {
 		 $.ajax({
 			  type: 'POST',
 			  url: 'matching_rides',
-			  beforeSend: function(){$("#searchedResult").html('<img src="http://localhost/qwerty/images/ajax_loader.gif" border="0" />'); },
+			  beforeSend: function(){$("#searchedResult").html('<img src="'+site_url+'images/ajax_loader.gif" border="0" />'); },
 			  data: 'city='+city+'&address='+address+'&startTime='+startTime+'&returnTime='+returnTime+"&search_for="+search_for,
 			  dataType: "text",
 			  success: function(resultData) {
@@ -240,18 +243,18 @@ function sendJoinRequest(selectedID,responseTag) {
 		 $.ajax({
 			  type: 'POST',
 			  url: 'sendrequest',
-			  beforeSend: function(){$(responseTag).html('<img src="http://localhost/qwerty/images/sending_request.gif" border="0" />'); },
+			  beforeSend: function(){$(responseTag).html('<img src="'+site_url+'images/sending_request.gif" border="0" />'); },
 			  data: 'request_ride_id='+selectedID,
 			  dataType: "text",
 			  success: function(resultData) {
 				  //$("#additionalInfo").html(resultData);
 					if(resultData=='success') {
 						//alert(resultData);
-						$(responseTag).html('<img src="http://localhost/qwerty/images/sent.gif" border="0" title="Sent Successfully" alt="Sent Successfully" />');
+						$(responseTag).html('<img src="'+site_url+'images/sent.gif" border="0" title="Sent Successfully" alt="Sent Successfully" />');
 					}else{
 						//alert(resultData);
 						alert("Error Sending Request!");
-						$(responseTag).html('<img src="http://localhost/qwerty/images/request.png" border="0" title="Send Request" alt="Send Request" />');
+						$(responseTag).html('<img src="'+site_url+'images/request.png" border="0" title="Send Request" alt="Send Request" />');
 					}
 			  }
 		});
@@ -266,7 +269,7 @@ function confirmRequest(responseID, reqID, stsVAL) {
 		 $.ajax({
 			  type: 'POST',
 			  url: 'update_request',
-			  beforeSend: function(){$(responseID).html('<img src="http://localhost/qwerty/images/sending_request.gif" border="0" />'); },
+			  beforeSend: function(){$(responseID).html('<img src="'+site_url+'sending_request.gif" border="0" />'); },
 			  data: 'request_id='+reqID+'&status='+stsVAL,
 			  dataType: "text",
 			  success: function(resultData) {

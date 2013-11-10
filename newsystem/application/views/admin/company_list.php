@@ -23,7 +23,7 @@
 				</tr>
 				<?php if(count($company_list)>0){foreach($company_list as $out) { ?>
 				<tr style="font-size:11px;">
-					<td><?php echo $out->company_name;?></td>
+					<td><a href="<?php echo base_url();?>admin/company_details/<?php echo $out->company_id;?>"><?php echo $out->company_name;?></a></td>
 					<td><?php echo $out->contact_person;?></td>
 					<td><?php echo $out->contact_email;?></td>
 					<td><?php echo $out->company_address.', '.$out->company_city.', '.$out->company_state.', '.$out->company_zipcode;?></td>

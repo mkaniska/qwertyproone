@@ -1,3 +1,63 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Nov 10, 2013 at 07:22 PM
+-- Server version: 5.1.36-community-log
+-- PHP Version: 5.3.0
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `project`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `old_pro_offers`
+--
+
+CREATE TABLE IF NOT EXISTS `old_pro_offers` (
+  `offer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `offer_title` varchar(255) NOT NULL,
+  `offer_type` varchar(255) NOT NULL,
+  `offer_created_by` int(11) NOT NULL,
+  `offer_valid_from` bigint(11) NOT NULL,
+  `offer_valid_until` bigint(11) NOT NULL,
+  `lifetime_validity` tinyint(1) NOT NULL DEFAULT '0',
+  `offer_notes` text NOT NULL,
+  `offer_status` tinyint(1) NOT NULL,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `offer_created_on` bigint(11) NOT NULL,
+  `offer_modified_on` bigint(11) NOT NULL,
+  PRIMARY KEY (`offer_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `old_pro_offers`
+--
+
+INSERT INTO `old_pro_offers` (`offer_id`, `offer_title`, `offer_type`, `offer_created_by`, `offer_valid_from`, `offer_valid_until`, `lifetime_validity`, `offer_notes`, `offer_status`, `is_deleted`, `offer_created_on`, `offer_modified_on`) VALUES
+(1, 'Return Ticket Offer', '2', 6, 1385769600, 1417305600, 0, 'While Booking Return Tickets', 1, 0, 1383654649, 1383912796),
+(2, 'Online Buying Offer', '4', 6, 1384732800, 1416873600, 0, 'Online Buying Offer', 1, 0, 1383654730, 1383912806),
+(3, 'Corporate Offers Edited', '1', 6, 1385596800, 1385424000, 0, 'Corporate Offers Edited', 0, 0, 1383654993, 1383838061),
+(4, 'Employees Offer', '3', 1, 5, 30, 0, 'Employees Offer', 1, 0, 1383655037, 0),
+(5, 'Xmas Offer', '6', 1, 1384128000, 1448841600, 0, 'Xmas Offer', 1, 0, 1383987942, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pro_cities`
+--
 
 CREATE TABLE IF NOT EXISTS `pro_cities` (
   `city_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1535,6 +1595,7 @@ INSERT INTO `pro_companies` (`company_id`, `company_name`, `company_address`, `c
 CREATE TABLE IF NOT EXISTS `pro_companies_offers` (
   `assign_id` int(11) NOT NULL AUTO_INCREMENT,
   `offer_id` int(11) NOT NULL,
+  `company_id` int(11) NOT NULL,
   `company_ids` text NOT NULL,
   PRIMARY KEY (`assign_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
@@ -1543,11 +1604,11 @@ CREATE TABLE IF NOT EXISTS `pro_companies_offers` (
 -- Dumping data for table `pro_companies_offers`
 --
 
-INSERT INTO `pro_companies_offers` (`assign_id`, `offer_id`, `company_ids`) VALUES
-(1, 1, '3,2'),
-(2, 2, '4,2'),
-(3, 3, '1'),
-(4, 4, '4,3,2,1');
+INSERT INTO `pro_companies_offers` (`assign_id`, `offer_id`, `company_id`, `company_ids`) VALUES
+(1, 1, 0, '3,2'),
+(2, 2, 0, '4,2'),
+(3, 3, 0, '1'),
+(4, 4, 0, '4,3,2,1');
 
 -- --------------------------------------------------------
 
@@ -1658,22 +1719,35 @@ CREATE TABLE IF NOT EXISTS `pro_offers` (
   `offer_valid_until` bigint(11) NOT NULL,
   `lifetime_validity` tinyint(1) NOT NULL DEFAULT '0',
   `offer_notes` text NOT NULL,
+  `offer_provider` varchar(255) NOT NULL,
+  `provider_address` text NOT NULL,
+  `contact_person` varchar(255) NOT NULL,
+  `contact_phone` int(11) NOT NULL,
+  `contact_email` varchar(255) NOT NULL,
+  `offer_picture` varchar(255) NOT NULL,
+  `minimum_purchase_amount` double(8,2) NOT NULL,
+  `minimum_purchase_quantity` int(11) NOT NULL,
+  `offer_percentage` double(8,2) NOT NULL,
+  `offer_amount` double(8,2) NOT NULL,
+  `conditions_apply` text NOT NULL,
   `offer_status` tinyint(1) NOT NULL,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
   `offer_created_on` bigint(11) NOT NULL,
   `offer_modified_on` bigint(11) NOT NULL,
   PRIMARY KEY (`offer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `pro_offers`
 --
 
-INSERT INTO `pro_offers` (`offer_id`, `offer_title`, `offer_type`, `offer_created_by`, `offer_valid_from`, `offer_valid_until`, `lifetime_validity`, `offer_notes`, `offer_status`, `is_deleted`, `offer_created_on`, `offer_modified_on`) VALUES
-(1, 'Return Ticket Offer', '2', 6, 1385769600, 1417305600, 0, 'While Booking Return Tickets', 1, 0, 1383654649, 1383912796),
-(2, 'Online Buying Offer', '4', 6, 1384732800, 1416873600, 0, 'Online Buying Offer', 1, 0, 1383654730, 1383912806),
-(3, 'Corporate Offers Edited', '1', 6, 1385596800, 1385424000, 0, 'Corporate Offers Edited', 0, 0, 1383654993, 1383838061),
-(4, 'Employees Offer', '3', 1, 5, 30, 0, 'Employees Offer', 1, 0, 1383655037, 0);
+INSERT INTO `pro_offers` (`offer_id`, `offer_title`, `offer_type`, `offer_created_by`, `offer_valid_from`, `offer_valid_until`, `lifetime_validity`, `offer_notes`, `offer_provider`, `provider_address`, `contact_person`, `contact_phone`, `contact_email`, `offer_picture`, `minimum_purchase_amount`, `minimum_purchase_quantity`, `offer_percentage`, `offer_amount`, `conditions_apply`, `offer_status`, `is_deleted`, `offer_created_on`, `offer_modified_on`) VALUES
+(1, 'Return Ticket Offer', '9', 1, 1384214400, 1385769600, 0, '									While Booking Return Tickets																		', 'Return Ticket Offer', 'Return Ticket Offer', 'Ramasaamy', 2147483647, 'samy@yahoo.co.in', '0', 1000.00, 5, 14.00, 500.00, '									Testing									', 1, 0, 1383654649, 1384100797),
+(2, 'Online Buying Offer', '1', 1, 0, 0, 0, '									Online Buying Offer																		', 'Online Buying Offer', 'Online Buying Offer', 'Gunasekar', 986856567, 'kannan@gmail.com', '0', 0.00, 10, 5.00, 1000.00, '									Testin									', 1, 0, 1383654730, 1384100876),
+(3, 'Corporate Offers Edited', '1', 6, 1385596800, 1385424000, 0, 'Corporate Offers Edited', '', '', '', 0, '', '', 0.00, 0, 0.00, 0.00, '', 0, 0, 1383654993, 1383838061),
+(4, 'Employees Offer', '3', 1, 5, 30, 0, 'Employees Offer', '', '', '', 0, '', '', 0.00, 0, 0.00, 0.00, '', 1, 0, 1383655037, 0),
+(5, 'Xmas Offer', '6', 1, 1384128000, 0, 0, 'Xmas Offer', 'Xmas Offer', 'Xmas Offer', 'Sivaji', 32432343, 'sivaji@gmai.com', '0', 1000.00, 15, 5.00, 200.00, 'Xmas Offer', 1, 0, 1383987942, 1384101110),
+(6, 'Food Bazaar', '9', 1, 1384041600, 1384041600, 0, 'This is applicable for 1000 & more rupees purchase. Or if you buy more than 5 quantity.', 'BigBazaar', 'Koramangala, Bangalore-32', 'Rajamoorthi', 2147483647, 'bazaar@food.com', '', 1000.00, 5, 0.00, 500.00, 'This is applicable for 1000 & more rupees purchase. Or if you buy more than 5 quantity.', 1, 0, 1384066600, 0);
 
 -- --------------------------------------------------------
 
@@ -1686,17 +1760,22 @@ CREATE TABLE IF NOT EXISTS `pro_offer_types` (
   `offer_type` varchar(255) NOT NULL,
   `offer_details` text NOT NULL,
   PRIMARY KEY (`offer_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `pro_offer_types`
 --
 
 INSERT INTO `pro_offer_types` (`offer_type_id`, `offer_type`, `offer_details`) VALUES
-(1, 'One Time', 'One Time'),
-(2, 'Industry Based', 'Industry Based'),
-(3, 'Coupon Code Based', 'Coupon Code Based'),
-(4, 'Life Time', 'Life Time');
+(1, 'Accesories', 'Accesories'),
+(2, 'Saloon', 'Saloon'),
+(3, 'Entertianment', 'Entertianment'),
+(4, 'Jewels', 'Jewels'),
+(5, 'Grocery', 'Grocery'),
+(6, 'Shopping', 'Shopping'),
+(7, 'Fruits', 'Fruits'),
+(8, 'Travel', 'Travel'),
+(9, 'Food', 'Food');
 
 -- --------------------------------------------------------
 
@@ -2111,6 +2190,7 @@ INSERT INTO `pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES
 CREATE TABLE IF NOT EXISTS `pro_users` (
   `pro_user_id` int(11) NOT NULL AUTO_INCREMENT,
   `pro_user_type` int(11) NOT NULL,
+  `pro_corporate_id` int(11) NOT NULL,
   `pro_user_full_name` varchar(255) NOT NULL,
   `pro_user_gender` varchar(10) NOT NULL,
   `pro_user_password` varchar(255) NOT NULL,
@@ -2133,13 +2213,13 @@ CREATE TABLE IF NOT EXISTS `pro_users` (
 -- Dumping data for table `pro_users`
 --
 
-INSERT INTO `pro_users` (`pro_user_id`, `pro_user_type`, `pro_user_full_name`, `pro_user_gender`, `pro_user_password`, `pro_user_phone`, `pro_user_email`, `pro_user_status`, `pro_user_address`, `pro_user_city`, `pro_user_state`, `pro_user_zipcode`, `pro_user_latitude`, `pro_user_longitude`, `pro_user_ip`, `pro_user_joined`, `pro_user_updated`) VALUES
-(1, 1, 'Arun', 'male', 'haihai', '8979786789', 'test1', 0, '110 Madiwala', 'Arakkonam', 'Tamil Nadu', '560016', 0.00, 999999.99, '127.0.0.1', 1381489875, 1381489875),
-(2, 2, 'Bala', 'male', 'haihai', '9986363998', 'test2', 1, 'Koramangala', 'Bangalore', 'Tamil Nadu', '560016', 0.00, 999999.99, '127.0.0.1', 1381931826, 1381931826),
-(3, 2, 'Chinna', 'male', 'haihai', '9986363912', 'test3', 0, '120 5th Cross', 'Trichy', 'Tamil Nadu', '560013', 0.00, 999999.99, '127.0.0.1', 1381914058, 1381914058),
-(4, 2, 'Durai', 'male', 'haihai', '8886363998', 'test4', 1, '4th cross, Madiwala', 'Madurai', 'Tamil Nadu', '560011', 0.00, 999999.99, '127.0.0.1', 1381914270, 1381914270),
-(5, 2, 'Ervin', 'male', 'haihai', '9981263998', 'test5', 0, 'Shakthi Nagar', 'Chennai', 'Tamil Nadu', '560098', 0.00, 999999.99, '127.0.0.1', 1381914370, 1381914370),
-(6, 1, 'Fransis', 'male', 'haihai', '9986343998', 'test6', 1, 'HSR Layout', 'Bangalore', 'Tamil Nadu', '560086', 0.00, 999999.99, '127.0.0.1', 1381931415, 1381931415);
+INSERT INTO `pro_users` (`pro_user_id`, `pro_user_type`, `pro_corporate_id`, `pro_user_full_name`, `pro_user_gender`, `pro_user_password`, `pro_user_phone`, `pro_user_email`, `pro_user_status`, `pro_user_address`, `pro_user_city`, `pro_user_state`, `pro_user_zipcode`, `pro_user_latitude`, `pro_user_longitude`, `pro_user_ip`, `pro_user_joined`, `pro_user_updated`) VALUES
+(1, 1, 4, 'Arun', 'male', 'haihai', '8979786789', 'test1', 0, '110 Madiwala', 'Arakkonam', 'Tamil Nadu', '560016', 0.00, 999999.99, '127.0.0.1', 1381489875, 1381489875),
+(2, 2, 2, 'Bala', 'male', 'haihai', '9986363998', 'test2', 1, 'Koramangala', 'Bangalore', 'Tamil Nadu', '560016', 0.00, 999999.99, '127.0.0.1', 1381931826, 1381931826),
+(3, 3, 4, 'Chinna', 'male', 'haihai', '9986363912', 'test3', 0, '120 5th Cross', 'Trichy', 'Tamil Nadu', '560013', 0.00, 999999.99, '127.0.0.1', 1381914058, 1381914058),
+(4, 2, 1, 'Durai', 'male', 'haihai', '8886363998', 'test4', 1, '4th cross, Madiwala', 'Madurai', 'Tamil Nadu', '560011', 0.00, 999999.99, '127.0.0.1', 1381914270, 1381914270),
+(5, 3, 4, 'Ervin', 'male', 'haihai', '9981263998', 'test5', 0, 'Shakthi Nagar', 'Chennai', 'Tamil Nadu', '560098', 0.00, 999999.99, '127.0.0.1', 1381914370, 1381914370),
+(6, 1, 7, 'Fransis', 'male', 'haihai', '9986343998', 'test6', 1, 'HSR Layout', 'Bangalore', 'Tamil Nadu', '560086', 0.00, 999999.99, '127.0.0.1', 1381931415, 1381931415);
 
 -- --------------------------------------------------------
 
@@ -2165,4 +2245,6 @@ INSERT INTO `pro_user_types` (`user_type_id`, `user_type`) VALUES
 (5, 'Organization Admin'),
 (6, 'Super Administrator');
 
-
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

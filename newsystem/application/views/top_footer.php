@@ -2,7 +2,7 @@
 	<div id="website_bottom" class="wrapper">
     
     	<div class="col one_fourth">
-            <h4>About</h4>
+            <h4>About Us</h4>
             <p>Pellentesque ut erat id dolor pharetra pellentesque. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed pharetra varius libero sit amet ultrices. Suspendisse ac sapien turpis. Donec congue dolor eu purus adipiscing fringilla. <a href="#">Read More</a></p>
         </div>
         
@@ -36,7 +36,7 @@
     	</div>
     
     	<div class="col one_fourth no_margin_right">
-    	<h4>Twitter</h4>
+    	<h4>Socially Connected with</h4>
         <ul class="no_bullet">
         	<li><a href="#">@templatemo</a> at scelerisque urna in tellus varius ultricies.</li>
             <li>Suspendisse enean <a href="#">#FREE</a> tincidunt massa in tellus varius ultricies.</li>

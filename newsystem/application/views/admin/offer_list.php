@@ -54,6 +54,6 @@
 			</div>
 	</div>
 </div>
-<div id="dialog" title="Select the Company" style="width:200px;height:400px;overflow:auto;display:none;">
-</div>
+<div id="dialog" title="Select the Company" style="width:400px;height:400px;overflow:auto;display:none;"></div>
+<div id="views" title="Selected Companies" style="width:400px;height:400px;overflow:auto;display:none;"></div>
 <div class="clear"></div>

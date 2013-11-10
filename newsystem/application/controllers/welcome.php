@@ -51,6 +51,14 @@ class Welcome extends CI_Controller {
 		$this->load->view('layout', $data);
 	}
  
+	public function services(){
+	
+		$data['page_name'] = "welcome/services";
+		$data['menu'] = "services";
+		$data['title'] = SITE_TITLE." :: Services";
+		$this->load->view('layout', $data);
+	}
+	
 	public function process_contact() {
 	
 		if($this->input->post('doContact')=='Submit') {
@@ -61,7 +69,14 @@ class Welcome extends CI_Controller {
 		$message_text 	= $this->input->post('message_text');
 		$phone_number	= $this->input->post('phone_number');
 
-			$this->load->library('email');
+			$mconfig['protocol'] = 'mail';
+			$mconfig['wordwrap'] = FALSE;
+			$mconfig['mailtype'] = 'html';
+			$mconfig['charset'] = 'utf-8';
+			$mconfig['crlf'] = "\r\n";
+			$mconfig['newline'] = "\r\n";
+			$this->load->library('email',$mconfig);
+
 
 			$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
 			$this->email->to('murugdev.eee@gmail.com');

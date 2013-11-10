@@ -508,9 +508,20 @@ function validOffer() {
 	var ok = true;
 	if($.trim($("#offer_title").val())==''){$("#errorDisplay").html("Please enter the Offer Title");$("#offer_title").focus();ok = false;}
 	else if($("#offer_type").val()==0){$("#errorDisplay").html("Please select the offer type");$("#offer_type").focus();ok = false;}
+	else if($.trim($("#offer_provider").val())==''){$("#errorDisplay").html("Please enter the offer provider");$("#offer_provider").focus();ok = false;}
+	else if($.trim($("#provider_address").val())==''){$("#errorDisplay").html("Please enter the provider address");$("#provider_address").focus();ok = false;}
+	else if($.trim($("#contact_person").val())==''){$("#errorDisplay").html("Please enter the contact person");$("#contact_person").focus();ok = false;}
+	else if($.trim($("#contact_phone").val())==''){$("#errorDisplay").html("Please enter the contact phone");$("#contact_phone").focus();ok = false;}
+	else if($.trim($("#contact_email").val())==''){$("#errorDisplay").html("Please select the contact email");$("#contact_email").focus();ok = false;}
+	else if($.trim($("#minimum_purchase_amount").val())==''){$("#errorDisplay").html("Please enter the minimum purchase amount");$("#minimum_purchase_amount").focus();ok = false;}
+	else if($.trim($("#minimum_purchase_quantity").val())==''){$("#errorDisplay").html("Please enter the minimum purchase quantity");$("#minimum_purchase_quantity").focus();ok = false;}
+	else if($.trim($("#offer_percentage").val())==''){$("#errorDisplay").html("Please enter the offer percentage");$("#offer_percentage").focus();ok = false;}
+	else if($.trim($("#offer_amount").val())==''){$("#errorDisplay").html("Please select the offer amount");$("#offer_amount").focus();ok = false;}
+	else if($.trim($("#conditions_apply").val())==''){$("#errorDisplay").html("Please enter the conditions apply");$("#conditions_apply").focus();ok = false;}
 	else if($.trim($("#valid_from").val())==''){$("#errorDisplay").html("Please enter the valid from date");$("#valid_from").focus();ok = false;}
 	else if($.trim($("#valid_to").val())==''){$("#errorDisplay").html("Please enter the valid expiry date");$("#valid_to").focus();ok = false;}
 	else if($.trim($("#notes").val())==''){$("#errorDisplay").html("Please enter the notes");$("#notes").focus();ok = false;}
+	
 	if(ok==true){	
 		return true;
 	}else { return false; }

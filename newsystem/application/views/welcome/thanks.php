@@ -1,6 +1,6 @@
 <div id="website_main" class="wrapper">
 	<div id="content_login" class="left">
-        <div class="post">
+        <div class="post_thanks">
             <h2 style="text-align:center;margin-left:200px;">Thank you !</h2>
             <div class="img_frame img_frame_23_new">
 			<span style="margin-top:15px;margin-left:140px;">

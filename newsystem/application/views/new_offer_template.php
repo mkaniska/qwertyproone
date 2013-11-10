@@ -8,7 +8,7 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="15">
           <tr>
             <td align="center" style="color:#FFF; font-family:Arial, Helvetica, sans-serif; font-size:22px; padding-top:20px;padding-bottom:30px;"> 
-				Posted Ride Details ! <br />
+				New Offer Posted ! <br />
 			</td>
           </tr>
         </table></td>
@@ -18,10 +18,11 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="10" style="margin-bottom:10px;">
           <tr>
             <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#015591;">
-              <div style="font-size:18px;">Hello <?php echo $HelloTo;?>,</div>
+              <div style="font-size:20px;">Hello <?php echo $HelloTo;?>,</div>
 			  <div><br>
-				You have posted the Ride Details successfully ! <br />
-				Following are the details posted by you. You can review & change it any-time after you logged into the application.! </div> 
+				There is a new offer posted on Admin System & this is applicable for your employees. <br /> 
+				Please have a look into this offer & suggest to all your employees or interested people.
+				</div> 
 			</td>
           </tr>
         </table>
@@ -29,8 +30,8 @@
             <tr>
               <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#015591;">
 			  <div style="font-size:14px;"><b>
-					<img src="<?php echo $url;?>images/email_ok.png" align="left" style="margin-right:20px;">
-					Ride Details :</b></div>
+					<img src="<?php echo base_url();?>images/email_ok.png" align="left" style="margin-right:20px;">
+					Offer Details :</b></div>
 					<div style="color:#015591;"> <br />
 					<?php echo $ItemDetails;?> 
 					</div>

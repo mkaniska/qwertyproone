@@ -8,7 +8,7 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="15">
           <tr>
             <td align="center" style="color:#FFF; font-family:Arial, Helvetica, sans-serif; font-size:22px; padding-top:20px;padding-bottom:30px;"> 
-				Posted Ride Details ! <br />
+				Update Notification on Join Request ! <br />
 			</td>
           </tr>
         </table></td>
@@ -20,8 +20,8 @@
             <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#015591;">
               <div style="font-size:18px;">Hello <?php echo $HelloTo;?>,</div>
 			  <div><br>
-				You have posted the Ride Details successfully ! <br />
-				Following are the details posted by you. You can review & change it any-time after you logged into the application.! </div> 
+				Your Join Request has been <?php echo $Status;?> by <?php echo $byUser;?>" !.. <br /> 
+				Following are the details for which you had posted your Join Request. </div> 
 			</td>
           </tr>
         </table>
@@ -29,10 +29,10 @@
             <tr>
               <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#015591;">
 			  <div style="font-size:14px;"><b>
-					<img src="<?php echo $url;?>images/email_ok.png" align="left" style="margin-right:20px;">
-					Ride Details :</b></div>
+					<img src="<?php echo base_url();?>images/email_ok.png" align="left" style="margin-right:20px;">
+					Message/Note :</b></div>
 					<div style="color:#015591;"> <br />
-					<?php echo $ItemDetails;?> 
+					Please contact admin or <?php echo $byUser;?> if in case you have any other queries/clarifications.!
 					</div>
 				</td>
             </tr>

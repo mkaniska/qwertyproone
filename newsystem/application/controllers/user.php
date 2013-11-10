@@ -23,6 +23,41 @@ class User extends CI_Controller {
 		redirect('welcome/home');
 	}	
 	
+	
+	public function testEmail(){
+
+		$mconfig['protocol'] = 'mail';
+		$mconfig['wordwrap'] = FALSE;
+		$mconfig['mailtype'] = 'html';
+		$mconfig['charset'] = 'utf-8';
+		$mconfig['crlf'] = "\r\n";
+		$mconfig['newline'] = "\r\n";
+		$this->load->library('email',$mconfig);
+		//$this->email->mailtype('html');
+		
+		$this->email->from('admin@ideasdiary.com', 'Murugesan P');
+		$this->email->to('murugdev.eee@gmail.com');
+
+		$this->email->subject('Commute Easy: Registration Email Activation');
+
+		$email_data['PAGE_TITLE'] 		= 'Email Notification';
+		$email_data['PAGE_HEADING'] 	= 'Registration Confirmation & Email Account Activation !';
+		$email_data['ADDRESS_TO'] 		= "Hello ";
+		$email_data['ADDRESS_CONTENT'] 	= 'Thanks for joining us !..';
+		$email_data['SUCCESS_HEADER'] 	= 'Activate Email';
+		$email_data['SUCCESS_TEXT'] 	= 'Please contact admin if in case you have any other queries/clarifications.!';
+		$email_data['LINK_LABEL'] 		= 'Our Website Link';
+		$email_data['LINK_URL'] 		= 'http://mail.yahoo.com';
+		$email_data['USER_NAME'] 		= '';
+		$email_data['PASS_WORD'] 		= '';
+		
+		$email_template = $this->load->view('test_email_template', $email_data, true);				
+		
+		$this->email->message($email_template);
+		$this->email->send();				
+		echo $this->email->print_debugger();
+	}
+	
 	public function login() {
 		if($this->session->userdata('_user_id')!=''){redirect('welcome/home');}
 		$this->load->model('CommonModel');
@@ -76,23 +111,26 @@ class User extends CI_Controller {
 			
 			if($isValidID>0) {
 				// Sending Email Activation Link
-				$this->load->library('email');
+				$mconfig['protocol'] = 'mail';
+				$mconfig['wordwrap'] = FALSE;
+				$mconfig['mailtype'] = 'html';
+				$mconfig['charset'] = 'utf-8';
+				$mconfig['crlf'] = "\r\n";
+				$mconfig['newline'] = "\r\n";
+				$this->load->library('email',$mconfig);
 
 				$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
-				$this->email->to('murugdev.eee@gmail.com');
+				//$this->email->to('murugdev.eee@gmail.com');
+				$this->email->to($posted_data['pro_user_email']);
 
 				$this->email->subject('Commute Easy: Registration Email Activation');
 
-				$email_data['PAGE_TITLE'] 		= 'Email Notification';
-				$email_data['PAGE_HEADING'] 	= 'Registration Confirmation & Email Account Activation !';
-				$email_data['ADDRESS_TO'] 		= "Hello ".$user_data['pro_user_full_name'];
-				$email_data['ADDRESS_CONTENT'] 	= 'Thanks for joining us !..';
-				$email_data['SUCCESS_HEADER'] 	= 'Activate Email';
-				$email_data['SUCCESS_TEXT'] 	= 'Please contact admin if in case you have any other queries/clarifications.!';
-				$email_data['LINK_LABEL'] 		= 'Our Website Link';
-				$email_data['LINK_URL'] 		= 'http://mail.yahoo.com';
-				$email_data['USER_NAME'] 		= $this->input->post('email_address');
-				$email_data['PASS_WORD'] 		= $this->input->post('password_text');
+				$email_data['HelloTo'] 			= $posted_data['pro_user_full_name'];
+
+				$email_data['activateLink'] 	= 'http://mail.yahoo.com';
+				$email_data['userName'] 		= $this->input->post('email_address');
+				$email_data['passWord'] 		= $this->input->post('password_text');
+				$email_data['url'] 				= base_url();
 				
 				$email_template = $this->load->view('signup_email_template', $email_data, true);				
 				

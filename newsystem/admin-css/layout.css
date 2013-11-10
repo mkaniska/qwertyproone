@@ -59,6 +59,11 @@ h1 a {
 	font-weight:normal;
 }
 
+select {
+height:35px;
+width:auto;
+padding:4px;
+}
 
 /* branding
 ----------------------------------------------- */
@@ -131,7 +136,7 @@ h2#page-heading {
 .box h2 a,
 .box h2 a.visible {
 	color:#1B548D;
-	background:url("../admin-images/switch_minus.gif") 97% 50% no-repeat;
+	/*background:url("../admin-images/switch_minus.gif") 97% 50% no-repeat;*/
 	display:block;
 	padding:6px 12px;
 	margin:-6px -12px;

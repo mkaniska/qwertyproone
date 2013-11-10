@@ -66,10 +66,12 @@ class AdminModel extends CI_Model {
 	}
 	
 	function get_this_offer($offer_id) {
-		$this->db->where('offer_id', $offer_id);
+		$this->db->where('pro_offers.offer_id', $offer_id);
+		$this->db->join("pro_offer_types","pro_offer_types.offer_type_id=pro_offers.offer_type");
+		$this->db->select('pro_offers.*,pro_offer_types.*,pro_offers.offer_type as type_offer, pro_offer_types.offer_type as OType');		
 		$query = $this->db->get('pro_offers');
 		if($query->num_rows() > 0){
-			foreach ($query->result() as $row)
+			foreach ($query->result() as $row) 
 			{
 				$result_back[] = $row;
 			}
@@ -104,8 +106,14 @@ class AdminModel extends CI_Model {
 		return true;
 	}
 	
-	function assignCompanyOffer($data, $offer_id) {
+	function isThisOfferAssigned($data, $offer_id) {
+		$this->db->where('offer_id', $offer_id);
+		$this->db->select();
+		$query = $this->db->get('pro_companies_offers');
+		if($query->num_rows()>0) {return true;}else{return false;}
+	}
 	
+	function assignCompanyOffer_($data, $offer_id) {
 		$this->db->where('offer_id', $offer_id);
 		$this->db->select();
 		$query = $this->db->get('pro_companies_offers');
@@ -121,6 +129,30 @@ class AdminModel extends CI_Model {
         $inserted_id = $this->db->insert_id();
         return $inserted_id;
 	}
+
+    function get_total_offer_types() {
+
+		$this->db->order_by("offer_type","ASC");
+		$this->db->select('offer_type_id');
+		$query = $this->db->get('pro_offer_types');
+		return $query->num_rows();
+	}
+
+    function list_offer_types($cp, $pp) {
+ 
+		$this->db->order_by("offer_type","DESC");
+		$this->db->select();
+        $this->db->limit($cp, $pp);
+		$query = $this->db->get('pro_offer_types');
+		if($query->num_rows() > 0){
+			foreach ($query->result() as $row) {
+				$result_back[] = $row;
+			}
+			return $result_back;
+		}else {
+			return array();
+		}
+    }
 	
     function get_total_company_types() {
 
@@ -201,6 +233,55 @@ class AdminModel extends CI_Model {
 		}
     }
 
+    function getTheseCompanyDetails($company_id_list,$multiple=true) {
+		
+		if($multiple) {
+			$this->db->where('company_id IN ', '('.$company_id_list.')');
+		}else {
+			$this->db->where('company_id', $company_id_list);
+		}
+		$this->db->join("pro_company_types","pro_companies.company_type=pro_company_types.company_type_id");
+		$this->db->select('pro_companies.*,pro_company_types.*');
+		$query = $this->db->get('pro_companies');
+		if($query->num_rows() > 0){
+			foreach ($query->result() as $row)
+			{
+				$result_back[] = $row;
+			}
+			return $result_back;
+		}else{ 
+			return array();
+		}
+    }	
+
+    function get_total_hrusers($company_id) {
+		
+		$this->db->where('pro_corporate_id', $company_id);
+		$this->db->where('pro_user_type', '3');
+		$this->db->order_by("pro_user_joined","DESC");
+		$this->db->select('pro_user_id');
+		$query = $this->db->get('pro_users');
+		return $query->num_rows();
+	}		
+
+    function getThisCompanyUsers($cp,$pp,$company_id) {
+		
+		$this->db->where('pro_corporate_id', $company_id);
+		$this->db->order_by("pro_user_joined","DESC");
+		$this->db->select();
+        $this->db->limit($cp, $pp);
+		$query = $this->db->get('pro_users');
+		if($query->num_rows() > 0){
+			foreach ($query->result() as $row)
+			{
+				$result_back[] = $row;
+			}
+			return $result_back;
+		}else{ 
+			return array();
+		}
+    }
+	
     function get_companies_assigned($offer_id) {
 	
 		$this->db->where('offer_id',$offer_id);

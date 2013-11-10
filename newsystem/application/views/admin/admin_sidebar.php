@@ -13,6 +13,7 @@
 					<ul class="submenu">
 						<li><a href="<?php echo base_url();?>admin/addoffer">Add Offer</a> </li>
 						<li><a href="<?php echo base_url();?>admin/offer_list">List Offers</a></li>
+						<li><a href="<?php echo base_url();?>admin/offertype_list">List Offer Types</a></li>
 					</ul> 
 				</li>
 				<!--

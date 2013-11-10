@@ -1,20 +1,14 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?php echo $PAGE_TITLE;?></title>
-</head>
-<body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="color:#015591;">
   <tr>
     <td align="center" valign="top" bgcolor="#015591" style="background-color:#FFF;"><br>
     <br>
-    <table width="900" border="1" cellspacing="0" cellpadding="0" style="border:1px solid #015591;">
+    <table width="900" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #015591;">
       <tr>
         <td align="left" valign="top" bgcolor="#015591" style="background-color:#015591;">
 		<table width="100%" border="0" cellspacing="0" cellpadding="15">
           <tr>
-            <td align="center" style="color:#FFF; font-family:Arial, Helvetica, sans-serif; font-size:22px; padding-top:30px;padding-bottom:30px;"> 
-				<?php echo $PAGE_HEADING;?> <br />
+            <td align="center" style="color:#FFF; font-family:Arial, Helvetica, sans-serif; font-size:22px; padding-top:20px;padding-bottom:30px;"> 
+				Update Notification on Join Request ! <br />
 			</td>
           </tr>
         </table></td>
@@ -24,9 +18,10 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="10" style="margin-bottom:10px;">
           <tr>
             <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#015591;">
-              <div style="font-size:20px;"><?php echo $ADDRESS_TO;?>,</div>
+              <div style="font-size:18px;">Hello <?php echo $HelloTo;?>,</div>
 			  <div><br>
-				<?php echo $ADDRESS_CONTENT;?> </div> 
+				Your Join Request has been posted to the user & you will get a notification once after he approved it !.. <br /> 
+				Following are the details for which you had posted your Join Request. </div> 
 			</td>
           </tr>
         </table>
@@ -35,9 +30,9 @@
               <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#015591;">
 			  <div style="font-size:14px;"><b>
 					<img src="<?php echo base_url();?>images/email_ok.png" align="left" style="margin-right:20px;">
-					<?php echo $SUCCESS_HEADER;?> :</b></div>
+					Ride Details :</b></div>
 					<div style="color:#015591;"> <br />
-					<?php echo $SUCCESS_TEXT;?>
+					<?php echo $ItemDetails;?>
 					</div>
 				</td>
             </tr>
@@ -65,5 +60,3 @@
 	</td>
   </tr>
 </table>
-</body>
-</html>
