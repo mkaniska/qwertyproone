@@ -573,3 +573,15 @@ function doneSelectCompany(){
 	$('.ui-dialog-titlebar-close:visible').click();
 	$('#selectCompany').submit();
 }
+
+function validHRUser() {
+	
+	$("#errorDisplay").html('');
+	var ok = true;
+	if($.trim($("#full_name").val())==''){$("#errorDisplay").html("Please enter a valid full name");$("#full_name").focus();ok = false;}
+	else if($.trim($("#email_address").val())==''){$("#errorDisplay").html("Please enter a valid email address");$("#email_address").focus();ok = false;}
+	else if($.trim($("#phone_number").val())==''){$("#errorDisplay").html("Please enter a valid phone number");$("#phone_number").focus();ok = false;}
+	else if($.trim($("#address").val())==''){$("#errorDisplay").html("Please enter a valid address");$("#address").focus();ok = false;}
+	else if($.trim($("#zipcode").val())==''){$("#errorDisplay").html("Please enter a valid zip code");$("#zipcode").focus();ok = false;}
+	return ok;
+}

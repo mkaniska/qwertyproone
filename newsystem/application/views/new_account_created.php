@@ -8,7 +8,7 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="15">
           <tr>
             <td align="center" style="color:#FFF; font-family:Arial, Helvetica, sans-serif; font-size:22px; padding-top:20px;padding-bottom:30px;"> 
-				Registration Confirmation & Email Account Activation !<br />
+				New Account Created !<br />
 			</td>
           </tr>
         </table></td>
@@ -20,7 +20,7 @@
             <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#015591;">
               <div style="font-size:18px;">Hello <?php echo $HelloTo;?>,</div>
 			  <div><br>
-				Thanks for joining us !.. Your details are saved into our database successfully !. Our Administrator will contact you soon for the updates!.</div> 
+				Thanks for joining us !.. Our admin has created an account for you on our Application !. You can login into the application using the below details.</div> 
 			</td>
           </tr>
         </table>
@@ -29,10 +29,9 @@
               <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#015591;">
 			  <div style="font-size:14px;"><b>
 					<img src="<?php echo $url;?>images/email_ok.png" align="left" style="margin-right:20px;">
-					Activate Email :</b></div>
+					Login Details :</b></div>
 					<div style="color:#015591;"> <br />
-					Please contact admin if in case you have any other queries/clarifications.!
-					<a href="<?php echo $activateLink;?>" style="color:#015591;font-weight:bold;">Click Here</a> <br /><br />
+					Please contact admin if in case you have any other queries/clarifications.!					
 					<p style="color:#015591;font-weight:bold;">
 					Your User Name : <?php echo $userName;?> <br /><br />
 					Your Password  : <?php echo $passWord;?>

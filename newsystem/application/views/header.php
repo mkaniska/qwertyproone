@@ -64,7 +64,11 @@ ddsmoothmenu.init({
 	<div id="website_header" class="wrapper">
     	<div id="site_title"><a href="<?php echo base_url();?>welcome/home">CodeIgniter Sample Application</a></div>
 		<!-- start of website_menu -->
+			<?php if($this->session->userdata('_user_type')==3) { ?>
+			<?php $this->load->view('hr_menu'); ?>
+			<?php }else { ?>
 			<?php $this->load->view('menu'); ?>
+			<?php } ?>
         <!-- end of website_menu -->
     </div>
 </div>

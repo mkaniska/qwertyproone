@@ -27,7 +27,7 @@ $config['form_pages'] = array('user/signup','welcome/contactus','user/newride','
 
 $config['is_map_page'] = array('user/newride');
 
-$config['is_email_enabled'] = true;
+$config['is_email_enabled'] = false;
 
 $config['left_menu_navigation'] = array(array('admin/addcompany','admin/company_list','admin/type_list'),
 										array('admin/addoffer','admin/offer_list','admin/edit_offer','admin/offertype_list'),

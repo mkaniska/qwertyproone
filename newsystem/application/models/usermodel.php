@@ -12,12 +12,15 @@ class UserModel extends CI_Model {
 	
     function is_valid_login($user, $pass, $userType=2) {
 	
-        $this->db->select('pro_user_id,pro_user_full_name'); //'pro_users');
+        $this->db->select('pro_user_id,pro_user_full_name,pro_user_type'); //'pro_users');
         $this->db->where('pro_user_email', $user);
         $this->db->where('pro_user_password', $pass);
-		$this->db->where('pro_user_type', $userType); // $userType =1 is for Admin / 2 is for User / 3 is for HR 
-		 
+		if($userType!=2) {
+			$this->db->where('pro_user_type', $userType); // $userType =1 is for Admin / 2 is for User / 3 is for HR 
+		}
         $query = $this->db->get($this->table_name);
+		//echo $this->db->last_query();
+		//exit;
 		if($query->num_rows() > 0) {
 			return $query->row();  
 		}else {
@@ -25,6 +28,18 @@ class UserModel extends CI_Model {
 		}
     }
 
+    function get_enabled_ips() {
+        
+		$this->db->where("ip_added_by",$this->session->userdata('_user_id'));
+		$this->db->select();
+        $query = $this->db->get('pro_allowed_ipaddresses');
+		foreach ($query->result() as $row)
+		{
+			$result_back[] = $row;
+		}
+        return $result_back;  
+    }
+	
     function get_total_users() {
 
 		$this->db->order_by("pro_user_joined","DESC");

@@ -170,6 +170,7 @@ class User extends CI_Controller {
 			if($output->pro_user_id>0){
 				$newsessdata = array(
 								   '_user_id'  	=> $output->pro_user_id,
+								   '_user_type' => $output->pro_user_type,
 								   '_user_name' => $output->pro_user_full_name
 							   );
 				$this->session->set_userdata($newsessdata);
@@ -201,7 +202,7 @@ class User extends CI_Controller {
 	}	
 	
 	public function logout() {
-		$newsessdata = array('_user_id'  	=> '', '_user_name' => '');
+		$newsessdata = array('_user_id'  	=> '', '_user_type' => '', '_user_name' => '');
 		$this->session->unset_userdata($newsessdata); // Clearing the session values
 		$this->session->set_flashdata('flash_message', 'Successfully Logged out !..');
 		redirect('user/login');
@@ -212,7 +213,35 @@ class User extends CI_Controller {
 		$data['menu'] = "thanks";
 		$data['title'] = SITE_TITLE." :: Thanks";
 		$this->load->view('simple_layout', $data);
-	}	
+	}
+
+	public function settings() {
+		if($this->session->userdata('_user_id')==''){redirect('user/login');}
+		$data['page_name'] = "user/settings";		
+		$data['states_list'] = $this->CommonModel->states_list();			
+		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
+		//$data['time_slots']  = $this->CommonModel->get_time_slot();
+		//$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		//$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
+		$data['ip_list'] = $this->UserModel->get_enabled_ips();
+		$data['menu'] = "settings";
+		$data['title'] = SITE_TITLE." :: Global Settings";
+		$this->load->view('layout', $data);
+	}
+	
+	public function update_settings() {
+		if($this->session->userdata('_user_id')==''){redirect('user/login');}
+		if($this->input->post('doUpdate')=='Update') {
+			$posted_data['pro_user_full_name'] 	= $this->input->post('email_domain');
+			$posted_data['pro_user_email'] 		= $this->input->post('email_address');
+			$posted_data['pro_user_phone']	 	= $this->input->post('phone_number');
+			$posted_data['pro_user_address'] 	= $this->input->post('address');
+			$posted_data['pro_user_state'] 		= $this->input->post('state');
+			$posted_data['pro_user_city'] 		= $this->input->post('city');
+			$posted_data['pro_user_zipcode'] 	= $this->input->post('zipcode');
+		}
+		$data['ip_list'] = $this->UserModel->updateSettings($posted_data);
+	}
 }
 
 /* End of file user.php */

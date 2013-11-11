@@ -41,14 +41,13 @@ class Admin extends CI_Controller {
 			*/
 			//$this->load->helper(array('form', 'url'));
             $config = array();
-            $config['upload_path'] = dirname($_SERVER["SCRIPT_FILENAME"])."/uploads/";
-            $config['upload_path'] = base_url()."uploads/";
+            $config['upload_path'] = "uploads/";
             $config['allowed_types'] = 'gif|jpg|png|JPG|JPEG|PNG|GIF';
             $config['max_size'] = '100';
             $config['max_width'] = '1024';
             $config['max_height'] = '768';
             $config['max_filename'] = '1000';
-            //$config['file_name'] = 'x.png';
+            $config['file_name'] = 'x.png';
 
             $this->load->library('upload',$config);
 			$this->upload->initialize($config);
@@ -58,6 +57,7 @@ class Admin extends CI_Controller {
                 echo $datas['error'] = $this->upload->display_errors();                
             }
 		}
+		
 		$data['page_name'] = "admin/testupload";
 		$data['menu'] = "home";
 		$data['title'] = SITE_ADMIN_TITLE." :: Dashboard";		
@@ -325,31 +325,32 @@ class Admin extends CI_Controller {
 			$inp_data['offer_amount'] 				= $this->input->post('offer_amount');
 			$inp_data['conditions_apply'] 			= $this->input->post('conditions_apply');
 			
-			/*
+			
 			// File uploading here
-			$fconfig['upload_path'] = '../offer_pictures/';
+			$fconfig['upload_path'] = 'offer_pictures/';
 			$fconfig['allowed_types'] = 'gif|jpg|png|GIF|JPG|JPEG|PNG';
 			$fconfig['max_size']	= '1000';
 			$fconfig['max_width']  = '1024';
 			$fconfig['max_height']  = '1024';
 			$fconfig['remove_spaces']  = TRUE;            
-			
-            $fconfig['upload_url'] = base_url()."offer_pictures/";			
 			$ext = end(explode('.', $_FILES['userfile']['name']));
+			$fconfig['file_name']  = time().'.'.$ext;
+			
+            //$fconfig['upload_url'] = base_url()."offer_pictures/";
 			//$findExt = explode(basename($this->input->post('userfile')));
 			//$filename = 'mypic.gif';
 			//$ext = pathinfo($filename, PATHINFO_EXTENSION);
-			$fconfig['file_name']  = time().'.'.$ext;
+			
 			$this->load->library('upload', $fconfig);
-			if ( ! $this->upload->do_upload()){
+			
+			if(!$this->upload->do_upload()) {
 				$this->session->set_flashdata('flash_message', 'Invalid Picture Uploaded!');
 				$this->session->set_flashdata('flash_data', $inp_data);
 				redirect('admin/addoffer');
-			} else{
+			} else {
 				$inp_data['offer_picture'] = $fconfig['upload_path'].$fconfig['file_name'];
 			}
 			// File upload completed 
-			*/
 			
 			$inp_data['offer_picture'] = '';
 			
@@ -708,27 +709,107 @@ class Admin extends CI_Controller {
 		$this->load->view('admin_layout', $data);
 	}
 	
+	public function addhruser() {
+		
+		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
+		$data['state_list'] = $this->CommonModel->states_list();
+		$data['page_name'] = "admin/addhruser";
+		$data['menu'] = "addhruser";		
+		$data['title'] = SITE_ADMIN_TITLE." :: Add New HR User";
+		$this->load->view('admin_layout', $data);
+	}
+
+	public function prcess_addhruser() {
+		
+		if($this->input->post('addUser')=='Submit') {
+			$posted_data['pro_user_type'] 		= 3; // HR
+			$posted_data['pro_user_full_name'] 	= $this->input->post('full_name');
+			$posted_data['pro_user_email'] 		= $this->input->post('email_address');
+			$posted_data['pro_user_gender'] 	= $this->input->post('gender');
+			$randomPassword = chr(rand(65,74)).rand(1,3).chr(rand(75,83)).chr(rand(84,90)).rand(4,6).chr(rand(97,107)).chr(rand(108,122)).rand(7,9);
+			$posted_data['pro_user_password'] 	= $randomPassword;
+			$posted_data['pro_user_phone']	 	= $this->input->post('phone_number');
+			$posted_data['pro_user_address'] 	= $this->input->post('address');
+			$posted_data['pro_user_state'] 		= $this->input->post('state');
+			$posted_data['pro_user_city'] 		= $this->input->post('city');
+			$posted_data['pro_user_zipcode'] 	= $this->input->post('zipcode');
+			$posted_data['pro_user_ip'] 		= $_SERVER['REMOTE_ADDR'];
+			$posted_data['pro_user_latitude'] 	= '';
+			$posted_data['pro_user_longitude'] 	= time();
+			$posted_data['pro_user_joined'] 	= time();
+			$posted_data['pro_user_updated'] 	= time();
+			$posted_data['pro_user_status'] 	= '1'; // Self Approval
+			$posted_data['pro_corporate_id'] 	= $this->input->post('selected_company')==''?$this->session->userdata('selected_company'):$this->input->post('selected_company');
+			
+			$isValidID = $this->UserModel->insertSingup($posted_data);
+			
+			if($isValidID>0) {
+				// Sending Email Activation Link
+				$mconfig['protocol'] = 'mail';
+				$mconfig['wordwrap'] = FALSE;
+				$mconfig['mailtype'] = 'html';
+				$mconfig['charset'] = 'utf-8';
+				$mconfig['crlf'] = "\r\n";
+				$mconfig['newline'] = "\r\n";
+				$this->load->library('email',$mconfig);
+
+				$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
+				//$this->email->to('murugdev.eee@gmail.com');
+				$this->email->to($posted_data['pro_user_email']);
+
+				$this->email->subject('Commute Easy: New Account Created!');
+
+				$email_data['HelloTo'] 			= $posted_data['pro_user_full_name'];
+
+				$email_data['activateLink'] 	= 'http://work.ideasdiary.com';
+				$email_data['userName'] 		= $this->input->post('email_address');
+				$email_data['passWord'] 		= $randomPassword;
+				$email_data['url'] 				= base_url();
+				
+				$email_template = $this->load->view('new_account_created', $email_data, true);
+				
+				if($this->config->item('is_email_enabled')) {
+					$this->email->message($email_template);
+					$this->email->send();				
+				}				
+				
+				$this->session->set_flashdata('flash_message', 'Successfully Added the HR Account !');
+				redirect('admin/company_details/'.$posted_data['pro_corporate_id']);
+			} else {
+				$this->session->set_flashdata('data_back', $posted_data);
+				$this->session->set_flashdata('flash_message', 'Please enter all the details');
+				redirect('admin/addhruser');
+			}
+		}else{
+			$this->session->set_flashdata('flash_message', 'Invalid Request!');
+			redirect('admin/addhruser');
+		}
+	}
+	
 	public function company_details(){
 	
 		$company_id = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
 		if($company_id>0) {
 			$selection = array('selected_company' => $company_id);
 			$this->session->set_userdata($selection);
-		}else {
+		}else if($this->session->userdata('selected_company')!='') {
 			$company_id = $this->session->userdata('selected_company');
+		}else {
+			redirect('admin/company_list');
 		}
-		
-		$data['company_info'] = $this->AdminModel->getTheseCompanyDetails($company_id,false);
+		//echo $this->session->userdata('selected_company');
+		//exit;
+		$data['company_info'] = $this->AdminModel->getTheseCompanyDetails($company_id, false);
 		
 		$data['page_name'] = "admin/company_details";
 		$data['menu'] = "company_details";
 		
 		$this->load->library('pagination');		
-		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
-		$config['uri_segment'] 		= 3;
-		$config['num_links']		= 3;
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;	
+		$config['uri_segment'] 		= 4;
+		$config['num_links']		= 4;
 		$config['per_page'] 		= 5;
-		$config['base_url'] 		= base_url().'admin/company_details/';
+		$config['base_url'] 		= base_url().'admin/company_details/'.$company_id.'/';
 		$config['use_page_numbers'] = TRUE;
         $config['cur_tag_open'] 	= "<li><span><b>";
         $config['cur_tag_close'] 	= "</b></span></li>";
@@ -748,8 +829,12 @@ class Admin extends CI_Controller {
 		$data['total']     = $config['total_rows'];
 		$data['title'] = SITE_ADMIN_TITLE." :: Details of Company & List of HR";
 		$data['user_list'] = $this->AdminModel->getThisCompanyUsers($config["per_page"], $page, $company_id);
+		
+		$this->pagination->initialize($config); 
+		$data['pagelink'] = $this->pagination->create_links();		
 		$this->load->view('admin_layout', $data);
 	}
+	
 	
 }
 
