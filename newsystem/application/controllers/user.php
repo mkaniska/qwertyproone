@@ -94,7 +94,8 @@ class User extends CI_Controller {
 			$posted_data['pro_user_type'] 		= 2;// Commuters
 			$posted_data['pro_user_full_name'] 	= $this->input->post('full_name');
 			$posted_data['pro_user_gender'] 	= $this->input->post('gender');
-			$posted_data['pro_user_email'] 		= $this->input->post('email_address');
+			$domainAddress 						= explode("@",$this->input->post('email_address'));
+			$posted_data['pro_user_domain'] 	= $domainAddress[1];
 			$posted_data['pro_user_password'] 	= $this->input->post('password_text');
 			$posted_data['pro_user_phone']	 	= $this->input->post('phone_number');
 			$posted_data['pro_user_address'] 	= $this->input->post('address');
@@ -224,6 +225,8 @@ class User extends CI_Controller {
 		//$data['recent_rides'] = $this->RideModel->get_recent_rides();
 		//$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
 		$data['ip_list'] = $this->UserModel->get_enabled_ips();
+		$returned = $this->UserModel->get_user_settings();
+		$data['user_settings'] = $returned[0];
 		$data['menu'] = "settings";
 		$data['title'] = SITE_TITLE." :: Global Settings";
 		$this->load->view('layout', $data);
@@ -232,15 +235,38 @@ class User extends CI_Controller {
 	public function update_settings() {
 		if($this->session->userdata('_user_id')==''){redirect('user/login');}
 		if($this->input->post('doUpdate')=='Update') {
-			$posted_data['pro_user_full_name'] 	= $this->input->post('email_domain');
-			$posted_data['pro_user_email'] 		= $this->input->post('email_address');
+			$posted_data['pro_user_domain'] 	= $this->input->post('email_domain');
 			$posted_data['pro_user_phone']	 	= $this->input->post('phone_number');
 			$posted_data['pro_user_address'] 	= $this->input->post('address');
 			$posted_data['pro_user_state'] 		= $this->input->post('state');
 			$posted_data['pro_user_city'] 		= $this->input->post('city');
 			$posted_data['pro_user_zipcode'] 	= $this->input->post('zipcode');
+			$isDone = $this->UserModel->updateUserSettings($posted_data);
+			if($isDone){
+				$this->session->set_flashdata('flash_message', 'Settings are updated successfully!');
+			}else{
+				$this->session->set_flashdata('flash_message', 'Error on Updating Settings!');
+			}
+			redirect('user/settings');
+		}else {
+			$this->session->set_flashdata('flash_message', 'Invalid Request!');
+			redirect('user/settings');
 		}
-		$data['ip_list'] = $this->UserModel->updateSettings($posted_data);
+	}
+	public function process_addipaddress() {
+		
+		if($this->input->post('addIP')=='Add') {
+			$posted_data['ip_address'] 	= $this->input->post('ip_address');
+			$posted_data['ip_added_by'] = $this->session->userdata('_user_id');
+			$posted_data['ip_added_on'] = time();
+			$isDone = $this->UserModel->insertIPAddress($posted_data);
+			if($isDone){
+				$this->session->set_flashdata('flash_message', 'IP Address Added Successfully!');
+			}else{
+				$this->session->set_flashdata('flash_message', 'Error on Adding IP Address!');
+			}
+			redirect('user/settings');
+		}
 	}
 }
 

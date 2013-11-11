@@ -725,6 +725,8 @@ class Admin extends CI_Controller {
 			$posted_data['pro_user_type'] 		= 3; // HR
 			$posted_data['pro_user_full_name'] 	= $this->input->post('full_name');
 			$posted_data['pro_user_email'] 		= $this->input->post('email_address');
+			$domainAddress 						= explode("@",$this->input->post('email_address'));
+			$posted_data['pro_user_domain'] 	= $domainAddress[1];
 			$posted_data['pro_user_gender'] 	= $this->input->post('gender');
 			$randomPassword = chr(rand(65,74)).rand(1,3).chr(rand(75,83)).chr(rand(84,90)).rand(4,6).chr(rand(97,107)).chr(rand(108,122)).rand(7,9);
 			$posted_data['pro_user_password'] 	= $randomPassword;

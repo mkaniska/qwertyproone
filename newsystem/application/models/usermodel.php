@@ -33,12 +33,28 @@ class UserModel extends CI_Model {
 		$this->db->where("ip_added_by",$this->session->userdata('_user_id'));
 		$this->db->select();
         $query = $this->db->get('pro_allowed_ipaddresses');
+		$result_back = array();
 		foreach ($query->result() as $row)
 		{
 			$result_back[] = $row;
 		}
         return $result_back;  
     }
+
+    function get_user_settings() {
+        
+		$this->db->where("pro_user_id",$this->session->userdata('_user_id'));
+		$this->db->select();
+        $query = $this->db->get('pro_users');
+		return $query->result();
+    }	
+	
+	function updateUserSettings($data) {
+	
+		$this->db->where("pro_user_id",$this->session->userdata('_user_id'));
+		$this->db->update('pro_users', $data);
+        return true;
+	}
 	
     function get_total_users() {
 
@@ -126,6 +142,13 @@ class UserModel extends CI_Model {
         $inserted_id = $this->db->insert_id();
         return $inserted_id;
 	}
+	
+	function insertIPAddress($data) {
+        $this->db->insert('pro_allowed_ipaddresses', $data);
+        $inserted_id = $this->db->insert_id();
+        return $inserted_id;
+	}
+	
 }
 
 ?>

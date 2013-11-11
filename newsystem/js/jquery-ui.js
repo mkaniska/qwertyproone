@@ -9669,8 +9669,8 @@ $.widget( "ui.dialog", {
 		height: "auto",
 		maxHeight: null,
 		maxWidth: null,
-		minHeight: 250,
-		minWidth: 250,
+		minHeight: 150,
+		minWidth: 150,
 		modal: false,
 		position: {
 			my: "center",
@@ -9688,7 +9688,7 @@ $.widget( "ui.dialog", {
 		resizable: true,
 		show: null,
 		title: null,
-		width: 500,
+		width: 400,
 
 		// callbacks
 		beforeClose: null,

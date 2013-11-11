@@ -284,3 +284,21 @@ function confirmRequest(responseID, reqID, stsVAL) {
 		alert("Invalid Request!");
 	}
 }
+
+function addIP(){
+	$('#dialog').dialog();
+}
+
+function isValidIP() {
+	$("#iperror").html();
+	var ipvals = $("#ip_address").val();
+	if(ipvals=='') {
+         $("#iperror").html('Please enter the IP Address');
+		 return true;
+	}else if(!ipvals.match(/^[0-9]+\.?[0-9]*$/)) {
+         $("#iperror").html('Please enter Only Number or Dot');
+		 return true;
+    }else {
+		return true;
+	}
+}

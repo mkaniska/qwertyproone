@@ -1,3 +1,30 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Nov 11, 2013 at 07:33 PM
+-- Server version: 5.1.36-community-log
+-- PHP Version: 5.3.0
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `project`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `old_pro_offers`
+--
 
 CREATE TABLE IF NOT EXISTS `old_pro_offers` (
   `offer_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -38,7 +65,16 @@ CREATE TABLE IF NOT EXISTS `pro_allowed_ipaddresses` (
   `ip_address` varchar(50) NOT NULL,
   `ip_added_on` bigint(11) NOT NULL,
   PRIMARY KEY (`ip_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `pro_allowed_ipaddresses`
+--
+
+INSERT INTO `pro_allowed_ipaddresses` (`ip_id`, `ip_added_by`, `ip_address`, `ip_added_on`) VALUES
+(1, 7, '182.176.2.109', 1384197631),
+(2, 7, '127.0.123.323', 1384197881),
+(3, 7, '1.1.1.1', 1384198341);
 
 -- --------------------------------------------------------
 
@@ -2177,7 +2213,7 @@ INSERT INTO `pro_time_slot` (`slot_id`, `slot_value`, `slot_label`) VALUES
 CREATE TABLE IF NOT EXISTS `pro_users` (
   `pro_user_id` int(11) NOT NULL AUTO_INCREMENT,
   `pro_user_type` int(11) NOT NULL,
-  `pro_corporate_id` int(11) NOT NULL,
+  `pro_corporate_id` int(11) NOT NULL DEFAULT '0',
   `pro_user_full_name` varchar(255) NOT NULL,
   `pro_user_gender` varchar(10) NOT NULL,
   `pro_user_password` varchar(255) NOT NULL,
@@ -2191,6 +2227,7 @@ CREATE TABLE IF NOT EXISTS `pro_users` (
   `pro_user_latitude` double(8,2) NOT NULL,
   `pro_user_longitude` double(8,2) NOT NULL,
   `pro_user_ip` varchar(25) NOT NULL,
+  `pro_user_domain` varchar(200) NOT NULL,
   `pro_user_joined` bigint(20) NOT NULL,
   `pro_user_updated` bigint(20) NOT NULL,
   PRIMARY KEY (`pro_user_id`)
@@ -2200,15 +2237,15 @@ CREATE TABLE IF NOT EXISTS `pro_users` (
 -- Dumping data for table `pro_users`
 --
 
-INSERT INTO `pro_users` (`pro_user_id`, `pro_user_type`, `pro_corporate_id`, `pro_user_full_name`, `pro_user_gender`, `pro_user_password`, `pro_user_phone`, `pro_user_email`, `pro_user_status`, `pro_user_address`, `pro_user_city`, `pro_user_state`, `pro_user_zipcode`, `pro_user_latitude`, `pro_user_longitude`, `pro_user_ip`, `pro_user_joined`, `pro_user_updated`) VALUES
-(1, 1, 4, 'Arun', 'male', 'haihai', '8979786789', 'test1', 0, '110 Madiwala', 'Arakkonam', 'Tamil Nadu', '560016', 0.00, 999999.99, '127.0.0.1', 1381489875, 1381489875),
-(2, 2, 2, 'Bala', 'male', 'haihai', '9986363998', 'test2', 1, 'Koramangala', 'Bangalore', 'Tamil Nadu', '560016', 0.00, 999999.99, '127.0.0.1', 1381931826, 1381931826),
-(3, 3, 4, 'Chinna', 'male', 'haihai', '9986363912', 'test3', 0, '120 5th Cross', 'Trichy', 'Tamil Nadu', '560013', 0.00, 999999.99, '127.0.0.1', 1381914058, 1381914058),
-(4, 2, 1, 'Durai', 'male', 'haihai', '8886363998', 'test4', 1, '4th cross, Madiwala', 'Madurai', 'Tamil Nadu', '560011', 0.00, 999999.99, '127.0.0.1', 1381914270, 1381914270),
-(5, 3, 4, 'Ervin', 'male', 'haihai', '9981263998', 'test5', 0, 'Shakthi Nagar', 'Chennai', 'Tamil Nadu', '560098', 0.00, 999999.99, '127.0.0.1', 1381914370, 1381914370),
-(6, 1, 7, 'Fransis', 'male', 'haihai', '9986343998', 'test6', 1, 'HSR Layout', 'Bangalore', 'Tamil Nadu', '560086', 0.00, 999999.99, '127.0.0.1', 1381931415, 1381931415),
-(7, 3, 3, 'Gopalakrishnan', 'male', 'haihai', '87856757667', 'p.murugesan@clariontechnologies.co.in', 1, 'Alaska,Adak,US', 'Bangalore', 'Tamil Nadu', '8678676', 0.00, 999999.99, '127.0.0.1', 1384179728, 1384179728),
-(8, 3, 3, 'Vivekananth', 'male', 'C2QV6kr', '9956525998', 'vivek@gmail.com', 1, 'California,Agoura Hills,US', 'Bangalore', 'Karnataka', '560214', 0.00, 999999.99, '127.0.0.1', 1384180304, 1384180304);
+INSERT INTO `pro_users` (`pro_user_id`, `pro_user_type`, `pro_corporate_id`, `pro_user_full_name`, `pro_user_gender`, `pro_user_password`, `pro_user_phone`, `pro_user_email`, `pro_user_status`, `pro_user_address`, `pro_user_city`, `pro_user_state`, `pro_user_zipcode`, `pro_user_latitude`, `pro_user_longitude`, `pro_user_ip`, `pro_user_domain`, `pro_user_joined`, `pro_user_updated`) VALUES
+(1, 1, 4, 'Arun', 'male', 'haihai', '8979786789', 'test1', 0, '110 Madiwala', 'Arakkonam', 'Tamil Nadu', '560016', 0.00, 999999.99, '127.0.0.1', 'clarion.com', 1381489875, 1381489875),
+(2, 2, 2, 'Bala', 'male', 'haihai', '9986363998', 'test2', 1, 'Koramangala', 'Bangalore', 'Tamil Nadu', '560016', 0.00, 999999.99, '127.0.0.1', 'infosys.com', 1381931826, 1381931826),
+(3, 3, 4, 'Chinna', 'male', 'haihai', '9986363912', 'test3', 0, '120 5th Cross', 'Trichy', 'Tamil Nadu', '560013', 0.00, 999999.99, '127.0.0.1', 'delcosys.com', 1381914058, 1381914058),
+(4, 2, 1, 'Durai', 'male', 'haihai', '8886363998', 'test4', 1, '4th cross, Madiwala', 'Madurai', 'Tamil Nadu', '560011', 0.00, 999999.99, '127.0.0.1', 'co-strategix.com', 1381914270, 1381914270),
+(5, 3, 4, 'Ervin', 'male', 'haihai', '9981263998', 'test5', 0, 'Shakthi Nagar', 'Chennai', 'Tamil Nadu', '560098', 0.00, 999999.99, '127.0.0.1', 'ibm.in', 1381914370, 1381914370),
+(6, 1, 7, 'Fransis', 'male', 'haihai', '9986343998', 'test6', 1, 'HSR Layout', 'Bangalore', 'Tamil Nadu', '560086', 0.00, 999999.99, '127.0.0.1', 'yahoo.co.in', 1381931415, 1381931415),
+(7, 3, 3, 'Gopalakrishnan', 'male', 'haihai', '9986363772', 'p.murugesan@clariontechnologies.co.in', 1, '110 First Floor Koramangala', 'Bangalore', 'Tamil Nadu', '560023', 0.00, 999999.99, '127.0.0.1', 'mtsindia.co.in', 1384179728, 1384179728),
+(8, 3, 3, 'Vivekananth', 'male', 'C2QV6kr', '9956525998', 'vivek@gmail.com', 1, 'California,Agoura Hills,US', 'Bangalore', 'Karnataka', '560214', 0.00, 999999.99, '127.0.0.1', 'itsoft.in', 1384180304, 1384180304);
 
 -- --------------------------------------------------------
 
