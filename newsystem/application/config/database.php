@@ -52,7 +52,7 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 
-switch(1) {
+switch(2) {
 
 	case '1':
 			$db['default']['username'] = 'root';

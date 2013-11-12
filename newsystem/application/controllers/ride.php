@@ -46,7 +46,8 @@ class Ride extends CI_Controller {
 		
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();
-		
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
 		$this->load->view('layouts/layout', $data);
 	}
 
@@ -139,7 +140,8 @@ class Ride extends CI_Controller {
 		
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();
-		
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
 		$this->load->view('layouts/layout', $data);
 	}
 
