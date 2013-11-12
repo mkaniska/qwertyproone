@@ -26,8 +26,8 @@
 <link rel="stylesheet" href="<?php echo base_url();?>css/tab_jquery-ui.css" />
 
 <?php if($page_name=='welcome/home') { ?>
-<link href="<?php echo base_url();?>css/image-slider.css" rel="stylesheet" type="text/css" />
-<script src="<?php echo base_url();?>js/image-slider.js" type="text/javascript"></script>
+<link href="<?php echo base_url();?>css/js-image-slider.css" rel="stylesheet" type="text/css" />
+<script src="<?php echo base_url();?>js/js-image-slider.js" type="text/javascript"></script>
 <?php } ?>
 
 <?php if($page_name=='ride/add') { ?>

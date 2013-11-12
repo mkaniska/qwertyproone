@@ -827,7 +827,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
 	border: 1px solid #d3d3d3;
-	background: #E16715 url(../admin-images/cross.png) 50% 50% no-repeat;
+	/*background: #E16715 url(../admin-images/cross.png) 50% 50% no-repeat;*/
 	font-weight: normal;
 	color: #000000;
 }
@@ -845,7 +845,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
 	border: 1px solid #E16715;
-	background: #dadada url(../admin-images/cross.png) 50% 50% no-repeat;
+	/*background: #dadada url(../admin-images/cross.png) 50% 50% no-repeat;*/
 	font-weight: normal;
 	color: #212121;
 }

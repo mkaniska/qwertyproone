@@ -2,7 +2,7 @@
 	<div id="website_bottom" class="wrapper">
     
     	<div class="col one_fourth_footer1">
-            <h4>Who we are ?</h4>
+            <h4 align="center">Who we are ?</h4>
             <p> 
 			We do services on Booking, Group Sharing on Daily Travel, Corporate Offers, Daily Offers by known big companies/sales pool. 
 			Our services are currently free to linked corporate companies & soon we will reach the general public to expand our services.
@@ -11,7 +11,7 @@
         </div>
        
     	<div class="col one_fourth_footer2">
-    	<h4>Recent Joinees !</h4>
+    	<h4 align="center">Recent Joinees !</h4>
             <div class="sidebar_box_content">
                 <ul class="no_bullet_new">
 					<?php foreach($recent_joinees as $key=>$userValue) { ?>
@@ -22,7 +22,8 @@
     	</div>
 		
     	<div class="col one_fourth_footer3 no_margin_right">
-    	<h4>Socially Connected with</h4>
+    	<h4 align="center">Recent Rides Posted!</h4>
+			<!--
 			<div style="padding:10px;">
 				<div class="fb-share-button" data-href="http://mail.google.cm" data-width="180" data-type="button_count"></div>
 			</div>
@@ -34,6 +35,15 @@
 				<script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
 				<script type="IN/Share" data-url="mail.google.com" data-counter="right"></script>
 			</div>
+			-->
+            <div class="sidebar_box_content">
+                <ul class="list_bullet">
+					<?php foreach($recent_rides as $key=>$value) { ?>
+						<li><?php echo substr($value->origin_location,0,20).'...';?> -> <?php echo substr($value->destination_location,0,20).'...';?> 
+						<font style="font-weight:bold;">[<?php echo $value->start_time;?> - <?php echo $value->return_time;?>]</font></li>
+					<?php } ?>
+                </ul>
+            </div>			
     	</div>
         <div class="clear"></div>
     </div>

@@ -101,7 +101,7 @@ class RideModel extends CI_Model {
 
 	function get_recent_rides() {
 	
-		$this->db->limit(5);
+		$this->db->limit(3);
 		$this->db->order_by("added_on","DESC");
 		$this->db->select('origin_location,destination_location,start_time,return_time');
 		$query = $this->db->get($this->table_name);

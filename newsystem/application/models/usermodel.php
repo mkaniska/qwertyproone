@@ -106,7 +106,7 @@ class UserModel extends CI_Model {
 	
 	function get_recent_joinees() {
 	
-		$this->db->limit(5);
+		$this->db->limit(6);
 		$this->db->order_by("pro_user_joined","DESC");
 		$this->db->select('pro_user_full_name,pro_user_city,pro_user_joined');
 		$query = $this->db->get($this->table_name);

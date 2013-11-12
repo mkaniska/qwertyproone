@@ -60,6 +60,8 @@ class Welcome extends CI_Controller {
 		$data['page_name'] = "welcome/services";
 		$data['menu'] = "services";
 		$data['title'] = SITE_TITLE." :: Services";
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
 		$this->load->view('layouts/layout', $data);
 	}
 	

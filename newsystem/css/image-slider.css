@@ -3,7 +3,8 @@
 /*slider frame*/
 #sliderFrame 
 {
-    width:640px;
+    /*width:640px;*/
+	width:920px;
     margin:0 auto; /*remove the "margin:0 auto;" if you want to align the whole slider to the left side*/
     padding:5px;
     box-shadow: 0 0 5px #BBB;border:1px solid #CCC; background-color:#FFF;
@@ -12,7 +13,7 @@
 
 #slider {
     float:left;
-    width:420px;height:306px;/* Make it the same size as your images. */
+    width:720px;/* Make it the same size as your images. */
 	background:#fff url(loading.gif) no-repeat 50% 50%;
 	position:relative;
 	margin:0 auto;/*make the image slider center-aligned */

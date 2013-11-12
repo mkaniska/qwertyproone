@@ -17,7 +17,7 @@
 					<li><a href="http://www.templatemo.com/page/4">Template Page 4</a></li>
 				</ul>
 			</li> -->
-			<li><a href="<?php echo base_url();?>welcome/faq" <?php if($menu=='faq')echo 'class="selected"';?>>FAQ</a></li>
+			<li><a href="<?php echo base_url();?>welcome/services" <?php if($menu=='services')echo 'class="selected"';?>>Services</a></li>
 			<li><a href="<?php echo base_url();?>ride/search" <?php if($menu=='search')echo 'class="selected"';?>>Search</a></li>
 			<?php if($this->session->userdata('_user_id')=='') { ?>
 			<li><a href="<?php echo base_url();?>ride/add" <?php if($menu=='addride')echo 'class="selected"';?>>Post Ride</a></li>
