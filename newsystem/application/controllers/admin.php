@@ -61,7 +61,7 @@ class Admin extends CI_Controller {
 		$data['page_name'] = "admin/testupload";
 		$data['menu'] = "home";
 		$data['title'] = SITE_ADMIN_TITLE." :: Dashboard";		
-		$this->load->view('admin_layout', $data);
+		$this->load->view('layouts/admin_layout', $data);
 	}
 	
 	public function home() {
@@ -69,7 +69,7 @@ class Admin extends CI_Controller {
 		$data['page_name'] = "admin/home";
 		$data['menu'] = "home";
 		$data['title'] = SITE_ADMIN_TITLE." :: Dashboard";
-		$this->load->view('admin_layout', $data);
+		$this->load->view('layouts/admin_layout', $data);
 	}
 
 	public function login() {
@@ -78,7 +78,7 @@ class Admin extends CI_Controller {
 		$data['page_name'] = "admin/login";
 		$data['menu'] = "login";
 		$data['title'] = SITE_ADMIN_TITLE." :: Login";
-		$this->load->view('admin_login_layout', $data);
+		$this->load->view('layouts/admin_login_layout', $data);
 	}
 	
 	public function settings() {
@@ -88,7 +88,7 @@ class Admin extends CI_Controller {
 		$data['setting'] = $rows[0];
 		$data['menu'] = "settings";
 		$data['title'] = SITE_ADMIN_TITLE." :: Global Settings";
-		$this->load->view('admin_layout', $data);
+		$this->load->view('layouts/admin_layout', $data);
 	}
 
 	public function edit_offer() {
@@ -100,7 +100,7 @@ class Admin extends CI_Controller {
 		$data['offer'] = $rows[0];
 		$data['menu'] = "edit_offer";
 		$data['title'] = SITE_ADMIN_TITLE." :: Edit Offer";
-		$this->load->view('admin_layout', $data);
+		$this->load->view('layouts/admin_layout', $data);
 	}
 
 	public function delete_offer() {
@@ -165,7 +165,7 @@ class Admin extends CI_Controller {
 					
 					$mail_data['HelloTo'] 		= $row['contact_person'];
 					
-					$mail_template = $this->load->view('new_offer_template', $mail_data, true);
+					$mail_template = $this->load->view('templates/new_offer_template', $mail_data, true);
 					
 					if($this->config->item('is_email_enabled')) {
 						$this->email->message($mail_template);
@@ -197,7 +197,7 @@ class Admin extends CI_Controller {
 		$data['assigned_list'] = explode(",", $assigned);
 		$data['offer_id'] = $offer_id;
 		$data['page_name'] = "admin/ajax_company_list";
-		echo $this->load->view('ajax_layout', $data, true);
+		echo $this->load->view('layouts/ajax_layout', $data, true);
 		exit;
 	}
 
@@ -209,7 +209,7 @@ class Admin extends CI_Controller {
 		$assigned = $this->AdminModel->get_companies_assigned($offer_id);
 		$data['company_list'] = $this->AdminModel->getTheseCompanyDetails($assigned);
 		$data['page_name'] = "admin/selected_company_list";
-		echo $this->load->view('ajax_layout', $data, true);
+		echo $this->load->view('layouts/ajax_layout', $data, true);
 		exit;
 	}
 	
@@ -293,7 +293,7 @@ class Admin extends CI_Controller {
 		$data['offer_types'] = $this->AdminModel->get_offer_types();
 		$data['menu'] = "addoffer";
 		$data['title'] = SITE_ADMIN_TITLE." :: Add Offer";
-		$this->load->view('admin_layout', $data);
+		$this->load->view('layouts/admin_layout', $data);
 	}
 
 	public function prcess_addoffer() {
@@ -378,7 +378,7 @@ class Admin extends CI_Controller {
 		$data['company_types'] = $this->AdminModel->get_company_types();
 		$data['menu'] = "addcompany";
 		$data['title'] = SITE_ADMIN_TITLE." :: Add Company";
-		$this->load->view('admin_layout', $data);
+		$this->load->view('layouts/admin_layout', $data);
 	}
 
 	public function prcess_addcompany() {
@@ -428,7 +428,7 @@ class Admin extends CI_Controller {
 		$data['page_name'] = "admin/getpassword";
 		$data['menu'] = "getpassword";
 		$data['title'] = SITE_ADMIN_TITLE." :: Retrive Password";
-		$this->load->view('admin_layout', $data);
+		$this->load->view('layouts/admin_layout', $data);
 	}
 	
 	public function process_login() {
@@ -519,7 +519,7 @@ class Admin extends CI_Controller {
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();
 		
-		$this->load->view('admin_layout', $data);
+		$this->load->view('layouts/admin_layout', $data);
 	}
 
 	public function offertype_list() {
@@ -556,7 +556,7 @@ class Admin extends CI_Controller {
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();
 		
-		$this->load->view('admin_layout', $data);
+		$this->load->view('layouts/admin_layout', $data);
 	}
 	
 	
@@ -594,7 +594,7 @@ class Admin extends CI_Controller {
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();
 		
-		$this->load->view('admin_layout', $data);
+		$this->load->view('layouts/admin_layout', $data);
 	}
 
 	public function offer_list() {
@@ -632,7 +632,7 @@ class Admin extends CI_Controller {
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();
 		
-		$this->load->view('admin_layout', $data);
+		$this->load->view('layouts/admin_layout', $data);
 	}
 	
 	public function company_list() {
@@ -670,7 +670,7 @@ class Admin extends CI_Controller {
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();
 		
-		$this->load->view('admin_layout', $data);
+		$this->load->view('layouts/admin_layout', $data);
 	}
 	
 	public function user_list() {
@@ -706,7 +706,7 @@ class Admin extends CI_Controller {
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();
 		
-		$this->load->view('admin_layout', $data);
+		$this->load->view('layouts/admin_layout', $data);
 	}
 	
 	public function addhruser() {
@@ -716,7 +716,7 @@ class Admin extends CI_Controller {
 		$data['page_name'] = "admin/addhruser";
 		$data['menu'] = "addhruser";		
 		$data['title'] = SITE_ADMIN_TITLE." :: Add New HR User";
-		$this->load->view('admin_layout', $data);
+		$this->load->view('layouts/admin_layout', $data);
 	}
 
 	public function prcess_addhruser() {
@@ -768,7 +768,7 @@ class Admin extends CI_Controller {
 				$email_data['passWord'] 		= $randomPassword;
 				$email_data['url'] 				= base_url();
 				
-				$email_template = $this->load->view('new_account_created', $email_data, true);
+				$email_template = $this->load->view('templates/new_account_created', $email_data, true);
 				
 				if($this->config->item('is_email_enabled')) {
 					$this->email->message($email_template);
@@ -834,7 +834,7 @@ class Admin extends CI_Controller {
 		
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();		
-		$this->load->view('admin_layout', $data);
+		$this->load->view('layouts/admin_layout', $data);
 	}
 	
 	

@@ -16,7 +16,7 @@ class Welcome extends CI_Controller {
 		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();
 		$data['menu'] = "home";
 		$data['title'] = "Welcome to CodeIgniter Sample";		
-		$this->load->view('layout', $data);
+		$this->load->view('layouts/layout', $data);
 	}
 	public function home(){	
 
@@ -25,7 +25,7 @@ class Welcome extends CI_Controller {
 		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();
 		$data['menu'] = "home"; 
 		$data['title'] = "Welcome to CodeIgniter Sample";
-		$this->load->view('layout', $data);
+		$this->load->view('layouts/layout', $data);
 	}
 	public function thanks(){	
 
@@ -34,21 +34,25 @@ class Welcome extends CI_Controller {
 		$data['title'] = "Thank you !";
 		$data['title'] = SITE_TITLE." :: Thanks";
 		$this->session->set_flashdata('flash_message', 'Successfully Registered ! <br /> You will receive the email for verification & please confirm that to activate your account!.');
-		$this->load->view('layout', $data);
+		$this->load->view('layouts/layout', $data);
 	}	
 	public function contactus(){
 	
 		$data['page_name'] = "welcome/contactus"; 
 		$data['title'] = SITE_TITLE." :: Contact Us";
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();
 		$data['menu'] = "contactus";
-		$this->load->view('layout', $data);
+		$this->load->view('layouts/layout', $data);
 	}
 	public function faq(){
 	
 		$data['page_name'] = "welcome/faq";
 		$data['menu'] = "faq";
 		$data['title'] = SITE_TITLE." :: FAQ";
-		$this->load->view('layout', $data);
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();
+		$this->load->view('layouts/layout', $data);
 	}
  
 	public function services(){
@@ -56,7 +60,7 @@ class Welcome extends CI_Controller {
 		$data['page_name'] = "welcome/services";
 		$data['menu'] = "services";
 		$data['title'] = SITE_TITLE." :: Services";
-		$this->load->view('layout', $data);
+		$this->load->view('layouts/layout', $data);
 	}
 	
 	public function process_contact() {
@@ -93,9 +97,8 @@ class Welcome extends CI_Controller {
 			$temp_str.="Phone Number : ".$phone_number." <br /><br />";
 			
 			$email_data['SUCCESS_TEXT'] 	= $temp_str;
-
 			
-			$email_template = $this->load->view('contact_us_email', $email_data, true);				
+			$email_template = $this->load->view('templates/contact_us_email', $email_data, true);				
 			
 			if($this->config->item('is_email_enabled')) {
 				$this->email->message($email_template);

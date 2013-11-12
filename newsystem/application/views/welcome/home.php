@@ -1,8 +1,8 @@
 <div id="website_main" class="wrapper">
 	<div id="content" class="left">
         <div class="post">
-            <h2>Find a Ride</h2>
-            <div class="img_frame img_frame_23 img_nom"><span></span><img src="<?php echo base_url();?>images/blog/01.jpg" alt="" /></div>
+            <h2>Welcome to CodeIgniter Sample Site</h2>
+            <?php $this->load->view('home_slider'); ?>
             <p>Duis id lacus ac odio varius ultricies. Validate <a href="http://validator.w3.org/check?uri=referer" rel="nofollow">XHTML</a> &amp; <a href="http://jigsaw.w3.org/css-validator/check/referer" rel="nofollow">CSS</a>. Nam ut congue velit. Cras eget fermentum sem. Maecenas nec purus lorem, a sodales lectus. Etiam consequat nulla sit amet nisl volutpat ornare. Donec purus nulla, egestas ac porttitor et, pharetra nec felis. Donec lobortis fringilla blandit. Fusce a purus vel justo pulvinar tempor.</p>
         </div>
         <div class="post2">

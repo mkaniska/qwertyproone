@@ -47,7 +47,7 @@ class Ride extends CI_Controller {
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();
 		
-		$this->load->view('layout', $data);
+		$this->load->view('layouts/layout', $data);
 	}
 
 	public function update_request() {
@@ -88,7 +88,7 @@ class Ride extends CI_Controller {
 				$email_data['byUser'] 			= $owner_user_details->pro_user_full_name;				
 				$email_data['Status'] 			= $finalStatus;
 				
-				$email_template = $this->load->view('join_request_reply_email', $email_data, true);				
+				$email_template = $this->load->view('templates/join_request_reply_email', $email_data, true);				
 			
 				if($this->config->item('is_email_enabled')) {
 					$this->email->message($email_template);
@@ -140,7 +140,7 @@ class Ride extends CI_Controller {
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();
 		
-		$this->load->view('layout', $data);
+		$this->load->view('layouts/layout', $data);
 	}
 
 	
@@ -166,8 +166,7 @@ class Ride extends CI_Controller {
 		$data['ignore_rides']   = $ignore_list;
 		//print_r($ignore_list);exit;
 		$data['page_name'] = "ride/results";
-		
-		echo $this->load->view('ajax_layout', $data, true);		
+		echo $this->load->view('layouts/ajax_layout', $data, true);		
 		exit;
 	}
 	
@@ -177,14 +176,14 @@ class Ride extends CI_Controller {
 		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
 		$data['time_slots'] = $this->CommonModel->get_time_slot();
 		$data['title'] = SITE_TITLE." :: Search for a Ride";
-		$this->load->view('simple_layout', $data);
+		$this->load->view('layouts/simple_layout', $data);
 	}
 	
 	public function thanks() {
 		$data['page_name'] = "ride/thanks";
 		$data['menu'] = "thanks";
 		$data['title'] = SITE_TITLE." :: Thank you !";
-		$this->load->view('layout', $data);
+		$this->load->view('layouts/layout', $data);
 	}
 	
 	public function add() {
@@ -193,9 +192,11 @@ class Ride extends CI_Controller {
 		$data['states_list'] = $this->CommonModel->states_list();
 		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
 		$data['time_slots']  = $this->CommonModel->get_time_slot();
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
 		$data['menu'] = "addride";
 		$data['title'] = SITE_TITLE." :: Post a New Ride";
-		$this->load->view('layout', $data);
+		$this->load->view('layouts/layout', $data);
 	}
 
 	public function edit($id) {
@@ -208,7 +209,7 @@ class Ride extends CI_Controller {
 			$data['time_slots']  = $this->CommonModel->get_time_slot();
 			$data['menu'] = "editride";
 			$data['title'] = SITE_TITLE." :: Edit the Ride";
-			$this->load->view('layout', $data);
+			$this->load->view('layouts/layout', $data);
 		}else{
 			$this->session->set_flashdata('flash_message', 'Invalid Request!');
 			redirect('ride/ridelist');
@@ -225,7 +226,7 @@ class Ride extends CI_Controller {
 		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
 		$data['menu'] = "addride";
 		$data['title'] = SITE_TITLE." :: Post a New Ride";
-		$this->load->view('layout', $data);
+		$this->load->view('layouts/layout', $data);
 	}	
 
 	public function process_ride() {
@@ -302,7 +303,7 @@ class Ride extends CI_Controller {
 				$email_data['passWord'] 		= 'Ade453H';
 				$email_data['url'] 				= base_url();
 				
-				$email_template = $this->load->view('signup_email_template', $email_data, true);				
+				$email_template = $this->load->view('templates/signup_email_template', $email_data, true);				
 				
 				if($this->config->item('is_email_enabled')) {
 					$this->email->message($email_template);
@@ -332,7 +333,7 @@ class Ride extends CI_Controller {
 				$mail_data['ItemDetails'] 	= $tmp_str;
 				$mail_data['url'] 			= base_url();
 				
-				$mail_template = $this->load->view('posted_ride_email', $mail_data, true);
+				$mail_template = $this->load->view('templates/posted_ride_email', $mail_data, true);
 
 				if($this->config->item('is_email_enabled')) {
 					$this->email->message($mail_template);
@@ -392,7 +393,7 @@ class Ride extends CI_Controller {
 				
 				$email_data['ItemDetails'] = $tmp_str;
 				
-				$email_template = $this->load->view('join_request_email', $email_data, true);
+				$email_template = $this->load->view('templates/join_request_email', $email_data, true);
 				
 				if($this->config->item('is_email_enabled')) {
 					$this->email->message($email_template);
@@ -479,7 +480,7 @@ class Ride extends CI_Controller {
 				$mail_data['ItemDetails'] 		= $tmp_str;
 				$mail_data['url'] 				= base_url();
 				
-				$mail_template = $this->load->view('posted_ride_email', $mail_data, true);
+				$mail_template = $this->load->view('templates/posted_ride_email', $mail_data, true);
 
 				if($this->config->item('is_email_enabled')) {
 					$this->email->message($mail_template);
@@ -570,7 +571,7 @@ class Ride extends CI_Controller {
 				
 				$mail_data['ItemDetails'] = $tmp_str;
 				
-				$mail_template = $this->load->view('posted_ride_email', $mail_data, true);
+				$mail_template = $this->load->view('templates/posted_ride_email', $mail_data, true);
 
 				if($this->config->item('is_email_enabled')) {
 					$this->email->message($mail_template);

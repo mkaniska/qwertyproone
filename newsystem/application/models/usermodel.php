@@ -12,15 +12,14 @@ class UserModel extends CI_Model {
 	
     function is_valid_login($user, $pass, $userType=2) {
 	
-        $this->db->select('pro_user_id,pro_user_full_name,pro_user_type'); //'pro_users');
+        $this->db->select('pro_user_id, pro_user_full_name, pro_user_type'); //'pro_users');
         $this->db->where('pro_user_email', $user);
         $this->db->where('pro_user_password', $pass);
+        $this->db->where('pro_user_status', '1');
 		if($userType!=2) {
 			$this->db->where('pro_user_type', $userType); // $userType =1 is for Admin / 2 is for User / 3 is for HR 
 		}
         $query = $this->db->get($this->table_name);
-		//echo $this->db->last_query();
-		//exit;
 		if($query->num_rows() > 0) {
 			return $query->row();  
 		}else {
@@ -54,6 +53,19 @@ class UserModel extends CI_Model {
 		$this->db->where("pro_user_id",$this->session->userdata('_user_id'));
 		$this->db->update('pro_users', $data);
         return true;
+	}
+
+	function activate_user($data) {
+	
+		$this->db->where("pro_user_id",$data('id'));
+		$this->db->where("pro_user_email",$data('email'));
+		$this->db->where("pro_user_status","0");
+		$this->db->update('pro_users', array('pro_user_status'=>'1'));
+        if($this->db->affected_rows()>0) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
     function get_total_users() {

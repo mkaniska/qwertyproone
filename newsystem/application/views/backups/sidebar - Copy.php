@@ -17,6 +17,7 @@
 					<?php foreach($recent_joinees as $key=>$userValue) { ?>
 						<li><font style="color:#E16715;font-weight:bold;"><?php echo $userValue->pro_user_full_name;?></font> &nbsp; - (From <?php echo $userValue->pro_user_city;?> on <?php echo date("d M 'y",$userValue->pro_user_joined);?>)</li>
 					<?php } ?>
+                     
                 </ul>
 			</div>
 		</div>

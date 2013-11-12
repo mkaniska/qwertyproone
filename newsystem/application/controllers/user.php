@@ -51,7 +51,7 @@ class User extends CI_Controller {
 		$email_data['USER_NAME'] 		= '';
 		$email_data['PASS_WORD'] 		= '';
 		
-		$email_template = $this->load->view('test_email_template', $email_data, true);				
+		$email_template = $this->load->view('templates/test_email_template', $email_data, true);				
 		
 		$this->email->message($email_template);
 		$this->email->send();				
@@ -64,7 +64,7 @@ class User extends CI_Controller {
 		$data['page_name'] = "user/login";
 		$data['menu'] = "login";
 		$data['title'] = SITE_TITLE." :: Login";
-		$this->load->view('simple_layout', $data);
+		$this->load->view('layouts/simple_layout', $data);
 	}
 	
 	public function getpassword() {
@@ -72,7 +72,7 @@ class User extends CI_Controller {
 		$data['page_name'] = "user/getpassword";
 		$data['menu'] = "getpassword";
 		$data['title'] = SITE_TITLE." :: Retrive Password";
-		$this->load->view('simple_layout', $data);
+		$this->load->view('layouts/simple_layout', $data);
 	}	
 	
 	public function register($param=NULL) {
@@ -85,9 +85,23 @@ class User extends CI_Controller {
 		$data['menu'] = "register";
 		$data['title'] = SITE_TITLE." :: Registration";
 		$data['param'] = $param==NULL ?'':$param;
-		$this->load->view('layout', $data);
+		$this->load->view('layouts/layout', $data);
 	}
 
+	public function activate() {
+		$this->load->helper('common');
+		$string = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
+		$actual_data = decryptData($string);
+		$isDone = $this->UserModel->activate_user($actual_data);
+		if($isDone) {
+			$this->session->set_flashdata('flash_message', 'Your Account is activated successfully!');
+			redirect('user/login');
+		}else {
+			$this->session->set_flashdata('flash_message', 'Invalid Request!');
+			redirect('user/login');
+		}
+	}
+	
 	public function process_signup() {
 		
 		if($this->input->post('doSignup')=='Submit') {
@@ -112,6 +126,10 @@ class User extends CI_Controller {
 			
 			if($isValidID>0) {
 				// Sending Email Activation Link
+				
+				$this->load->helper('common');
+				$activation_link = base_url().'user/activate/';
+				$activation_link.= encryptData(array('email'=>$this->input->post('email_address'),'id'=>$isValidID));
 				$mconfig['protocol'] = 'mail';
 				$mconfig['wordwrap'] = FALSE;
 				$mconfig['mailtype'] = 'html';
@@ -128,12 +146,12 @@ class User extends CI_Controller {
 
 				$email_data['HelloTo'] 			= $posted_data['pro_user_full_name'];
 
-				$email_data['activateLink'] 	= 'http://mail.yahoo.com';
+				$email_data['activateLink'] 	= $activation_link;
 				$email_data['userName'] 		= $this->input->post('email_address');
 				$email_data['passWord'] 		= $this->input->post('password_text');
 				$email_data['url'] 				= base_url();
 				
-				$email_template = $this->load->view('signup_email_template', $email_data, true);				
+				$email_template = $this->load->view('templates/signup_email_template', $email_data, true);				
 				
 				if($this->config->item('is_email_enabled')) {
 					$this->email->message($email_template);
@@ -186,7 +204,6 @@ class User extends CI_Controller {
 	public function retrivepassword() {
 		$username 	= $this->input->post('user_name');
 		$output     = $this->UserModel->is_valid_user($username);
-		//print_r($output);exit;
 		if($output!=''){
 			if($output->pro_user_id>0){
 				$newsessdata = array(
@@ -203,7 +220,7 @@ class User extends CI_Controller {
 	}	
 	
 	public function logout() {
-		$newsessdata = array('_user_id'  	=> '', '_user_type' => '', '_user_name' => '');
+		$newsessdata = array('_user_id' => '', '_user_type' => '', '_user_name' => '');
 		$this->session->unset_userdata($newsessdata); // Clearing the session values
 		$this->session->set_flashdata('flash_message', 'Successfully Logged out !..');
 		redirect('user/login');
@@ -213,7 +230,7 @@ class User extends CI_Controller {
 		$data['page_name'] = "user/thanks";
 		$data['menu'] = "thanks";
 		$data['title'] = SITE_TITLE." :: Thanks";
-		$this->load->view('simple_layout', $data);
+		$this->load->view('layouts/simple_layout', $data);
 	}
 
 	public function settings() {
@@ -222,14 +239,14 @@ class User extends CI_Controller {
 		$data['states_list'] = $this->CommonModel->states_list();			
 		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
 		//$data['time_slots']  = $this->CommonModel->get_time_slot();
-		//$data['recent_rides'] = $this->RideModel->get_recent_rides();
-		//$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
 		$data['ip_list'] = $this->UserModel->get_enabled_ips();
 		$returned = $this->UserModel->get_user_settings();
 		$data['user_settings'] = $returned[0];
 		$data['menu'] = "settings";
 		$data['title'] = SITE_TITLE." :: Global Settings";
-		$this->load->view('layout', $data);
+		$this->load->view('layouts/layout', $data);
 	}
 	
 	public function update_settings() {

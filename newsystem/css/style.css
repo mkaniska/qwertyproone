@@ -78,6 +78,11 @@ p { margin: 0 0 15px 0 }
 
 .no_bullet { margin: 0; padding: 0; list-style: none }
 .no_bullet li { margin: 0 0 15px 0; padding: 0 }
+
+.no_bullet_new { margin: 0; padding: 0; list-style: none }
+.no_bullet_new li { margin: 0 0 10px 0; padding: 0 }
+
+
 a.header { display: block; font-weight: 700 }
 
 #website_header_wrapper {
@@ -132,6 +137,9 @@ a.header { display: block; font-weight: 700 }
 #content_full { width: 930px }
 #sidebar { width: 300px }
 .one_fourth { width: 216px }
+.one_fourth_footer1 { width: 280px }
+.one_fourth_footer2 { width: 320px }
+.one_fourth_footer3 { width: 250px }
 .one_fifth { width: 190px }
 
 #site_title { float: left; margin-top: 20px }

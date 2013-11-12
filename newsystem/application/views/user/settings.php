@@ -65,7 +65,7 @@
 			</table>
             </form>
 			</div>
-			<div id="searchedResult" style="overflow:auto;border:1px solid #CCCCCC;margin-left:100px;margin-top:20px;padding-top:20px;width:800px;height:350px;text-align:center;">
+			<div id="searchedResult" style="overflow:auto;border:1px solid #CCCCCC;margin-left:100px;margin-top:20px;padding-top:20px;width:800px;min-height:250px;text-align:center;">
 				<div style="float:right:margin-right:10px;margin-bottom:20px;font-weight:bold;">
 					<a href="javascript:addIP();">Add IP Access <img align="absmiddle" src="<?php echo base_url();?>admin-images/pluse.png" /></a>
 				</div>
@@ -101,7 +101,7 @@
         </div>
         <div class="clear"></div>
 </div>
-<div id="dialog" title="Add New IP Address">
+<div id="dialog" title="Add New IP Address" style="display:none;">
 	<form action="<?php echo base_url();?>user/process_addipaddress" method="post" onsubmit="return isValidIP()">
 		<table width="50%" cellpadding="0" cellspacing="0" align="center" border="0">
 			<tr><td id="iperror" style="color:#ff0000;"> &nbsp; </td></tr>

@@ -24,6 +24,12 @@
 <!-- Tab based form related JS & CSS Files --> 
 <script src="<?php echo base_url();?>js/jquery-ui.js"></script>
 <link rel="stylesheet" href="<?php echo base_url();?>css/tab_jquery-ui.css" />
+
+<?php if($page_name=='welcome/home') { ?>
+<link href="<?php echo base_url();?>css/image-slider.css" rel="stylesheet" type="text/css" />
+<script src="<?php echo base_url();?>js/image-slider.js" type="text/javascript"></script>
+<?php } ?>
+
 <?php if($page_name=='ride/add') { ?>
 <script>
 $(function(){
@@ -60,6 +66,14 @@ ddsmoothmenu.init({
 <script src="<?php echo base_url();?>js/validate.js"></script>
 </head>
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=295442140552257";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div id="website_header_wrapper">
 	<div id="website_header" class="wrapper">
     	<div id="site_title"><a href="<?php echo base_url();?>welcome/home">CodeIgniter Sample Application</a></div>
