@@ -15,8 +15,8 @@
 |
 */
 
-$config['base_url']	 = 'http://work.ideasdiary.com';
-//$config['base_url']	 = 'http://'.$_SERVER['HTTP_HOST'].'/qwerty';
+//$config['base_url']	 = 'http://work.ideasdiary.com';
+$config['base_url']	 = 'http://'.$_SERVER['HTTP_HOST'].'/qwerty';
 
 define('SITE_TITLE', 'Application Front End');
 

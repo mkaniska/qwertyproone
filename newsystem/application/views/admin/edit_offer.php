@@ -2,7 +2,7 @@
 	<div class="box round first grid">
 		<h2>Edit Offer</h2>
 		<div style="margin:25px;">
-			<form action="<?php echo base_url();?>admin/prcess_updateoffer" method="post" name="editOffer" onsubmit="return validOffer();" enctype="multipart/form-data">
+			<form action="<?php echo base_url();?>admin/process_updateoffer" method="post" name="editOffer" onsubmit="return validOffer();" enctype="multipart/form-data">
 				<table width="100%" cellpadding="4" cellspacing="4" align="center" style="border:1px solid #ccc;">
 					<tr>
 						<td>

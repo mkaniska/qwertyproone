@@ -27,6 +27,17 @@ class UserModel extends CI_Model {
 		}
     }
 
+	function isUserExists($email) {
+		$this->db->where("pro_user_email",$email);
+		$this->db->select('pro_user_id');
+        $query = $this->db->get('pro_users');
+		if($query->num_rows() > 0){
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
     function get_enabled_ips() {
         
 		$this->db->where("ip_added_by",$this->session->userdata('_user_id'));

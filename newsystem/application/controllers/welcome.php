@@ -15,8 +15,8 @@ class Welcome extends CI_Controller {
 		$data['recent_rides'] = $this->RideModel->get_recent_rides();
 		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();
 		$data['menu'] = "home";
-		$data['title'] = "Welcome to CodeIgniter Sample";		
-		$this->load->view('layouts/layout', $data);
+		$data['title'] = SITE_TITLE." :: Welcome to CodeIgniter Sample";		
+		$this->load->view('layouts/simple_layout', $data);
 	}
 	public function home(){	
 
@@ -24,8 +24,8 @@ class Welcome extends CI_Controller {
 		$data['recent_rides'] = $this->RideModel->get_recent_rides();
 		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();
 		$data['menu'] = "home"; 
-		$data['title'] = "Welcome to CodeIgniter Sample";
-		$this->load->view('layouts/layout', $data);
+		$data['title'] = SITE_TITLE." :: Welcome to CodeIgniter Sample";
+		$this->load->view('layouts/simple_layout', $data);
 	}
 	public function thanks(){	
 
@@ -34,7 +34,7 @@ class Welcome extends CI_Controller {
 		$data['title'] = "Thank you !";
 		$data['title'] = SITE_TITLE." :: Thanks";
 		$this->session->set_flashdata('flash_message', 'Successfully Registered ! <br /> You will receive the email for verification & please confirm that to activate your account!.');
-		$this->load->view('layouts/layout', $data);
+		$this->load->view('layouts/simple_layout', $data);
 	}	
 	public function contactus(){
 	
@@ -69,11 +69,11 @@ class Welcome extends CI_Controller {
 	
 		if($this->input->post('doContact')=='Submit') {
 		
-		$subject 		= $this->input->post('subject');
-		$full_name 		= $this->input->post('full_name');
-		$email_address 	= $this->input->post('email_address');
-		$message_text 	= $this->input->post('message_text');
-		$phone_number	= $this->input->post('phone_number');
+			$subject 		= $this->input->post('subject');
+			$full_name 		= $this->input->post('full_name');
+			$email_address 	= $this->input->post('email_address');
+			$message_text 	= $this->input->post('message_text');
+			$phone_number	= $this->input->post('phone_number');
 
 			$mconfig['protocol'] = 'mail';
 			$mconfig['wordwrap'] = FALSE;
@@ -83,22 +83,18 @@ class Welcome extends CI_Controller {
 			$mconfig['newline'] = "\r\n";
 			$this->load->library('email',$mconfig);
 
-
 			$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
 			$this->email->to('murugdev.eee@gmail.com');
-			$this->email->subject('User Inquiry');
+			$this->email->subject('Customer Inquiry Notification !');
 
-			$email_data['PAGE_TITLE'] 		= 'Email Notification';
-			$email_data['PAGE_HEADING'] 	= 'Contact Inquiry Details !';
-			$email_data['ADDRESS_TO'] 		= "Hello Admin,";
-			$email_data['ADDRESS_CONTENT'] 	= $full_name." is trying to contact you for the following reason. <br /><br />".$message_text."<br />";
-			$email_data['SUCCESS_HEADER'] 	= 'User Details';
+			$email_data['HelloTo'] 		= $full_name;
+			$email_data['ToMessage'] 	= $message_text;
 			
 			$temp_str ="Full Name : ".$full_name." <br />";
 			$temp_str.="Email Address : ".$email_address." <br />";
 			$temp_str.="Phone Number : ".$phone_number." <br /><br />";
 			
-			$email_data['SUCCESS_TEXT'] 	= $temp_str;
+			$email_data['ItemDetails'] 	= $temp_str;
 			
 			$email_template = $this->load->view('templates/contact_us_email', $email_data, true);				
 			
@@ -110,7 +106,6 @@ class Welcome extends CI_Controller {
 			$this->session->set_flashdata('flash_message', 'Successfully Registered !');
 			redirect('welcome/thanks');
 		} else {
-			//$this->session->set_flashdata('data_back', $posted_data);
 			$this->session->set_flashdata('flash_message', 'Please enter all the details');
 			redirect('welcome/contactus/error/1');
 		}

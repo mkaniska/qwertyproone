@@ -40,19 +40,19 @@ class Admin extends CI_Controller {
 			}			
 			*/
 			//$this->load->helper(array('form', 'url'));
-            $config = array();
-            $config['upload_path'] = "uploads/";
-            $config['allowed_types'] = 'gif|jpg|png|JPG|JPEG|PNG|GIF';
-            $config['max_size'] = '100';
-            $config['max_width'] = '1024';
-            $config['max_height'] = '768';
-            $config['max_filename'] = '1000';
-            $config['file_name'] = 'x.png';
+            $fconfig = array();
+            $fconfig['upload_path'] = "./offer_pictures/";
+            $fconfig['allowed_types'] = 'gif|jpg|png|JPG|JPEG|PNG|GIF';
+            $fconfig['max_size'] = '5000';
+            $fconfig['max_width'] = '3024';
+            $fconfig['max_height'] = '3024';
+            $fconfig['max_filename'] = '2000';
+            $fconfig['file_name'] = 'x.jpg';
 
-            $this->load->library('upload',$config);
-			$this->upload->initialize($config);
+            $this->load->library('upload',$fconfig);
+			$this->upload->initialize($fconfig);
             if ($this->upload->do_upload()) {
-                echo $datas['message'] = $this->upload->data();                       
+                print_r($this->upload->data());
             } else {
                 echo $datas['error'] = $this->upload->display_errors();                
             }
@@ -213,7 +213,7 @@ class Admin extends CI_Controller {
 		exit;
 	}
 	
-	public function prcess_updateoffer() {
+	public function process_updateoffer() {
 	
 		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
 		$offer_id = $this->input->post('offer_id');
@@ -229,13 +229,35 @@ class Admin extends CI_Controller {
 			$inp_data['offer_created_by'] 	= $this->session->userdata('admin_user_id');
 			$inp_data['offer_status'] 		= 1;//$this->input->post('status');
 			$inp_data['offer_modified_on'] 	= time();
+
+			// File uploading here
+			$fconfig['upload_path'] = 'offer_pictures/';
+			$fconfig['allowed_types'] = 'gif|jpg|png|GIF|JPG|JPEG|PNG';
+			$fconfig['max_size']	= '4000';
+			$fconfig['max_width']  = '2024';
+			$fconfig['max_height']  = '2024';
+			$fconfig['remove_spaces']  = TRUE;            
+			$ext = end(explode('.', $_FILES['userfile']['name']));
+			$fconfig['file_name']  = time().'.'.$ext;
+			
+			$this->load->library('upload', $fconfig);
+			$this->upload->initialize($fconfig);
+			if(!$this->upload->do_upload()) {
+				$this->session->set_flashdata('flash_message', 'Invalid Picture Uploaded!');
+				$this->session->set_flashdata('flash_data', $inp_data);
+				redirect('admin/edit_offer/'.$offer_id);
+			} else {
+				$inp_data['offer_picture'] = $fconfig['file_name'];
+			}
+			
+			// File upload completed 
 			
 			$inp_data['offer_provider'] 			= $this->input->post('offer_provider');
 			$inp_data['provider_address'] 			= $this->input->post('provider_address');
 			$inp_data['contact_person'] 			= $this->input->post('contact_person');
 			$inp_data['contact_phone'] 				= $this->input->post('contact_phone');
 			$inp_data['contact_email'] 				= $this->input->post('contact_email');
-			$inp_data['offer_picture'] 				= $this->input->post('offer_picture');
+			
 			$inp_data['minimum_purchase_amount'] 	= $this->input->post('minimum_purchase_amount');
 			$inp_data['minimum_purchase_quantity'] 	= $this->input->post('minimum_purchase_quantity');
 			$inp_data['offer_percentage'] 			= $this->input->post('offer_percentage');
@@ -296,7 +318,7 @@ class Admin extends CI_Controller {
 		$this->load->view('layouts/admin_layout', $data);
 	}
 
-	public function prcess_addoffer() {
+	public function process_addoffer() {
 	
 		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
 		
@@ -329,30 +351,23 @@ class Admin extends CI_Controller {
 			// File uploading here
 			$fconfig['upload_path'] = 'offer_pictures/';
 			$fconfig['allowed_types'] = 'gif|jpg|png|GIF|JPG|JPEG|PNG';
-			$fconfig['max_size']	= '1000';
-			$fconfig['max_width']  = '1024';
-			$fconfig['max_height']  = '1024';
+			$fconfig['max_size']	= '4000';
+			$fconfig['max_width']  = '2024';
+			$fconfig['max_height']  = '2024';
 			$fconfig['remove_spaces']  = TRUE;            
 			$ext = end(explode('.', $_FILES['userfile']['name']));
 			$fconfig['file_name']  = time().'.'.$ext;
 			
-            //$fconfig['upload_url'] = base_url()."offer_pictures/";
-			//$findExt = explode(basename($this->input->post('userfile')));
-			//$filename = 'mypic.gif';
-			//$ext = pathinfo($filename, PATHINFO_EXTENSION);
-			
 			$this->load->library('upload', $fconfig);
-			
+			$this->upload->initialize($fconfig);
 			if(!$this->upload->do_upload()) {
 				$this->session->set_flashdata('flash_message', 'Invalid Picture Uploaded!');
 				$this->session->set_flashdata('flash_data', $inp_data);
 				redirect('admin/addoffer');
 			} else {
-				$inp_data['offer_picture'] = $fconfig['upload_path'].$fconfig['file_name'];
+				$inp_data['offer_picture'] = $fconfig['file_name'];
 			}
 			// File upload completed 
-			
-			$inp_data['offer_picture'] = '';
 			
 			$isValidOfferID = $this->AdminModel->insertOffer($inp_data);
 			
@@ -381,7 +396,7 @@ class Admin extends CI_Controller {
 		$this->load->view('layouts/admin_layout', $data);
 	}
 
-	public function prcess_addcompany() {
+	public function process_addcompany() {
 	
 		if($this->session->userdata('admin_user_id')==''){redirect('admin/login');}
 		
@@ -719,7 +734,7 @@ class Admin extends CI_Controller {
 		$this->load->view('layouts/admin_layout', $data);
 	}
 
-	public function prcess_addhruser() {
+	public function process_addhruser() {
 		
 		if($this->input->post('addUser')=='Submit') {
 			$posted_data['pro_user_type'] 		= 3; // HR
@@ -743,7 +758,15 @@ class Admin extends CI_Controller {
 			$posted_data['pro_user_status'] 	= '1'; // Self Approval
 			$posted_data['pro_corporate_id'] 	= $this->input->post('selected_company')==''?$this->session->userdata('selected_company'):$this->input->post('selected_company');
 			
-			$isValidID = $this->UserModel->insertSingup($posted_data);
+			$isExists = $this->UserModel->isUserExists(trim($this->input->post('email_address')));
+			
+			if($isExists) {
+				$this->session->set_flashdata('data_back', $posted_data);
+				$this->session->set_flashdata('flash_message', 'Email ID is already Exists!');
+				redirect('admin/addhruser');
+			}else {
+				$isValidID = $this->UserModel->insertSingup($posted_data);
+			}
 			
 			if($isValidID>0) {
 				// Sending Email Activation Link

@@ -8,23 +8,21 @@ class User extends CI_Controller {
 
         /* Load libraries */
         //$this->load->library('PHPMailer');
-
         /* Load helpers */
         //$this->load->helper('captcha');
-        
         /* Load helpers */
         $this->load->model('RideModel'); 
         $this->load->model('UserModel'); 
         $this->load->model('CommonModel'); 
+        $this->load->model('AdminModel'); 
     }
 
-	public function index()
-	{		 
+	public function index() {		 
 		redirect('welcome/home');
 	}	
 	
 	
-	public function testEmail(){
+	public function testEmail() {
 
 		$mconfig['protocol'] = 'mail';
 		$mconfig['wordwrap'] = FALSE;
@@ -33,7 +31,6 @@ class User extends CI_Controller {
 		$mconfig['crlf'] = "\r\n";
 		$mconfig['newline'] = "\r\n";
 		$this->load->library('email',$mconfig);
-		//$this->email->mailtype('html');
 		
 		$this->email->from('admin@ideasdiary.com', 'Murugesan P');
 		$this->email->to('murugdev.eee@gmail.com');
@@ -74,6 +71,17 @@ class User extends CI_Controller {
 		$data['title'] = SITE_TITLE." :: Retrive Password";
 		$this->load->view('layouts/simple_layout', $data);
 	}	
+
+	public function offers() {
+		$this->load->model('CommonModel');
+		$data['page_name'] = "user/offers";
+		$data['menu'] = "offers";
+		$data['title'] = SITE_TITLE." :: Available Offers";
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
+		$data['offers_list'] = $this->AdminModel->get_offers_posted();		
+		$this->load->view('layouts/simple_layout', $data);
+	}
 	
 	public function register($param=NULL) {
 		$this->load->model('CommonModel');
@@ -85,7 +93,7 @@ class User extends CI_Controller {
 		$data['menu'] = "register";
 		$data['title'] = SITE_TITLE." :: Registration";
 		$data['param'] = $param==NULL ?'':$param;
-		$this->load->view('layouts/layout', $data);
+		$this->load->view('layouts/simple_layout', $data);
 	}
 
 	public function activate() {
@@ -122,7 +130,16 @@ class User extends CI_Controller {
 			$posted_data['pro_user_joined'] 	= time();
 			$posted_data['pro_user_updated'] 	= time();
 			$posted_data['pro_user_status'] 	= '0';
-			$isValidID = $this->UserModel->insertSingup($posted_data);
+			
+			$isExists = $this->UserModel->isUserExists(trim($this->input->post('email_address')));
+			
+			if($isExists) {
+				$this->session->set_flashdata('data_back', $posted_data);
+				$this->session->set_flashdata('flash_message', 'Email ID is already Exists!');
+				redirect('user/signup');
+			}else {
+				$isValidID = $this->UserModel->insertSingup($posted_data);
+			}			
 			
 			if($isValidID>0) {
 				// Sending Email Activation Link

@@ -4,9 +4,10 @@
 	<div id="website_menu" class="ddsmoothmenu">
 		<ul>
 			<li><a href="<?php echo base_url();?>welcome/home" <?php if($menu=='home')echo 'class="selected"';?>>Home</a></li>
-			<li><a href="<?php echo base_url();?>welcome/faq" <?php if($menu=='faq')echo 'class="selected"';?>>FAQ</a></li>
+			<li><a href="<?php echo base_url();?>welcome/services" <?php if($menu=='services')echo 'class="selected"';?>>Services</a></li>
 			<li><a href="<?php echo base_url();?>ride/search" <?php if($menu=='search')echo 'class="selected"';?>>Search</a></li>
 			<li><a href="<?php echo base_url();?>welcome/contactus" <?php if($menu=='contactus')echo 'class="selected"';?>>Contact Us</a></li>
+			<li><a href="<?php echo base_url();?>user/offers" <?php if($menu=='offers')echo 'class="selected"';?>>Offers</a></li>
 			<li><a href="<?php echo base_url();?>user/settings" <?php if($menu=='settings')echo 'class="selected"';?>>Settings</a></li>
 		</ul>
 		<br style="clear: left" />

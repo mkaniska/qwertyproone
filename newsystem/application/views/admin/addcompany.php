@@ -3,7 +3,7 @@
 	<div class="box round first grid">
 		<h2>Add New Company</h2>
 		<div style="margin:25px;">
-			<form action="<?php echo base_url();?>admin/prcess_addcompany" method="post" name="addCompany" onsubmit="return validCompany();">
+			<form action="<?php echo base_url();?>admin/process_addcompany" method="post" name="addCompany" onsubmit="return validCompany();">
 				<table width="80%" cellpadding="5" cellspacing="5" align="center" style="border:1px solid #ccc;">
 					<tr>
 						<td>

@@ -7,7 +7,6 @@
     
         <div id="contact_form">
            <form method="post" name="postride" id="postride" action="<?php echo base_url();?>ride/process_ride" onsubmit="return checkStepThreeValidation();">
-           
 			<div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Post Location - Step 1 &nbsp; &nbsp;</a></li>

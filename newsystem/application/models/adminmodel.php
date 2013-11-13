@@ -202,6 +202,17 @@ class AdminModel extends CI_Model {
         return $result_back;  
     }
 
+    function get_offers_posted() {
+        
+		$this->db->order_by("offer_created_on","DESC");
+		$this->db->select();
+        $query = $this->db->get('pro_offers');
+		foreach ($query->result() as $row) {
+			$result_back[] = $row;
+		}
+        return $result_back;
+    }
+	
     function get_setting() {
 		
 		$this->db->select();

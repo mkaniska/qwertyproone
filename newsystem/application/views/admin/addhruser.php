@@ -3,7 +3,7 @@
 	<div class="box round first grid">
 		<h2>Add HR User Account</h2>
 		<div style="margin:25px;">
-			<form action="<?php echo base_url();?>admin/prcess_addhruser" method="post" name="addHRUser" onsubmit="return validHRUser();">
+			<form action="<?php echo base_url();?>admin/process_addhruser" method="post" name="addHRUser" onsubmit="return validHRUser();">
 				<table width="90%" cellpadding="5" cellspacing="5" align="center" style="border:1px solid #ccc;">
 					<tr>
 						<td>

@@ -228,7 +228,7 @@ class Ride extends CI_Controller {
 		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
 		$data['menu'] = "addride";
 		$data['title'] = SITE_TITLE." :: Post a New Ride";
-		$this->load->view('layouts/layout', $data);
+		$this->load->view('layouts/simple_layout', $data);
 	}	
 
 	public function process_ride() {
@@ -252,22 +252,12 @@ class Ride extends CI_Controller {
 			$user_data['pro_user_joined'] 		= time();
 			$user_data['pro_user_updated'] 		= time();
 			$user_data['pro_user_status'] 		= '0';
-			
-			$isValidUserID = $this->UserModel->insertSingup($user_data);
-			
-			if($isValidUserID>0) {
-			
-			// Insert the Ride Details & Vehicle Details;
 
-			$ride_data['user_id'] 				= $isValidUserID;
-			$ride_data['passenger_city'] 		= $this->input->post('city');
-			
+			$ride_data['passenger_city'] 		= $this->input->post('city');			
 			$ride_data['start_time'] 			= $this->CommonModel->get_time_label($this->input->post('start_time'));
 			$ride_data['return_time'] 			= $this->CommonModel->get_time_label($this->input->post('return_time'));
-			
 			$ride_data['start_time_24'] 		= $this->input->post('start_time');
 			$ride_data['return_time_24'] 		= $this->input->post('return_time');
-			
 			$ride_data['origin_location']	 	= $this->input->post('origin_from');
 			$ride_data['destination_location']	= $this->input->post('destination_to');
 			$ride_data['travel_as'] 			= $this->input->post('travel_type');
@@ -275,6 +265,23 @@ class Ride extends CI_Controller {
 			$ride_data['vehicle_type'] 			= $this->input->post('vehicle_type');
 			$ride_data['model_type'] 			= $this->input->post('model_type');
 			$ride_data['fuel_type'] 			= $this->input->post('fuel_type');
+			
+			$isExists = $this->UserModel->isUserExists(trim($this->input->post('email_address')));
+			
+			if($isExists) {
+				$this->session->set_flashdata('data_back', $user_data);
+				$this->session->set_flashdata('flash_message', 'Email ID is already Exists!');
+				redirect('ride/add');
+			}else {
+				$isValidUserID = $this->UserModel->insertSingup($user_data);
+			}
+			
+			if($isValidUserID>0) {
+			
+			// Insert the Ride Details & Vehicle Details;
+
+			$ride_data['user_id'] 				= $isValidUserID;
+
 			$ride_data['added_on'] 				= time();
 			$ride_data['modified_on'] 			= time();
 			$ride_data['active_status'] 		= '1';
