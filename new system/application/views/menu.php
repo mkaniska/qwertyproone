@@ -29,6 +29,7 @@
 					<li><a href="<?php echo base_url();?>ride/postride">Post A Ride</a></li>
 					<li><a href="<?php echo base_url();?>ride/ridelist">Ride List</a></li>
 					<li><a href="<?php echo base_url();?>ride/requestlist">Ride Requests</a></li>
+					<li><a href="<?php echo base_url();?>ride/instantride">Instant Post</a></li>
 				</ul>
 			</li>
 			<?php } ?>

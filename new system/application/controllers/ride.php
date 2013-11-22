@@ -233,6 +233,19 @@ class Ride extends CI_Controller {
 		}
 	}
 	
+	public function instantride() {
+		if($this->session->userdata('_user_id')==''){redirect('user/login');}
+		$data['page_name'] = "ride/instantpost";		
+		$data['states_list'] = $this->CommonModel->states_list();			
+		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
+		$data['time_slots']  = $this->CommonModel->get_time_slot();
+		//$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		//$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
+		$data['menu'] = "addride";
+		$data['title'] = SITE_TITLE." :: Post an Instant Ride";
+		$this->load->view('layouts/simple_layout', $data);
+	}
+
 	public function postride() {
 		if($this->session->userdata('_user_id')==''){redirect('user/login');}
 		$data['page_name'] = "ride/postride";		
