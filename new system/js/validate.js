@@ -302,3 +302,58 @@ function isValidIP() {
 		return true;
 	}
 }
+
+function isValidInstantRide(){
+
+	var ok = true;
+	if($("#city").val()==0){$("#errorDisplay").html("Please select the city");$("#city").focus();ok = false;}
+	else if($("#start_time").val()==0){$("#errorDisplay").html("Please select the Start Time");$("#start_time").focus();ok =  false;}
+	else if($("#return_time").val()==0){$("#errorDisplay").html("Please select the Return Time");$("#return_time").focus();ok = false;}
+	else if($("#searchTextField").val()==''){$("#errorDisplay").html("Please enter the Origin Location");$("#searchTextField").focus();ok = false;}
+	else if($("#searchTextField2").val()==''){$("#errorDisplay").html("Please enter the Destination Location");$("#searchTextField2").focus();ok = false;}
+	else if($('#travel_type').val()=='driver') {
+		if($.trim($("#model_type").val())==''){$("#errorDisplay").html("Please enter the model type");$("#model_type").focus();ok = false; }
+	}
+	if(ok==true){return true;}else{return false;}
+}
+
+function changeTrip(vals) {
+	if(vals=='1') {
+		$("#return_time").prop('disabled', true);
+		$("#return_time").css('border', '1px solid #ffffff');
+		$("#return_time").css('color', '#ccc');
+	}else {
+		$("#return_time").prop('disabled', false);
+		$("#return_time").css('border', '1px solid #CCCCCC');
+		$("#return_time").css('color', '#000');
+	}
+}
+
+function otherInput(vals) {
+	if(vals=='driver') {
+		$("#model_type").prop('disabled', false);
+		$("#model_type").css('border', '1px solid #CCCCCC');
+		$("#model_type").css('color', '#000');
+		
+		$("#fuel_type").prop('disabled', false);
+		$("#fuel_type").css('border', '1px solid #CCCCCC');
+		$("#fuel_type").css('color', '#000');
+		
+		$("#vehicle_type").prop('disabled', false);
+		$("#vehicle_type").css('border', '1px solid #CCCCCC');
+		$("#vehicle_type").css('color', '#000');		
+	}else {
+		$("#model_type").prop('disabled', true);
+		$("#model_type").css('border', '1px solid #ffffff');
+		$("#model_type").css('color', '#ccc');
+		
+		$("#fuel_type").prop('disabled', true);	
+		$("#fuel_type").css('border', '1px solid #ffffff');
+		$("#fuel_type").css('color', '#ccc');
+		
+		$("#vehicle_type").prop('disabled', true);
+		$("#vehicle_type").css('border', '1px solid #ffffff');
+		$("#vehicle_type").css('color', '#ccc');		
+	}
+
+}

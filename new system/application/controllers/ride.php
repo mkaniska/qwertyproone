@@ -235,10 +235,10 @@ class Ride extends CI_Controller {
 	
 	public function instantride() {
 		if($this->session->userdata('_user_id')==''){redirect('user/login');}
-		$data['page_name'] = "ride/instantpost";		
-		$data['states_list'] = $this->CommonModel->states_list();			
+		$data['page_name'] = "ride/instantride";
 		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
 		$data['time_slots']  = $this->CommonModel->get_time_slot();
+		//$data['states_list'] = $this->CommonModel->states_list();
 		//$data['recent_rides'] = $this->RideModel->get_recent_rides();
 		//$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
 		$data['menu'] = "addride";
@@ -246,6 +246,98 @@ class Ride extends CI_Controller {
 		$this->load->view('layouts/simple_layout', $data);
 	}
 
+	public function process_instantride() {
+	
+		if($this->session->userdata('_user_id')==''){redirect('user/login');}
+		
+		if($this->input->post('post_ride')=='Submit') {
+			
+			$UserID = $this->session->userdata('_user_id');
+			
+			$UserName = $this->session->userdata('_user_name');
+			
+			if($UserID>0) {
+
+			// Insert the Ride Details & Vehicle Details;
+
+			$ride_data['user_id'] 				= $UserID;
+			$ride_data['passenger_city'] 		= $this->input->post('city');
+			
+			$ride_data['start_time'] 			= $this->CommonModel->get_time_label($this->input->post('start_time'));
+			$ride_data['return_time'] 			= $this->CommonModel->get_time_label($this->input->post('return_time'));
+			
+			$ride_data['start_time_24'] 		= $this->input->post('start_time');
+			$ride_data['return_time_24'] 		= $this->input->post('return_time');
+			
+			$ride_data['origin_location']	 	= $this->input->post('origin_from');
+			$ride_data['destination_location']	= $this->input->post('destination_to');
+			$ride_data['travel_as'] 			= $this->input->post('travel_type');
+			$ride_data['join_alert_needed'] 	= $this->input->post('travel_alert');
+			$ride_data['vehicle_type'] 			= $this->input->post('vehicle_type');
+			$ride_data['model_type'] 			= $this->input->post('model_type');
+			$ride_data['fuel_type'] 			= $this->input->post('fuel_type');
+			$ride_data['added_on'] 				= time();
+			$ride_data['modified_on'] 			= time();
+			$ride_data['active_status'] 		= '1';
+	
+			$isValidRideID = $this->RideModel->insertRide($ride_data);
+		
+				// Sending Email Activation Link
+				$mconfig['protocol'] = 'mail';
+				$mconfig['wordwrap'] = FALSE;
+				$mconfig['mailtype'] = 'html';
+				$mconfig['charset'] = 'utf-8';
+				$mconfig['crlf'] = "\r\n";
+				$mconfig['newline'] = "\r\n";
+				$this->load->library('email',$mconfig);
+
+
+				$this->email->from('admin@ideasdiary.com', 'Murugesan P');
+				$this->email->to('murugdev.eee@gmail.com');
+				$this->email->subject('Commute Easy: Instant Ride Posted');			
+				
+				// Constructing Ride Details Email Notification
+
+				$mail_data['HelloTo'] 		= $UserName;				
+
+				$tmp_str = "City : ".$ride_data['passenger_city']." <br />";
+				$tmp_str.= "Start Time : ".$ride_data['start_time']." <br />";
+				$tmp_str.= "Return Time : ".$ride_data['return_time']." <br />";
+				$tmp_str.= "Origin Location : ".$ride_data['origin_location']." <br />";
+				$tmp_str.= "Destination Location : ".$ride_data['destination_location'].", <br />";
+				$tmp_str.= "Travel As : ".ucfirst($ride_data['travel_as'])." <br />";
+				
+				if($ride_data['travel_as']=='driver'){
+					$tmp_str.= "Vehicle Type : ".$ride_data['vehicle_type']." <br />";	
+					$tmp_str.= "Model Type : ".$ride_data['model_type']." <br />";	
+					$tmp_str.= "Fuel Type : ".$ride_data['fuel_type']." <br />";
+				}
+				
+				$mail_data['ItemDetails'] 		= $tmp_str;
+				$mail_data['url'] 				= base_url();
+				
+				$mail_template = $this->load->view('templates/posted_ride_email', $mail_data, true);
+
+				if($this->config->item('is_email_enabled')) {
+					$this->email->message($mail_template);
+					$this->email->send();				
+				}
+
+				$this->session->set_flashdata('flash_message', 'Successfully Added your Ride Details !');
+				$this->session->set_flashdata('flash_url', base_url().'ride/ridelist');
+				redirect('ride/thanks');
+			} else {
+				$this->session->set_flashdata('data_back', $ride_data);
+				$this->session->set_flashdata('flash_message', 'Please enter all the details');
+				redirect('ride/postride/error/1');
+			}
+		}else{
+			$this->session->set_flashdata('flash_message', 'Please enter all the details');
+			redirect('ride/postride/error/1');
+		}
+	}	
+	
+	
 	public function postride() {
 		if($this->session->userdata('_user_id')==''){redirect('user/login');}
 		$data['page_name'] = "ride/postride";		

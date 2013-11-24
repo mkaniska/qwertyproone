@@ -17,7 +17,7 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 
 <!-- Google Map related JS & CSS Files -->
-<?php if($page_name=='ride/add' || $page_name=='ride/postride' || $page_name=='ride/edit' || $page_name=='ride/instantride') { ?>
+<?php if($page_name=='ride/add' || $page_name=='ride/postride' || $page_name=='ride/edit') { ?>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/map.js"></script>
 <?php } ?>
@@ -66,6 +66,14 @@ ddsmoothmenu.init({
 <script src="<?php echo base_url();?>js/validate.js"></script>
 </head>
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=295442140552257";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div id="website_header_wrapper">
 	<div id="website_header" class="wrapper">
     	<div id="site_title"><a href="<?php echo base_url();?>welcome/home">CodeIgniter Sample Application</a></div>
