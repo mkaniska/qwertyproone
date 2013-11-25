@@ -19,6 +19,7 @@ class RideModel extends CI_Model {
 		$dataForTable['ride_id'] 			= $data->ride_id;
 		$dataForTable['requesting_user_id'] = $requesting_user_id;
 		$dataForTable['owner_user_id'] 		= $data->user_id;
+		$dataForTable['is_instant'] 		= $data->instant;
 		$dataForTable['requested_on'] 		= time();
 		$dataForTable['approved_on'] 		= '';
 		$dataForTable['request_status']		= '2';
@@ -87,14 +88,11 @@ class RideModel extends CI_Model {
 		$query = $this->db->get('pro_join_request');
 		//echo $this->db->last_query();exit; // To Print the SQL Query
 		if($query->num_rows() > 0){
-			foreach ($query->result() as $row)
-			{
+			foreach ($query->result() as $row) {
 				$result_back[] = $row;
 			}
-			//return array('resultList'=>$result_back,'resultCount'=>$query->num_rows());
 			return $result_back;
-		}else{ 
-			//return array('resultList'=>array(),'resultCount'=>0);
+		}else {
 			return array();
 		}
     }	
@@ -102,6 +100,7 @@ class RideModel extends CI_Model {
     function get_total_rides($user=true) {
 
         $UserID = $this->session->userdata('_user_id');
+		$this->db->where("instant","0");
 		if($user) {
 			$this->db->where('user_id', $UserID);
 		}
@@ -114,6 +113,7 @@ class RideModel extends CI_Model {
 	function get_recent_rides() {
 	
 		$this->db->limit(3);
+		$this->db->where("instant","0");
 		$this->db->order_by("added_on","DESC");
 		$this->db->select('origin_location,destination_location,start_time,return_time');
 		$query = $this->db->get($this->table_name);
@@ -125,7 +125,45 @@ class RideModel extends CI_Model {
 		return $result_back;
 	}
 
+	function get_instant_rides($cp, $pp) {
+	
+		$date = strtotime(date("Y-m-d"));
+		$this->db->where("added_on >=",$date);
+		$this->db->where("instant","1");
+		$this->db->where('user_id !=', $this->session->userdata('_user_id'));
+		$this->db->order_by("added_on","DESC");
+		$this->db->limit($cp, $pp);
+		$this->db->select();
+		$query = $this->db->get($this->table_name);
+		if($query->num_rows() > 0) {
+			foreach ($query->result() as $row) {
+				$result_back[] = $row;
+			}
+		}
+		return $result_back;
+	}
 
+    function get_total_instant_rides() {
+        
+		$date = strtotime(date("Y-m-d"));
+		$this->db->where("instant","1");
+		$this->db->where("added_on >=",$date);
+        $this->db->where('user_id !=', $this->session->userdata('_user_id'));
+		$this->db->order_by("added_on","DESC");
+		$this->db->select('ride_id');
+		$query = $this->db->get($this->table_name);
+		return $query->num_rows();
+	}
+
+    function get_total_instant_requests() {
+		
+		$this->db->where("is_instant","1");
+		$this->db->where("approved_on","0");
+		$this->db->where('owner_user_id =', $this->session->userdata('_user_id'));
+		$this->db->select();
+		$query = $this->db->get('pro_join_request');
+		return $query->num_rows();
+	}
 	
 	function request_already_sent_to() {
 	

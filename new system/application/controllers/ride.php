@@ -66,6 +66,44 @@ class Ride extends CI_Controller {
 		$this->load->view('layouts/layout', $data);
 	}
 
+	public function instantridelist() {
+		if($this->session->userdata('_user_id')==''){redirect('user/login');}
+		$this->load->library('pagination');		
+		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
+		$config['uri_segment'] 		= 3;
+		$config['num_links']		= 3;
+		$config['per_page'] 		= 3;
+		$config['base_url'] 		= base_url().'ride/instantridelist/';
+		$config['use_page_numbers'] = TRUE;
+        $config['cur_tag_open'] 	= "<li><span><b>";
+        $config['cur_tag_close'] 	= "</b></span></li>";
+		$config['full_tag_open'] 	= '<ul>';
+		$config['full_tag_close'] 	= '</ul>';
+		$config['num_tag_open'] 	= '<li>';
+		$config['num_tag_close'] 	= '</li>';
+		$config['first_link'] 		= 'First';
+		$config['last_link'] 		= 'Last';
+		$config['prev_link'] 		= 'Prev';
+		$config['next_link'] 		= 'Next';
+		$config['first_tag_open'] 	= $config['last_tag_open'] = $config['next_tag_open'] = $config['prev_tag_open'] = '<li>';
+        $config['first_tag_close'] 	= $config['last_tag_close'] = $config['next_tag_close'] = $config['prev_tag_close'] = '</li>';
+
+		$config['total_rows'] 		= $this->RideModel->get_total_instant_rides();
+		
+		$data['page_name'] = "ride/instantridelist";
+		$data['menu'] = "instantridelist";		
+		$data['ride_list'] = $this->RideModel->get_instant_rides($config["per_page"], $page);
+		$data['title'] = SITE_TITLE." :: List of Instant Ride";
+		
+		//$config['page_query_string'] = TRUE;
+		
+		$this->pagination->initialize($config); 
+		$data['pagelink'] = $this->pagination->create_links();
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
+		$this->load->view('layouts/layout', $data);
+	}
+	
 	public function update_request() {
 	
 		$request_id     = $this->input->post('request_id');
@@ -224,9 +262,11 @@ class Ride extends CI_Controller {
 			$data['states_list'] = $this->CommonModel->states_list();			
 			$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
 			$data['time_slots']  = $this->CommonModel->get_time_slot();
+			$data['recent_rides'] = $this->RideModel->get_recent_rides();
+			$data['recent_joinees'] = $this->UserModel->get_recent_joinees();
 			$data['menu'] = "editride";
 			$data['title'] = SITE_TITLE." :: Edit the Ride";
-			$this->load->view('layouts/layout', $data);
+			$this->load->view('layouts/simple_layout', $data);
 		}else{
 			$this->session->set_flashdata('flash_message', 'Invalid Request!');
 			redirect('ride/ridelist');
@@ -262,16 +302,20 @@ class Ride extends CI_Controller {
 
 			$ride_data['user_id'] 				= $UserID;
 			$ride_data['one_way'] 				= $this->input->post('one_way');
+			$ride_data['instant'] 				= 1;
 			$ride_data['passenger_city'] 		= $this->input->post('city');
 			
 			$ride_data['start_time'] 			= $this->CommonModel->get_time_label($this->input->post('start_time'));
 			
 			if($ride_data['one_way']==0) {
 				$ride_data['return_time'] 		= $this->CommonModel->get_time_label($this->input->post('return_time'));
-			} 
+			}else {$ride_data['return_time']='';} 
 			
 			$ride_data['start_time_24'] 		= $this->input->post('start_time');
-			$ride_data['return_time_24'] 		= $this->input->post('return_time');
+			
+			if($ride_data['one_way']==0) {
+				$ride_data['return_time_24'] 		= $this->input->post('return_time');
+			}else {$ride_data['return_time_24']='';}
 			
 			$ride_data['origin_location']	 	= $this->input->post('origin_from');
 			$ride_data['destination_location']	= $this->input->post('destination_to');
@@ -500,9 +544,9 @@ class Ride extends CI_Controller {
 		
 		if($request_ride_id>0) {
 		
-			$ride_details 			 = $this->RideModel->get_ride_value($request_ride_id,false);
-			$requesting_user_details = $this->UserModel->get_user_details($requesting_user_id);
-			$join_request_id 		 = $this->RideModel->insertJoinRequest($ride_details);
+			$ride_details 			   = $this->RideModel->get_ride_value($request_ride_id,false);
+			$requesting_user_details   = $this->UserModel->get_user_details($requesting_user_id);
+			$join_request_id 		   = $this->RideModel->insertJoinRequest($ride_details);
 			//print($join_request_id);exit;
 			if($join_request_id>0) {
 

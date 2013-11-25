@@ -3,7 +3,7 @@
         <div class="post">
             <h2>Post an Instant Ride</h2>
 			<div style="border:1px solid #CCCCCC;line-height:25px;"><!-- 918F8D-->
-			<form action="<?php echo base_url();?>ride/process_instantride" method="post" style="margin:20px;" onsubmit="return isValidInstantRide();" style="color:#555555;">
+			<form action="<?php echo base_url();?>ride/process_instantride" method="post" style="margin:10px;" onsubmit="return isValidInstantRide();" style="color:#555555;">
 				<table width="90%" cellpadding="4" cellspacing="3" align="center">
 					<tr>
 						<td width="100%" colspan="4">
@@ -58,26 +58,26 @@
 					<tr>
 						<td width="50%"> Origin :&nbsp; <br /> <input onKeyPress="return disableEnterKey(event)" type="text" name="origin_from" id="searchTextField" class="required input_field" style="width:250px;" /></td>
 						<td width="50%"> Destination :&nbsp;<br /> <input onKeyPress="return disableEnterKey(event)" type="text" name="destination_to" id="searchTextField2" class="required input_field" style="width:250px;" /></td>
-						<td width="50%" colspan="2"> Vehicle Type : <br />
+						<td width="25%"> Vehicle Type : <br />
 							<select name="vehicle_type" id="vehicle_type">
 								<option value="Car" selected="selected">Car</option>
 								<option value="Bike">Bike</option>
 							</select>
 						</td>
-					</tr>
-					<tr>
-						<td width="50%"> Model Type : <br />
-							<input type="text" id="model_type" name="model_type" class="required input_field" style="width:250px;" /> <br />
-							[Eg: Hero Honda, Yemaha, etc]
-						</td>
-						<td width="50%"> Fuel Type :&nbsp; 	<br/> 
+						<td width="25%"> Fuel Type :&nbsp; 	<br/> 
 							<select name="fuel_type" id="fuel_type">
 								<option value="Diesel" selected="selected">Diesel</option>
 								<option value="Petrol">Petrol</option>
 								<option value="LPG">LPG</option>
 							</select>						
 						</td>
-						<td width="50%" colspan="2" align="center">
+					</tr>
+					<tr>
+						<td width="40%"> Model Type : <br />
+							<input type="text" id="model_type" name="model_type" class="required input_field" style="width:250px;" /> <br />
+							[Eg: Hero Honda, Yemaha, etc]
+						</td>						
+						<td width="60%" colspan="3" align="center">
 							<input class="submit_btn float_l" type="submit" name="post_ride" id="post_ride" value="Submit" /> &nbsp; &nbsp;
 							<input class="submit_btn float_l" type="button" name="doCancel" id="doCancel" value="Cancel" />  	
 						</td>

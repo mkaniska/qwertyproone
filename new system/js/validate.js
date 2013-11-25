@@ -250,7 +250,7 @@ function sendJoinRequest(selectedID,responseTag) {
 				  //$("#additionalInfo").html(resultData);
 					if(resultData=='success') {
 						//alert(resultData);
-						$(responseTag).html('<img src="'+site_url+'images/sent.gif" border="0" title="Sent Successfully" alt="Sent Successfully" />');
+						$(responseTag).html('<img src="'+site_url+'images/sent.png" border="0" title="Sent Successfully" alt="Sent Successfully" />');
 					}else{
 						//alert(resultData);
 						alert("Error Sending Request!");
@@ -344,7 +344,9 @@ function otherInput(vals) {
 		$("#vehicle_type").css('color', '#000');		
 	}else {
 		$("#model_type").prop('disabled', true);
-		$("#model_type").css('border', '1px solid #ffffff');
+		//$("#model_type").wrap("<strike>");
+		$("#model_type").css('textDecoration', 'line-through');
+		//$("#model_type").css('border', '1px solid #ffffff');
 		$("#model_type").css('color', '#ccc');
 		
 		$("#fuel_type").prop('disabled', true);	
@@ -355,5 +357,4 @@ function otherInput(vals) {
 		$("#vehicle_type").css('border', '1px solid #ffffff');
 		$("#vehicle_type").css('color', '#ccc');		
 	}
-
 }

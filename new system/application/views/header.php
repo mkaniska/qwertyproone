@@ -64,6 +64,19 @@ ddsmoothmenu.init({
 <script src="<?php echo base_url();?>js/init.js"></script>
 <!-- All the JS form validations are available here -->
 <script src="<?php echo base_url();?>js/validate.js"></script>
+<style>
+.notifyRequest{
+	margin-left:10px;
+	padding-top:4px;
+	text-align:center;
+	width:32px;
+	height:32px;
+	float:right;
+	color:#000;
+	font-weight:bold;
+	background-image:url(../images/Circle_Grey.png);
+}
+</style>
 </head>
 <body>
 <div id="website_header_wrapper">
