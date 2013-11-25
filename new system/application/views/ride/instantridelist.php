@@ -20,17 +20,15 @@
 				<tr style="font-weight:bold;font-size:11px;text-align:center;background-color:#ccc;">
 					<td width="30%">Origin Location</td>
 					<td width="30%">Destination Location</td>
-					<td width="8%">Start Time</td>
+					<td width="10%">Start Time</td>
 					<td width="10%">Return Time</td>
 					<td width="10%">Posted At</td>
-					<td width="7%">Action</td>
+					<td width="10%">Send Interest</td>
 				</tr>
 				<?php if(count($ride_list)>0){foreach($ride_list as $out) { ?>
 				<tr style="font-size:11px;">
-					<td><?php echo $out->origin_location;?>
-					<?php if($out->vehicle_type!='') { ?>
-					[<img src="<?php echo base_url().'images/'.$out->vehicle_type.'.png';?>" align="absmiddle" />]
-					<?php }else { echo '[ Passenger ]';} ?>
+					<td><?php echo $out->origin_location; if($out->vehicle_type=='walk'){$alt='Passenger';}else{$alt='Vehicle Owner';}?>
+					[<img src="<?php echo base_url().'images/'.$out->vehicle_type.'.png';?>" align="absmiddle" alt="<?php echo $alt;?>" title="<?php echo $alt;?>"  />]
 					</td>
 					<td><?php echo $out->destination_location;?></td>
 					<td><?php echo $out->start_time;?></td>
@@ -40,9 +38,9 @@
 					<?php $responseID = 'request_row_'.$out->ride_id; ?>
 					<span id="<?php echo $responseID;?>">
 					<?php
-						  $href="javascript:sendJoinRequest('".$out->ride_id."','#".$responseID."','1')"; ?>
+						$href="javascript:sendJoinRequest('".$out->ride_id."','#".$responseID."','1')"; ?>
 						<a href="<?php echo $href;?>" alt="Send Request" title="Send Request">
-							<img src="<?php echo base_url().'images/request.png';?>" align="absmiddle" />
+							<img border="0" src="<?php echo base_url().'images/request.png';?>" align="absmiddle" />
 						</a>
 					</span>
 					</td>
@@ -53,7 +51,7 @@
 				</tr>
 				<?php }else{?>
 				<tr style="font-size:11px;">
-					<td colspan="6" align="center"> No Rides Added</td>
+					<td colspan="6" align="center"> No Instant Rides Posted Today!</td>
 				</tr>
 				<?php } ?>
 			</table>

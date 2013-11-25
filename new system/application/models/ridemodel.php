@@ -75,6 +75,20 @@ class RideModel extends CI_Model {
 		return $query->num_rows();
 	}	
 	
+    function get_total_instant_requests() {
+
+        $UserID = $this->session->userdata('_user_id');
+        $this->db->where('owner_user_id', $UserID);
+        $this->db->where('request_status', '2');
+        $this->db->where('requested_on >=', strtotime(date("y-m-d")));
+        $this->db->where('is_instant', '1');
+		$this->db->order_by("requested_on","DESC");
+		$this->db->join('pro_users', 'pro_users.pro_user_id = pro_join_request.requesting_user_id');
+		$this->db->select();
+		$query = $this->db->get('pro_join_request');
+		return $query->num_rows();
+	}	
+	
     function get_join_requests($cp,$pp) {
 
         $UserID = $this->session->userdata('_user_id');
@@ -86,7 +100,32 @@ class RideModel extends CI_Model {
 		$this->db->select('pro_join_request.*,pro_users.pro_user_full_name,pro_ride_details.*');
         $this->db->limit($cp, $pp);
 		$query = $this->db->get('pro_join_request');
-		//echo $this->db->last_query();exit; // To Print the SQL Query
+		
+		if($query->num_rows() > 0){
+			foreach ($query->result() as $row) {
+				$result_back[] = $row;
+			}
+			return $result_back;
+		}else {
+			return array();
+		}
+    }
+	
+    function get_instant_join_requests($cp,$pp) {
+
+        $UserID = $this->session->userdata('_user_id');
+		$date = strtotime(date("Y-m-d"));
+        $this->db->where('owner_user_id', $UserID);
+        $this->db->where('is_instant', '1');
+        $this->db->where('requested_on >=', $date);
+        $this->db->where('request_status', '2');
+		$this->db->join('pro_users', 'pro_users.pro_user_id = pro_join_request.requesting_user_id');
+		$this->db->join('pro_ride_details', 'pro_ride_details.ride_id = pro_join_request.ride_id');
+		$this->db->order_by("requested_on","DESC");
+		$this->db->select('pro_join_request.*,pro_users.pro_user_full_name,pro_ride_details.*');
+        $this->db->limit($cp, $pp);
+		$query = $this->db->get('pro_join_request');
+		
 		if($query->num_rows() > 0){
 			foreach ($query->result() as $row) {
 				$result_back[] = $row;
@@ -155,7 +194,7 @@ class RideModel extends CI_Model {
 		return $query->num_rows();
 	}
 
-    function get_total_instant_requests() {
+    function get_total_instant_requests___() {
 		
 		$this->db->where("is_instant","1");
 		$this->db->where("approved_on","0");
@@ -234,6 +273,7 @@ class RideModel extends CI_Model {
 			$join = ', pro_users.*';
 		}
 		$this->db->order_by("added_on","DESC");
+		$this->db->where("instant","0");
 		$this->db->select('pro_ride_details.*'.$join);
         $this->db->limit($cp, $pp);
 		$query = $this->db->get($this->table_name);

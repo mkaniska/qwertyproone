@@ -198,6 +198,46 @@ class Ride extends CI_Controller {
 		$this->load->view('layouts/layout', $data);
 	}
 
+	public function instantresponse() {
+	
+		if($this->session->userdata('_user_id')==''){redirect('user/login');}
+		
+		$this->load->library('pagination');		
+		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
+		$config['uri_segment'] 		= 3;
+		$config['num_links']		= 3;
+		$config['per_page'] 		= 3;
+		$config['base_url'] 		= base_url().'ride/instantresponse/';
+		$config['use_page_numbers'] = TRUE;
+        $config['cur_tag_open'] 	= "<li><span><b>";
+        $config['cur_tag_close'] 	= "</b></span></li>";
+		$config['full_tag_open'] 	= '<ul>';
+		$config['full_tag_close'] 	= '</ul>';
+		$config['num_tag_open'] 	= '<li>';
+		$config['num_tag_close'] 	= '</li>';
+		$config['first_link'] 		= 'First';
+		$config['last_link'] 		= 'Last';
+		$config['prev_link'] 		= 'Prev';
+		$config['next_link'] 		= 'Next';
+		$config['first_tag_open'] 	= $config['last_tag_open'] = $config['next_tag_open'] = $config['prev_tag_open'] = '<li>';
+        $config['first_tag_close'] 	= $config['last_tag_close'] = $config['next_tag_close'] = $config['prev_tag_close'] = '</li>';
+
+		$config['total_rows'] 		= $this->RideModel->get_total_instant_requests();
+		
+		$data['page_name'] = "ride/instantresponse";
+		$data['menu'] = "instantresponse";		
+		$data['request_list'] = $this->RideModel->get_instant_join_requests($config["per_page"], $page);
+		$data['title'] = SITE_TITLE." :: List of Instant Join Requests";
+		
+		//$config['page_query_string'] = TRUE;
+		
+		$this->pagination->initialize($config); 
+		$data['pagelink'] = $this->pagination->create_links();
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
+		$this->load->view('layouts/simple_layout', $data);
+	}
+
 	
 	public function matching_places() {
 		$place = $this->input->post('address_string');
