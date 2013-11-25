@@ -92,8 +92,5 @@
 				</div>
         </div>
     </div> <!-- END of content half -->
-    <!-- START of sidebar -->
-	<?php //$this->load->view('sidebar'); ?>
-    <!-- END of sidebar -->
     <div class="clear"></div>
 </div>

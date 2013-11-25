@@ -62,7 +62,7 @@ class Welcome extends CI_Controller {
 		$data['title'] = SITE_TITLE." :: Services";
 		$data['recent_rides'] = $this->RideModel->get_recent_rides();
 		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
-		$this->load->view('layouts/layout', $data);
+		$this->load->view('layouts/simple_layout', $data);
 	}
 	
 	public function process_contact() {

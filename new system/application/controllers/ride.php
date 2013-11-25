@@ -261,10 +261,14 @@ class Ride extends CI_Controller {
 			// Insert the Ride Details & Vehicle Details;
 
 			$ride_data['user_id'] 				= $UserID;
+			$ride_data['one_way'] 				= $this->input->post('one_way');
 			$ride_data['passenger_city'] 		= $this->input->post('city');
 			
 			$ride_data['start_time'] 			= $this->CommonModel->get_time_label($this->input->post('start_time'));
-			$ride_data['return_time'] 			= $this->CommonModel->get_time_label($this->input->post('return_time'));
+			
+			if($ride_data['one_way']==0) {
+				$ride_data['return_time'] 		= $this->CommonModel->get_time_label($this->input->post('return_time'));
+			} 
 			
 			$ride_data['start_time_24'] 		= $this->input->post('start_time');
 			$ride_data['return_time_24'] 		= $this->input->post('return_time');
@@ -323,17 +327,17 @@ class Ride extends CI_Controller {
 					$this->email->send();				
 				}
 
-				$this->session->set_flashdata('flash_message', 'Successfully Added your Ride Details !');
+				$this->session->set_flashdata('flash_message', 'Successfully Posted your Instant Ride !');
 				$this->session->set_flashdata('flash_url', base_url().'ride/ridelist');
 				redirect('ride/thanks');
 			} else {
 				$this->session->set_flashdata('data_back', $ride_data);
 				$this->session->set_flashdata('flash_message', 'Please enter all the details');
-				redirect('ride/postride/error/1');
+				redirect('ride/instantride/error/1');
 			}
 		}else{
 			$this->session->set_flashdata('flash_message', 'Please enter all the details');
-			redirect('ride/postride/error/1');
+			redirect('ride/instantride/error/1');
 		}
 	}	
 	
