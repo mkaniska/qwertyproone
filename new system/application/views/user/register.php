@@ -1,8 +1,7 @@
 <div id="website_main" class="wrapper">
 <h3>Registration</h3>
 	<div id="content" class="left">
-       <div id="contact_form">
-		
+       <div id="contact_form" style="border:1px solid #ccc;padding:20px;">
            <form method="post" name="registration_form" action="<?php echo base_url();?>user/process_signup" onsubmit="return isValidSignup();">
 		   
 			<table width="100%" cellpadding="4" cellspacing="3" align="center">

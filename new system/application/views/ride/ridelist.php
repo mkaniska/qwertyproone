@@ -8,7 +8,7 @@
         <div id="list_form">
             <div style="border:1px solid #CCCCCC;line-height:25px;"> <!-- 918F8D-->
 		    <form style="margin:10px;" method="post" name="contact_us_form" id="contact_us_form" action="<?php echo base_url();?>welcome/process_contact" onsubmit="return isValidContact();">
-			<table width="100%" cellpadding="3" cellspacing="0" align="center" border="1">
+			<table width="100%" cellpadding="2" cellspacing="0" align="center" border="1">
 			<?php if($this->session->flashdata('flash_message') !='') { ?>
 				<tr>
 					<td width="100%" colspan="6">
@@ -18,7 +18,7 @@
 					</td>
 				</tr>
 				<?php } ?>
-				<tr style="font-weight:bold;font-size:11px;text-align:center;background-color:#ccc;">
+				<tr style="font-weight:bold;font-size:11px;text-align:center;background-color:#015591;color:#FFF;">
 					<td width="30%">Origin Location</td>
 					<td width="30%">Destination Location</td>
 					<td width="8%">Start Time</td>
@@ -45,9 +45,11 @@
 					</td>
 				</tr>
 				<?php } ?>
+				<?php if($pagelink!='') { ?>
 				<tr style="font-size:11px;">
 					<td colspan="6" align="center"><?php echo $pagelink;?></td>
 				</tr>
+				<?php } ?>
 				<?php }else{?>
 				<tr style="font-size:11px;">
 					<td colspan="6" align="center"> No Rides Added</td>

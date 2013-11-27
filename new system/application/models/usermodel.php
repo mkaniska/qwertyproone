@@ -68,8 +68,8 @@ class UserModel extends CI_Model {
 
 	function activate_user($data) {
 	
-		$this->db->where("pro_user_id",$data('id'));
-		$this->db->where("pro_user_email",$data('email'));
+		$this->db->where("pro_user_id",$data['id']);
+		$this->db->where("pro_user_email",$data['email']);
 		$this->db->where("pro_user_status","0");
 		$this->db->update('pro_users', array('pro_user_status'=>'1'));
         if($this->db->affected_rows()>0) {

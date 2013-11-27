@@ -53,8 +53,9 @@ class Ride extends CI_Controller {
 		$config['total_rows'] 		= $this->RideModel->get_total_rides();
 		
 		$data['page_name'] = "ride/ridelist";
-		$data['menu'] = "ridelist";		
-		$data['ride_list'] = $this->RideModel->get_rides_posted($config["per_page"], $page);
+		$data['menu'] = "ridelist";
+		if($page!=0) {$start = ($page*3)-3;}else{$start = 0;}
+		$data['ride_list'] = $this->RideModel->get_rides_posted($config["per_page"], $start);
 		$data['title'] = SITE_TITLE." :: Ride List Posted";
 		
 		//$config['page_query_string'] = TRUE;
@@ -89,11 +90,52 @@ class Ride extends CI_Controller {
         $config['first_tag_close'] 	= $config['last_tag_close'] = $config['next_tag_close'] = $config['prev_tag_close'] = '</li>';
 
 		$config['total_rows'] 		= $this->RideModel->get_total_instant_rides();
+		$data['ignore_list']   		= $this->RideModel->request_already_sent_to();
 		
 		$data['page_name'] = "ride/instantridelist";
 		$data['menu'] = "instantridelist";		
-		$data['ride_list'] = $this->RideModel->get_instant_rides($config["per_page"], $page);
+		if($page!=0) {$start = ($page*3)-3;}else{$start = 0;}
+		$data['ride_list'] = $this->RideModel->get_instant_rides($config["per_page"], $start);
 		$data['title'] = SITE_TITLE." :: List of Instant Ride";
+		
+		//$config['page_query_string'] = TRUE;
+		
+		$this->pagination->initialize($config); 
+		$data['pagelink'] = $this->pagination->create_links();
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
+		$this->load->view('layouts/layout', $data);
+	}
+
+	public function copassengers() {
+		if($this->session->userdata('_user_id')==''){redirect('user/login');}
+		$this->load->library('pagination');		
+		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
+		$config['uri_segment'] 		= 3;
+		$config['num_links']		= 3;
+		$config['per_page'] 		= 3;
+		$config['base_url'] 		= base_url().'ride/copassengers/';
+		$config['use_page_numbers'] = TRUE;
+        $config['cur_tag_open'] 	= "<li><span><b>";
+        $config['cur_tag_close'] 	= "</b></span></li>";
+		$config['full_tag_open'] 	= '<ul>';
+		$config['full_tag_close'] 	= '</ul>';
+		$config['num_tag_open'] 	= '<li>';
+		$config['num_tag_close'] 	= '</li>';
+		$config['first_link'] 		= 'First';
+		$config['last_link'] 		= 'Last';
+		$config['prev_link'] 		= 'Prev';
+		$config['next_link'] 		= 'Next';
+		$config['first_tag_open'] 	= $config['last_tag_open'] = $config['next_tag_open'] = $config['prev_tag_open'] = '<li>';
+        $config['first_tag_close'] 	= $config['last_tag_close'] = $config['next_tag_close'] = $config['prev_tag_close'] = '</li>';
+
+		$config['total_rows'] 		= $this->RideModel->get_total_copassengers();
+		
+		$data['page_name'] = "ride/copassengers";
+		$data['menu'] = "copassengers";
+		if($page!=0) {$start = ($page*3)-3;}else{$start = 0;}
+		$data['ride_list'] = $this->RideModel->get_copassengers($config["per_page"], $start);
+		$data['title'] = SITE_TITLE." :: List of Co-Passengers";
 		
 		//$config['page_query_string'] = TRUE;
 		
@@ -185,8 +227,9 @@ class Ride extends CI_Controller {
 		$config['total_rows'] 		= $this->RideModel->get_total_requests();
 		
 		$data['page_name'] = "ride/requestlist";
-		$data['menu'] = "requestlist";		
-		$data['request_list'] = $this->RideModel->get_join_requests($config["per_page"], $page);
+		$data['menu'] = "requestlist";
+		if($page!=0) {$start = ($page*3)-3;}else{$start = 0;}
+		$data['request_list'] = $this->RideModel->get_join_requests($config["per_page"], $start);
 		$data['title'] = SITE_TITLE." :: List of Join Requests";
 		
 		//$config['page_query_string'] = TRUE;
@@ -225,8 +268,9 @@ class Ride extends CI_Controller {
 		$config['total_rows'] 		= $this->RideModel->get_total_instant_requests();
 		
 		$data['page_name'] = "ride/instantresponse";
-		$data['menu'] = "instantresponse";		
-		$data['request_list'] = $this->RideModel->get_instant_join_requests($config["per_page"], $page);
+		$data['menu'] = "instantresponse";
+		if($page!=0) {$start = ($page*3)-3;}else{$start = 0;}
+		$data['request_list'] = $this->RideModel->get_instant_join_requests($config["per_page"], $start);
 		$data['title'] = SITE_TITLE." :: List of Instant Join Requests";
 		
 		//$config['page_query_string'] = TRUE;
@@ -330,7 +374,7 @@ class Ride extends CI_Controller {
 	
 		if($this->session->userdata('_user_id')==''){redirect('user/login');}
 		
-		if($this->input->post('post_ride')=='Submit') {
+		if($this->input->post('post_ride')=='Post') {
 			
 			$UserID = $this->session->userdata('_user_id');
 			
@@ -361,7 +405,7 @@ class Ride extends CI_Controller {
 			$ride_data['destination_location']	= $this->input->post('destination_to');
 			$ride_data['travel_as'] 			= $this->input->post('travel_type');
 			$ride_data['join_alert_needed'] 	= $this->input->post('travel_alert');
-			$ride_data['vehicle_type'] 			= $this->input->post('vehicle_type');
+			$ride_data['vehicle_type'] 			= $this->input->post('vehicle_type')=='0'?'walk':$this->input->post('vehicle_type');
 			$ride_data['model_type'] 			= $this->input->post('model_type');
 			$ride_data['fuel_type'] 			= $this->input->post('fuel_type');
 			$ride_data['added_on'] 				= time();

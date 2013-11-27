@@ -17,7 +17,7 @@
 					</td>
 				</tr>
 				<?php } ?>
-				<tr style="font-weight:bold;font-size:11px;text-align:center;background-color:#ccc;">
+				<tr style="font-weight:bold;font-size:11px;text-align:center;background-color:#015591;color:#FFF;">
 					<td width="15%">Reqested By</td>
 					<td width="10%">Requested On</td>
 					<td width="40%">From & To Location</td>
@@ -36,16 +36,18 @@
 							<font style="font-weight:bold;color:#E96F1C;">[TO] : </font><?php echo $out->destination_location;?>
 						</div>
 					</td>
-					<td><?php echo $out->start_time;?> - <?php echo $out->return_time;?> <?php $responseID = 'request_row_'.$out->request_id; ?></td>
+					<td><?php echo $out->start_time;?> - <?php echo $out->return_time==''?'One Way':$out->return_time;?> <?php $responseID = 'request_row_'.$out->request_id; ?></td>
 					<td align="center" id="<?php echo $responseID;?>">
 					<input class="submit_btn float_l" type="button" name="Accept" id="Accept" value="Accept" onclick="javascript:confirmRequest('#<?php echo $responseID;?>','<?php echo $out->request_id;?>','1');" /> &nbsp; 
 					<input class="submit_btn float_l" type="button" name="Reject" id="Reject" value="Reject" onclick="javascript:confirmRequest('#<?php echo $responseID;?>','<?php echo $out->request_id;?>','0');" />
 					</td>
 				</tr>
 				<?php } ?>
+				<?php if($pagelink!='') { ?>
 				<tr style="font-size:11px;">
 					<td colspan="5" align="center"><?php echo $pagelink;?></td>
 				</tr>
+				<?php } ?>
 				<?php }else{?>
 				<tr style="font-size:11px;">
 					<td colspan="5" align="center"> No Requests Received</td>

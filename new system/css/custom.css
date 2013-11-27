@@ -1,0 +1,68 @@
+.alert_notification {
+	color:#555;
+	border-radius:10px;
+	font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+	padding:10px 10px 10px 36px;
+	margin:10px;
+	width:500px;
+	margin-left:200px;
+	text-align:center;
+	margin-top:100px;
+}
+
+.alert_notification span {
+	font-weight:bold;
+	text-transform:uppercase;
+}
+
+.notification_error {
+	background-color:#fff8c4;
+    border:1px solid #f2c779;
+}
+
+.notifyRequest{
+	margin-left:8px;
+	padding-top:5px;
+	text-align:center;
+	width:32px;
+	height:30px;
+	float:right;
+	color:#000;
+	font-weight:bold;
+	background-image:url(../images/circle.png);
+}
+#circle {
+    background: #E16715;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+	float:right;
+	color:#FFF;
+	font-weight:bold;
+	text-align:center;
+	border: 1px solid white;
+	border-radius: 8px;
+	margin-left:5px;
+}
+
+
+.alert_display {
+	color:#555;
+	border-radius:10px;
+	font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+	padding:10px 10px 10px 10px;
+	width:500px;
+	margin-left:5px;
+	text-align:left;
+	margin-top:5px;
+}
+
+.alert_display span {
+	font-weight:bold;
+	text-transform:uppercase;
+}
+
+.notification_error {
+	background-color:#fff8c4;
+    border:1px solid #f2c779;
+}

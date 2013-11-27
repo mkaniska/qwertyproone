@@ -14,6 +14,9 @@ class AdminModel extends CI_Model {
 
     function get_total_offers() {
 		$this->db->where('is_deleted', '0');
+		if($this->session->userdata('offer_id')!='' && $this->session->userdata('offer_id')!=0) {
+			$this->db->where('pro_offers.offer_type', $this->session->userdata('offer_id'));
+		}
 		$this->db->join("pro_offer_types","pro_offer_types.offer_type_id=pro_offers.offer_type");
 		$this->db->select();
 		$query = $this->db->get('pro_offers');
@@ -206,9 +209,13 @@ class AdminModel extends CI_Model {
     function get_offers_posted($cp, $pp) {
         
 		$this->db->order_by("offer_created_on","DESC");
+		if($this->session->userdata('offer_id')!='' && $this->session->userdata('offer_id')!=0) {
+			$this->db->where('pro_offers.offer_type', $this->session->userdata('offer_id'));
+		}
 		$this->db->select();
 		$this->db->limit($cp, $pp);
         $query = $this->db->get('pro_offers');
+		$result_back = array();
 		//echo $this->db->last_query();exit;
 		foreach ($query->result() as $row) {
 			$result_back[] = $row;
@@ -285,9 +292,8 @@ class AdminModel extends CI_Model {
 		$this->db->select();
         $this->db->limit($cp, $pp);
 		$query = $this->db->get('pro_users');
-		if($query->num_rows() > 0){
-			foreach ($query->result() as $row)
-			{
+		if($query->num_rows() > 0) {
+			foreach ($query->result() as $row) {
 				$result_back[] = $row;
 			}
 			return $result_back;

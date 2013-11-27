@@ -229,36 +229,52 @@ class Admin extends CI_Controller {
 			$inp_data['offer_created_by'] 	= $this->session->userdata('admin_user_id');
 			$inp_data['offer_status'] 		= 1;//$this->input->post('status');
 			$inp_data['offer_modified_on'] 	= time();
-
+			
 			// File uploading here
-			$fconfig['upload_path'] = 'offer_pictures/';
-			$fconfig['allowed_types'] = 'gif|jpg|png|GIF|JPG|JPEG|PNG';
-			$fconfig['max_size']	= '4000';
-			$fconfig['max_width']  = '2024';
-			$fconfig['max_height']  = '2024';
-			$fconfig['remove_spaces']  = TRUE;            
-			$ext = end(explode('.', $_FILES['userfile']['name']));
-			$fconfig['file_name']  = time().'.'.$ext;
-			
-			$this->load->library('upload', $fconfig);
-			$this->upload->initialize($fconfig);
-			if(!$this->upload->do_upload()) {
-				$this->session->set_flashdata('flash_message', 'Invalid Picture Uploaded!');
-				$this->session->set_flashdata('flash_data', $inp_data);
-				redirect('admin/edit_offer/'.$offer_id);
-			} else {
-				$inp_data['offer_picture'] = $fconfig['file_name'];
-				$upload_data =$this->upload->data();
-				$rconfig['image_library'] = 'gd2';
-				$rconfig['source_image'] = $upload_data['full_path'];
-				$rconfig['create_thumb'] = TRUE;
-				$rconfig['maintain_ratio'] = TRUE;
-				$rconfig['width'] = 100;
-				$rconfig['height'] = 100;
-				$this->load->library('image_lib', $rconfig);
-				$this->image_lib->resize();				
+			if($_FILES['userfile']['name']!='') {			
+				$fconfig['upload_path'] = 'offer_pictures/';
+				$fconfig['allowed_types'] = 'gif|jpg|png|GIF|JPG|JPEG|PNG';
+				$fconfig['max_size']	= '4000';
+				$fconfig['max_width']  = '2024';
+				$fconfig['max_height']  = '2024';
+				$fconfig['remove_spaces']  = TRUE;            
+				$ext = end(explode('.', $_FILES['userfile']['name']));
+				$fconfig['file_name']  = time().'.'.$ext;
+				
+				$this->load->library('upload', $fconfig);
+				$this->upload->initialize($fconfig);
+				if(!$this->upload->do_upload()) {
+					$this->session->set_flashdata('flash_message', 'Invalid Picture Uploaded!');
+					$this->session->set_flashdata('flash_data', $inp_data);
+					redirect('admin/edit_offer/'.$offer_id);
+				} else {
+					$inp_data['offer_picture'] = $fconfig['file_name'];
+					$upload_data =$this->upload->data();
+					$rconfig['image_library'] = 'gd2';
+					$rconfig['source_image'] = $upload_data['full_path'];
+					$rconfig['create_thumb'] = TRUE;
+					$rconfig['maintain_ratio'] = TRUE;
+					$rconfig['width'] = 100;
+					$rconfig['height'] = 100;
+					$rconfig['thumb_marker'] = '_thumb';
+					$this->load->library('image_lib', $rconfig);
+					$this->image_lib->initialize($rconfig);
+					$this->image_lib->resize();
+					
+					// One More to resize
+					
+					list($Iwidth, $Iheight, $Itype, $Iattr) = getimagesize($upload_data['full_path']);
+					if($Iwidth>464 && $Iheight>260) {
+						if($Iwidth>464) { $rconfig['width'] = 464; }else{$rconfig['width'] = $Iwidth;}
+						if($Iheight>260) { $rconfig['height'] = 260; }else{$rconfig['width'] = $Iheight;}
+						$rconfig['thumb_marker'] = '_normal_thumb';
+						$this->image_lib->initialize($rconfig);
+						$this->image_lib->resize();
+					}else{
+						copy($upload_data['full_path'],str_replace(".","_normal_thumb.",$upload_data['full_path']));
+					}
+				}
 			}
-			
 			// File upload completed 
 			
 			$inp_data['offer_provider'] 			= $this->input->post('offer_provider');
@@ -272,10 +288,15 @@ class Admin extends CI_Controller {
 			$inp_data['offer_percentage'] 			= $this->input->post('offer_percentage');
 			$inp_data['offer_amount'] 				= $this->input->post('offer_amount');
 			$inp_data['conditions_apply'] 			= $this->input->post('conditions_apply');
-			
+			$temp_details = $this->AdminModel->get_this_offer($offer_id);
 			$isUpdated = $this->AdminModel->updateOffer($inp_data, $offer_id);
 			
 			if($isUpdated) {
+				if($_FILES['userfile']['name']!='') {
+					unlink('offer_pictures/'.$temp_details[0]->offer_picture);
+					unlink('offer_pictures/'.str_replace(".","_thumb.",$temp_details[0]->offer_picture));
+					unlink('offer_pictures/'.str_replace(".","_normal_thumb.",$temp_details[0]->offer_picture));
+				}
 				$this->session->set_flashdata('flash_message', 'Offer Updated Successfully!');
 				redirect('admin/offer_list');
 			}else {
@@ -382,8 +403,24 @@ class Admin extends CI_Controller {
 				$rconfig['maintain_ratio'] = TRUE;
 				$rconfig['width'] = 100;
 				$rconfig['height'] = 100;
+				$rconfig['thumb_marker'] = '_thumb';
 				$this->load->library('image_lib', $rconfig);
+				//$this->upload->initialize($fconfig);
+				$this->image_lib->initialize($rconfig);
 				$this->image_lib->resize();
+
+				// One More to resize
+				
+				list($Iwidth, $Iheight, $Itype, $Iattr) = getimagesize($upload_data['full_path']);
+				if($Iwidth>464 && $Iheight>260) {
+					if($Iwidth>464) { $rconfig['width'] = 464; }else{$rconfig['width'] = $Iwidth;}
+					if($Iheight>260) { $rconfig['height'] = 260; }else{$rconfig['width'] = $Iheight;}
+					$rconfig['thumb_marker'] = '_normal_thumb';
+					$this->image_lib->initialize($rconfig);
+					$this->image_lib->resize();
+				}else{
+					copy($upload_data['full_path'],str_replace(".","_normal_thumb.",$upload_data['full_path']));
+				}
 			}
 			// File upload completed 
 			
@@ -543,8 +580,9 @@ class Admin extends CI_Controller {
 		
 		$data['total']     = $config['total_rows'];
 		$data['page_name'] = "admin/ride_list";
-		$data['menu'] = "ride_list";		
-		$data['ride_list'] = $this->RideModel->get_rides_posted($config["per_page"], $page, false, true);
+		$data['menu'] = "ride_list";
+		if($page!=0) {$start = ($page*5)-5;}else{$start = 0;}
+		$data['ride_list'] = $this->RideModel->get_rides_posted($config["per_page"], $start, false, true);
 		$data['title'] = SITE_ADMIN_TITLE." :: List of Rides";
 		
 		//$config['page_query_string'] = TRUE;
@@ -582,8 +620,9 @@ class Admin extends CI_Controller {
 		
 		$data['total']     = $config['total_rows'];
 		$data['page_name'] = "admin/offertype_list";
-		$data['menu'] = "offertype_list";		
-		$data['offertype_list'] = $this->AdminModel->list_offer_types($config["per_page"], $page);
+		$data['menu'] = "offertype_list";
+		if($page!=0) {$start = ($page*15)-15;}else{$start = 0;}
+		$data['offertype_list'] = $this->AdminModel->list_offer_types($config["per_page"], $start);
 		$data['title'] = SITE_ADMIN_TITLE." :: List of Offer Types";
 		
 		$this->pagination->initialize($config); 
@@ -620,8 +659,9 @@ class Admin extends CI_Controller {
 		
 		$data['total']     = $config['total_rows'];
 		$data['page_name'] = "admin/type_list";
-		$data['menu'] = "type_list";		
-		$data['type_list'] = $this->AdminModel->list_company_types($config["per_page"], $page);
+		$data['menu'] = "type_list";
+		if($page!=0) {$start = ($page*15)-15;}else{$start = 0;}
+		$data['type_list'] = $this->AdminModel->list_company_types($config["per_page"], $start);
 		$data['title'] = SITE_ADMIN_TITLE." :: List of Industry Types";
 		
 		$this->pagination->initialize($config); 
@@ -656,8 +696,9 @@ class Admin extends CI_Controller {
 		
 		$data['total']     = $config['total_rows'];
 		$data['page_name'] = "admin/offer_list";
-		$data['menu'] = "offer_list";		
-		$data['offer_list'] = $this->AdminModel->get_offers($config["per_page"], $page);
+		$data['menu'] = "offer_list";
+		if($page!=0) {$start = ($page*5)-5;}else{$start = 0;}
+		$data['offer_list'] = $this->AdminModel->get_offers($config["per_page"], $start);
 		$data['title'] = SITE_ADMIN_TITLE." :: List of Offers";
 		
 		$data['company_list'] = $this->AdminModel->get_companies(1, 1, false);
@@ -694,8 +735,9 @@ class Admin extends CI_Controller {
 		
 		$data['total']     = $config['total_rows'];
 		$data['page_name'] = "admin/company_list";
-		$data['menu'] = "company_list";		
-		$data['company_list'] = $this->AdminModel->get_companies($config["per_page"], $page);
+		$data['menu'] = "company_list";
+		if($page!=0) {$start = ($page*5)-5;}else{$start = 0;}
+		$data['company_list'] = $this->AdminModel->get_companies($config["per_page"], $start);
 		$data['title'] = SITE_ADMIN_TITLE." :: List of Companies";
 		
 		//$config['page_query_string'] = TRUE;
@@ -732,8 +774,9 @@ class Admin extends CI_Controller {
 		
 		$data['total']     = $config['total_rows'];
 		$data['page_name'] = "admin/user_list";
-		$data['menu'] = "user_list";		
-		$data['user_list'] = $this->UserModel->get_users_registered($config["per_page"], $page);
+		$data['menu'] = "user_list";
+		if($page!=0) {$start = ($page*5)-5;}else{$start = 0;}
+		$data['user_list'] = $this->UserModel->get_users_registered($config["per_page"], $start);
 		$data['title'] = SITE_ADMIN_TITLE." :: List of Users";
 		
 		$this->pagination->initialize($config); 
@@ -863,7 +906,8 @@ class Admin extends CI_Controller {
 		
 		$data['total']     = $config['total_rows'];
 		$data['title'] = SITE_ADMIN_TITLE." :: Details of Company & List of HR";
-		$data['user_list'] = $this->AdminModel->getThisCompanyUsers($config["per_page"], $page, $company_id);
+		if($page!=0) {$start = ($page*5)-5;}else{$start = 0;}
+		$data['user_list'] = $this->AdminModel->getThisCompanyUsers($config["per_page"], $start, $company_id);
 		
 		$this->pagination->initialize($config); 
 		$data['pagelink'] = $this->pagination->create_links();		

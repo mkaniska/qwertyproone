@@ -22,16 +22,19 @@
 					<li><a href="<?php echo base_url();?>ride/ridelist">Ride List</a></li>
 					<li><a href="<?php echo base_url();?>ride/requestlist">Ride Requests</a></li>
 					<li><a href="<?php echo base_url();?>ride/instantride">Instant Post</a></li>
+					<li><a href="<?php echo base_url();?>ride/copassengers">Co-Passengers</a></li>
 				</ul>
 			</li>
-			<?php $total_request = $this->RideModel->get_total_instant_requests(); if($total_request>0) { ?>
-			<div class="notifyRequest"  alt="Join Requests Received" title="Join Requests Received">
-				<?php echo $total_request;?>
+			<?php $total_request = $this->RideModel->get_total_requests(); if($total_request>0) { ?>
+			<div id="circle" alt="Join Requests Received" title="Join Requests Received">
+				<a href="<?php echo base_url();?>ride/requestlist" style="color:#fff;" alt="Join Requests Received" title="Join Requests Received">
+					<?php echo $total_request;?>
+				</a>
 			</div>
 			<?php } ?>
 			<div style="float:right;padding-right:10px;padding-left:20px;">
 				<a href="<?php echo base_url();?>ride/instantride">
-					<img align="absmiddle" border="0" src="<?php echo base_url();?>images/quickpost.png" alt="Add Instant Post" title="Add Instant Post" />
+					<img align="absmiddle" border="0" src="<?php echo base_url();?>images/clock.png" alt="Add Instant Post" title="Add Instant Post" />
 				</a>
 			</div>
 			<?php if($this->RideModel->get_total_instant_rides()>0) { ?>

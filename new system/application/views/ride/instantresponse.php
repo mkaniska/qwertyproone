@@ -17,7 +17,7 @@
 					</td>
 				</tr>
 				<?php } ?>
-				<tr style="font-weight:bold;font-size:11px;text-align:center;background-color:#ccc;">
+				<tr style="font-weight:bold;font-size:11px;text-align:center;background-color:#015591;color:#FFF;">
 					<td width="15%">Reqested By</td>
 					<td width="10%">Requested On</td>
 					<td width="40%">From & To Location</td>
@@ -43,9 +43,11 @@
 					</td>
 				</tr>
 				<?php } ?>
+				<?php if($pagelink!='') { ?>
 				<tr style="font-size:11px;">
 					<td colspan="5" align="center"><?php echo $pagelink;?></td>
 				</tr>
+				<?php } ?>
 				<?php }else{?>
 				<tr style="font-size:11px;">
 					<td colspan="5" align="center"> No Requests Received</td>

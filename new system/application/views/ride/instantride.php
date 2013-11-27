@@ -2,8 +2,8 @@
 	<div id="content_full" class="left">
         <div class="post">
             <h2>Post an Instant Ride</h2>
-			<div style="border:1px solid #CCCCCC;line-height:25px;"><!-- 918F8D-->
-			<form action="<?php echo base_url();?>ride/process_instantride" method="post" style="margin:10px;" onsubmit="return isValidInstantRide();" style="color:#555555;">
+			<div style="border:1px solid #CCCCCC;line-height:20px;"><!-- 918F8D-->
+			<form action="<?php echo base_url();?>ride/process_instantride" method="post" style="margin:5px;" onsubmit="return isValidInstantRide();" style="color:#555555;">
 				<table width="90%" cellpadding="4" cellspacing="3" align="center">
 					<tr>
 						<td width="100%" colspan="4">
@@ -78,11 +78,10 @@
 							[Eg: Hero Honda, Yemaha, etc]
 						</td>						
 						<td width="60%" colspan="3" align="center">
-							<input class="submit_btn float_l" type="submit" name="post_ride" id="post_ride" value="Submit" /> &nbsp; &nbsp;
+							<input class="submit_btn float_l" type="submit" name="post_ride" id="post_ride" value="Post" /> &nbsp; &nbsp;
 							<input class="submit_btn float_l" type="button" name="doCancel" id="doCancel" value="Cancel" />  	
 						</td>
 					</tr>
-					<tr><td width="100%" colspan="4">  </td></tr>
 					<tr style="display:none;">
 						<td width="50%" style="padding-left:15px;" colspan="2"><div id="map-canvas" style="width: 380px;height:190px;"></div></td>
 						<td width="50%" style="padding-left:50px;" colspan="2"><div id="map-canvas2" style="width: 380px;height:190px;"></div></td>

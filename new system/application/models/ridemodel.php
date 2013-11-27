@@ -44,7 +44,8 @@ class RideModel extends CI_Model {
         
 		$this->db->where('ride_id', $RideId);
 		$this->db->where('user_id', $this->session->userdata('_user_id'));
-		$this->db->delete($this->table_name);
+		//$this->db->delete($this->table_name);
+		$this->db->update($this->table_name, array('active_status'=>'0'));
         if($this->db->affected_rows()>0) {
 			return true;
 		}else {
@@ -116,7 +117,7 @@ class RideModel extends CI_Model {
         $UserID = $this->session->userdata('_user_id');
 		$date = strtotime(date("Y-m-d"));
         $this->db->where('owner_user_id', $UserID);
-        $this->db->where('is_instant', '1');
+        //$this->db->where('is_instant', '1');
         $this->db->where('requested_on >=', $date);
         $this->db->where('request_status', '2');
 		$this->db->join('pro_users', 'pro_users.pro_user_id = pro_join_request.requesting_user_id');
@@ -124,6 +125,55 @@ class RideModel extends CI_Model {
 		$this->db->order_by("requested_on","DESC");
 		$this->db->select('pro_join_request.*,pro_users.pro_user_full_name,pro_ride_details.*');
         $this->db->limit($cp, $pp);
+		$query = $this->db->get('pro_join_request');
+		
+		if($query->num_rows() > 0){
+			foreach ($query->result() as $row) {
+				$result_back[] = $row;
+			}
+			return $result_back;
+		}else {
+			return array();
+		}
+    }	
+
+	function get_total_copassengers() {
+	
+        $UserID = $this->session->userdata('_user_id');
+		
+        $this->db->where('owner_user_id', $UserID);
+		
+		$this->db->or_where('requesting_user_id', $UserID);
+		
+        $this->db->where('request_status', '1');
+		
+		$this->db->select('pro_join_request.request_id');
+		
+		$query = $this->db->get('pro_join_request');
+		
+		return $query->num_rows();
+	}
+	
+    function get_copassengers($cp, $pp) {
+
+        $UserID = $this->session->userdata('_user_id');
+		
+        $this->db->where('owner_user_id', $UserID);
+		
+		$this->db->or_where('requesting_user_id', $UserID);
+		
+        $this->db->where('request_status', '1');
+		
+		$this->db->join('pro_users', 'pro_users.pro_user_id = pro_join_request.requesting_user_id');
+		
+		$this->db->join('pro_ride_details', 'pro_ride_details.ride_id = pro_join_request.ride_id');
+		
+		$this->db->order_by("approved_on","DESC");
+		
+		$this->db->select('pro_join_request.*,pro_users.pro_user_full_name,pro_users.pro_user_phone,pro_users.pro_user_gender,pro_ride_details.*');
+		
+        $this->db->limit($cp, $pp);
+		
 		$query = $this->db->get('pro_join_request');
 		
 		if($query->num_rows() > 0){
@@ -144,6 +194,7 @@ class RideModel extends CI_Model {
 			$this->db->where('user_id', $UserID);
 		}
 		$this->db->order_by("added_on","DESC");
+		$this->db->where("active_status","1");
 		$this->db->select('ride_id');
 		$query = $this->db->get($this->table_name);
 		return $query->num_rows();
@@ -153,6 +204,7 @@ class RideModel extends CI_Model {
 	
 		$this->db->limit(3);
 		$this->db->where("instant","0");
+		$this->db->where("active_status","1");
 		$this->db->order_by("added_on","DESC");
 		$this->db->select('origin_location,destination_location,start_time,return_time');
 		$query = $this->db->get($this->table_name);
@@ -274,6 +326,7 @@ class RideModel extends CI_Model {
 		}
 		$this->db->order_by("added_on","DESC");
 		$this->db->where("instant","0");
+		$this->db->where("active_status","1");
 		$this->db->select('pro_ride_details.*'.$join);
         $this->db->limit($cp, $pp);
 		$query = $this->db->get($this->table_name);

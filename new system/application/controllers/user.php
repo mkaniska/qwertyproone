@@ -73,7 +73,12 @@ class User extends CI_Controller {
 	}	
 
 	public function offers() {
-	
+		
+		if($this->input->post('offer_filter')=='1') {
+			$selectedOffer = array('offer_id' => $this->input->post('offer_categories'));
+			$this->session->set_userdata($selectedOffer);
+			//$this->session->userdata('offer_id');
+		}
 		$this->load->library('pagination');		
 		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
 		$config['uri_segment'] 		= 3;
@@ -96,15 +101,13 @@ class User extends CI_Controller {
 		
 		$data['page_name'] = "user/offers";
 		$data['menu'] = "offers";
-		$data['recent_rides'] 	= $this->RideModel->get_recent_rides();
-		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();		
-		$data['title'] 			= SITE_TITLE." :: Available Offers";
+		$data['offer_categories'] 	= $this->AdminModel->get_offer_types();
+		$data['recent_rides'] 		= $this->RideModel->get_recent_rides();
+		$data['recent_joinees'] 	= $this->UserModel->get_recent_joinees();		
+		$data['title'] 				= SITE_TITLE." :: Available Offers";
 		
 		//echo $config["per_page"].'-'.$page;
-		if($page!=0)
-		$start = ($page*6)-6;
-		else
-		$start = 0;
+		if($page!=0) {$start = ($page*6)-6;}else{$start = 0;}
 		
 		$data['offers_list'] 	= $this->AdminModel->get_offers_posted($config["per_page"], $start);
 		$config['total_rows'] 	= $this->AdminModel->get_total_offers();	
@@ -112,6 +115,20 @@ class User extends CI_Controller {
 		
 		$data['pagelink'] = $this->pagination->create_links();
 
+		$this->load->view('layouts/simple_layout', $data);
+	}
+
+	public function viewoffer() {
+		$offer_id = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
+		if($offer_id==0){
+			$this->session->set_flashdata('flash_message', 'Invalid Request!');
+			redirect('user/offers');
+		}
+		$data['page_name'] = "user/viewoffer";
+		$data['menu'] = "viewoffer";
+		$details = $this->AdminModel->get_this_offer($offer_id);
+		$data['offer_details'] = $details[0];
+		$data['title'] = SITE_TITLE." :: View Offer Details";
 		$this->load->view('layouts/simple_layout', $data);
 	}
 	
@@ -132,6 +149,7 @@ class User extends CI_Controller {
 		$this->load->helper('common');
 		$string = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
 		$actual_data = decryptData($string);
+		//print_r($actual_data);exit;
 		$isDone = $this->UserModel->activate_user($actual_data);
 		if($isDone) {
 			$this->session->set_flashdata('flash_message', 'Your Account is activated successfully!');
@@ -148,6 +166,7 @@ class User extends CI_Controller {
 			$posted_data['pro_user_type'] 		= 2;// Commuters
 			$posted_data['pro_user_full_name'] 	= $this->input->post('full_name');
 			$posted_data['pro_user_gender'] 	= $this->input->post('gender');
+			$posted_data['pro_user_email'] 		= $this->input->post('email_address');
 			$domainAddress 						= explode("@",$this->input->post('email_address'));
 			$posted_data['pro_user_domain'] 	= $domainAddress[1];
 			$posted_data['pro_user_password'] 	= $this->input->post('password_text');
@@ -189,7 +208,7 @@ class User extends CI_Controller {
 
 				$this->email->from('murugesanme@yahoo.com', 'Murugesan P');
 				//$this->email->to('murugdev.eee@gmail.com');
-				$this->email->to($posted_data['pro_user_email']);
+				$this->email->to($this->input->post('email_address'));
 
 				$this->email->subject('Commute Easy: Registration Email Activation');
 

@@ -7,7 +7,7 @@
 				<form action="" method="post" style="margin-top:40px;margin-left:45px;">
 					<table width="100%" cellpadding="4" cellspacing="3" align="center">
 						<tr><td width="100%" colspan="2" align="left">
-							<div id="errorDisplay" style="color:#ff0000;margin-left:130px;float:left;font-weight:bold;">
+							<div id="errorDisplay" style="color:#ff0000;margin-left:150px;float:left;font-weight:bold;">
 								<?php if($this->session->flashdata('flash_message') !='') { ?>
 									<?php echo $this->session->flashdata('flash_message'); ?>
 								<?php } ?>
