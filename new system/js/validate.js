@@ -220,12 +220,13 @@ function findMatchingRides() {
 	var startTime  = $.trim($("#start_time").val());
 	var returnTime = $.trim($("#return_time").val());
 	var search_for = $.trim($("#travel_type").val());
+	var vehicle_type = $.trim($("#vehicle_type").val());
 	if(address!='' && city!='0') {
 		 $.ajax({
 			  type: 'POST',
 			  url: 'matching_rides',
 			  beforeSend: function(){$("#searchedResult").html('<img src="'+site_url+'images/ajax_loader.gif" border="0" />'); },
-			  data: 'city='+city+'&address='+address+'&startTime='+startTime+'&returnTime='+returnTime+"&search_for="+search_for,
+			  data: 'city='+city+'&address='+address+'&startTime='+startTime+'&returnTime='+returnTime+"&search_for="+search_for+"&vehicle_type="+vehicle_type,
 			  dataType: "text",
 			  success: function(resultData) {
 				    $("#errorDisplay").html("");
@@ -343,10 +344,8 @@ function otherInput(vals) {
 		$("#vehicle_type").css('border', '1px solid #CCCCCC');
 		$("#vehicle_type").css('color', '#000');		
 	}else {
-		$("#model_type").prop('disabled', true);
-		//$("#model_type").wrap("<strike>");
+		$("#model_type").prop('disabled', true);		
 		$("#model_type").css('textDecoration', 'line-through');
-		//$("#model_type").css('border', '1px solid #ffffff');
 		$("#model_type").css('color', '#ccc');
 		
 		$("#fuel_type").prop('disabled', true);	
@@ -356,5 +355,17 @@ function otherInput(vals) {
 		$("#vehicle_type").prop('disabled', true);
 		$("#vehicle_type").css('border', '1px solid #ffffff');
 		$("#vehicle_type").css('color', '#ccc');		
+	}
+}
+
+function enableDisable(vals) {
+	if(vals=='passenger') {
+		$("#vehicle_type").prop('disabled', true);
+		$("#vehicle_type").css('border', '1px solid #ffffff');
+		$("#vehicle_type").css('color', '#ccc');
+	}else{
+		$("#vehicle_type").prop('disabled', false);
+		$("#vehicle_type").css('border', '1px solid #CCCCCC');
+		$("#vehicle_type").css('color', '#000');
 	}
 }

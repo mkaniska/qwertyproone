@@ -84,6 +84,21 @@ class AdminModel extends CI_Model {
 			return array();
 		}
 	}
+
+	function get_category_offers($category_id) {
+		$this->db->where('offer_type', $category_id);
+		$this->db->limit(3,0);
+		$this->db->select();
+		$query = $this->db->get('pro_offers');
+		if($query->num_rows()> 0) {
+			foreach ($query->result() as $row) {
+				$result_back[] = $row;
+			}
+			return $result_back;
+		}else {
+			return array();
+		}
+	}
 	
 	function isCompanyExists($company) {
 		$this->db->where('company_name', trim($company));

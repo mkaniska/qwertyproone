@@ -81,6 +81,12 @@
 					</tr>
 					<tr>
 						<td width="100%" colspan="2" align="left">
+							<input type="radio" id="posting_for" name="posting_for" value="Own" checked="checked" /> Posting it for Own Purpose &nbsp;
+							<input type="radio" id="posting_for" name="posting_for" value="Friend" <?php if($ride_value->posting_for=='Friend'){?> checked="checked" <?php } ?> /> Posting it for Friend
+						</td>
+					</tr>
+					<tr>
+						<td width="100%" colspan="2" align="left">
 							<input type="checkbox" id="travel_alert" name="travel_alert" value="1" <?php if($ride_value->join_alert_needed=='1'){?> checked="checked" <?php } ?> /> Alert me when someone Joins on my Route
 							<input type="hidden" name="ride_id" id="ride_id" value="<?php echo $ride_value->ride_id;?>" />
 						</td>

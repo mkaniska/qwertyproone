@@ -77,6 +77,12 @@
 					</tr>
 					<tr>
 						<td width="100%" colspan="2" align="left">
+							<input type="radio" id="posting_for" name="posting_for" value="Own" checked="checked" /> Posting it for Own Purpose &nbsp;
+							<input type="radio" id="posting_for" name="posting_for" value="Friend" /> Posting it for Friend
+						</td>
+					</tr>
+					<tr>
+						<td width="100%" colspan="2" align="left">
 							<input type="checkbox" id="travel_alert" name="travel_alert" value="1" /> Alert me when someone Joins on my Route
 						</td>
 					</tr>
@@ -92,10 +98,6 @@
 				</form>
 				</div>
         </div>
-        <div class="post2">
-
-        </div>
-
     </div> <!-- END of content half -->
     <!-- START of sidebar -->
 	<?php $this->load->view('sidebar'); ?>

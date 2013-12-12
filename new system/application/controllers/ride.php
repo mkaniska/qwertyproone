@@ -297,6 +297,7 @@ class Ride extends CI_Controller {
 		$input['startTime'] 	= $this->input->post('startTime');
 		$input['returnTime'] = $this->input->post('returnTime');
 		$input['search_for'] = $this->input->post('search_for');
+		$input['vehicle_type'] = $this->input->post('vehicle_type');
 		
 		$matching_list = $this->RideModel->find_matching_rides($input);
 		$ignore_list   = $this->RideModel->request_already_sent_to();
@@ -408,6 +409,7 @@ class Ride extends CI_Controller {
 			$ride_data['vehicle_type'] 			= $this->input->post('vehicle_type')=='0'?'walk':$this->input->post('vehicle_type');
 			$ride_data['model_type'] 			= $this->input->post('model_type');
 			$ride_data['fuel_type'] 			= $this->input->post('fuel_type');
+			$ride_data['posting_for'] 			= $this->input->post('posting_for');
 			$ride_data['added_on'] 				= time();
 			$ride_data['modified_on'] 			= time();
 			$ride_data['active_status'] 		= '1';
@@ -438,6 +440,7 @@ class Ride extends CI_Controller {
 				$tmp_str.= "Origin Location : ".$ride_data['origin_location']." <br />";
 				$tmp_str.= "Destination Location : ".$ride_data['destination_location'].", <br />";
 				$tmp_str.= "Travel As : ".ucfirst($ride_data['travel_as'])." <br />";
+				$tmp_str.= "Posting For : ".$ride_data['posting_for']." Purpose<br />";
 				
 				if($ride_data['travel_as']=='driver'){
 					$tmp_str.= "Vehicle Type : ".$ride_data['vehicle_type']." <br />";	
@@ -445,8 +448,8 @@ class Ride extends CI_Controller {
 					$tmp_str.= "Fuel Type : ".$ride_data['fuel_type']." <br />";
 				}
 				
-				$mail_data['ItemDetails'] 		= $tmp_str;
-				$mail_data['url'] 				= base_url();
+				$mail_data['ItemDetails']	= $tmp_str;
+				$mail_data['url']			= base_url();
 				
 				$mail_template = $this->load->view('templates/posted_ride_email', $mail_data, true);
 
@@ -517,6 +520,7 @@ class Ride extends CI_Controller {
 			$ride_data['vehicle_type'] 			= $this->input->post('vehicle_type');
 			$ride_data['model_type'] 			= $this->input->post('model_type');
 			$ride_data['fuel_type'] 			= $this->input->post('fuel_type');
+			$ride_data['posting_for'] 			= $this->input->post('posting_for');
 			
 			$isExists = $this->UserModel->isUserExists(trim($this->input->post('email_address')));
 			
@@ -589,6 +593,7 @@ class Ride extends CI_Controller {
 				$tmp_str.= "Origin Location : ".$ride_data['origin_location']." <br />";
 				$tmp_str.= "Destination Location : ".$ride_data['destination_location']." <br />";
 				$tmp_str.= "Travel As : ".ucfirst($ride_data['travel_as'])." <br />";
+				$tmp_str.= "Posting for : ".$ride_data['posting_for']." Purpose<br />";
 				
 				if($ride_data['travel_as']=='driver'){
 					$tmp_str.= "Vehicle Type : ".$ride_data['vehicle_type']." <br />";	
@@ -706,6 +711,7 @@ class Ride extends CI_Controller {
 			$ride_data['vehicle_type'] 			= $this->input->post('vehicle_type');
 			$ride_data['model_type'] 			= $this->input->post('model_type');
 			$ride_data['fuel_type'] 			= $this->input->post('fuel_type');
+			$ride_data['posting_for'] 			= $this->input->post('posting_for');
 			$ride_data['added_on'] 				= time();
 			$ride_data['modified_on'] 			= time();
 			$ride_data['active_status'] 		= '1';
@@ -736,6 +742,7 @@ class Ride extends CI_Controller {
 				$tmp_str.= "Origin Location : ".$ride_data['origin_location']." <br />";
 				$tmp_str.= "Destination Location : ".$ride_data['destination_location'].", <br />";
 				$tmp_str.= "Travel As : ".ucfirst($ride_data['travel_as'])." <br />";
+				$tmp_str.= "Posting For : ".$ride_data['posting_for']." Purpose<br />";
 				
 				if($ride_data['travel_as']=='driver'){
 					$tmp_str.= "Vehicle Type : ".$ride_data['vehicle_type']." <br />";	
@@ -743,8 +750,8 @@ class Ride extends CI_Controller {
 					$tmp_str.= "Fuel Type : ".$ride_data['fuel_type']." <br />";
 				}
 				
-				$mail_data['ItemDetails'] 		= $tmp_str;
-				$mail_data['url'] 				= base_url();
+				$mail_data['ItemDetails']	= $tmp_str;
+				$mail_data['url']			= base_url();
 				
 				$mail_template = $this->load->view('templates/posted_ride_email', $mail_data, true);
 
@@ -800,6 +807,7 @@ class Ride extends CI_Controller {
 			$ride_data['vehicle_type'] 			= $this->input->post('vehicle_type');
 			$ride_data['model_type'] 			= $this->input->post('model_type');
 			$ride_data['fuel_type'] 			= $this->input->post('fuel_type');
+			$ride_data['posting_for'] 			= $this->input->post('posting_for');
 			$ride_data['modified_on'] 			= time();
 	
 			$this->RideModel->updateRide($ride_data, $EditRideID);
@@ -828,6 +836,7 @@ class Ride extends CI_Controller {
 				$tmp_str.= "Origin Location : ".$ride_data['origin_location']." <br />";
 				$tmp_str.= "Destination Location : ".$ride_data['destination_location']." <br />";
 				$tmp_str.= "Travel As : ".ucfirst($ride_data['travel_as'])." <br />";
+				$tmp_str.= "Posting For : ".$ride_data['posting_for']." Purpose<br />";
 				
 				if($ride_data['travel_as']=='driver'){
 					$tmp_str.= "Vehicle Type : ".$ride_data['vehicle_type']." <br />";	

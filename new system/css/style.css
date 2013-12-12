@@ -131,6 +131,7 @@ a.header { display: block; font-weight: 700 }
 .col2 { float: left; margin: 0 15px 15px 0 }
 .half { width: 465px; margin-bottom: 30px }
 .one_third { width: 300px }
+.one_third_new { width: 280px; padding-top:20px; }
 .one_third_1{ width: 850px }
 #content, .two-third { width: 630px }
 #content_login { width: 630px;height:380px; }
@@ -196,7 +197,7 @@ background: url(../images/logo.png) no-repeat top left; }
 #comment_form .submit_btn {
 	display: block; width: 70px; height: 30px; line-height: 30px; padding: 0 8px; text-align: center; text-decoration: none; font-weight: bold;  background-color: #524239; border: 1px solid #2f2f2f; color: #fff; font-size:11px; cursor: pointer 
 }
-
+ 
 
 #gallery {
 	margin: 0; padding: 0; list-style: none;

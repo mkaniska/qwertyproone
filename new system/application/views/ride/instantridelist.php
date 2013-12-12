@@ -21,7 +21,7 @@
 					<td width="50%">Origin & Destination</td>
 					<td width="7%">Start Time</td>
 					<td width="7%">Return Time</td>
-					<td width="8%">Posted At</td>
+					<td width="12%">Posted At/For</td>
 					<td width="8%">Send Interest</td>
 				</tr>
 				<?php if(count($ride_list)>0){foreach($ride_list as $out) { ?>
@@ -38,7 +38,7 @@
 					</td>
 					<td><?php echo $out->start_time;?></td>
 					<td><?php if($out->return_time=='' || $out->return_time=='00:00:00'){echo 'One Way';}else{echo $out->return_time;}?></td>
-					<td><?php echo date("h:i A",$out->added_on);?></td>
+					<td><?php echo date("h:i A",$out->added_on);?>/<?php echo $out->posting_for;?></td>
 					<td align="center">
 					<?php $responseID = 'request_row_'.$out->ride_id; ?>
 					<span id="<?php echo $responseID;?>">

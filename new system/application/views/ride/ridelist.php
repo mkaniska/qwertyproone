@@ -23,7 +23,7 @@
 					<td width="30%">Destination Location</td>
 					<td width="8%">Start Time</td>
 					<td width="10%">Return Time</td>
-					<td width="10%">Posted On</td>
+					<td width="12%">Posted On/For</td>
 					<td width="7%">Action</td>
 				</tr>
 				<?php if(count($ride_list)>0){foreach($ride_list as $out) { ?>
@@ -34,7 +34,7 @@
 					<td><?php echo $out->destination_location;?></td>
 					<td><?php echo $out->start_time;?></td>
 					<td><?php if($out->return_time=='' || $out->return_time=='00:00:00'){echo 'One Way';}else{echo $out->return_time;}?></td>
-					<td><?php echo date("d M Y",$out->added_on);?></td>
+					<td><?php echo date("d M Y",$out->added_on);?>/<?php echo $out->posting_for;?></td>
 					<td align="center">
 						<a href="<?php echo base_url();?>ride/edit/<?php echo $out->ride_id;?>" alt="Edit" title="Edit">
 							<img src="<?php echo base_url();?>images/edit.png" border="0" />

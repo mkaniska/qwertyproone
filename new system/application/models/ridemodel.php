@@ -273,10 +273,40 @@ class RideModel extends CI_Model {
 		}	
 	}
 	
-    function find_matching_rides($data){
+    function find_matching_rides($data) {
 	
-		$addressString = explode(" ",$data['address']);
+		if (preg_match("/ /i", $data['address'])) {
+			$addressString = explode(" ",$data['address']);
+			$locationMatch = "((origin_location LIKE '%$addressString[0]%' OR origin_location LIKE '%$addressString[1]%') OR (destination_location LIKE '%$addressString[0]%' OR destination_location LIKE '%$addressString[1]%'))";
+		}else {
+			$addressString = $data['address'];
+			$locationMatch = "(origin_location LIKE '%$addressString%' destination_location LIKE '%$addressString%')";			
+		}
 		
+		$currentUserID = $this->session->userdata('_user_id');
+		$travelAs = $data['search_for'];
+		$startTime = $data['startTime'];
+		$returnTime = $data['returnTime'];
+		$passengerCity = $data['city'];
+		
+		if($data['vehicle_type']!='Any' && $travelAs!='passenger') {
+			$vehicleType  = " vehicle_type = '".$data['vehicle_type']."' AND ";
+		}else {
+			$vehicleType = '';
+		}       
+		
+		$query = $this->db->query("SELECT pro_ride_details.*, pro_users.pro_user_full_name 
+		FROM (pro_ride_details) JOIN pro_users ON pro_users.pro_user_id = pro_ride_details.user_id 
+		WHERE $vehicleType 
+		passenger_city = '$passengerCity' 
+		AND start_time_24 >= '$startTime' 
+		AND return_time_24 <= '$returnTime'  
+		AND user_id != '$currentUserID' 
+		AND travel_as = '$travelAs' 
+		AND $locationMatch  		 
+		ORDER BY ride_id DESC");
+		
+		/*
 		$this->db->where('passenger_city', $data['city']);
 		
         $this->db->where('start_time_24 >=', $data['startTime']);
@@ -285,7 +315,9 @@ class RideModel extends CI_Model {
 		
         $this->db->where('travel_as', $data['search_for']);
 		
-        $this->db->where('user_id !=', $this->session->userdata('_user_id'));// To ignore his own posts		
+		if($data['vehicle_type']!='Any') { $this->db->where('vehicle_type', $data['vehicle_type']); }       
+		
+        $this->db->where('user_id !=', $this->session->userdata('_user_id')); // To ignore his own posts		
 		
 		$this->db->like('origin_location', $addressString[0]);
 		
@@ -302,18 +334,17 @@ class RideModel extends CI_Model {
 		$this->db->select("pro_ride_details.*,pro_users.pro_user_full_name");
 		
         $query = $this->db->get('pro_ride_details');
-		
+		*/
 		//echo $this->db->last_query();exit;
 		
 		if($query->num_rows()>0) {
-		
 			foreach ($query->result() as $row) {
 				$result_back[] = $row;
 			}			
 		}else {
 			$result_back = array();
 		}
-
+		//print_r($result_back);exit;
 		return $result_back;
     }
 	

@@ -77,7 +77,11 @@
 							<input type="text" id="model_type" name="model_type" class="required input_field" style="width:250px;" /> <br />
 							[Eg: Hero Honda, Yemaha, etc]
 						</td>						
-						<td width="60%" colspan="3" align="center">
+						<td align="left">
+							<input type="radio" id="posting_for" name="posting_for" value="Own" checked="checked" /> Own Purpose &nbsp;
+							<input type="radio" id="posting_for" name="posting_for" value="Friend" /> For Friend
+						</td>
+						<td width="60%" colspan="2" align="center">
 							<input class="submit_btn float_l" type="submit" name="post_ride" id="post_ride" value="Post" /> &nbsp; &nbsp;
 							<input class="submit_btn float_l" type="button" name="doCancel" id="doCancel" value="Cancel" />  	
 						</td>

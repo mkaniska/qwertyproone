@@ -64,6 +64,12 @@ ddsmoothmenu.init({
 <script src="<?php echo base_url();?>js/validate.js"></script>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/custom.css" />
+ <script>
+$(function() {
+$( "#accordion" ).accordion({heightStyle: "content"});
+//$( "#accordion" ).accordion( "option", "collapsible", true );
+});
+</script>
 </head>
 <body>
 <div id="website_header_wrapper">

@@ -118,6 +118,14 @@
 						</tr>
 						<tr><td width="100%" colspan="2">   </td></tr>
 						<tr>
+							<td width="100%" colspan="2" align="left">
+							Purpose : 
+								<input type="radio" id="posting_for" name="posting_for" value="Own" checked="checked" /> Posting it for Own Purpose &nbsp;
+								<input type="radio" id="posting_for" name="posting_for" value="Friend" /> Posting it for Friend
+							</td>
+						</tr>						
+						<tr><td width="100%" colspan="2">   </td></tr>
+						<tr>
 							<td width="100%" colspan="2" align="center">
 								<input class="submit_btn float_l" type="button" name="next2" id="next2" value="Continue" />	
 							</td>

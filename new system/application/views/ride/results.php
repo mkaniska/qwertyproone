@@ -38,8 +38,8 @@
 		<td colspan="7" align="center" id="additionalInfo"><?php //echo $pagelink;?></td>
 	</tr>				
 	<?php }else { ?>
-	<tr style="color:#ff0000;margin-left:300px;float:left;font-weight:bold;">
-		<td colspan="7" align="center">No Results Found</td>
+	<tr>
+		<td colspan="7" style="color:#ff0000;text-align:center;font-weight:bold;">No Results Found</td>
 	</tr>
 	<?php } ?>
 </table>

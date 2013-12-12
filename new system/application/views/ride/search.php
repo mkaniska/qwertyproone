@@ -8,7 +8,7 @@
 				<form style="margin:5px;" method="post" name="contact_us_form" id="contact_us_form" action="<?php echo base_url();?>welcome/process_contact">
 				<table width="100%" cellpadding="4" cellspacing="3" align="center">
 					<tr>
-						<td width="100%" colspan="5">
+						<td width="100%" colspan="6">
 							<div id="errorDisplay" style="color:#ff0000;margin-left:340px;float:left;font-weight:bold;">
 							<?php if($this->session->flashdata('flash_message') !='') { ?>
 								<?php echo $this->session->flashdata('flash_message'); ?>
@@ -17,7 +17,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td width="20%"> City :<br />
+						<td width="15%"> City :<br />
 							<select name="city" id="city">
 								<option value="0" selected="selected">Select City</option>
 								<?php foreach($cities_list as $key=>$value) { ?>
@@ -29,7 +29,7 @@
 							Address From/To: <br />
 							<input type="text" id="search_address" class="required input_field1" onkeyup="javascript:getMatchingLocation(this.value);" />
 						</td>						
-						<td width="15%">						
+						<td width="10%">						
 						Start Time: <br />
 							<select name="start_time" id="start_time">
 								<?php foreach($time_slots as $value) { ?>
@@ -37,7 +37,7 @@
 								<?php } ?>
 							</select>
 						</td>
-						<td width="15%">						
+						<td width="10%">						
 						Return Time: <br />
 							<select name="return_time" id="return_time">
 								<?php foreach($time_slots as $value) { ?>
@@ -45,16 +45,24 @@
 								<?php } ?>
 							</select>
 						</td>
-						<td width="30%">
+						<td width="15%">
 							Searching for : <br />
-							<select name="travel_type" id="travel_type">
-								<option value="driver">A Vehichle</option>
-								<option value="passenger">A Passenger</option>
+							<select name="travel_type" id="travel_type" onchange="javascript:enableDisable(this.value)">
+								<option value="driver">Vehichle</option>
+								<option value="passenger">Passenger</option>
+							</select>
+						</td>
+						<td width="30%">
+							Vehicle Type : <br />
+							<select name="vehicle_type" id="vehicle_type">
+								<option value="Any">Any</option>
+								<option value="Car">Car</option>
+								<option value="Bike">Bike</option>
 							</select> &nbsp; &nbsp;
-							<input onclick="javascript:findMatchingRides();" type="button" name="doSearch" id="doSearch" value="Go" class="submit_btn float_l" />
-						</td>						
+							<input onclick="javascript:findMatchingRides();" type="button" name="doSearch" id="doSearch" value="Go" class="button" />
+						</td>
 					</tr>
-					<tr><td width="100%" colspan="5">  </td></tr>
+					<tr><td width="100%" colspan="6">  </td></tr>
 			</table>
             </form>
 			</div>
