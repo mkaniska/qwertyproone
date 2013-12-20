@@ -18,6 +18,17 @@
 									</td>
 								</tr>
 								<tr>
+									<td colspan="4" align="left" style="padding-left:10px;">
+									Offer Applicable City Name &nbsp;
+										<select name="offer_city" id="offer_city">
+											<option value="0" selected="selected">Select</option>
+											<?php foreach($cities_list as $key=>$value) { ?>
+												<option value="<?php echo $value;?>"><?php echo $value;?></option>
+											<?php } ?>							
+										</select>
+									</td>
+								</tr>								
+								<tr>
 									<td width="20%" class="form_label">Offer Title</td> 
 									<td width="30%"> 
 									<input value="<?php if(isset($offer['offer_title'])) echo $offer['offer_title'];?>" type="text" name="offer_title" id="offer_title" class="input_fields" /></td> 

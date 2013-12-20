@@ -10,7 +10,7 @@
 }
 
 #slider, #slider div.sliderInner {
-    width:600px;height:306px;/* Must be the same size as the slider images width:680px;*/
+    width:605px;height:306px;/* Must be the same size as the slider images width:680px;*/
 }
 
 #slider {
@@ -132,10 +132,10 @@
 #thumbs_new 
 {
     float:left;
-    margin-left:10px;
+    margin-left:-32px;
     width:310px; /*230px*/
     font:normal 11px/13px Arial;
-    border-top:1px solid #CCC;
+    /*border-top:1px solid #CCC;*/
     color:#666;
 }
 #thumbs_new .frame {float:left;padding:2px;border:1px solid #CCC;background:white;border-radius:3px;box-shadow:0 0 3px #BBB;font-size:0;line-height:0;}

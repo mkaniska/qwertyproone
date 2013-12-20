@@ -97,6 +97,7 @@ class Admin extends CI_Controller {
 		$offer_id = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
 		$rows = $this->AdminModel->get_this_offer($offer_id);
 		$data['offer_types'] = $this->AdminModel->get_offer_types();
+		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
 		$data['offer'] = $rows[0];
 		$data['menu'] = "edit_offer";
 		$data['title'] = SITE_ADMIN_TITLE." :: Edit Offer";
@@ -219,6 +220,7 @@ class Admin extends CI_Controller {
 		$offer_id = $this->input->post('offer_id');
 		if($this->input->post('editOffer')=='Update') {
 			
+			$inp_data['offer_city'] 		= $this->input->post('offer_city');
 			$inp_data['offer_title'] 		= $this->input->post('offer_title');
 			$inp_data['offer_type'] 		= $this->input->post('offer_type');
 			$fDates							= explode("/",$this->input->post('valid_from'));
@@ -541,6 +543,7 @@ class Admin extends CI_Controller {
 	public function addoffer() {
 		$data['page_name'] = "admin/addoffer";
 		$data['offer_types'] = $this->AdminModel->get_offer_types();
+		$data['cities_list'] = $this->CommonModel->cities_list('Tamil Nadu');
 		$data['menu'] = "addoffer";
 		$data['title'] = SITE_ADMIN_TITLE." :: Add Offer";
 		$this->load->view('layouts/admin_layout', $data);
@@ -552,6 +555,7 @@ class Admin extends CI_Controller {
 		
 		if($this->input->post('addOffer')=='Submit') {
 			
+			$inp_data['offer_city'] 		= $this->input->post('offer_city');
 			$inp_data['offer_title'] 		= $this->input->post('offer_title');
 			$inp_data['offer_type'] 		= $this->input->post('offer_type');
 			$fDates							= explode("/",$this->input->post('valid_from'));

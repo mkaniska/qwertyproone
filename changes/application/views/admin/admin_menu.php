@@ -13,6 +13,7 @@
 		<li class="ic-charts"><a href="<?php echo base_url();?>admin/offer_list"><span>Manage Offers</span></a></li>
 		<li class="ic-typography"><a href="<?php echo base_url();?>admin/user_list"><span>Manage Users</span></a></li>		
 		<li class="ic-grid-tables"><a href="<?php echo base_url();?>admin/settings"><span>Manage Settings</span></a></li>
+		<li class="ic-ads"><a href="<?php echo base_url();?>admin/ads_list"><span>Manage Ads</span></a></li>
 	</ul>
 </div>
 <div class="clear"></div>

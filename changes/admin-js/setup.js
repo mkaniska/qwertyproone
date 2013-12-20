@@ -506,7 +506,8 @@ function validCompany() {
 function validOffer() {
 	$("#errorDisplay").html('');
 	var ok = true;
-	if($.trim($("#offer_title").val())==''){$("#errorDisplay").html("Please enter the Offer Title");$("#offer_title").focus();ok = false;}
+	if($.trim($("#offer_city").val())=='0'){$("#errorDisplay").html("Please select the Offer City");$("#offer_city").focus();ok = false;}
+	else if($.trim($("#offer_title").val())==''){$("#errorDisplay").html("Please enter the Offer Title");$("#offer_title").focus();ok = false;}
 	else if($("#offer_type").val()==0){$("#errorDisplay").html("Please select the offer type");$("#offer_type").focus();ok = false;}
 	else if($.trim($("#offer_provider").val())==''){$("#errorDisplay").html("Please enter the offer provider");$("#offer_provider").focus();ok = false;}
 	else if($.trim($("#provider_address").val())==''){$("#errorDisplay").html("Please enter the provider address");$("#provider_address").focus();ok = false;}

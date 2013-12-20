@@ -12,7 +12,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title><?php echo $title;?></title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>admin-css/reset.css" media="screen" />  
-    <?php if($page_name=='admin/login' || $page_name=='admin/ride_list' || $page_name=='admin/company_list' || $page_name=='admin/offer_list' || $page_name=='admin/user_list' || $page_name=='admin/type_list') { ?>
+    <?php if($page_name=='admin/login' || $page_name=='admin/ride_list' || $page_name=='admin/company_list' || $page_name=='admin/offer_list' || $page_name=='admin/user_list' || $page_name=='admin/type_list' || $page_name=='admin/ads_list') { ?>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/style.css" media="screen" />  
 	<?php } ?>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>admin-css/text.css" media="screen" />
@@ -65,6 +65,9 @@
 			<?php } ?>
         });
     </script>
+	<!-- For Lightbox Effects -->
+	<script type="text/javascript" src="<?php echo base_url();?>admin-js/lightbox.js"></script>
+	<link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url();?>admin-css/lightbox.css">
 </head>
 <body>
     <div class="container_12">

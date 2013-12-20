@@ -63,6 +63,9 @@ ddsmoothmenu.init({
 <!-- All the JS form validations are available here -->
 <script src="<?php echo base_url();?>js/validate.js"></script>
 
+<!-- For Advertisement 
+<script src="<?php echo base_url();?>js/ads.js"></script>-->
+
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/custom.css" />
  <script>
 $(function() {

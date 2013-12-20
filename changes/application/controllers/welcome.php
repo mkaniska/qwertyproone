@@ -4,6 +4,7 @@ class Welcome extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->model('AdminModel'); 
         $this->load->model('UserModel'); 
         $this->load->model('RideModel'); 
         $this->load->model('CommonModel');
@@ -12,10 +13,13 @@ class Welcome extends CI_Controller {
 	public function index()
 	{		 
 		$data['page_name'] = "welcome/home"; 
-		$data['recent_rides'] = $this->RideModel->get_recent_rides();
+		$data['recent_rides'] = $this->RideModel->get_recent_rides();		
 		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();
 		$data['menu'] = "home";
-		$data['title'] = SITE_TITLE." :: Welcome to CodeIgniter Sample";		
+		$data['title'] = SITE_TITLE." :: Welcome to CodeIgniter Sample";
+		
+		$data['random_ads'] = $this->AdminModel->get_random_ads();
+		
 		$this->load->view('layouts/layout', $data);
 	}
 	public function home(){	
@@ -25,6 +29,7 @@ class Welcome extends CI_Controller {
 		$data['recent_joinees'] = $this->UserModel->get_recent_joinees();
 		$data['menu'] = "home"; 
 		$data['title'] = SITE_TITLE." :: Welcome to CodeIgniter Sample";
+		$data['random_ads'] = $this->AdminModel->get_random_ads();
 		$this->load->view('layouts/layout', $data);
 	}
 	public function thanks(){	
@@ -36,6 +41,22 @@ class Welcome extends CI_Controller {
 		$this->session->set_flashdata('flash_message', 'Successfully Registered ! <br /> You will receive the email for verification & please confirm that to activate your account!.');
 		$this->load->view('layouts/layout', $data);
 	}	
+	public function show_ads(){
+
+		$data['random_ads'] = $this->AdminModel->get_random_ads();
+		$data['page_name'] = "welcome/ads";
+		echo $this->load->view('layouts/ajax_layout', $data, true);		
+		exit;
+	}
+
+	public function pick_ads(){
+
+		$data['random_ads'] = $this->AdminModel->get_random_ads();
+		$data['page_name'] = "welcome/ads";
+		echo $this->load->view('layouts/ajax_layout', $data, true);		
+		exit;
+	}
+	
 	public function contactus(){
 	
 		$data['page_name'] = "welcome/contactus"; 

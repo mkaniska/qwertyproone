@@ -6,16 +6,39 @@
             <img src="<?php echo base_url();?>images/image-slider-4.jpg" alt="Make your cab booking online easy..." />
         </div>
 		<div id="thumbs_new">
-			<div class="rotators" id="random_ads">
-				<ul style="list-style:none;position:absolute;margin:3px;">
-				<?php foreach($random_ads as $key=>$out) { ?>
-					<li style="border:2px solid #ccc;margin-bottom:2px;">
-						<a href="<?php echo $out->ads_url;?>">
-							<img src="<?php echo base_url().'ads_images/'.$out->ads_image;?>" width="300" height="95" id="myRandImg" />
-						</a>
-					</li>
-				<?php } ?>
-				</ul>
+			<div class="rotator">
+			  <ul>
+				<li class="show">
+					<a href="#">
+						<img src="<?php echo base_url();?>ads/image-1.jpg" width="300" height="100"  alt="pic1" />
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<img src="<?php echo base_url();?>ads/image-2.jpg" width="300" height="100"  alt="pic2" />
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<img src="<?php echo base_url();?>ads/image-3.jpg" width="300" height="100"  alt="pic3" />
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<img src="<?php echo base_url();?>ads/image-4.jpg" width="300" height="100"  alt="pic4" />
+					</a>
+				</li>
+				<li>
+					<a href="http://www.alohatechsupport.net/">
+						<img src="<?php echo base_url();?>ads/image-5.jpg" width="300" height="100"  alt="pic5" />
+					</a>
+				</li>	
+				<li>
+					<a href="http://www.alohatechsupport.net/">
+						<img src="<?php echo base_url();?>ads/image-6.jpg" width="300" height="100"  alt="pic6" />
+					</a>
+				</li>				
+			  </ul>
 			</div>		
 		</div>		
 		<!--

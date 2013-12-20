@@ -177,6 +177,9 @@ ul.nav li.secondary:hover a:hover {
 }
 ul.nav li.secondary:hover a:active {background:#1F4562;}
 
+
+ul.nav li.ic-ads a span, .ic-ads{background:url(../admin-images/ads.png) no-repeat center left;}
+
 ul.nav li.ic-dashboard a span, .ic-dashboard{background:url(../admin-images/org.png) no-repeat center left;}
 ul.nav li.ic-typography a span, .ic-typography{background:url(../admin-images/users.png) no-repeat center left;}
 ul.nav li.ic-charts a span, .ic-charts{background:url(../admin-images/offers.png) no-repeat center left;}

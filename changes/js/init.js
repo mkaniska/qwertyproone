@@ -47,4 +47,6 @@ $(function(){
 		*/
 
 		$("#search_address").autocomplete({source: new Array()});
+		setInterval(function(){myAdvertisement()}, 6000);
 });
+

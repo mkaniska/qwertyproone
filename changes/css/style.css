@@ -128,9 +128,29 @@ a.header { display: block; font-weight: 700 }
 }
 
 .col { float: left; margin: 0 25px 25px 0 }
+.col_rounded { float: left; margin: 0 20px 25px 0 }
 .col2 { float: left; margin: 0 15px 15px 0 }
 .half { width: 465px; margin-bottom: 30px }
 .one_third { width: 300px }
+.one_third_rounded { 
+width: 300px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+border:1px solid #ccc; 
+padding:2px;
+height:240px;
+overflow:auto;
+}
+.offer_img_rounded {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border:1px solid #ccc; 
+	padding:1px;
+	float:left;
+	padding-right:8px;
+}
 .one_third_new { width: 280px; padding-top:20px; }
 .one_third_1{ width: 850px }
 #content, .two-third { width: 630px }
@@ -320,3 +340,6 @@ li{
 	float:right;
 }
 
+.offer_round {
+
+}

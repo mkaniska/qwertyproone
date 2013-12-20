@@ -76,8 +76,10 @@ class User extends CI_Controller {
 		
 		if($this->input->post('offer_filter')=='1') {
 			$selectedOffer = array('offer_id' => $this->input->post('offer_categories'));
+			$selectedCity = array('offer_city' => $this->input->post('offer_city'));
 			$this->session->set_userdata($selectedOffer);
-			//$this->session->userdata('offer_id');
+			$this->session->set_userdata($selectedCity);
+			//echo $this->session->userdata('offer_city');
 		}
 		$this->load->library('pagination');		
 		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;	
@@ -103,7 +105,8 @@ class User extends CI_Controller {
 		$data['menu'] = "offers";
 		$data['offer_categories'] 	= $this->AdminModel->get_offer_types();
 		$data['recent_rides'] 		= $this->RideModel->get_recent_rides();
-		$data['recent_joinees'] 	= $this->UserModel->get_recent_joinees();		
+		$data['recent_joinees'] 	= $this->UserModel->get_recent_joinees();
+		$data['cities_list'] 		= $this->CommonModel->cities_list('Tamil Nadu');		
 		$data['title'] 				= SITE_TITLE." :: Available Offers";
 		
 		//echo $config["per_page"].'-'.$page;

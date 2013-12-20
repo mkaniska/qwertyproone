@@ -370,3 +370,27 @@ function enableDisable(vals) {
 		$("#vehicle_type").css('color', '#000');
 	}
 }
+
+function myAdvertisement() {	
+	//alert('');	 
+	 $.ajax({
+		  type: 'POST',
+		  url: site_url+'welcome/pick_ads',
+		  beforeSend: function(){  },
+		  data: 'ads=1',
+		  dataType: "text",
+		  success: function(resultData) {
+			 //$("#random_ads").show( selectedEffect, options, 500, function callback() {} );
+			 //$("#random_ads").slideDown();
+			 //$("#random_ads").slideUp("slow");
+			 //$("#random_ads").attr("display","none");
+			 //$('#random_ads').hide('slide',{direction:'right'},500);
+			 //$('#random_ads').animate({ },500, function(){$(this).slideUp('slow');});
+			 $("#random_ads").html(resultData);
+			 //$("#random_ads").show();
+			 //$("#random_ads").slideDown("slow");
+
+			 
+		  }
+	});	
+}

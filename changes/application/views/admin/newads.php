@@ -45,9 +45,7 @@
 								<tr>
 									<td width="20%" class="form_label" valign="top"> Comments</td> 
 									<td width="70%"> 
-									<textarea name="ads_comments" id="ads_comments" cols="40" rows="6">
-									 <?php if(isset($ads['ads_comments'])) echo $ads['ads_comments'];?>
-									</textarea>
+									<textarea name="ads_comments" id="ads_comments" cols="40" rows="6"><?php if(isset($ads['ads_comments'])) echo $ads['ads_comments'];?></textarea>
 									</td>
 								</tr>
 								<tr>
@@ -56,7 +54,7 @@
 								<tr>
 									<td colspan="2" align="center">
 										<input type="submit" class="buttons" id="submitbutton" name="addAds" value="Submit" /> &nbsp;  &nbsp;
-										<input type="button" class="buttons" id="cancelbutton" value="Cancel" />
+										<input type="button" class="buttons" id="cancel" value="Cancel" onclick="javascript:window.history.go(-1);" />
 									</td>
 								</tr>
 								<tr>

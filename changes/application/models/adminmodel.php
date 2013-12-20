@@ -17,12 +17,24 @@ class AdminModel extends CI_Model {
 		if($this->session->userdata('offer_id')!='' && $this->session->userdata('offer_id')!=0) {
 			$this->db->where('pro_offers.offer_type', $this->session->userdata('offer_id'));
 		}
+		if($this->session->userdata('offer_city')!='' && $this->session->userdata('offer_city')!='0') {
+			$this->db->where('pro_offers.offer_city', $this->session->userdata('offer_city'));
+		}		
 		$this->db->join("pro_offer_types","pro_offer_types.offer_type_id=pro_offers.offer_type");
 		$this->db->select();
 		$query = $this->db->get('pro_offers');
 		return $query->num_rows();
 	}
-
+	
+	function get_random_ads() {
+	
+		$query = $this->db->query("SELECT * FROM `pro_ads_details` ORDER BY RAND() LIMIT 0,3");
+		foreach ($query->result() as $row) {
+			$result_back[] = $row;
+		}			
+		return $result_back;
+	}
+	
     function get_offers($cp, $pp) {
         
 		$this->db->order_by("offer_created_on","ASC");
@@ -288,12 +300,17 @@ class AdminModel extends CI_Model {
     function get_offers_posted($cp, $pp) {
         
 		$this->db->order_by("offer_created_on","DESC");
-		if($this->session->userdata('offer_id')!='' && $this->session->userdata('offer_id')!=0) {
+		if($this->session->userdata('offer_id')!='' && $this->session->userdata('offer_id')!='0') {
 			$this->db->where('pro_offers.offer_type', $this->session->userdata('offer_id'));
 		}
+		if($this->session->userdata('offer_city')!='' && $this->session->userdata('offer_city')!='0') {
+			$this->db->where('pro_offers.offer_city', $this->session->userdata('offer_city'));
+		}
+		
 		$this->db->select();
 		$this->db->limit($cp, $pp);
         $query = $this->db->get('pro_offers');
+		//echo $this->db->last_query();
 		$result_back = array();
 		//echo $this->db->last_query();exit;
 		foreach ($query->result() as $row) {
